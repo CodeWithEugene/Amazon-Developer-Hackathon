@@ -110,10 +110,9 @@ MODEL_PROVIDER=fixture|bedrock       # fixture until integration week
 MCP_PUBLIC_URL=https://mcp.visitproof.com/mcp
 MCP_AUTH_ISSUER=                     # Cognito issuer URL
 MCP_DEMO_TOKENS=family-demo-token,agency-demo-token
-
-# TypeSafe
-TYPESAFE_API_KEY=                    # read from the shell; never committed
 ```
+
+`TYPESAFE_API_KEY` (read from the shell; never committed) joins the schema when the planned Jev integration lands; nothing reads it today.
 
 Demo mode is the default. Live mode is opt-in per subsystem so partial credentials still work (for example Playground token without AWS).
 
@@ -409,7 +408,7 @@ Cut order if behind: MCP Apps card, Alexa+ secondary, ops copilot, reports chart
 
 ## 15. Demo and Video Plan
 
-- **Dataset:** three clients (Okoro, Nakamura, Alvarez), four caregivers, two weeks, 84 visits: 62 on time, 9 late, 4 no-shows (2 backfilled), 5 early departures, 3 unobservable (device offline, encrypted device, integration removed), 1 ambiguous double visitor. EVV records with 6 contradictions and 8 missing clock-ins.
+- **Dataset:** three clients (Okoro, Nakamura, Alvarez), six caregivers, two weeks, 84 visits: 72 completed (62 on time, 9 late arrivals, 1 double-visitor visit that the deterministic arrival rules resolve and attribute to the doorbell press), 5 early departures, 4 no-shows, and 3 unobservable (device offline, encrypted device, integration removed). EVV records with 6 contradictions and 8 missing clock-ins.
 - **Recording:** 1440 px desktop for the console, 390 px for the family portal; OBS; Playground live view captured with provenance visible; emulator control visible as "Simulator" in the corner.
 - **Script (2:50):** 0:00 hook and quantified claim ("2026 hard edits deny claims without a verified visit; VisitProof turns the Ring doorbell already at the door into proof of presence"); 0:20 Priya links Ring in the Ring Appstore flow (Playground) and sets consent; 0:45 a normal day: webhook arrives (log visible), status flips, 7 PM digest; 1:10 late arrival at 6:15, exception card, backfill; 1:40 reconciliation, contradicted clock-in, signed evidence pack and Open EVV export; 2:10 "did the caregiver come to Mom's today?" in Ask VisitProof; 2:30 architecture card (Ring APIs used, AWS services, MCP); 2:45 boundaries and what's next.
 - **Never in the video:** third-party footage, music without rights, real people, real addresses.
@@ -426,10 +425,12 @@ Cut order if behind: MCP Apps card, Alexa+ secondary, ops copilot, reports chart
 
 ---
 
-## 17. Open Questions Logged for the Founder (Do Not Block the Build)
+## 17. Founder Answers (27 September 2026)
 
-1. Ring developer identity verification: which government ID and exact legal name to use on the Company Profile.
-2. AWS account: new account (gets $200 credits) or existing; region us-east-1 assumed.
-3. Whether an iPhone plus Apple Watch or any Amazon device is available (affects only stretch items).
-4. Agency contacts for a pilot letter of intent to quote in the Potential Impact section.
-5. Kiro plan (Pro recommended for Crew jobs during the window).
+1. Ring developer registration is complete and credentials are stored in the git-ignored `.env`. Day 1 of the schedule is therefore done; the build starts with the monorepo scaffold.
+2. AWS: existing account; region `us-east-1`; request the $150 hackathon credits by 21 October and set AWS Budgets alarms on first deploy.
+3. Hardware: an iPhone is available; no Ring device, Echo, or Apple Watch. All demos run on the Ring Playground plus the emulator, as specified. The iPhone can record the demo video's family-portal segment at 390 px.
+4. Team: solo. The schedule and the cut order in Section 14 stand.
+5. No agency pilot contact yet. The Potential Impact section will rely on public market and EVV data (research.md Section 8) and on the founder's own domain experience; a pilot letter of intent is a nice-to-have, not a dependency.
+6. Product name VisitProof confirmed. Alexa+ secondary entry approved if the simulator is polished by day 20.
+7. Kiro plan: still open (Pro recommended for Crew jobs); Claude Code is the primary agent until decided.

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalDependencies": [".env.example", "packages/config/tsconfig.base.json"],
+  "globalEnv": [
+    "NODE_ENV",
+    "CI",
+    "VISITPROOF_MODE",
+    "NEXT_PUBLIC_APP_URL",
+    "RING_CLIENT_ID",
+    "RING_CLIENT_SECRET",
+    "RING_HMAC_SIGNING_KEY",
+    "RING_PLAYGROUND_ACCESS_TOKEN",
+    "RING_API_BASE",
+    "RING_OAUTH_TOKEN_URL",
+    "AWS_REGION",
+    "DYNAMODB_TABLE",
+    "S3_SNAPSHOT_BUCKET",
+    "KMS_SIGNING_KEY_ID",
+    "KMS_TOKEN_KEY_ID",
+    "SES_FROM_ADDRESS",
+    "BEDROCK_MODEL_ID",
+    "BEDROCK_GUARDRAIL_ID",
+    "BEDROCK_GUARDRAIL_VERSION",
+    "COGNITO_USER_POOL_ID",
+    "COGNITO_CLIENT_ID",
+    "MODEL_PROVIDER",
+    "MCP_PUBLIC_URL",
+    "MCP_AUTH_ISSUER",
+    "MCP_DEMO_TOKENS",
+    "TYPESAFE_API_KEY",
+    "PORT",
+    "CDK_DEFAULT_ACCOUNT",
+    "CDK_DEFAULT_REGION"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "cdk.out/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "!README.md"],
+      "outputs": ["coverage/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
+    }
+  }
+}

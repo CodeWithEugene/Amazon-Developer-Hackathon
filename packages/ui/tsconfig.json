@@ -1,0 +1,11 @@
+{
+  "extends": "@visitproof/config/tsconfig.react-library.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "@workspace/ui/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

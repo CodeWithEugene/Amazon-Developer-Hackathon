@@ -1,0 +1,7 @@
+{
+  "extends": "@visitproof/config/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src", "test", "vitest.config.ts", "tsup.config.ts"]
+}

@@ -1,0 +1,12 @@
+dist/
+node_modules/
+.next/
+.turbo/
+coverage/
+pnpm-lock.yaml
+.pnpm-store/
+docs/
+.kiro/
+.claude-flow/
+cdk.out/
+next-env.d.ts

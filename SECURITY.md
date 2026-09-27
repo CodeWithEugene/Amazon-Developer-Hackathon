@@ -13,7 +13,7 @@ VisitProof processes events about care visits to private homes, Ring account tok
 
 Please do not open a public GitHub issue for security problems.
 
-- Email: emutembei@appliedhealthanalytics.org with the subject line "VisitProof security".
+- Email: eugenegabriel.ke@gmail.com with the subject line "VisitProof security".
 - Include: a description, steps to reproduce, affected component (console, webhook receiver, MCP server, emulator, SDK package), and any proof-of-concept. Never include real customer data, real Ring tokens, or real media.
 - You will receive an acknowledgement within 3 business days and a status update at least every 7 days until resolution.
 - We ask for 90 days of coordinated disclosure. We will credit reporters in the release notes unless you prefer otherwise.

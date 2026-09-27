@@ -1,0 +1,48 @@
+{
+  "name": "@visitproof/console",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Next.js 16 console: agency console, family portal, caregiver record, Ring endpoints, and the Ask VisitProof simulator.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-amplify/adapter-nextjs": "1.8.0",
+    "@hookform/resolvers": "5.9.1",
+    "@modelcontextprotocol/sdk": "1.30.1",
+    "@tanstack/react-table": "9.2.4",
+    "@typesafe-ai/sdk": "0.6.0",
+    "@visitproof/config": "workspace:*",
+    "@visitproof/db": "workspace:*",
+    "@visitproof/domain": "workspace:*",
+    "@visitproof/ring-partner-sdk": "workspace:*",
+    "@workspace/ui": "workspace:*",
+    "aws-amplify": "6.22.0",
+    "date-fns": "4.4.0",
+    "lucide-react": "1.48.0",
+    "next": "16.3.6",
+    "next-themes": "0.4.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-hook-form": "7.89.0",
+    "recharts": "3.10.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "26.6.3",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@visitproof/config": "workspace:*",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "eslint": "9.39.5",
+    "typescript": "5.9.3"
+  }
+}

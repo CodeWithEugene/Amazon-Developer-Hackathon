@@ -1,0 +1,34 @@
+{
+  "name": "@visitproof/domain",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Presence Engine, reconciliation, evidence signing, EVV export, Jev judgments, and narratives. Pure TypeScript with no AWS imports.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@typesafe-ai/sdk": "0.6.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.3",
+    "@visitproof/config": "workspace:*",
+    "@vitest/coverage-v8": "5.0.2",
+    "eslint": "9.39.5",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

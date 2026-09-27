@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "shadcn": { "command": "npx", "args": ["shadcn@latest", "mcp"], "disabled": false },
+    "ring-appstore-knowledge": { "type": "streamable-http", "url": "https://knowledge.appstore-mcp.ring.amazon.dev/mcp", "disabled": false },
+    "amazon-devices-buildertools": { "command": "npx", "args": ["-y", "@amazon-devices/amazon-devices-buildertools-mcp@latest"], "disabled": true },
+    "visitproof-local": { "type": "streamable-http", "url": "http://localhost:3300/mcp", "headers": { "Authorization": "Bearer agency-demo-token" }, "disabled": true }
+  }
+}

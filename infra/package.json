@@ -1,0 +1,30 @@
+{
+  "name": "@visitproof/infra",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AWS CDK v2 app: data, auth, webhooks, engine, mcp (AgentCore), hosting, and observability stacks.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy --all",
+    "destroy": "cdk destroy --all",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.271.0",
+    "constructs": "10.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.3",
+    "@visitproof/config": "workspace:*",
+    "aws-cdk": "2.1143.0",
+    "eslint": "9.39.5",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

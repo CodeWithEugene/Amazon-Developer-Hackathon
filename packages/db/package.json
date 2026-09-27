@@ -1,0 +1,38 @@
+{
+  "name": "@visitproof/db",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DynamoDB single-table access layer for VisitProof: typed entities, key builders, and repositories.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.1141.0",
+    "@aws-sdk/client-kms": "3.1141.0",
+    "@aws-sdk/lib-dynamodb": "3.1141.0",
+    "@visitproof/domain": "workspace:*",
+    "ulidx": "2.4.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.3",
+    "@visitproof/config": "workspace:*",
+    "@vitest/coverage-v8": "5.0.2",
+    "aws-sdk-client-mock": "4.1.0",
+    "eslint": "9.39.5",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

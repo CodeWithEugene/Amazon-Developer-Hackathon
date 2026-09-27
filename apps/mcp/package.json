@@ -1,0 +1,34 @@
+{
+  "name": "@visitproof/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "VisitProof MCP server (Express + @modelcontextprotocol/sdk 1.x) with conformance tests and the AgentCore deployment.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "test:conformance": "vitest run --passWithNoTests test/conformance",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.1",
+    "@visitproof/config": "workspace:*",
+    "@visitproof/db": "workspace:*",
+    "@visitproof/domain": "workspace:*",
+    "express": "5.2.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "26.6.3",
+    "@visitproof/config": "workspace:*",
+    "eslint": "9.39.5",
+    "tsup": "8.5.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

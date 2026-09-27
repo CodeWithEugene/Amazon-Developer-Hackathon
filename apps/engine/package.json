@@ -1,0 +1,44 @@
+{
+  "name": "@visitproof/engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lambda handlers: event processor (DynamoDB Streams), visit sweeper (EventBridge), narrative writer, snapshot fetcher, exporter, mailer.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "3.1141.0",
+    "@aws-sdk/client-rekognition": "3.1141.0",
+    "@aws-sdk/client-s3": "3.1141.0",
+    "@aws-sdk/client-scheduler": "3.1141.0",
+    "@aws-sdk/client-ses": "3.1141.0",
+    "@react-email/components": "1.0.12",
+    "@react-pdf/renderer": "4.9.0",
+    "@visitproof/config": "workspace:*",
+    "@visitproof/db": "workspace:*",
+    "@visitproof/domain": "workspace:*",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.163",
+    "@types/node": "26.6.3",
+    "@types/react": "^19",
+    "@visitproof/config": "workspace:*",
+    "aws-sdk-client-mock": "4.1.0",
+    "eslint": "9.39.5",
+    "react-email": "6.11.0",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

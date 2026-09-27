@@ -1,0 +1,35 @@
+{
+  "name": "@visitproof/webhooks",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ring Webhook URL receiver: Hono app served as a Lambda in production and as a local Node server in development.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@hono/node-server": "2.1.1",
+    "@visitproof/config": "workspace:*",
+    "@visitproof/db": "workspace:*",
+    "@visitproof/domain": "workspace:*",
+    "@visitproof/engine": "workspace:*",
+    "@visitproof/ring-partner-sdk": "workspace:*",
+    "hono": "4.13.9",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.163",
+    "@types/node": "26.6.3",
+    "@visitproof/config": "workspace:*",
+    "eslint": "9.39.5",
+    "tsup": "8.5.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
+  }
+}

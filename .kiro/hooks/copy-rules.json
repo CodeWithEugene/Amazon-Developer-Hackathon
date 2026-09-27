@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "copy-rules-on-save",
+      "trigger": "PostFileSave",
+      "matcher": "apps/console/messages/.*\\.ts$",
+      "action": { "type": "command", "command": "pnpm --filter console lint:copy" }
+    },
+    {
+      "name": "reread-requirements",
+      "trigger": "PreTaskExecution",
+      "action": { "type": "agent", "prompt": "Re-read .kiro/specs/presence-engine/requirements.md and docs/build.md Section 6 before implementing this task." }
+    }
+  ]
+}

@@ -69,7 +69,7 @@ It is built on the Ring Partner API (OAuth account linking, devices, event histo
 
 - **Why now:** the Ring Developer Portal reached general availability on 31 March 2026 and the Ring Appstore lists elder care as a headline category; Medicaid EVV hard edits switched on across states in 2026; families own the sensor already.
 - **Why Ring:** the only broadly deployed, consent-native, server-signed presence sensor at the client's door. Its read-only API is a feature: VisitProof cannot and does not control anything.
-- **Why us:** Applied Health Analytics works in exactly this domain. The product speaks the language of six data elements, aggregators, reason codes, and payer denials because we do.
+- **Why us:** VisitProof is built by Technetium Kenya, whose founder works in healthcare analytics (Applied Health Analytics) in exactly this domain. The product speaks the language of six data elements, aggregators, reason codes, and payer denials because we do.
 - **Why it wins on the judges' criteria:** deep and visible use of the Ring API at runtime (Tech), three coherent role-based surfaces with designed empty and error states (Design), a quantifiable regulatory and financial need with a named buyer and a distribution channel (Impact), and an agency-first, EVV-aware, corroboration-not-surveillance framing that no other entry has (Idea).
 
 ---
