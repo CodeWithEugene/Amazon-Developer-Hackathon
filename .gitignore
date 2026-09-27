@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+.turbo/
+coverage/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+aws-exports.js
+amplify_outputs.json
+
+# Local data and media (never commit real Ring data)
+data/
+snapshots/
+*.mp4
+*.jpg
+*.jpeg
+*.png
+!docs/assets/**
+!apps/**/public/**
+
+# Tooling
+.claude-flow/
+.claude/settings.local.json
+.kiro/**/*.local.*
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Test artifacts
+playwright-report/
+test-results/
