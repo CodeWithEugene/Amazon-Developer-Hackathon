@@ -21,23 +21,22 @@ Thank you for helping build proof of presence for home care. This document expla
 git clone https://github.com/<your-fork>/visitproof.git
 cd visitproof
 pnpm install
-cp .env.example .env.local
-pnpm dev
+pnpm demo
 ```
 
-`pnpm dev` starts the console, the webhook receiver, the MCP server, and the emulator with a seeded two-week schedule. Open http://localhost:3000 and sign in with the demo accounts printed in the terminal.
+`pnpm demo` seeds a local store, posts the emulator's signed webhooks to the webhook receiver, replays the Presence Engine, imports an EVV CSV, and then starts the MCP server and the console. Open http://localhost:3000 and sign in with one click as any demo role. The README's Judge Quick Start lists the ports and overrides. Copy `.env.example` to `.env` only when you need live settings such as `RING_PLAYGROUND_ACCESS_TOKEN`.
 
 Useful scripts:
 
 | Script | What it does |
 |---|---|
-| `pnpm dev` | Start everything locally with fixtures |
-| `pnpm demo` | Replay the judge scenario (on time, late, no-show, early departure, unobservable) |
-| `pnpm test` | Unit and integration tests (Vitest) |
-| `pnpm test:e2e` | Playwright end-to-end flows |
-| `pnpm lint` and `pnpm typecheck` | ESLint and TypeScript |
-| `pnpm mcp:conformance` | MCP 2025-11-25 transport and tool conformance checks |
-| `pnpm emulator -- --scenario no_show` | Send signed Ring webhooks for one scenario |
+| `pnpm demo` | The full offline demo (ports `PORT`, `WEBHOOK_PORT`, `MCP_PORT`; store `VISITPROOF_DEMO_STORE_PATH`) |
+| `pnpm ring:smoke` | Calls the live Ring Partner API with a Playground token from `.env` |
+| `pnpm -r test` | Unit and integration tests (Vitest) in every workspace |
+| `pnpm test:scripts` and `pnpm typecheck:scripts` | Tests and types for the demo scripts |
+| `pnpm -r lint` and `pnpm -r typecheck` | ESLint and TypeScript |
+| `pnpm mcp:conformance` | MCP transport and tool conformance checks |
+| `pnpm --filter @visitproof/mcp dev` | The MCP server alone (fixture data unless `VISITPROOF_DEMO_STORE_PATH` is set) |
 
 ## Repository Layout
 

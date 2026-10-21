@@ -6,17 +6,17 @@
 
 | # | Area | Task | Severity | Status |
 |---|---|---|---|---|
-| 1 | Ring Playground | Drive the webhook path from the sandbox device | High | Open |
-| 2 | Ring Playground | Keep a token alive during a development session | Medium | Open |
-| 3 | Ring API docs | Filter event history by type | Medium | Open |
+| 1 | Ring Playground | Drive the webhook path from the sandbox device | High | Anticipated, not yet reproduced |
+| 2 | Ring Playground | Keep a token alive during a development session | Medium | Anticipated, not yet reproduced |
+| 3 | Ring API docs | Filter event history by type | Medium | Anticipated, not yet reproduced |
 | 4 | ring-api-helloworld | Verify webhook signatures using the sample | High | Open |
-| 5 | Ring Developer Console | Recover credentials after closing the creation dialog | Medium | Open |
+| 5 | Ring Developer Console | Recover credentials after closing the creation dialog | Medium | Anticipated, not yet reproduced |
 | 6 | Ring docs | Understand the hardware requirement for testing | Medium | Open |
-| 7 | Ring media | Size the watermark band for computer vision | Low | Open |
-| 8 | Ring encryption | Detect whether a device is TAKE or E2EE encrypted | Medium | Open |
+| 7 | Ring media | Size the watermark band for computer vision | Low | Anticipated, not yet reproduced |
+| 8 | Ring encryption | Detect whether a device is TAKE or E2EE encrypted | Medium | Anticipated, not yet reproduced |
 | 9 | Alexa+ docs | Reconcile the MCP protocol version across pages | Medium | Open |
 | 10 | Alexa+ docs | Reconcile authentication guidance across pages | Medium | Open |
-| 11 | AWS AgentCore | Install the CLI when the older Python CLI is present | Low | Open |
+| 11 | AWS AgentCore | Install the CLI when the older Python CLI is present | Low | Anticipated, not yet reproduced |
 | 12 | AWS Amplify | Confirm Next.js 16 support before choosing hosting | Medium | Open |
 | 13 | Ring emulator + Presence Engine | Replay the two-week dataset end to end | High | Resolved |
 | 14 | shadcn/ui | Ship the specced initial component set | Low | Resolved |
@@ -26,6 +26,7 @@
 
 ### 1. Ring Playground: drive the webhook path from the sandbox device
 
+- **Status:** Anticipated, not yet reproduced. No Playground token has been used in this repository yet (no calls, no recorded fixtures). The steps above are the planned reproduction; the finding comes from the Playground documentation and the Devpost forum.
 - **Task attempted:** Use the Playground sandbox doorbell to generate `motion_detected` and `button_press` webhooks so the visit-matching engine could be exercised against real Ring deliveries.
 - **Steps taken:** Generated a Playground token, listed devices, queried `GET /v1/history/devices/{id}/events`, opened a WHEP session, waited for events, checked the Devpost forum thread on the Playground for non-US entrants.
 - **Expected:** Simulated motion or doorbell events (the release notes for 28 May 2026 mention "event simulation") delivered to a registered webhook URL, or at least visible in history.
@@ -36,6 +37,7 @@
 
 ### 2. Ring Playground: keep a token alive during a development session
 
+- **Status:** Anticipated, not yet reproduced. No Playground session has been run yet, so the 30 minute expiry has not been hit in practice. The expiry is documented; the steps above are the planned reproduction.
 - **Task attempted:** Run a two-hour development session against the Playground.
 - **Steps taken:** Generated a token, stored it in `.env`, worked, hit 401 after about 30 minutes, regenerated, repeated.
 - **Expected:** A refresh token or a longer-lived development token.
@@ -46,6 +48,7 @@
 
 ### 3. Ring API docs: filter event history by type
 
+- **Status:** Anticipated, not yet reproduced. The history call has not been made against the Playground yet. The finding comes from the documentation and forum reports; the steps above are the planned reproduction.
 - **Task attempted:** Retrieve only human motion events with `event_types`.
 - **Steps taken:** Called `GET /v1/history/devices/{id}/events?event_types=motion.human` per the documentation; compared with an unfiltered call; read the forum correction from Amazon staff about plural syntax.
 - **Expected:** Only `motion.human` events.
@@ -66,6 +69,7 @@
 
 ### 5. Ring Developer Console: recover credentials after closing the creation dialog
 
+- **Status:** Anticipated, not yet reproduced. The credential behavior is taken from the Ring documentation (docs/research.md Section 2); the console steps above have not been reproduced in this project.
 - **Task attempted:** Retrieve the HMAC signing key after the app creation dialog was dismissed.
 - **Steps taken:** Looked in the app settings; read the docs stating credentials are shown once and cannot be regenerated.
 - **Expected:** A "rotate secret" or "reveal once more" action.
@@ -86,6 +90,7 @@
 
 ### 7. Ring media: size the watermark band for computer vision
 
+- **Status:** Anticipated, not yet reproduced. No Playground frame has been downloaded yet, so nothing has been measured. The steps above are the planned reproduction.
 - **Task attempted:** Crop the watermark before running label detection on a snapshot.
 - **Steps taken:** Downloaded a Playground frame; measured the band manually.
 - **Expected:** Documented pixel dimensions or a ratio for the watermark overlay.
@@ -96,6 +101,7 @@
 
 ### 8. Ring encryption: detect whether a device is TAKE or E2EE encrypted
 
+- **Status:** Anticipated, not yet reproduced. Device status and capabilities have not been inspected against the Playground yet. The finding comes from the encryption documentation; the steps above are the planned reproduction.
 - **Task attempted:** Decide up front whether snapshots for a device will be readable.
 - **Steps taken:** Inspected device status and capabilities; read the encryption documentation added on 16 September 2026.
 - **Expected:** A device attribute for encryption state.
@@ -126,6 +132,7 @@
 
 ### 11. AWS AgentCore: install the CLI when the older Python CLI is present
 
+- **Status:** Anticipated, not yet reproduced. The AgentCore CLI has not been installed for this project yet (AgentCore hosting is planned, not built). The steps above are the planned reproduction.
 - **Task attempted:** Install the npm `@aws/agentcore` CLI.
 - **Steps taken:** Ran `agentcore --help`; the older Python `bedrock-agentcore-starter-toolkit` binary shadowed the new one.
 - **Expected:** A clear migration note.

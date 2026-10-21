@@ -77,20 +77,33 @@ File size ceiling 500 lines; functions under 50 lines; domain code has no AWS im
 
 ## 3. Environment and Configuration
 
-`.env.example` (all variables validated with a Zod schema in `packages/config/env.ts`; the app refuses to start on a missing required value):
+`.env.example` (all variables validated with a Zod schema in `packages/config/src/env.ts`; the app refuses to start on an invalid value):
 
 ```
 # Modes
-VISITPROOF_MODE=demo|live            # demo = fixtures + emulator; live = Ring Playground or OAuth
+VISITPROOF_MODE=demo                 # demo = fixtures + emulator; live = Ring Playground or OAuth
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+VISITPROOF_TIME_ZONE=America/New_York  # agency time zone fallback (the agency record wins)
 
 # Ring (live mode)
 RING_CLIENT_ID=
 RING_CLIENT_SECRET=
 RING_HMAC_SIGNING_KEY=               # also used by the emulator to sign demo webhooks
-RING_PLAYGROUND_ACCESS_TOKEN=        # optional 30-minute token for read/live calls
+RING_PLAYGROUND_ACCESS_TOKEN=        # optional 30-minute token for read/live calls (pnpm ring:smoke)
 RING_API_BASE=https://api.amazonvision.com
 RING_OAUTH_TOKEN_URL=https://oauth.ring.com/oauth/token
+VISITPROOF_TOKEN_KEY=                # 32-byte base64 key that encrypts Ring OAuth tokens at rest
+
+# Local demo and services
+PORT=3000                            # console
+WEBHOOK_PORT=3101                    # webhook receiver (apps/webhooks)
+VISITPROOF_DEMO_STORE_PATH=          # local JSON store; pnpm demo defaults to .demo-data/
+VISITPROOF_STORE=                    # "dynamo" makes the console use DynamoDB; anything else is local
+VISITPROOF_AGENCY_ID=a1              # agency whose consent the webhook receiver enforces
+VISITPROOF_DEMO_AGENCY_ID=           # agency for the local servers (default a1)
+VISITPROOF_ENGINE_INLINE=true        # false: the receiver only persists; the engine runs elsewhere
+VISITPROOF_LEDGER_SECRET=            # local HMAC stand-in for the KMS ledger signer (demo only)
+VISITPROOF_SESSION_SECRET=           # signs the demo role cookie; random per process when unset
 
 # AWS
 AWS_REGION=us-east-1
@@ -104,12 +117,19 @@ BEDROCK_GUARDRAIL_ID=
 BEDROCK_GUARDRAIL_VERSION=
 COGNITO_USER_POOL_ID=
 COGNITO_CLIENT_ID=
-MODEL_PROVIDER=fixture|bedrock       # fixture until integration week
+MODEL_PROVIDER=fixture               # fixture (offline) or bedrock
 
 # MCP
+MCP_HOST=127.0.0.1                   # 0.0.0.0 for AgentCore Runtime
+MCP_PORT=8000
+MCP_URL=http://localhost:8000/mcp    # where the console's /ask route connects
 MCP_PUBLIC_URL=https://mcp.visitproof.com/mcp
 MCP_AUTH_ISSUER=                     # Cognito issuer URL
-MCP_DEMO_TOKENS=family-demo-token,agency-demo-token
+MCP_DEMO_TOKENS=family-demo-token=family:cli_okoro,agency-demo-token=agency
+MCP_ALLOW_ANONYMOUS=                 # 1 allows unauthenticated calls in demo mode only
+MCP_ALLOWED_HOSTS=
+MCP_ALLOWED_ORIGINS=
+MCP_STATELESS=                       # true for stateless Streamable HTTP
 ```
 
 `TYPESAFE_API_KEY` (read from the shell; never committed) joins the schema when the planned Jev integration lands; nothing reads it today.
@@ -244,19 +264,20 @@ Narratives (`packages/domain/narratives.ts`): build a structured summary, call B
 |---|---|---|---|
 | `get_visit_status` | `clientId?`, `date?` | family, agency | Today's visit status for a client with times and reconciliation summary |
 | `list_visits` | `date`, `status?`, `clientId?` | agency, family (own client) | At most 5 items in voice, more in structured content |
-| `list_exceptions` | `date?`, `state?` | agency | Open exceptions ranked by severity |
+| `list_exceptions` | `date?`, `state?` (`open`, `snoozed`, `resolved`, `any`), `kind?`, `days?` | agency | Exceptions ranked by severity; open by default |
 | `explain_visit` | `visitId` | family, agency, caregiver (own) | Evidence timeline in plain language, three columns |
 | `get_client_summary` | `clientId`, `range` | family, agency | Reliability over a range |
 | `acknowledge_exception` | `exceptionId`, `reason`, `confirmed` | agency | Confirmation required (elicitation or `confirmed`) |
 | `add_visit_note` | `visitId`, `text`, `confirmed` | family, caregiver, agency | Signed into the Reported column |
 
+- Write tools answer with a status: `done`, `confirmation_required`, `declined`, or `already_resolved`. The earlier `export_evidence` tool was removed; evidence packs come from the console export.
 - Resources: `visitproof://schedule/{clientId}/{date}` (JSON), `visitproof://feed/{clientId}/today` (text). Prompt: `morning_briefing(clientId)`.
 - MCP Apps (optional, day 18+): `ui://visitproof/visit-card.html` returned via `_meta.ui.resourceUri` for Echo Show rendering.
 - Conformance tests (`pnpm mcp:conformance`): initialize both versions, session headers, 202 on notifications, 404 on unknown session, 403 on bad Origin, 401 unauthenticated, tools/list, each tool with fixtures, structured output validation.
 
 ### 8.2 Ask VisitProof simulator (`/ask`)
 
-Mirrors Amazon's web simulator layout: left conversation (shadcn chat components `MessageScroller`, `Message`, `Bubble`), "Ask VisitProof" input with optional browser speech recognition, right panel device preview (Echo Show small and large toggle via `ToggleGroup`) rendering the structured content as a Card, bottom `Tabs`: Response Detail (tool call JSON), Trace (timings), Visual. Brain: Strands agent with the MCP client over Streamable HTTP (`MODEL_PROVIDER=fixture` uses golden-utterance mappings offline). Golden utterances in `apps/mcp/test/golden.json` map phrases to expected tool selections and are run in CI against the fixture brain and, in integration week, against Nova 2 Lite.
+Mirrors Amazon's web simulator layout: left conversation (shadcn chat components `MessageScroller`, `Message`, `Bubble`), "Ask VisitProof" input with optional browser speech recognition, right panel device preview (Echo Show small and large toggle via `ToggleGroup`) rendering the structured content as a Card, bottom `Tabs`: Response Detail (tool call JSON), Trace (timings), Visual. Brain: Strands agent with the MCP client over Streamable HTTP (`MODEL_PROVIDER=fixture` uses golden-utterance mappings offline). Golden utterances in `apps/mcp/test/golden.json` map phrases to expected tool selections and run with `pnpm --filter @visitproof/copilot test` against the fixture brain (Nova 2 Lite runs are planned).
 
 ---
 
@@ -328,7 +349,7 @@ Family invitation; Account Linked; Daily Digest (one per client per day, dedupe 
 
 1. Initialize with `pnpm dlx shadcn@latest init -t next --monorepo` then set `style: "base-nova"`, `base: "base"`, `baseColor: "neutral"`, `iconLibrary: "lucide"`, `cssVariables: true`, `rsc: true` in every `components.json`; run `pnpm dlx shadcn@latest info --json` and commit the output to `docs/shadcn-info.json`.
 2. Add components only with `pnpm dlx shadcn@latest add <name> -c apps/console`; the CLI routes `registry:ui` items to `packages/ui`. Initial set: `sidebar breadcrumb separator button badge card tabs table sheet dialog alert-dialog drawer dropdown-menu select native-select combobox command input input-group input-otp textarea field checkbox switch radio-group slider toggle-group calendar popover tooltip toast skeleton empty item kbd spinner progress avatar alert scroll-area chart aspect-ratio questionnaire message-scroller message bubble marker`.
-3. Tokens only. Two added intents in `packages/ui/src/globals.css`: `--warning`/`--warning-foreground` (light `oklch(0.84 0.16 84)` / `oklch(0.28 0.07 46)`; dark `oklch(0.41 0.11 46)` / `oklch(0.99 0.02 95)`) and `--success`/`--success-foreground` (light `oklch(0.72 0.17 150)` / `oklch(0.98 0.02 150)`; dark `oklch(0.52 0.14 150)` / `oklch(0.98 0.02 150)`), mapped in `@theme inline`, and added as `warning` and `success` variants to `badge.tsx` and `alert.tsx` only. No other color overrides anywhere.
+3. Tokens only. Two added intents in `packages/ui/src/globals.css`: `--warning`/`--warning-foreground` (light `oklch(0.84 0.16 84)` / `oklch(0.28 0.07 46)`; dark `oklch(0.41 0.11 46)` / `oklch(0.99 0.02 95)`) and `--success`/`--success-foreground` (light `oklch(0.5 0.14 150)` / `oklch(0.98 0.02 150)`; dark `oklch(0.52 0.14 150)` / `oklch(0.98 0.02 150)`), mapped in `@theme inline`, and added as `warning` and `success` variants to `badge.tsx` and `alert.tsx` only. For AA contrast the light `--destructive` is `oklch(0.52 0.21 27.325)`. No other color overrides anywhere.
 4. Base UI composition: `render` not `asChild`; `Select` with `items`; `ToggleGroup` and `Accordion` with `multiple` and array values; `Slider` numbers for single thumbs; toasts via `toast.add` from `@/components/ui/toast`; `Combobox` first-class.
 5. Layout only via className (`flex gap-4`, `grid`, `max-w-*`); never `space-*`; `size-*` for squares; `cn()` from `"cn"` for conditionals.
 6. Forms: `FieldGroup` > `Field` > `FieldLabel` + control + `FieldDescription` + `FieldError`, React Hook Form `Controller`, Zod resolver; `InputGroup` for adorned inputs; `FieldSet` + `FieldLegend` for groups.
