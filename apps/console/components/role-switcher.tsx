@@ -13,7 +13,6 @@ import { Button } from "@workspace/ui/components/button"
 import {
   Card,
   CardAction,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -42,8 +41,8 @@ export function RoleSwitcher({ current }: { current: Role | null }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ role }),
-    })
-    if (!response.ok) {
+    }).catch(() => null)
+    if (!response?.ok) {
       setPending(null)
       toast.add({ type: "error", title: "Sign In Failed", description: "Try again." })
       return
@@ -58,29 +57,45 @@ export function RoleSwitcher({ current }: { current: Role | null }) {
 
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      {ROLE_ORDER.map((role) => {
-        const Icon = ROLE_ICONS[role]
-        return (
-          <Card key={role} className="py-4">
-            <CardHeader>
-              <Icon className="size-5 text-muted-foreground" aria-hidden="true" />
-              <CardTitle>{ROLE_LABELS[role]}</CardTitle>
-              <CardDescription>{ROLE_DESCRIPTIONS[role]}</CardDescription>
-              <CardAction>
-                <Button
-                  onClick={() => signIn(role)}
-                  disabled={pending !== null || current === role}
-                >
-                  {current === role ? "Current Session" : "Sign In"}
-                </Button>
-              </CardAction>
-            </CardHeader>
-            <CardContent className="text-sm text-muted-foreground">
-              Opens {roleHome(role)}
-            </CardContent>
-          </Card>
-        )
-      })}
+      {ROLE_ORDER.map((role) => (
+        <RoleCard
+          key={role}
+          role={role}
+          current={current === role}
+          disabled={pending !== null || current === role}
+          onSignIn={() => signIn(role)}
+        />
+      ))}
     </div>
+  )
+}
+
+function RoleCard({
+  role,
+  current,
+  disabled,
+  onSignIn,
+}: {
+  role: Role
+  current: boolean
+  disabled: boolean
+  onSignIn: () => void
+}) {
+  const Icon = ROLE_ICONS[role]
+  return (
+    <Card size="sm">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Icon aria-hidden="true" />
+          {ROLE_LABELS[role]}
+        </CardTitle>
+        <CardDescription>{ROLE_DESCRIPTIONS[role]}</CardDescription>
+        <CardAction>
+          <Button onClick={onSignIn} disabled={disabled}>
+            {current ? "Current Session" : "Demo Sign In"}
+          </Button>
+        </CardAction>
+      </CardHeader>
+    </Card>
   )
 }

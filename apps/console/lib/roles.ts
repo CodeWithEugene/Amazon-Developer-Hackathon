@@ -1,7 +1,7 @@
 /** Roles available for one-click mock sign-in. */
 export type Role = "scheduler" | "compliance" | "family" | "caregiver"
 
-export const ROLES: readonly Role[] = ["scheduler", "compliance", "family", "caregiver"]
+export const ROLES = ["scheduler", "compliance", "family", "caregiver"] as const satisfies readonly Role[]
 
 export const ROLE_HOME: Record<Role, string> = {
   scheduler: "/agency/today",
@@ -21,7 +21,7 @@ export const ROLE_DESCRIPTIONS: Record<Role, string> = {
   scheduler: "Run today's board and clear exceptions.",
   compliance: "Reconcile EVV records and export evidence.",
   family: "See one calm daily message and control consent.",
-  caregiver: "Review your visit record and add notes.",
+  caregiver: "Review your own visits, add notes, and dispute a record.",
 }
 
 export function roleHome(role: Role): string {

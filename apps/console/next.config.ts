@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     "@visitproof/db",
     "@visitproof/domain",
     "@visitproof/ring-partner-sdk",
+    "@visitproof/copilot",
   ],
 }
 

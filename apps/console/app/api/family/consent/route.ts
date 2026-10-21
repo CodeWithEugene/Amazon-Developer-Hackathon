@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
-import { storeErrorResponse } from "@/lib/api"
-import { getSessionClientId, updateConsent } from "@/lib/store"
+import { rejectCrossSite, storeErrorResponse } from "@/lib/api"
+import { getClient, getSessionClientId, isErased, updateConsent } from "@/lib/store"
 import { getSessionRole } from "@/lib/session"
 
 const patchSchema = z.object({
@@ -18,6 +18,8 @@ export async function PATCH(request: Request) {
   if (role !== "family") {
     return NextResponse.json({ error: "Not authorized" }, { status: 401 })
   }
+  const refused = rejectCrossSite(request)
+  if (refused) return refused
   const parsed = patchSchema.safeParse(await request.json().catch(() => null))
   if (!parsed.success) {
     return NextResponse.json(
@@ -35,6 +37,13 @@ export async function PATCH(request: Request) {
     )
   }
   try {
+    const current = await getClient(clientId)
+    if (current && isErased(current)) {
+      return NextResponse.json(
+        { error: "This household's data was deleted. Link Ring again to share." },
+        { status: 409 }
+      )
+    }
     const client = await updateConsent(clientId, patch)
     return NextResponse.json({ consent: client.consent })
   } catch (error) {

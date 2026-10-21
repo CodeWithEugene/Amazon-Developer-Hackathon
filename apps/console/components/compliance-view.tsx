@@ -1,9 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import { FileCheckIcon, FileJsonIcon } from "lucide-react"
 
-import { StatusBadge } from "@workspace/ui/components/status-badge"
-import { Badge } from "@workspace/ui/components/badge"
 import { Button } from "@workspace/ui/components/button"
 import {
   Card,
@@ -13,250 +12,145 @@ import {
   CardHeader,
   CardTitle,
 } from "@workspace/ui/components/card"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@workspace/ui/components/table"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@workspace/ui/components/tabs"
 
-import { formatTime, formatWindow } from "@/lib/format"
-import type { EVVRecord, LedgerRecord, Visit } from "@visitproof/domain"
+import type { ComplianceData, LedgerChain } from "@/lib/views/compliance"
 
-export interface ReconciliationRow {
-  visit: Visit
-  clientName: string
-  caregiverName: string
-  evv: EVVRecord | undefined
+import { LedgerCard } from "./compliance/ledger-card"
+import {
+  inRange,
+  ReconciliationCard,
+  type RangeKey,
+} from "./compliance/reconciliation-card"
+import { NoDemoData } from "./today-board"
+
+const RANGE_LABEL: Record<RangeKey, string> = {
+  today: "Today",
+  week: "This Week",
+  "two-weeks": "Two Weeks",
 }
 
-export function ComplianceView({
-  rows,
-  ledger,
-  chainVerified,
-}: {
-  rows: ReconciliationRow[]
-  ledger: LedgerRecord[]
-  chainVerified: boolean
-}) {
-  const corroborated = rows.filter((r) =>
-    isCorroborated(r.visit.reconciliation?.outcome)
+export function ComplianceView({ data }: { data: ComplianceData }) {
+  const [range, setRange] = useState<RangeKey>("two-weeks")
+  const firstSharing = data.chains.find((c) => c.sharing) ?? data.chains[0]
+  const [clientId, setClientId] = useState(firstSharing?.clientId ?? "")
+  if (data.storeEmpty) return <NoDemoData />
+  const ranged = data.rows.filter((row) => inRange(row, range, data.today))
+  const corroborated = ranged.filter(
+    (r) => r.outcome === "corroborated" || r.outcome === "corroborated_with_variance"
   ).length
-
-  function download(format: "pdf" | "json") {
-    window.location.href = `/api/compliance/export?format=${format}`
-    return undefined
-  }
-
+  const chain = data.chains.find((c) => c.clientId === clientId)
+  const pdfHref = `/api/compliance/export?format=pdf&clientId=${encodeURIComponent(clientId)}`
   return (
     <div className="flex flex-col gap-6">
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card className="py-4">
-          <CardHeader>
-            <CardDescription>Visits Reconciled Today</CardDescription>
-            <CardTitle className="text-3xl tabular-nums">
-              {rows.length}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter className="text-xs text-muted-foreground">
-            {corroborated} corroborated by EVV clock-in
-          </CardFooter>
-        </Card>
-        <Card className="py-4">
-          <CardHeader>
-            <CardDescription>Signed Ledger Records</CardDescription>
-            <CardTitle className="text-3xl tabular-nums">
-              {ledger.length}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter className="text-xs text-muted-foreground">
-            {chainVerified
-              ? "Chain and signatures verified. HMAC stand-in for the demo; KMS ECDSA P-256 in production."
-              : "Chain verification failed. These records may have been altered."}
-          </CardFooter>
-        </Card>
-        <Card className="py-4">
-          <CardHeader>
-            <CardDescription>Evidence Exports</CardDescription>
-            <CardTitle className="text-base">Download Pack</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-wrap gap-2">
-            <Button size="sm" onClick={() => download("pdf")}>
-              <FileCheckIcon data-icon="inline-start" aria-hidden="true" />
-              PDF Evidence Pack
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => download("json")}
-            >
-              <FileJsonIcon data-icon="inline-start" aria-hidden="true" />
-              Alternate EVV JSON
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Reconciliation</CardTitle>
-          <CardDescription>
-            Door observations joined with EVV clock-ins. Corroborated,
-            contradicted, missing clock-in, and unobservable outcomes.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="all">
-            <TabsList>
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="corroborated">Corroborated</TabsTrigger>
-              <TabsTrigger value="contradicted">Contradicted</TabsTrigger>
-              <TabsTrigger value="missing">Missing</TabsTrigger>
-              <TabsTrigger value="unobservable">Unobservable</TabsTrigger>
-            </TabsList>
-            <TabsContent value="all">
-              <ReconciliationTable rows={rows} />
-            </TabsContent>
-            <TabsContent value="corroborated">
-              <ReconciliationTable
-                rows={rows.filter((r) =>
-                  isCorroborated(r.visit.reconciliation?.outcome)
-                )}
-              />
-            </TabsContent>
-            <TabsContent value="contradicted">
-              <ReconciliationTable
-                rows={rows.filter(
-                  (r) => r.visit.reconciliation?.outcome === "contradicted"
-                )}
-              />
-            </TabsContent>
-            <TabsContent value="missing">
-              <ReconciliationTable
-                rows={rows.filter((r) => {
-                  const outcome = r.visit.reconciliation?.outcome
-                  return (
-                    outcome === "missing_clock_in" || outcome === "missing_both"
-                  )
-                })}
-              />
-            </TabsContent>
-            <TabsContent value="unobservable">
-              <ReconciliationTable
-                rows={rows.filter(
-                  (r) => r.visit.reconciliation?.outcome === "unobservable"
-                )}
-              />
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Signed Evidence Records</CardTitle>
-          <CardDescription>
-            Every observation, report, and resolution is chained and signed.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Seq</TableHead>
-                <TableHead>Column</TableHead>
-                <TableHead>Subject</TableHead>
-                <TableHead>Payload Hash</TableHead>
-                <TableHead>Prev Hash</TableHead>
-                <TableHead>Signature</TableHead>
-                <TableHead>At</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {ledger.map((record) => (
-                <TableRow key={`${record.clientId}-${record.seq}`}>
-                  <TableCell className="tabular-nums">{record.seq}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{record.column}</Badge>
-                  </TableCell>
-                  <TableCell className="font-mono text-xs">
-                    {record.subject}
-                  </TableCell>
-                  <TableCell className="font-mono text-xs">
-                    {record.payloadHash}
-                  </TableCell>
-                  <TableCell className="font-mono text-xs">
-                    {record.prevHash}
-                  </TableCell>
-                  <TableCell className="font-mono text-xs">
-                    {record.signature}
-                  </TableCell>
-                  <TableCell>{formatTime(record.at)}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      <SummaryCards
+        rangeLabel={RANGE_LABEL[range]}
+        reconciled={ranged.length}
+        corroborated={corroborated}
+        hiddenClients={data.hiddenClients}
+        chain={chain}
+        pdfHref={pdfHref}
+      />
+      <ReconciliationCard rows={data.rows} today={data.today} range={range} onRange={setRange} />
+      <LedgerCard
+        chains={data.chains}
+        selectedId={clientId}
+        onSelect={setClientId}
+        zoneLabel={data.zoneLabel}
+      />
     </div>
   )
 }
 
-/** corroborated_with_variance (10–30 min deltas) belongs in the corroborated bucket. */
-function isCorroborated(outcome: string | undefined): boolean {
+function SummaryCards(props: {
+  rangeLabel: string
+  reconciled: number
+  corroborated: number
+  hiddenClients: number
+  chain: LedgerChain | undefined
+  pdfHref: string
+}) {
   return (
-    outcome === "corroborated" || outcome === "corroborated_with_variance"
+    <div className="grid gap-4 md:grid-cols-3">
+      <ReconciledCard {...props} />
+      <LedgerSummaryCard chain={props.chain} />
+      <ExportCard chain={props.chain} pdfHref={props.pdfHref} />
+    </div>
   )
 }
 
-function ReconciliationTable({ rows }: { rows: ReconciliationRow[] }) {
-  if (rows.length === 0) {
-    return (
-      <p className="py-6 text-center text-sm text-muted-foreground">
-        No visits in this category.
-      </p>
-    )
-  }
+function ReconciledCard({
+  rangeLabel,
+  reconciled,
+  corroborated,
+  hiddenClients,
+}: {
+  rangeLabel: string
+  reconciled: number
+  corroborated: number
+  hiddenClients: number
+}) {
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Client</TableHead>
-          <TableHead>Caregiver</TableHead>
-          <TableHead>Window</TableHead>
-          <TableHead>Door Arrival</TableHead>
-          <TableHead>Door Departure</TableHead>
-          <TableHead>Clock-In</TableHead>
-          <TableHead>Outcome</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {rows.map(({ visit, clientName, caregiverName }) => (
-          <TableRow key={visit.id}>
-            <TableCell>{clientName}</TableCell>
-            <TableCell>{caregiverName}</TableCell>
-            <TableCell>
-              {formatWindow(visit.scheduledStart, visit.scheduledEnd)}
-            </TableCell>
-            <TableCell>{formatTime(visit.arrival?.at)}</TableCell>
-            <TableCell>{formatTime(visit.departure?.at)}</TableCell>
-            <TableCell>{formatTime(visit.reconciliation?.clockIn)}</TableCell>
-            <TableCell>
-              <StatusBadge
-                status={visit.reconciliation?.outcome ?? "pending"}
-              />
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <Card>
+      <CardHeader>
+        <CardDescription>Visits Reconciled, {rangeLabel}</CardDescription>
+        <CardTitle className="text-3xl tabular-nums">{reconciled}</CardTitle>
+      </CardHeader>
+      <CardFooter>
+        <p className="text-xs text-muted-foreground">
+          {corroborated} corroborated by EVV clock-in.
+          {hiddenClients > 0 ? ` ${hiddenClients} client hidden by family choice.` : ""}
+        </p>
+      </CardFooter>
+    </Card>
+  )
+}
+
+function LedgerSummaryCard({ chain }: { chain: LedgerChain | undefined }) {
+  const status = chain?.verified
+    ? "Chain and signatures verified. HMAC stand-in for the demo; KMS ECDSA P-256 in production."
+    : "Chain verification failed. These records may have been altered."
+  return (
+    <Card>
+      <CardHeader>
+        <CardDescription>Signed Ledger Records</CardDescription>
+        <CardTitle className="text-3xl tabular-nums">{chain?.records.length ?? 0}</CardTitle>
+      </CardHeader>
+      <CardFooter>
+        <p className="text-xs text-muted-foreground">
+          {chain ? `${chain.clientName}. ${status}` : "Choose a client below."}
+        </p>
+      </CardFooter>
+    </Card>
+  )
+}
+
+function ExportCard({ chain, pdfHref }: { chain: LedgerChain | undefined; pdfHref: string }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardDescription>Evidence Exports</CardDescription>
+        <CardTitle>Download Pack</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-wrap gap-2">
+        <Button
+          size="sm"
+          disabled={!chain?.sharing}
+          render={<a href={pdfHref} download />}
+          nativeButton={false}
+        >
+          <FileCheckIcon data-icon="inline-start" aria-hidden="true" />
+          PDF For {chain?.clientName ?? "Client"}
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          render={<a href="/api/compliance/export?format=json" download />}
+          nativeButton={false}
+        >
+          <FileJsonIcon data-icon="inline-start" aria-hidden="true" />
+          Alternate EVV JSON
+        </Button>
+      </CardContent>
+    </Card>
   )
 }

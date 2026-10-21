@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
-import { storeErrorResponse } from "@/lib/api"
+import { rejectCrossSite, storeErrorResponse } from "@/lib/api"
 import { resolveException, snoozeException } from "@/lib/store"
 import { getSessionRole } from "@/lib/session"
 
@@ -20,6 +20,8 @@ export async function POST(
   if (role !== "scheduler" && role !== "compliance") {
     return NextResponse.json({ error: "Not authorized" }, { status: 401 })
   }
+  const refused = rejectCrossSite(request)
+  if (refused) return refused
   const { id } = await params
   const parsed = actionSchema.safeParse(await request.json().catch(() => null))
   if (!parsed.success) {
@@ -32,7 +34,7 @@ export async function POST(
 
   try {
     if (body.action === "snooze") {
-      const exception = await snoozeException(id, body.minutes ?? 10)
+      const exception = await snoozeException(id, body.minutes ?? 10, role)
       return NextResponse.json({ exception })
     }
 

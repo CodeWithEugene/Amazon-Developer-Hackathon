@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit"
   },
@@ -20,6 +21,7 @@
     "@tanstack/react-table": "9.2.4",
     "@typesafe-ai/sdk": "0.6.0",
     "@visitproof/config": "workspace:*",
+    "@visitproof/copilot": "workspace:*",
     "@visitproof/db": "workspace:*",
     "@visitproof/domain": "workspace:*",
     "@visitproof/ring-partner-sdk": "workspace:*",
@@ -43,6 +45,7 @@
     "@visitproof/config": "workspace:*",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "9.39.5",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "5.0.2"
   }
 }
