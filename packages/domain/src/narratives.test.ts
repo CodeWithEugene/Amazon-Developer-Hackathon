@@ -99,3 +99,74 @@ describe("validateNarrative", () => {
     ).toBe(true)
   })
 })
+
+describe("narratives in the agency time zone (contract C1)", () => {
+  const now = new Date("2026-10-01T16:00:00.000Z")
+  const eastern = visit({
+    scheduledStart: "2026-10-01T13:00:00.000Z",
+    scheduledEnd: "2026-10-01T15:00:00.000Z",
+    arrival: { at: "2026-10-01T13:04:00.000Z", source: "rule" },
+    departure: { at: "2026-10-01T15:00:00.000Z", source: "rule" },
+    status: "completed",
+    reconciliation: { outcome: "corroborated_with_variance" },
+  })
+
+  it("renders agency-local 12-hour times with the zone abbreviation", () => {
+    const narrative = buildNarrative({ visit: eastern, now, timeZone: "America/New_York" })
+    expect(narrative.text).toContain("arrived at 9:04 AM ET, 4 minutes after the scheduled time (9:00 AM ET)")
+    expect(narrative.text).toContain("left at 11:00 AM ET, on time (11:00 AM ET)")
+    expect(narrative.text).not.toMatch(/[–—]/)
+    const rules = validateNarrative(narrative.text, eastern, undefined, { timeZone: "America/New_York" })
+    expect(rules).toEqual({ mustContainTimes: true, under60Words: true, noOtherNames: true })
+  })
+
+  it("keeps the legacy UTC form when no time zone is given", () => {
+    const narrative = buildNarrative({ visit: eastern, now })
+    expect(narrative.text).toContain("arrived at 13:04")
+    expect(validateNarrative(narrative.text, eastern).mustContainTimes).toBe(true)
+    expect(validateNarrative(narrative.text, eastern, undefined, { timeZone: "America/New_York" }).mustContainTimes).toBe(
+      false
+    )
+  })
+
+  it("covers the remaining reconciliation phrases and a departure that was not observed", () => {
+    const phrases = (["contradicted", "missing_clock_in", "missing_door", "missing_both", "unobservable", "pending"] as const).map(
+      (outcome) => buildNarrative({ visit: { ...eastern, reconciliation: { outcome } }, now }).text
+    )
+    expect(phrases.every((text) => text.length > 0)).toBe(true)
+    const lingering = buildNarrative({
+      visit: { ...eastern, departure: undefined, status: "departure_not_observed" },
+      now,
+      timeZone: "America/New_York",
+    })
+    expect(lingering.text).toContain("No departure was observed")
+    const early = buildNarrative({ visit: { ...eastern, arrival: { at: "2026-10-01T12:59:00.000Z", source: "rule" } }, now })
+    expect(early.text).toContain("1 minute before")
+  })
+})
+
+describe("narrative minute deltas", () => {
+  it("compares the displayed minutes, so seconds never contradict the shown time", () => {
+    const base: Visit = {
+      id: "v1",
+      clientId: "c1",
+      agencyId: "a1",
+      caregiverId: "cg1",
+      serviceCode: "T1019",
+      date: "2026-10-01",
+      scheduledStart: "2026-10-01T20:00:00.000Z",
+      scheduledEnd: "2026-10-01T22:00:00.000Z",
+      status: "completed",
+      observability: { state: "observable", reasons: [] },
+      createdAt: "2026-10-01T00:00:00.000Z",
+      updatedAt: "2026-10-01T00:00:00.000Z",
+      version: 1,
+    }
+    const text = buildNarrative({
+      visit: { ...base, arrival: { at: "2026-10-01T20:00:40.000Z", source: "rule" } },
+      now: new Date("2026-10-01T23:00:00.000Z"),
+      timeZone: "America/New_York",
+    }).text
+    expect(text).toContain("A caregiver arrived at 4:00 PM ET, on time (4:00 PM ET).")
+  })
+})

@@ -317,6 +317,18 @@ export const narrativeSchema = z.object({
 })
 export type Narrative = z.infer<typeof narrativeSchema>
 
+export const exceptionKindSchema = z.enum([
+  "late_no_arrival",
+  "late_arrival",
+  "no_show",
+  "early_departure",
+  "unobservable",
+  "contradicted",
+  "missing_clock_in",
+  "ambiguous",
+])
+export type ExceptionKind = z.infer<typeof exceptionKindSchema>
+
 export const visitSchema = auditFieldsSchema.extend({
   id: idSchema,
   clientId: idSchema,
@@ -333,6 +345,12 @@ export const visitSchema = auditFieldsSchema.extend({
   observability: observabilitySchema,
   reconciliation: reconciliationSchema.optional(),
   narrative: narrativeSchema.optional(),
+  /**
+   * Exception kinds the Presence Engine has already requested for this
+   * visit. Keeps re-sweeps idempotent: once a card was raised it is never
+   * requested again, even after a person resolves or snoozes it.
+   */
+  raisedExceptionKinds: z.array(exceptionKindSchema).optional(),
 })
 export type Visit = z.infer<typeof visitSchema>
 
@@ -362,18 +380,6 @@ export type EVVRecord = z.infer<typeof evvRecordSchema>
 // ---------------------------------------------------------------------------
 // Exceptions
 // ---------------------------------------------------------------------------
-
-export const exceptionKindSchema = z.enum([
-  "late_no_arrival",
-  "late_arrival",
-  "no_show",
-  "early_departure",
-  "unobservable",
-  "contradicted",
-  "missing_clock_in",
-  "ambiguous",
-])
-export type ExceptionKind = z.infer<typeof exceptionKindSchema>
 
 export const exceptionStateSchema = z.enum(["open", "snoozed", "resolved"])
 export type ExceptionState = z.infer<typeof exceptionStateSchema>
@@ -416,6 +422,11 @@ export const ledgerRecordSchema = z.object({
   signature: z.string().min(1),
   signerKeyId: z.string().min(1),
   at: isoDateTime,
+  /**
+   * Signing format. Absent (legacy v1) signs clientId, seq, column, subject,
+   * payloadHash, and prevHash. Version 2 also signs `at` and `signerKeyId`.
+   */
+  ledgerVersion: z.union([z.literal(1), z.literal(2)]).optional(),
 })
 export type LedgerRecord = z.infer<typeof ledgerRecordSchema>
 

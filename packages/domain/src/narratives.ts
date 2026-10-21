@@ -3,38 +3,59 @@
  * The template path is fully local and deterministic; Bedrock is prod-only
  * and layered on top by the narrative-writer handler.
  */
+import { formatLocalTime } from "./time"
 import type { Narrative, Reconciliation, Visit } from "./types"
 
 const MIN = 60_000
 
-export interface NarrativeInput {
+export interface NarrativeOptions {
+  /**
+   * Agency time zone (Agency.timezone). When given, times render as
+   * agency-local 12-hour times with the zone ("8:04 AM ET"); without it the
+   * legacy UTC "HH:MM" form is kept for existing callers.
+   */
+  timeZone?: string
+}
+
+export interface NarrativeInput extends NarrativeOptions {
   visit: Visit
   caregiverName?: string
   now: Date
 }
 
-function timeOf(iso: string): string {
+/** The time as a narrative renders it. */
+export function narrativeTime(iso: string, options: NarrativeOptions = {}): string {
+  if (options.timeZone) return formatLocalTime(iso, options.timeZone)
   return new Date(Date.parse(iso)).toISOString().slice(11, 16)
 }
 
+/**
+ * Whole-minute difference between the times as displayed: clock times drop
+ * their seconds, so 4:00:40 PM against 4:00 PM reads "on time", matching
+ * the "4:00 PM" the sentence shows.
+ */
 function minuteDiff(from: string, to: string): number {
-  return Math.round((Date.parse(to) - Date.parse(from)) / MIN)
+  return Math.floor(Date.parse(to) / MIN) - Math.floor(Date.parse(from) / MIN)
 }
 
-function deltaPhrase(label: string, deltaMin: number): string {
+function deltaPhrase(scheduledIso: string, deltaMin: number, options: NarrativeOptions): string {
   const plural = Math.abs(deltaMin) === 1 ? "minute" : "minutes"
+  const scheduled = narrativeTime(scheduledIso, options)
   return deltaMin === 0
-    ? `on time (${timeOf(label)})`
-    : `${Math.abs(deltaMin)} ${plural} ${deltaMin > 0 ? "after" : "before"} the scheduled time (${timeOf(label)})`
+    ? `on time (${scheduled})`
+    : `${Math.abs(deltaMin)} ${plural} ${deltaMin > 0 ? "after" : "before"} the scheduled time (${scheduled})`
 }
 
 /** Deterministic template narrative; no identity or health language. */
 export function buildNarrative(input: NarrativeInput): Narrative {
   const { visit, now } = input
+  const options: NarrativeOptions = { timeZone: input.timeZone }
   const parts: string[] = []
   if (visit.arrival) {
     const delta = minuteDiff(visit.scheduledStart, visit.arrival.at)
-    parts.push(`A caregiver arrived at ${timeOf(visit.arrival.at)}, ${deltaPhrase(visit.scheduledStart, delta)}.`)
+    parts.push(
+      `A caregiver arrived at ${narrativeTime(visit.arrival.at, options)}, ${deltaPhrase(visit.scheduledStart, delta, options)}.`
+    )
   } else if (visit.status === "no_show") {
     parts.push(`No caregiver arrival was observed by the end of the escalation window.`)
   } else if (visit.observability.state === "unobservable") {
@@ -44,7 +65,9 @@ export function buildNarrative(input: NarrativeInput): Narrative {
   }
   if (visit.departure) {
     const delta = minuteDiff(visit.scheduledEnd, visit.departure.at)
-    parts.push(`They left at ${timeOf(visit.departure.at)}, ${deltaPhrase(visit.scheduledEnd, delta)}.`)
+    parts.push(
+      `They left at ${narrativeTime(visit.departure.at, options)}, ${deltaPhrase(visit.scheduledEnd, delta, options)}.`
+    )
   } else if (visit.arrival && visit.status === "departure_not_observed") {
     parts.push(`No departure was observed by the end of the visit window.`)
   }
@@ -88,10 +111,14 @@ export interface NarrativeRules {
 }
 
 /** Validate narrative output rules; used for both template and model text. */
-export function validateNarrative(text: string, visit: Visit, caregiverName?: string): NarrativeRules {
+export function validateNarrative(
+  text: string,
+  visit: Visit,
+  caregiverName?: string,
+  options: NarrativeOptions = {}
+): NarrativeRules {
   const words = text.trim().split(/\s+/).filter(Boolean)
-  const timesPresent =
-    !visit.arrival || new RegExp(timeOf(visit.arrival.at).replace(":", "\\:")).test(text)
+  const timesPresent = !visit.arrival || text.includes(narrativeTime(visit.arrival.at, options))
   // The caregiver's own name is allowed; match it per-word ("Maria Santos"
   // allows both "Maria" and "Santos").
   const allowed = new Set((caregiverName ?? "").split(/\s+/).filter(Boolean))

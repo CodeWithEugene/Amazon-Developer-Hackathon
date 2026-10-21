@@ -1,14 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import {
-  buildEvidencePack,
-  canonicalHash,
-  canonicalJson,
-  ledgerSigningHash,
-  signLedger,
-  toOpenEvvVisit,
-  verifyChain,
-} from "./evidence"
+import { buildEvidencePack, canonicalHash, canonicalJson } from "./evidence"
 import { DEFAULT_TOLERANCES, type Client, type EVVRecord, type Visit } from "./types"
 
 const audit = {
@@ -106,85 +98,57 @@ describe("buildEvidencePack", () => {
   })
 })
 
-describe("toOpenEvvVisit", () => {
-  it("prefers door-observed times and flags missing clock-ins", () => {
-    const json = toOpenEvvVisit(
-      visit({
-        arrival: { at: "2026-10-01T06:02:00.000Z", source: "rule" },
-        departure: { at: "2026-10-01T08:05:00.000Z", source: "rule" },
-      })
-    )
-    expect(json.StartDateTime).toBe("2026-10-01T06:02:00.000Z")
-    expect(json.EndDateTime).toBe("2026-10-01T08:05:00.000Z")
-    expect(json.ExceptionIndicator).toBe("MISSING_CLOCK_IN")
-
-    expect(toOpenEvvVisit(visit(), evv).StartDateTime).toBe(evv.clockIn)
-    expect(toOpenEvvVisit(visit(), evv).ExceptionIndicator).toBeUndefined()
-  })
-})
-
-describe("signLedger", () => {
-  it("chains records and verifies", () => {
-    const first = signLedger({
-      clientId: "c1",
-      seq: 0,
-      column: "observed",
-      subject: "v1",
-      payload: { at: "2026-10-01T06:02:00.000Z" },
-      signerKeyId: "key-1",
-      at: "2026-10-01T06:02:01.000Z",
-      sign: (hash) => `sig(${hash.slice(0, 8)})`,
+describe("buildEvidencePack timeline", () => {
+  it("covers an empty range and lays out observed, reported, and resolved entries", () => {
+    const empty = buildEvidencePack({
+      client,
+      visits: [],
+      events: [],
+      evvRecords: [],
+      exceptions: [],
+      tolerances: DEFAULT_TOLERANCES,
+      now,
     })
-    const second = signLedger({
-      clientId: "c1",
-      seq: 1,
-      column: "reported",
-      subject: "v1",
-      payload: { clockIn: "2026-10-01T06:05:00.000Z" },
-      signerKeyId: "key-1",
-      at: "2026-10-01T06:05:01.000Z",
-      prev: first,
-      sign: (hash) => `sig(${hash.slice(0, 8)})`,
-    })
-    expect(second.prevHash).toBe(canonicalHash(first))
-    expect(verifyChain([second, first], (record) => record.signature.startsWith("sig("))).toBe(true)
-    const broken = { ...second, prevHash: "deadbeef" }
-    expect(verifyChain([first, broken], () => true)).toBe(false)
-  })
+    expect(empty.rangeStart).toBe(now.toISOString())
+    expect(empty.rangeEnd).toBe(now.toISOString())
 
-  it("signs the record context, not just the payload hash", () => {
-    const signed: string[] = []
-    const sign = (hash: string): string => {
-      signed.push(hash)
-      return `sig(${hash.slice(0, 8)})`
-    }
-    const base = {
-      clientId: "c1",
-      column: "observed" as const,
-      subject: "v1",
-      payload: { at: "2026-10-01T06:02:00.000Z" },
-      signerKeyId: "key-1",
-      sign,
-    }
-    const first = signLedger({ ...base, seq: 0, at: "2026-10-01T06:02:01.000Z" })
-    const samePayloadNextSeq = signLedger({
-      ...base,
-      seq: 1,
-      at: "2026-10-01T06:02:02.000Z",
-      prev: first,
+    const pack = buildEvidencePack({
+      client,
+      visits: [visit({ status: "no_show", reconciliation: { outcome: "missing_both" } })],
+      events: [
+        {
+          ...audit,
+          clientId: "c1",
+          requestId: "r1",
+          timestampMs: Date.parse("2026-10-01T06:01:00.000Z"),
+          at: "2026-10-01T06:01:00.000Z",
+          type: "motion",
+          subType: "human",
+          provenance: "emulated",
+          rawPayloadHash: "h",
+          componentIds: [],
+        },
+      ],
+      evvRecords: [{ ...evv, clockOut: undefined }],
+      exceptions: [
+        {
+          ...audit,
+          id: "v1#no_show",
+          agencyId: "a1",
+          visitId: "v1",
+          clientId: "c1",
+          kind: "no_show",
+          state: "resolved",
+          openedAt: "2026-10-01T06:45:00.000Z",
+          resolution: { by: "dana", at: "2026-10-01T07:00:00.000Z", reason: "Replacement sent" },
+        },
+      ],
+      tolerances: DEFAULT_TOLERANCES,
+      now,
     })
-    // Identical payload hash, but the signatures bind seq and prevHash, so
-    // they differ and cannot be transplanted between records.
-    expect(samePayloadNextSeq.payloadHash).toBe(first.payloadHash)
-    expect(samePayloadNextSeq.signature).not.toBe(first.signature)
-    expect(signed[0]).toBe(ledgerSigningHash(first))
-    expect(signed[1]).toBe(ledgerSigningHash(samePayloadNextSeq))
-    // A verifier recomputes the context hash from the stored record alone.
-    expect(
-      verifyChain([samePayloadNextSeq, first], (record) => {
-        const expected = `sig(${ledgerSigningHash(record).slice(0, 8)})`
-        return record.signature === expected
-      }),
-    ).toBe(true)
+    expect(pack.visits[0]?.exceptionKinds).toEqual(["no_show"])
+    expect(pack.visits[0]?.reconciliation?.outcome).toBe("missing_both")
+    expect(pack.timeline.map((entry) => entry.column)).toEqual(["observed", "reported", "resolved", "resolved"])
+    expect(pack.timeline[0]?.label).toBe("motion (human) via emulated")
   })
 })

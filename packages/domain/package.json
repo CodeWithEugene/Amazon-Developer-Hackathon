@@ -2,7 +2,7 @@
   "name": "@visitproof/domain",
   "version": "0.1.0",
   "private": true,
-  "description": "Presence Engine, reconciliation, evidence signing, EVV export, Jev judgments, and narratives. Pure TypeScript with no AWS imports.",
+  "description": "Presence Engine, reconciliation, evidence signing, Open EVV style export, the arrival Judge port (deterministic rule judge; Jev adapter injected), agency time zone helpers, and narratives. Pure TypeScript with no AWS imports.",
   "license": "Apache-2.0",
   "type": "module",
   "sideEffects": false,
@@ -15,16 +15,16 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
     "lint": "eslint ."
   },
   "dependencies": {
-    "@typesafe-ai/sdk": "0.6.0",
     "zod": "4.6.5"
   },
   "devDependencies": {
     "@types/node": "26.6.3",
     "@visitproof/config": "workspace:*",
+    "@visitproof/ring-partner-sdk": "workspace:*",
     "@vitest/coverage-v8": "5.0.2",
     "eslint": "9.39.5",
     "tsup": "8.5.1",
