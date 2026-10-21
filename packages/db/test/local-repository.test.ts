@@ -40,7 +40,11 @@ describe("local repository round-trip", () => {
     const updated = await repo.clients.saveConsent(
       "agency-1",
       "client-1",
-      { ...client.consent, snapshotsEnabled: true, consentedAt: "2026-10-01T10:00:00.000Z" },
+      {
+        ...client.consent,
+        snapshotsEnabled: true,
+        consentedAt: "2026-10-01T10:00:00.000Z",
+      },
       new Date("2026-10-01T10:00:00.000Z")
     )
     expect(updated.consent.snapshotsEnabled).toBe(true)
@@ -64,8 +68,14 @@ describe("local repository round-trip", () => {
       "visit-early",
     ])
     const today = await repo.visits.byAgencyAndDate("agency-1", "2026-10-01")
-    expect(today.map((v) => v.id)).toEqual(["visit-early", "visit-1", "visit-2"])
-    expect(await repo.visits.byAgencyAndDate("agency-1", "2026-10-02")).toEqual([])
+    expect(today.map((v) => v.id)).toEqual([
+      "visit-early",
+      "visit-1",
+      "visit-2",
+    ])
+    expect(await repo.visits.byAgencyAndDate("agency-1", "2026-10-02")).toEqual(
+      []
+    )
     expect(await repo.visits.get("client-1", "visit-1")).toBeTruthy()
     expect(await repo.visits.get("client-1", "nope")).toBeNull()
   })
@@ -102,9 +112,9 @@ describe("local repository round-trip", () => {
 
   it("round-trips caregivers", async () => {
     await repo.caregivers.put(makeCaregiver())
-    expect((await repo.caregivers.byAgency("agency-1")).map((c) => c.id)).toEqual([
-      "cg-1",
-    ])
+    expect(
+      (await repo.caregivers.byAgency("agency-1")).map((c) => c.id)
+    ).toEqual(["cg-1"])
     expect(await repo.caregivers.get("agency-1", "cg-1")).toBeTruthy()
     expect(await repo.caregivers.get("agency-1", "nope")).toBeNull()
   })
@@ -123,15 +133,15 @@ describe("local repository round-trip", () => {
     await repo.evidence.appendLedger(makeLedgerRecord(0))
     await repo.evidence.appendLedger(makeLedgerRecord(1))
 
-    expect((await repo.evidence.notesByVisit("visit-1")).map((n) => n.id)).toEqual([
-      "note-1",
-    ])
+    expect(
+      (await repo.evidence.notesByVisit("visit-1")).map((n) => n.id)
+    ).toEqual(["note-1"])
     expect(
       (await repo.evidence.snapshotsByVisit("visit-1")).map((s) => s.s3Key)
     ).toEqual(["snapshots/visit-1/1.jpg"])
-    expect((await repo.evidence.ledgerByClient("client-1")).map((r) => r.seq)).toEqual([
-      0, 1,
-    ])
+    expect(
+      (await repo.evidence.ledgerByClient("client-1")).map((r) => r.seq)
+    ).toEqual([0, 1])
     await expect(
       repo.evidence.appendLedger(makeLedgerRecord(1))
     ).rejects.toThrow(/already exists/)
@@ -176,7 +186,9 @@ describe("local repository round-trip", () => {
   it("survives a fresh repository instance over the same directory", async () => {
     const reopened = createLocalRepository(dir)
     expect(await reopened.clients.get("agency-1", "client-1")).toBeTruthy()
-    expect(await reopened.webhookReceipts.claim("req-abc", new Date())).toBe(false)
+    expect(await reopened.webhookReceipts.claim("req-abc", new Date())).toBe(
+      false
+    )
     const visit = await reopened.visits.get("client-1", "visit-1")
     expect(visit?.id).toBe("visit-1")
   })

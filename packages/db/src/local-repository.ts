@@ -1,7 +1,8 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises"
-import { dirname, join } from "node:path"
+import { readFile } from "node:fs/promises"
+import { join } from "node:path"
 
 import type {
+  Agency,
   Caregiver,
   Client,
   DoorEvent,
@@ -15,6 +16,7 @@ import type {
 } from "@visitproof/domain"
 
 import {
+  agencyKeys,
   caregiverKeys,
   clientKeys,
   eventKeys,
@@ -28,126 +30,97 @@ import {
   visitGsi1,
   visitKeys,
   webhookReceiptKeys,
-  type Key,
 } from "./keys"
-import { MalformedDataError } from "./errors"
+import type { FileLockOptions } from "./local/file-lock"
+import { JsonTable } from "./local/json-table"
 import type { VisitProofRepository } from "./repository"
-import { toEpochSeconds, ttlAt } from "./time"
+import { ttlAt } from "./time"
 import { WEBHOOK_RECEIPT_TTL_SECONDS } from "./table"
-
-/**
- * One JSON file per table on disk, under the directory given to
- * `createLocalRepository`. This is what the offline demo and the tests use.
- */
-class JsonTable<T> {
-  private readonly rows = new Map<string, T & { expiresAt?: number }>()
-
-  constructor(
-    private readonly filePath: string,
-    private readonly now: () => Date
-  ) {}
-
-  private keyOf(key: Key): string {
-    return `${key.pk}￿${key.sk}`
-  }
-
-  private async load(): Promise<void> {
-    if (this.rows.size > 0) return
-    let raw: string
-    try {
-      raw = await readFile(this.filePath, "utf8")
-    } catch {
-      return // absent file: empty table
-    }
-    let parsed: unknown
-    try {
-      parsed = JSON.parse(raw)
-    } catch (cause) {
-      throw new MalformedDataError(`${this.filePath} is not valid JSON`, { cause })
-    }
-    if (!Array.isArray(parsed)) {
-      throw new MalformedDataError(`${this.filePath} must contain an array`)
-    }
-    const ttl = toEpochSeconds(this.now())
-    for (const row of parsed) {
-      if (typeof row !== "object" || row === null || !("key" in row)) {
-        throw new MalformedDataError(`${this.filePath} has a malformed row`)
-      }
-      const record = row as { key: unknown; item: T & { expiresAt?: number } }
-      if (typeof record.key !== "string" || typeof record.item !== "object") {
-        throw new MalformedDataError(`${this.filePath} has a malformed row`)
-      }
-      const expired =
-        record.item.expiresAt !== undefined && record.item.expiresAt <= ttl
-      if (!expired) this.rows.set(record.key, record.item)
-    }
-  }
-
-  private async save(): Promise<void> {
-    const rows = [...this.rows.entries()].map(([key, item]) => ({ key, item }))
-    await mkdir(dirname(this.filePath), { recursive: true })
-    await writeFile(this.filePath, `${JSON.stringify(rows, null, 2)}\n`, "utf8")
-  }
-
-  async get(key: Key): Promise<(T & { expiresAt?: number }) | null> {
-    await this.load()
-    return this.rows.get(this.keyOf(key)) ?? null
-  }
-
-  async has(key: Key): Promise<boolean> {
-    await this.load()
-    return this.rows.has(this.keyOf(key))
-  }
-
-  async put(key: Key, item: T, expiresAt?: number): Promise<void> {
-    await this.load()
-    this.rows.set(this.keyOf(key), { ...item, ...(expiresAt !== undefined ? { expiresAt } : {}) })
-    await this.save()
-  }
-
-  async delete(key: Key): Promise<void> {
-    await this.load()
-    if (this.rows.delete(this.keyOf(key))) await this.save()
-  }
-
-  async all(): Promise<T[]> {
-    await this.load()
-    return [...this.rows.values()]
-  }
-}
+import { parseStored, storedParser, type EntityName } from "./validation"
 
 export interface LocalRepositoryOptions {
   /** Injected clock; defaults to the system clock. */
   readonly clock?: () => Date
+  /**
+   * Validate every stored item against its domain schema on read (default
+   * true). A row that fails raises `MalformedDataError`.
+   */
+  readonly validate?: boolean
+  /** Cross-process lock tuning (tests shorten the stale timeout). */
+  readonly lock?: FileLockOptions
+}
+
+/** The single-object agency file the demo script and console share. */
+const LEGACY_AGENCY_FILE = "agency.json"
+
+const sortDesc = <T>(items: readonly T[], by: (item: T) => string): T[] =>
+  [...items].sort((a, b) => (by(a) < by(b) ? 1 : by(a) > by(b) ? -1 : 0))
+
+const readLegacyAgency = async (
+  dirPath: string,
+  agencyId: Id,
+  validate: boolean
+): Promise<Agency | null> => {
+  let raw: string
+  try {
+    raw = await readFile(join(dirPath, LEGACY_AGENCY_FILE), "utf8")
+  } catch (error) {
+    if ((error as { code?: unknown }).code === "ENOENT") return null
+    throw error
+  }
+  const parsed: unknown = JSON.parse(raw)
+  const agency = (validate ? parseStored("agency", parsed) : parsed) as Agency
+  return agency.id === agencyId ? agency : null
 }
 
 /**
  * Repository backed by JSON files on disk (one per table). No AWS SDK, no
  * network: the shape the offline demo and the vitest suites run against.
+ * Safe for several processes sharing `dirPath` (see `local/json-table.ts`).
  */
 export const createLocalRepository = (
   dirPath: string,
   options: LocalRepositoryOptions = {}
 ): VisitProofRepository => {
   const now = options.clock ?? (() => new Date())
-  const table = <T>(name: string) => new JsonTable<T>(join(dirPath, `${name}.json`), now)
+  const validate = options.validate ?? true
+  const table = <T>(name: string, entity: EntityName) =>
+    new JsonTable<T>(join(dirPath, `${name}.json`), {
+      now,
+      parse: storedParser(entity, validate),
+      ...(options.lock !== undefined ? { lock: options.lock } : {}),
+    })
 
-  const visitsTable = table<Visit>("visits")
-  const eventsTable = table<DoorEvent>("events")
-  const exceptionsTable = table<Exception>("exceptions")
-  const caregiversTable = table<Caregiver>("caregivers")
-  const clientsTable = table<Client>("clients")
-  const ringAccountsTable = table<{ clientId: Id }>("ring-accounts")
-  const evvTable = table<EVVRecord>("evv-records")
-  const notesTable = table<Note>("notes")
-  const snapshotsTable = table<Snapshot>("snapshots")
-  const ledgerTable = table<LedgerRecord>("ledger")
-  const receiptsTable = table<{ requestId: string }>("webhook-receipts")
-
-  const sortDesc = <T>(items: T[], by: (item: T) => string): T[] =>
-    [...items].sort((a, b) => (by(a) < by(b) ? 1 : by(a) > by(b) ? -1 : 0))
+  const agenciesTable = table<Agency>("agencies", "agency")
+  const visitsTable = table<Visit>("visits", "visit")
+  const eventsTable = table<DoorEvent>("events", "event")
+  const exceptionsTable = table<Exception>("exceptions", "exception")
+  const caregiversTable = table<Caregiver>("caregivers", "caregiver")
+  const clientsTable = table<Client>("clients", "client")
+  const ringAccountsTable = table<{ clientId: Id }>(
+    "ring-accounts",
+    "ringAccount"
+  )
+  const evvTable = table<EVVRecord>("evv-records", "evv")
+  const notesTable = table<Note>("notes", "note")
+  const snapshotsTable = table<Snapshot>("snapshots", "snapshot")
+  const ledgerTable = table<LedgerRecord>("ledger", "ledger")
+  const receiptsTable = table<{ requestId: string }>(
+    "webhook-receipts",
+    "webhookReceipt"
+  )
 
   return {
+    agencies: {
+      async put(agency) {
+        await agenciesTable.put(agencyKeys(agency.id), agency)
+      },
+      async get(agencyId) {
+        const stored = await agenciesTable.get(agencyKeys(agencyId))
+        return stored ?? readLegacyAgency(dirPath, agencyId, validate)
+      },
+    },
+
     visits: {
       async put(visit) {
         await visitsTable.put(visitKeys(visit), visit)
@@ -176,16 +149,23 @@ export const createLocalRepository = (
 
     events: {
       async put(event) {
-        await eventsTable.put(eventKeys(event), event)
+        // Ring retries reuse the request id: the first delivery wins.
+        await eventsTable.putIfAbsent(eventKeys(event), event)
       },
-      async byClient(clientId, options) {
+      async byClient(clientId, query) {
         const rows = await eventsTable.all()
         const filtered = rows
           .filter((e) => e.clientId === clientId)
-          .filter((e) => options?.sinceMs === undefined || e.timestampMs >= options.sinceMs)
+          .filter(
+            (e) =>
+              query?.sinceMs === undefined || e.timestampMs >= query.sinceMs
+          )
           .sort((a, b) => a.timestampMs - b.timestampMs)
-        const limit = options?.limit
+        const limit = query?.limit
         return limit === undefined ? filtered : filtered.slice(0, limit)
+      },
+      async deleteByClient(clientId) {
+        return eventsTable.deleteWhere((e) => e.clientId === clientId)
       },
     },
 
@@ -196,7 +176,8 @@ export const createLocalRepository = (
       async get(agencyId, exceptionId) {
         const rows = await exceptionsTable.all()
         return (
-          rows.find((e) => e.agencyId === agencyId && e.id === exceptionId) ?? null
+          rows.find((e) => e.agencyId === agencyId && e.id === exceptionId) ??
+          null
         )
       },
       async byAgency(agencyId, state) {
@@ -234,16 +215,17 @@ export const createLocalRepository = (
         const rows = await clientsTable.all()
         return rows.filter((c) => c.agencyId === agencyId)
       },
-      async saveConsent(agencyId, clientId, consent) {
-        const client = await clientsTable.get(clientKeys({ agencyId, id: clientId }))
-        if (!client) throw new Error(`client not found: ${clientId}`)
-        const updated: Client = {
-          ...client,
-          consent,
-          updatedAt: now().toISOString(),
-          version: client.version + 1,
-        }
-        await clientsTable.put(clientKeys(updated), updated)
+      async saveConsent(agencyId, clientId, consent, at) {
+        const updated = await clientsTable.update(
+          clientKeys({ agencyId, id: clientId }),
+          (client) => ({
+            ...client,
+            consent,
+            updatedAt: at.toISOString(),
+            version: client.version + 1,
+          })
+        )
+        if (updated === null) throw new Error(`client not found: ${clientId}`)
         return updated
       },
     },
@@ -267,7 +249,9 @@ export const createLocalRepository = (
       },
       async get(clientId, recordId) {
         const rows = await evvTable.all()
-        return rows.find((r) => r.clientId === clientId && r.id === recordId) ?? null
+        return (
+          rows.find((r) => r.clientId === clientId && r.id === recordId) ?? null
+        )
       },
       async byClient(clientId) {
         const rows = await evvTable.all()
@@ -287,7 +271,11 @@ export const createLocalRepository = (
         )
       },
       async putSnapshot(snapshot) {
-        await snapshotsTable.put(snapshotKeys(snapshot), snapshot)
+        await snapshotsTable.put(
+          snapshotKeys(snapshot),
+          snapshot,
+          snapshot.expiresAt
+        )
       },
       async snapshotsByVisit(visitId) {
         const rows = await snapshotsTable.all()
@@ -296,12 +284,23 @@ export const createLocalRepository = (
           (s) => s.at
         )
       },
+      async deleteByVisit(visitId) {
+        const notes = await notesTable.deleteWhere((n) => n.visitId === visitId)
+        const snapshots = await snapshotsTable.deleteWhere(
+          (s) => s.visitId === visitId
+        )
+        return { notes, snapshots }
+      },
       async appendLedger(record) {
-        const key = ledgerKeys(record)
-        if (await ledgerTable.has(key)) {
-          throw new Error(`ledger seq already exists: ${record.clientId}/${record.seq}`)
+        const appended = await ledgerTable.putIfAbsent(
+          ledgerKeys(record),
+          record
+        )
+        if (!appended) {
+          throw new Error(
+            `ledger seq already exists: ${record.clientId}/${record.seq}`
+          )
         }
-        await ledgerTable.put(key, record)
       },
       async ledgerByClient(clientId) {
         const rows = await ledgerTable.all()
@@ -312,15 +311,12 @@ export const createLocalRepository = (
     },
 
     webhookReceipts: {
-      async claim(requestId) {
-        const key = webhookReceiptKeys(requestId)
-        if (await receiptsTable.has(key)) return false
-        await receiptsTable.put(
-          key,
+      async claim(requestId, at) {
+        return receiptsTable.putIfAbsent(
+          webhookReceiptKeys(requestId),
           { requestId },
-          ttlAt(now(), WEBHOOK_RECEIPT_TTL_SECONDS)
+          ttlAt(at, WEBHOOK_RECEIPT_TTL_SECONDS)
         )
-        return true
       },
     },
   }

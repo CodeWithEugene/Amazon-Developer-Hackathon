@@ -1,4 +1,5 @@
 import type {
+  Agency,
   Caregiver,
   Client,
   Consent,
@@ -20,6 +21,16 @@ import type {
  * `createDynamoRepository` backs production.
  */
 export interface VisitProofRepository {
+  /**
+   * Agency records (`AGENCY#id` / `META`). Optional so existing test doubles
+   * keep compiling; both built-in repositories implement it. The local
+   * repository falls back to the demo's single-object `agency.json`.
+   */
+  readonly agencies?: {
+    put(agency: Agency): Promise<void>
+    get(agencyId: Id): Promise<Agency | null>
+  }
+
   readonly visits: {
     /** Upsert by (clientId, id). */
     put(visit: Visit): Promise<void>
@@ -40,6 +51,11 @@ export interface VisitProofRepository {
       clientId: Id,
       options?: { sinceMs?: number; limit?: number }
     ): Promise<DoorEvent[]>
+    /**
+     * Deletes every door event of a client ("Delete Everything", contract
+     * C3); returns the number removed. Optional for test doubles.
+     */
+    deleteByClient?(clientId: Id): Promise<number>
   }
 
   readonly exceptions: {
@@ -86,6 +102,12 @@ export interface VisitProofRepository {
     notesByVisit(visitId: Id): Promise<Note[]>
     putSnapshot(snapshot: Snapshot): Promise<void>
     snapshotsByVisit(visitId: Id): Promise<Snapshot[]>
+    /**
+     * Deletes the notes and snapshot records of a visit ("Delete
+     * Everything", contract C3). The ledger is append-only and never
+     * deleted. Optional for test doubles.
+     */
+    deleteByVisit?(visitId: Id): Promise<{ notes: number; snapshots: number }>
     /**
      * Appends to the per-client hash chain; rejects a seq that already exists
      * so the ledger stays append-only.

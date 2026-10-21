@@ -43,7 +43,8 @@ const ATTRIBUTE_KEYS = new Set(["S", "N", "BOOL", "NULL", "L", "M"])
 
 /** True for DynamoDB attribute values; plain JSON passes through unchanged. */
 function isAttributeValue(value: unknown): value is AttributeValue {
-  if (typeof value !== "object" || value === null || Array.isArray(value)) return false
+  if (typeof value !== "object" || value === null || Array.isArray(value))
+    return false
   const keys = Object.keys(value)
   return keys.length === 1 && ATTRIBUTE_KEYS.has(keys[0] as string)
 }

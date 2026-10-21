@@ -8,6 +8,13 @@ import { utcDateOf } from "./time"
 export type Key = { readonly pk: string; readonly sk: string }
 export type GsiKey = { readonly gsi1pk: string; readonly gsi1sk: string }
 
+// -- Agencies ----------------------------------------------------------------
+
+export const agencyKeys = (agencyId: string): Key => ({
+  pk: `AGENCY#${agencyId}`,
+  sk: "META",
+})
+
 // -- Visits ------------------------------------------------------------------
 
 export const visitKeys = (visit: {
@@ -79,32 +86,33 @@ export const caregiverKeys = (caregiver: {
   sk: `CAREGIVER#${caregiver.id}`,
 })
 
-export const clientKeys = (client: {
-  agencyId: string
-  id: string
-}): Key => ({
+export const clientKeys = (client: { agencyId: string; id: string }): Key => ({
   pk: `AGENCY#${client.agencyId}`,
   sk: `CLIENT#${client.id}`,
 })
 
 // -- Evidence ----------------------------------------------------------------
 
-export const noteKeys = (note: { visitId: string; at: string; id: string }): Key => ({
+export const noteKeys = (note: {
+  visitId: string
+  at: string
+  id: string
+}): Key => ({
   pk: `VISIT#${note.visitId}`,
   sk: `NOTE#${note.at}#${note.id}`,
 })
 
-export const snapshotKeys = (snapshot: { visitId: string; at: string }): Key => ({
+export const snapshotKeys = (snapshot: {
+  visitId: string
+  at: string
+}): Key => ({
   pk: `VISIT#${snapshot.visitId}`,
   sk: `SNAP#${snapshot.at}`,
 })
 
 const LEDGER_SEQ_WIDTH = 12
 
-export const ledgerKeys = (record: {
-  clientId: string
-  seq: number
-}): Key => ({
+export const ledgerKeys = (record: { clientId: string; seq: number }): Key => ({
   pk: `CLIENT#${record.clientId}`,
   sk: `LEDGER#${String(record.seq).padStart(LEDGER_SEQ_WIDTH, "0")}`,
 })

@@ -26,7 +26,11 @@ const audit = {
 }
 
 let seq = 0
-function doorEvent(at: string, type: DoorEvent["type"], subType?: string): DoorEvent {
+function doorEvent(
+  at: string,
+  type: DoorEvent["type"],
+  subType?: string
+): DoorEvent {
   seq += 1
   return doorEventSchema.parse({
     ...audit,
@@ -64,7 +68,13 @@ const client: Client = {
   agencyId: "a1",
   name: "Okoro Residence",
   homeLabel: "Home",
-  familyContacts: [{ name: "Priya Okoro", email: "priya@example.com", relationship: "daughter" }],
+  familyContacts: [
+    {
+      name: "Priya Okoro",
+      email: "priya@example.com",
+      relationship: "daughter",
+    },
+  ],
   ringLinkStatus: "linked",
   consent: {
     shareWithAgency: true,
@@ -121,7 +131,9 @@ describe("event-processor handler", () => {
         },
       ],
     })
-    expect((await d.visits.listForClient("c1"))[0]?.status).toBe("arrived_on_time")
+    expect((await d.visits.listForClient("c1"))[0]?.status).toBe(
+      "arrived_on_time"
+    )
   })
 
   it("skips unparseable stream records", async () => {
@@ -139,13 +151,18 @@ describe("event-processor handler", () => {
           dynamodb: {
             ApproximateCreationDateTime: 1,
             Keys: {},
-            NewImage: { garbage: { S: "true" } } as unknown as Record<string, never>,
+            NewImage: { garbage: { S: "true" } } as unknown as Record<
+              string,
+              never
+            >,
             StreamViewType: "NEW_AND_OLD_IMAGES",
           },
         },
       ],
     })
-    expect((await d.visits.listForClient("c1"))[0]?.status).toBe("awaiting_arrival")
+    expect((await d.visits.listForClient("c1"))[0]?.status).toBe(
+      "awaiting_arrival"
+    )
   })
 })
 
@@ -155,7 +172,9 @@ describe("visit-sweeper handler", () => {
     const d = deps([testVisit()], clock)
     const handler = createVisitSweeper(d)
     await handler({} as never)
-    expect((await d.exceptions.listOpen()).map((e) => e.kind)).toEqual(["late_no_arrival"])
+    expect((await d.exceptions.listOpen()).map((e) => e.kind)).toEqual([
+      "late_no_arrival",
+    ])
 
     clock.advanceTo("2026-10-01T06:50:00.000Z")
     await handler({} as never)
@@ -179,7 +198,8 @@ describe("narrative-writer handler", () => {
     )
     await createNarrativeWriter(d)()
     expect(d.narratives.narratives.get("v1")?.provenance).toBe("template")
-    expect(d.narratives.narratives.get("v1")?.text).toContain("06:02")
+    // Agency-local 12-hour time (contract C1); the demo zone is New York.
+    expect(d.narratives.narratives.get("v1")?.text).toContain("2:02 AM ET")
   })
 })
 
@@ -187,7 +207,12 @@ describe("snapshot-fetcher handler", () => {
   it("requests a snapshot 15 s after arrival when consent allows", async () => {
     const requested: string[] = []
     const d = deps(
-      [testVisit({ status: "in_progress", arrival: { at: "2026-10-01T06:02:00.000Z", source: "rule" } })],
+      [
+        testVisit({
+          status: "in_progress",
+          arrival: { at: "2026-10-01T06:02:00.000Z", source: "rule" },
+        }),
+      ],
       fixedClock("2026-10-01T06:02:10.000Z")
     )
     d.snapshots = { request: async (visit) => void requested.push(visit.id) }
@@ -195,7 +220,12 @@ describe("snapshot-fetcher handler", () => {
     expect(requested).toEqual([])
 
     const later = deps(
-      [testVisit({ status: "in_progress", arrival: { at: "2026-10-01T06:02:00.000Z", source: "rule" } })],
+      [
+        testVisit({
+          status: "in_progress",
+          arrival: { at: "2026-10-01T06:02:00.000Z", source: "rule" },
+        }),
+      ],
       fixedClock("2026-10-01T06:02:20.000Z")
     )
     const seen: string[] = []
@@ -208,10 +238,18 @@ describe("snapshot-fetcher handler", () => {
 describe("exporter handler", () => {
   it("writes the evidence pack and alternate EVV JSON", async () => {
     const d = deps(
-      [testVisit({ status: "completed", arrival: { at: "2026-10-01T06:02:00.000Z", source: "rule" } })],
+      [
+        testVisit({
+          status: "completed",
+          arrival: { at: "2026-10-01T06:02:00.000Z", source: "rule" },
+        }),
+      ],
       fixedClock("2026-10-01T09:00:00.000Z")
     )
-    const result = await createExporter(d)({ clientId: "c1", date: "2026-10-01" })
+    const result = await createExporter(d)({
+      clientId: "c1",
+      date: "2026-10-01",
+    })
     expect(result.evidenceKey).toBe("evidence/c1/2026-10-01.json")
     const pack = JSON.parse(d.evidence.packs.get(result.evidenceKey) ?? "{}")
     expect(pack.clientName).toBe("Okoro Residence")
@@ -226,18 +264,24 @@ describe("mailer handler", () => {
     const sent: { to: string; subject: string }[] = []
     const d = deps([testVisit()], fixedClock("2026-10-01T06:20:00.000Z"))
     d.mail = {
-      send: async (input) => void sent.push({ to: input.to, subject: input.subject }),
+      send: async (input) =>
+        void sent.push({ to: input.to, subject: input.subject }),
     }
     await createVisitSweeper(d)({} as never)
     await createMailer(d)({ kind: "exception_alert", clientId: "c1" })
-    expect(sent).toEqual([{ to: "priya@example.com", subject: "VisitProof Exception Alert" }])
+    expect(sent).toEqual([
+      { to: "priya@example.com", subject: "VisitProof Exception Alert" },
+    ])
   })
 
   it("sends nothing when consent has exception alerts off", async () => {
     const sent: unknown[] = []
     const d = deps([testVisit()], fixedClock("2026-10-01T06:20:00.000Z"))
     d.clients = {
-      get: async () => ({ ...client, consent: { ...client.consent, exceptionAlerts: false } }),
+      get: async () => ({
+        ...client,
+        consent: { ...client.consent, exceptionAlerts: false },
+      }),
     }
     d.mail = { send: async (input) => void sent.push(input) }
     await createMailer(d)({ kind: "exception_alert", clientId: "c1" })

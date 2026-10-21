@@ -5,11 +5,11 @@
  */
 import {
   buildEvidencePack,
-  DEFAULT_TOLERANCES,
   reconcile,
   toOpenEvvVisit,
 } from "@visitproof/domain"
 
+import { tolerancesFor } from "../lib/agency"
 import type { EngineDeps } from "../lib/ports"
 
 export const handlerName = "exporter"
@@ -20,7 +20,9 @@ export interface ExportInput {
 }
 
 export function createExporter(deps: EngineDeps) {
-  return async function exporter(input: ExportInput): Promise<{ evidenceKey: string; evvKey: string }> {
+  return async function exporter(
+    input: ExportInput
+  ): Promise<{ evidenceKey: string; evvKey: string }> {
     const client = await deps.clients.get(input.clientId)
     if (!client) throw new Error(`unknown client ${input.clientId}`)
     const allVisits = await deps.visits.listForClient(input.clientId)
@@ -37,7 +39,7 @@ export function createExporter(deps: EngineDeps) {
       events,
       evvRecords,
       exceptions,
-      tolerances: DEFAULT_TOLERANCES,
+      tolerances: await tolerancesFor(deps, client.agencyId),
       now: deps.clock.now(),
     })
     const evidenceKey = `evidence/${input.clientId}/${input.date}.json`

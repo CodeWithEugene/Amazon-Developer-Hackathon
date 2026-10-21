@@ -1,16 +1,13 @@
-import { App, Tags } from "aws-cdk-lib"
+import { App } from "aws-cdk-lib"
 
-import { VisitProofStack } from "../lib/visitproof-stack"
+import { readInfraConfig } from "../lib/config"
+import { createVisitProofStacks } from "../lib/stacks"
 
+/**
+ * CDK entry. Synthesizes offline: no context lookups, no account lookups
+ * (stacks are account-agnostic), and no credentials are read by this code.
+ */
 const app = new App()
+const config = readInfraConfig((key) => app.node.tryGetContext(key))
 
-const environment = app.node.tryGetContext("environment") ?? "dev"
-
-new VisitProofStack(app, `VisitProof-${environment}`, {
-  env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION ?? "us-east-1",
-  },
-})
-
-Tags.of(app).add("Project", "visitproof")
+createVisitProofStacks(app, config)

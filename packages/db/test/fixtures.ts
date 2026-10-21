@@ -41,7 +41,9 @@ export const makeClient = (overrides: Partial<Client> = {}): Client => ({
   ...overrides,
 })
 
-export const makeCaregiver = (overrides: Partial<Caregiver> = {}): Caregiver => ({
+export const makeCaregiver = (
+  overrides: Partial<Caregiver> = {}
+): Caregiver => ({
   ...base(NOW),
   id: "cg-1",
   agencyId: "agency-1",
@@ -68,7 +70,9 @@ export const makeVisit = (overrides: Partial<Visit> = {}): Visit => ({
   ...overrides,
 })
 
-export const makeDoorEvent = (overrides: Partial<DoorEvent> = {}): DoorEvent => ({
+export const makeDoorEvent = (
+  overrides: Partial<DoorEvent> = {}
+): DoorEvent => ({
   ...base(NOW),
   clientId: "client-1",
   requestId: "req-1",
@@ -83,7 +87,9 @@ export const makeDoorEvent = (overrides: Partial<DoorEvent> = {}): DoorEvent => 
   ...overrides,
 })
 
-export const makeException = (overrides: Partial<Exception> = {}): Exception => ({
+export const makeException = (
+  overrides: Partial<Exception> = {}
+): Exception => ({
   ...base(NOW),
   id: "exc-1",
   agencyId: "agency-1",
@@ -95,7 +101,9 @@ export const makeException = (overrides: Partial<Exception> = {}): Exception => 
   ...overrides,
 })
 
-export const makeEvvRecord = (overrides: Partial<EVVRecord> = {}): EVVRecord => ({
+export const makeEvvRecord = (
+  overrides: Partial<EVVRecord> = {}
+): EVVRecord => ({
   ...base(NOW),
   id: "evv-1",
   clientId: "client-1",

@@ -32,7 +32,8 @@ type Item = Record<string, unknown> & { pk: string; sk: string }
 
 const createFakeTable = () => {
   const items = new Map<string, Item>()
-  const keyOf = (item: Record<string, unknown>) => `${String(item.pk)}|${String(item.sk)}`
+  const keyOf = (item: Record<string, unknown>) =>
+    `${String(item.pk)}|${String(item.sk)}`
   const conditionalFailure = () => {
     const error = new Error("The conditional request failed")
     error.name = "ConditionalCheckFailedException"
@@ -54,7 +55,9 @@ const createFakeTable = () => {
     ExpressionAttributeNames?: Record<string, string>
   }) => {
     const expression = `${input.ConditionExpression ?? ""} ${input.KeyConditionExpression ?? ""}`
-    const tokens = new Set([...expression.matchAll(/#\w+/g)].map((match) => match[0]))
+    const tokens = new Set(
+      [...expression.matchAll(/#\w+/g)].map((match) => match[0])
+    )
     for (const token of tokens) {
       if (input.ExpressionAttributeNames?.[token] === undefined) {
         throw validationFailure(
@@ -66,22 +69,26 @@ const createFakeTable = () => {
   return {
     items,
     apply(ddb: ReturnType<typeof mockClient>) {
-      ddb.on(PutCommand).callsFake(async (input: {
-        Item: Item
-        ConditionExpression?: string
-        ExpressionAttributeNames?: Record<string, string>
-      }) => {
-        validateExpressionNames(input)
-        const key = keyOf(input.Item)
-        if (
-          input.ConditionExpression?.includes("attribute_not_exists") &&
-          items.has(key)
-        ) {
-          throw conditionalFailure()
-        }
-        items.set(key, input.Item)
-        return {}
-      })
+      ddb
+        .on(PutCommand)
+        .callsFake(
+          async (input: {
+            Item: Item
+            ConditionExpression?: string
+            ExpressionAttributeNames?: Record<string, string>
+          }) => {
+            validateExpressionNames(input)
+            const key = keyOf(input.Item)
+            if (
+              input.ConditionExpression?.includes("attribute_not_exists") &&
+              items.has(key)
+            ) {
+              throw conditionalFailure()
+            }
+            items.set(key, input.Item)
+            return {}
+          }
+        )
       ddb.on(GetCommand).callsFake(async (input: { Key: Item }) => ({
         Item: items.get(keyOf(input.Key)),
       }))
@@ -89,29 +96,37 @@ const createFakeTable = () => {
         items.delete(keyOf(input.Key))
         return {}
       })
-      ddb.on(QueryCommand).callsFake(async (input: {
-        KeyConditionExpression?: string
-        ExpressionAttributeNames?: Record<string, string>
-        ExpressionAttributeValues?: Record<string, unknown>
-        ExclusiveStartKey?: Item
-      }) => {
-        validateExpressionNames(input)
-        const values = input.ExpressionAttributeValues ?? {}
-        const pk = values[":pk"]
-        const gpk = values[":gpk"]
-        const prefix = typeof values[":sk"] === "string" ? values[":sk"] : undefined
-        const gprefix =
-          typeof values[":gsk"] === "string" ? values[":gsk"] : undefined
-        const found = [...items.values()].filter((item) => {
-          if (gpk !== undefined) {
-            if (item.gsi1pk !== gpk) return false
-            return gprefix === undefined || String(item.gsi1sk).startsWith(gprefix)
+      ddb
+        .on(QueryCommand)
+        .callsFake(
+          async (input: {
+            KeyConditionExpression?: string
+            ExpressionAttributeNames?: Record<string, string>
+            ExpressionAttributeValues?: Record<string, unknown>
+            ExclusiveStartKey?: Item
+          }) => {
+            validateExpressionNames(input)
+            const values = input.ExpressionAttributeValues ?? {}
+            const pk = values[":pk"]
+            const gpk = values[":gpk"]
+            const prefix =
+              typeof values[":sk"] === "string" ? values[":sk"] : undefined
+            const gprefix =
+              typeof values[":gsk"] === "string" ? values[":gsk"] : undefined
+            const found = [...items.values()].filter((item) => {
+              if (gpk !== undefined) {
+                if (item.gsi1pk !== gpk) return false
+                return (
+                  gprefix === undefined ||
+                  String(item.gsi1sk).startsWith(gprefix)
+                )
+              }
+              if (item.pk !== pk) return false
+              return prefix === undefined || item.sk.startsWith(prefix)
+            })
+            return { Items: found }
           }
-          if (item.pk !== pk) return false
-          return prefix === undefined || item.sk.startsWith(prefix)
-        })
-        return { Items: found }
-      })
+        )
     },
   }
 }
@@ -124,7 +139,9 @@ beforeEach(() => {
   ddb.reset()
   table.items.clear()
   table.apply(ddb)
-  const client = DynamoDBDocumentClient.from(new DynamoDBClient({ region: "us-east-1" }))
+  const client = DynamoDBDocumentClient.from(
+    new DynamoDBClient({ region: "us-east-1" })
+  )
   repo = createDynamoRepository({
     client,
     config: { tableName: "visitproof-test", region: "us-east-1" },
@@ -156,7 +173,12 @@ describe("dynamo repository round-trip", () => {
     expect(updated.consent.shareWithAgency).toBe(false)
     expect(updated.version).toBe(2)
     await expect(
-      repo.clients.saveConsent("agency-1", "missing", client.consent, new Date())
+      repo.clients.saveConsent(
+        "agency-1",
+        "missing",
+        client.consent,
+        new Date()
+      )
     ).rejects.toThrow(/not found/)
   })
 
@@ -175,7 +197,9 @@ describe("dynamo repository round-trip", () => {
     ])
     const today = await repo.visits.byAgencyAndDate("agency-1", "2026-10-01")
     expect(today.map((v) => v.id)).toEqual(["visit-early", "visit-1"])
-    expect(await repo.visits.byAgencyAndDate("agency-1", "2026-10-02")).toEqual([])
+    expect(await repo.visits.byAgencyAndDate("agency-1", "2026-10-02")).toEqual(
+      []
+    )
   })
 
   it("absorbs duplicate door event puts idempotently", async () => {
@@ -192,23 +216,31 @@ describe("dynamo repository round-trip", () => {
     await repo.caregivers.put(makeCaregiver())
     await repo.evvRecords.put(makeEvvRecord())
 
-    expect((await repo.exceptions.byAgency("agency-1", "open")).map((e) => e.id)).toEqual([
-      "exc-1",
-    ])
+    expect(
+      (await repo.exceptions.byAgency("agency-1", "open")).map((e) => e.id)
+    ).toEqual(["exc-1"])
     expect(await repo.exceptions.get("agency-1", "exc-1")).toBeTruthy()
-    expect((await repo.caregivers.byAgency("agency-1")).map((c) => c.id)).toEqual(["cg-1"])
-    expect((await repo.evvRecords.byClient("client-1")).map((r) => r.id)).toEqual(["evv-1"])
+    expect(
+      (await repo.caregivers.byAgency("agency-1")).map((c) => c.id)
+    ).toEqual(["cg-1"])
+    expect(
+      (await repo.evvRecords.byClient("client-1")).map((r) => r.id)
+    ).toEqual(["evv-1"])
   })
 
   it("round-trips evidence and enforces the append-only ledger", async () => {
     await repo.evidence.putNote(makeNote())
     await repo.evidence.putSnapshot(makeSnapshot())
     await repo.evidence.appendLedger(makeLedgerRecord(0))
-    await expect(repo.evidence.appendLedger(makeLedgerRecord(0))).rejects.toThrow(
-      /conditional request failed/
-    )
-    expect((await repo.evidence.notesByVisit("visit-1")).map((n) => n.id)).toEqual(["note-1"])
-    expect((await repo.evidence.ledgerByClient("client-1")).map((r) => r.seq)).toEqual([0])
+    await expect(
+      repo.evidence.appendLedger(makeLedgerRecord(0))
+    ).rejects.toThrow(/conditional request failed/)
+    expect(
+      (await repo.evidence.notesByVisit("visit-1")).map((n) => n.id)
+    ).toEqual(["note-1"])
+    expect(
+      (await repo.evidence.ledgerByClient("client-1")).map((r) => r.seq)
+    ).toEqual([0])
   })
 
   it("links Ring accounts and claims webhook receipts once", async () => {
@@ -224,7 +256,9 @@ describe("dynamo repository round-trip", () => {
 
   it("writes key columns and gsi1 on every stored item", async () => {
     await repo.visits.put(makeVisit())
-    const item = [...table.items.values()].find((i) => i.sk.startsWith("VISIT#"))
+    const item = [...table.items.values()].find((i) =>
+      i.sk.startsWith("VISIT#")
+    )
     expect(item?.pk).toBe("CLIENT#client-1")
     expect(item?.gsi1pk).toBe("AGENCY#agency-1")
     expect(String(item?.gsi1sk).startsWith("DATE#2026-10-01#")).toBe(true)

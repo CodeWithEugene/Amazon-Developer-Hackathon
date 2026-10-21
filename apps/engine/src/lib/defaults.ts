@@ -3,14 +3,15 @@
  * studio, local webhooks, and tests; production handlers inject DynamoDB,
  * S3, SES, and KMS backed stores instead.
  */
-import type {
-  Client,
-  DoorEvent,
-  EVVRecord,
-  Exception,
-  ExceptionResolution,
-  Narrative,
-  Visit,
+import {
+  buildNarrative,
+  type Client,
+  type DoorEvent,
+  type EVVRecord,
+  type Exception,
+  type ExceptionResolution,
+  type Narrative,
+  type Visit,
 } from "@visitproof/domain"
 
 import type {
@@ -20,6 +21,7 @@ import type {
   EvidenceStore,
   ExceptionStore,
   MailTransport,
+  Narrator,
   SnapshotService,
   VisitStore,
 } from "./ports"
@@ -71,17 +73,23 @@ export class InMemoryExceptionStore implements ExceptionStore {
     return this.exceptions.filter((exception) => exception.state === "open")
   }
   async listForClient(clientId: string): Promise<Exception[]> {
-    return this.exceptions.filter((exception) => exception.clientId === clientId)
+    return this.exceptions.filter(
+      (exception) => exception.clientId === clientId
+    )
   }
   async open(exception: Exception): Promise<void> {
     this.exceptions.push(exception)
   }
   async resolve(id: string, resolution: ExceptionResolution): Promise<void> {
-    const exception = this.exceptions.find((existing) => existing.id === id)
-    if (exception) {
-      exception.state = "resolved"
-      exception.resolution = resolution
-      exception.updatedAt = resolution.at
+    const index = this.exceptions.findIndex((existing) => existing.id === id)
+    const exception = this.exceptions[index]
+    if (exception === undefined) return
+    this.exceptions[index] = {
+      ...exception,
+      state: "resolved",
+      resolution,
+      updatedAt: resolution.at,
+      version: exception.version + 1,
     }
   }
 }
@@ -111,6 +119,14 @@ export class InMemoryEvidenceStore implements EvidenceStore {
   }
 }
 
+/** Deterministic template narrator (the demo default and the Bedrock fallback). */
+export const templateNarrator: Narrator = {
+  name: "template",
+  async write(input) {
+    return buildNarrative(input)
+  },
+}
+
 /** Fixture transport: logs instead of sending (demo mode). */
 export const consoleMailTransport: MailTransport = {
   async send(input) {
@@ -126,7 +142,9 @@ export interface InMemoryEngineOptions {
   evvRecords?: EVVRecord[]
 }
 
-export function inMemoryEngineDeps(options: InMemoryEngineOptions = {}): EngineDeps {
+export function inMemoryEngineDeps(
+  options: InMemoryEngineOptions = {}
+): EngineDeps {
   return {
     clock: { now: () => new Date() },
     visits: new InMemoryVisitStore(options.visits ?? []),

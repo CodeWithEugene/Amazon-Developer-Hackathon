@@ -55,3 +55,29 @@ export const visitproofTable: TableDefinition = Object.freeze({
 
 /** Webhook receipts expire after 30 days (docs/build.md Section 4). */
 export const WEBHOOK_RECEIPT_TTL_SECONDS = 30 * 24 * 60 * 60
+
+/**
+ * Snapshot objects in S3 carry a retention tag; the DataStack lifecycle has
+ * one expiration rule per class. A family's consent retention is rounded
+ * DOWN to the nearest class, so media never outlives the consent.
+ */
+export const SNAPSHOT_RETENTION_TAG_KEY = "retention-days" as const
+export const SNAPSHOT_RETENTION_CLASSES_DAYS: readonly number[] = Object.freeze(
+  [1, 7, 14, 30]
+)
+/**
+ * Safety net for every object under the snapshot prefix: the longest class.
+ * S3 applies the shortest matching expiration, so this never extends a
+ * tagged object; the consent default (7 days) arrives as a 7 day tag.
+ */
+export const SNAPSHOT_MAX_RETENTION_DAYS = 30
+export const SNAPSHOT_KEY_PREFIX = "snapshots/" as const
+
+export const snapshotRetentionClass = (requestedDays: number): number => {
+  const eligible = SNAPSHOT_RETENTION_CLASSES_DAYS.filter(
+    (days) => days <= requestedDays
+  )
+  return eligible.length === 0
+    ? (SNAPSHOT_RETENTION_CLASSES_DAYS[0] ?? 1)
+    : Math.max(...eligible)
+}

@@ -1,0 +1,61 @@
+# Continuous integration. Demo mode only: no secrets, no AWS credentials, no
+# Ring token. cdk synth runs offline (no lookups) and never deploys.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VISITPROOF_MODE: demo
+  CDK_DISABLE_CLI_TELEMETRY: "true"
+  TURBO_TELEMETRY_DISABLED: "1"
+  NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  verify:
+    name: Typecheck, Lint, Test, Build, Synth
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v5
+
+      - name: Set up pnpm
+        # Version comes from "packageManager" in package.json.
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node 22 with the pnpm store cache
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Typecheck and test the demo scripts
+        run: pnpm typecheck:scripts && pnpm test:scripts
+
+      - name: Build the console
+        run: pnpm --filter @visitproof/console build
+
+      - name: Synthesize the CDK app (offline)
+        run: pnpm --filter infra exec cdk synth --no-lookups --no-notices --no-version-reporting --quiet
