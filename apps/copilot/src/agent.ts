@@ -1,12 +1,13 @@
 import type { CopilotDataAccessor } from "./accessor"
 import { parseIntent, type Now, type ParsedIntent } from "./intents"
-import { findTool, type ToolResult } from "./tools"
+import { DEFAULT_TOOL_ENV, findTool, type ToolEnv, type ToolResult } from "./tools"
 
 /**
- * The ops copilot agent: a Strands-style loop with a deterministic brain.
- * `ask(question)` parses the intent, selects one tool, runs it against the
- * injected accessor, and returns the answer plus the query it ran. Every
- * decision is rule-based and narrated; no model runs locally.
+ * The deterministic ops copilot: `ask(question)` parses the intent with the
+ * rule-based engine (intents.ts), selects one tool, runs it against the
+ * injected accessor, and returns the answer plus the query it ran. This is
+ * the fixture brain; the model-backed path is the Strands agent over the
+ * VisitProof MCP server (./ask).
  */
 export interface CopilotAnswer {
   readonly question: string
@@ -26,6 +27,8 @@ export interface CreateOpsCopilotOptions {
   readonly accessor: CopilotDataAccessor
   /** Injected clock for deterministic tests and replay. Defaults to `Date.now`. */
   readonly now?: Now
+  /** Agency time zone and grace window; defaults to America/New_York and 15 minutes. */
+  readonly env?: Partial<ToolEnv>
 }
 
 function unknownAnswer(question: string, parsed: ParsedIntent): CopilotAnswer {
@@ -44,9 +47,10 @@ function unknownAnswer(question: string, parsed: ParsedIntent): CopilotAnswer {
 export function createOpsCopilot(options: CreateOpsCopilotOptions): OpsCopilot {
   const { accessor } = options
   const now: Now = options.now ?? (() => new Date())
+  const env: ToolEnv = { ...DEFAULT_TOOL_ENV, ...options.env }
   return {
     async ask(question) {
-      const parsed = parseIntent(question, now)
+      const parsed = parseIntent(question, now, env.timeZone)
       if (parsed.intent === "unknown") {
         return unknownAnswer(question, parsed)
       }
@@ -68,7 +72,7 @@ export function createOpsCopilot(options: CreateOpsCopilotOptions): OpsCopilot {
       }
       let result: ToolResult
       try {
-        result = await tool.call(accessor, parsedInput.data)
+        result = await tool.call(accessor, parsedInput.data, env)
       } catch (error) {
         return {
           question,

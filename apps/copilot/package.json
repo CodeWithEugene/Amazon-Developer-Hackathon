@@ -2,11 +2,12 @@
   "name": "@visitproof/copilot",
   "version": "0.1.0",
   "private": true,
-  "description": "Strands ops copilot and the Ask VisitProof simulator brain (TypeScript), with a fixture brain fallback.",
+  "description": "Ask VisitProof brain and ops copilot: a Strands agent (Bedrock Nova 2 Lite) over the VisitProof MCP server, with a deterministic fixture brain fallback.",
   "license": "Apache-2.0",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./strands": "./src/ask/strands-brain.ts"
   },
   "scripts": {
     "build": "tsup",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/node": "26.6.3",
     "@visitproof/config": "workspace:*",
+    "@visitproof/mcp": "workspace:*",
     "eslint": "9.39.5",
     "tsup": "8.5.1",
     "typescript": "5.9.3",

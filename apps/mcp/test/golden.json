@@ -1,0 +1,106 @@
+{
+  "description": "Golden utterances: phrases a family member or scheduler says to Ask VisitProof, with the MCP tool calls the fixture brain must make (arguments are matched as a subset) and words the spoken answer must contain. Checked in CI by apps/copilot/test/golden.test.ts against the fixture world (2026-09-27, 12:00 PM ET).",
+  "utterances": [
+    {
+      "utterance": "Did the caregiver come today?",
+      "persona": "family",
+      "calls": [{ "name": "get_visit_status", "arguments": {} }],
+      "spokenIncludes": ["Yes.", "someone arrived at the door at 8:04 AM ET", "Amara Okafor clocked in at 8:06 AM ET"]
+    },
+    {
+      "utterance": "Did the caregiver come to Mom's today?",
+      "persona": "family",
+      "calls": [{ "name": "get_visit_status", "arguments": {} }],
+      "spokenIncludes": ["Yes."]
+    },
+    {
+      "utterance": "Did anyone come yesterday?",
+      "persona": "family",
+      "calls": [{ "name": "get_visit_status", "arguments": { "date": "2026-09-26" } }],
+      "spokenIncludes": ["20 minutes after the scheduled start"]
+    },
+    {
+      "utterance": "Was anyone late this week?",
+      "persona": "family",
+      "calls": [{ "name": "get_client_summary", "arguments": { "range": "week" } }],
+      "spokenIncludes": ["arrived late"]
+    },
+    {
+      "utterance": "What visits are scheduled today?",
+      "persona": "family",
+      "calls": [{ "name": "list_visits", "arguments": {} }],
+      "spokenIncludes": ["Grace has two visits today"]
+    },
+    {
+      "utterance": "Explain visit v_okoro_26",
+      "persona": "family",
+      "calls": [{ "name": "explain_visit", "arguments": { "visitId": "v_okoro_26" } }],
+      "spokenIncludes": ["signed ledger records"]
+    },
+    {
+      "utterance": "Tell the agency I'll be there Thursday instead",
+      "persona": "family",
+      "calls": [
+        { "name": "list_visits", "arguments": {} },
+        { "name": "add_visit_note", "arguments": { "visitId": "v_okoro_27", "text": "I'll be there Thursday instead" } }
+      ],
+      "spokenIncludes": ["Say yes to confirm"],
+      "pending": true
+    },
+    {
+      "utterance": "Who was late this week?",
+      "persona": "agency",
+      "calls": [{ "name": "list_exceptions", "arguments": { "kind": "late_arrival", "state": "any", "days": 7 } }],
+      "spokenIncludes": ["late arrival for Grace on Saturday at 8:00 AM ET", "late arrival for Ken on Sunday at 9:00 AM ET"]
+    },
+    {
+      "utterance": "What are today's exceptions?",
+      "persona": "agency",
+      "calls": [{ "name": "list_exceptions", "arguments": {} }],
+      "spokenIncludes": ["There are 4 open exceptions today", "no-show for Rosa at 7:00 AM ET"]
+    },
+    {
+      "utterance": "Give me the morning briefing",
+      "persona": "agency",
+      "calls": [
+        { "name": "list_visits", "arguments": {} },
+        { "name": "list_exceptions", "arguments": {} }
+      ],
+      "spokenIncludes": ["and 1 more"]
+    },
+    {
+      "utterance": "Did the caregiver come to Ken today?",
+      "persona": "agency",
+      "calls": [
+        { "name": "list_visits", "arguments": {} },
+        { "name": "get_visit_status", "arguments": { "clientId": "cli_nakamura" } }
+      ],
+      "spokenIncludes": ["could not be fully observed because the doorbell was offline"]
+    },
+    {
+      "utterance": "How did Rosa's visits go this week?",
+      "persona": "agency",
+      "calls": [
+        { "name": "list_visits", "arguments": {} },
+        { "name": "get_client_summary", "arguments": { "clientId": "cli_alvarez", "range": "week" } }
+      ],
+      "spokenIncludes": ["had no one at the door"]
+    },
+    {
+      "utterance": "Acknowledge the no-show for Rosa because the caregiver was sick",
+      "persona": "agency",
+      "calls": [
+        { "name": "list_exceptions", "arguments": {} },
+        { "name": "acknowledge_exception", "arguments": { "exceptionId": "v_alvarez_26#no_show", "reason": "the_caregiver_was_sick" } }
+      ],
+      "spokenIncludes": ["Say yes to confirm"],
+      "pending": true
+    },
+    {
+      "utterance": "What is the weather like?",
+      "persona": "family",
+      "calls": [],
+      "spokenIncludes": ["I can tell you whether the caregiver came"]
+    }
+  ]
+}

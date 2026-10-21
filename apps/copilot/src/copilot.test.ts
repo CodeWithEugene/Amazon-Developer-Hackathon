@@ -44,10 +44,18 @@ function exception(overrides: Partial<Exception>): Exception {
   }
 }
 
+// Late visits end as "completed": lateness comes from the door arrival.
 const lateVisit = visit({
   id: "V-late",
+  status: "completed",
+  date: "2026-10-14",
+  arrival: { at: "2026-10-14T06:22:00Z", source: "rule" },
+})
+const onTimeVisit = visit({
+  id: "V-ontime",
   status: "arrived_late",
   date: "2026-10-14",
+  arrival: { at: "2026-10-14T06:10:00Z", source: "rule" },
 })
 const noShowVisit = visit({
   id: "V-noshow",
@@ -159,26 +167,41 @@ describe("parseIntent", () => {
 
 describe("createOpsCopilot", () => {
   const accessor = makeAccessor(
-    [lateVisit, noShowVisit, unobservableVisit, missingClockInVisit, okVisit],
+    [lateVisit, onTimeVisit, noShowVisit, unobservableVisit, missingClockInVisit, okVisit],
     [openException],
   )
   const copilot = createOpsCopilot({ accessor, now: NOW })
 
-  it("answers who was late today with the query it ran", async () => {
+  it("answers who was late today from the arrival time, with the query it ran", async () => {
     const answer = await copilot.ask("who was late today")
     expect(answer.tool).toBe("list_late_visits")
-    expect(answer.answer).toContain("1 late visit")
-    expect(answer.answer).toContain("V-late")
+    expect(answer.answer).toBe("1 late arrival: a client, Wednesday 2:00 AM ET, 22 minutes late.")
+    expect((answer.data as Visit[]).map((v) => v.id)).toEqual(["V-late"])
     expect(answer.query).toBe(
-      "listVisits({ from: 2026-10-14, to: 2026-10-14, statuses: [arrived_late] })",
+      "listVisits({ from: 2026-10-14, to: 2026-10-14 }) filtered to arrival later than scheduled start + 15 min",
     )
     expect(answer.reasoning).toMatch(/late/)
+  })
+
+  it("names clients and bounds the answer to five items", async () => {
+    const many = Array.from({ length: 7 }, (_, index) =>
+      visit({ id: `V-late-${index}`, clientId: "C1", status: "completed", arrival: { at: "2026-10-14T06:30:00Z", source: "rule" } }),
+    )
+    const named = createOpsCopilot({
+      accessor: { ...makeAccessor(many, []), async getClient() { return { name: "Grace Okoro" } as never } },
+      now: NOW,
+    })
+    const answer = await named.ask("who was late today")
+    expect(answer.answer.startsWith("7 late arrivals: Grace, Wednesday 2:00 AM ET, 30 minutes late;")).toBe(true)
+    expect(answer.answer).toContain("; and 2 more.")
+    expect(answer.data).toHaveLength(7)
   })
 
   it("answers no-shows this week", async () => {
     const answer = await copilot.ask("show no-shows this week")
     expect(answer.tool).toBe("list_no_shows")
-    expect(answer.answer).toContain("V-noshow")
+    expect(answer.answer).toContain("1 no-show")
+    expect((answer.data as Visit[]).map((v) => v.id)).toEqual(["V-noshow"])
     expect(answer.query).toContain("from: 2026-10-12")
   })
 
@@ -192,15 +215,16 @@ describe("createOpsCopilot", () => {
   it("explains an exception by id", async () => {
     const answer = await copilot.ask("explain exception V-late#late_no_arrival")
     expect(answer.tool).toBe("explain_exception")
-    expect(answer.answer).toContain("V-late#late_no_arrival")
-    expect(answer.answer).toContain("late no arrival")
-    expect(answer.answer).toContain("V-late")
+    expect(answer.answer).toContain("late no arrival exception")
+    expect(answer.answer).toContain("Someone arrived at the door at 2:22 AM ET")
+    expect(answer.query).toContain("getVisit(V-late)")
   })
 
   it("explains the latest open exception when no id is given", async () => {
     const answer = await copilot.ask("explain this exception")
     expect(answer.tool).toBe("explain_exception")
-    expect(answer.answer).toContain("V-late#late_no_arrival")
+    expect(answer.query).toContain("listExceptions({ state: open })")
+    expect(answer.answer).toContain("late no arrival exception")
   })
 
   it("declines gracefully for unknown questions", async () => {

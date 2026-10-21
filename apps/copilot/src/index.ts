@@ -1,13 +1,13 @@
-import { z } from "zod"
+import { askConfigSchema } from "./ask/ask"
 
-/** Runtime settings for the copilot brain. `fixture` replays golden utterances offline. */
-export const copilotConfigSchema = z.object({
-  modelProvider: z.enum(["fixture", "bedrock"]).default("fixture"),
-  mcpUrl: z.url().default("http://localhost:8000/mcp"),
-  modelId: z.string().min(1).default("global.amazon.nova-2-lite-v1:0"),
-})
+/**
+ * Runtime settings for the copilot brain: `fixture` uses the deterministic
+ * rules offline; `bedrock` runs the Strands agent on Nova 2 Lite.
+ * Kept for compatibility; {@link askConfigSchema} is the full schema.
+ */
+export const copilotConfigSchema = askConfigSchema.pick({ modelProvider: true, mcpUrl: true, modelId: true })
 
-export type CopilotConfig = z.infer<typeof copilotConfigSchema>
+export type CopilotConfig = ReturnType<typeof copilotConfigSchema.parse>
 
 export type {
   CopilotDataAccessor,
@@ -23,5 +23,6 @@ export type {
 export { createDbCopilotAccessor } from "./db-accessor"
 export { parseIntent, resolveRange } from "./intents"
 export type { DateRange, Now, ParsedIntent } from "./intents"
-export { COPILOT_TOOLS, findTool } from "./tools"
-export type { CopilotTool, ToolResult } from "./tools"
+export { COPILOT_TOOLS, DEFAULT_TOOL_ENV, findTool, isLateArrival, MAX_SPOKEN_ITEMS } from "./tools"
+export type { CopilotTool, ToolEnv, ToolResult } from "./tools"
+export * from "./ask/index"

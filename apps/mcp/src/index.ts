@@ -1,224 +1,217 @@
-import { createHash, randomUUID, timingSafeEqual } from "node:crypto"
-import {
-  isInitializeRequest,
-  isJSONRPCNotification,
-} from "@modelcontextprotocol/sdk/types.js"
+import { randomUUID } from "node:crypto"
+
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js"
-import express, { type Express, type Request, type Response } from "express"
+import { isInitializeRequest, isJSONRPCNotification } from "@modelcontextprotocol/sdk/types.js"
+import { parseEnv, type EnvSource } from "@visitproof/config/env"
+import express, { type Express, type NextFunction, type Request, type Response } from "express"
+
+import { createAuthenticator, parseDemoTokens, type AccessTokenVerifier, type Principal } from "./auth"
+import {
+  authMiddleware,
+  authOf,
+  PROTECTED_RESOURCE_PATH,
+  protectedResourceMetadata,
+  type ProtectedResourceConfig,
+} from "./auth-http"
 import { DEMO_REPO, type VisitRepository } from "./repo"
-import { MCP_INSTRUCTIONS, registerTools, type ToolContext } from "./tools"
+import { originGuard, originPolicyFromEnv, type OriginPolicy } from "./security"
+import { DEFAULT_SESSION_LIMITS, SessionRegistry, type SessionLimits } from "./sessions"
+import { DEMO_LEDGER_SIGNER, type LedgerSignerConfig } from "./signer"
+import { MCP_INSTRUCTIONS, registerPrompts, registerResources, registerTools, type ToolContext } from "./tools"
 
 export const MCP_SERVER_NAME = "visitproof"
-export const MCP_SERVER_VERSION = "0.1.0"
+export const MCP_SERVER_VERSION = "0.2.0"
 
 export interface CreateHttpAppOptions {
-  /** Repository accessor injected into the tools (defaults to the demo fixtures). */
+  /** Repository accessor injected into the tools (defaults to the fixture world). */
   repo?: VisitRepository
   /** Clock injected into the tools (defaults to real time). */
   now?: () => Date
   /**
-   * Bearer tokens accepted on /mcp (demo mode). When omitted, tokens are read
-   * from MCP_DEMO_TOKENS; when that is unset too, /mcp is open (local dev).
+   * Demo bearer tokens as "token=scope" entries (scope "agency" or
+   * "family:<clientId>"). Defaults to MCP_DEMO_TOKENS. Honored only in demo mode.
    */
   tokens?: string[]
+  /** VISITPROOF_MODE; defaults to the environment (demo). */
+  mode?: "demo" | "live"
+  /** Demo mode only: treat requests without a token as the agency (local development). */
+  allowAnonymous?: boolean
+  /** Verifies non-demo access tokens (Cognito JWTs in production). */
+  verifyAccessToken?: AccessTokenVerifier
+  originPolicy?: OriginPolicy
+  protectedResource?: ProtectedResourceConfig
+  /** Ledger signer for the write tools; the local HMAC stand-in in demo mode. */
+  signer?: LedgerSignerConfig
+  /** Stateless Streamable HTTP (serverless): fresh server per request, JSON responses. */
+  stateless?: boolean
+  sessionLimits?: SessionLimits
+  /** Environment used for the defaults above (defaults to process.env). */
+  env?: EnvSource
 }
 
 export const createMcpServer = (): McpServer =>
-  new McpServer(
-    { name: MCP_SERVER_NAME, version: MCP_SERVER_VERSION },
-    { instructions: MCP_INSTRUCTIONS },
-  )
+  new McpServer({ name: MCP_SERVER_NAME, version: MCP_SERVER_VERSION }, { instructions: MCP_INSTRUCTIONS })
 
-const demoTokensFromEnv = (): string[] =>
-  (process.env.MCP_DEMO_TOKENS ?? "")
-    .split(",")
-    .map((token) => token.trim())
-    .filter((token) => token.length > 0)
-
-type Session = {
-  server: McpServer
-  transport: StreamableHTTPServerTransport
+const CONFIRM_SCHEMA = {
+  type: "object" as const,
+  properties: { confirm: { type: "boolean" as const, title: "Confirm", description: "Yes, do it" } },
+  required: ["confirm"],
 }
 
-const ERROR_UNAUTHORIZED = {
-  jsonrpc: "2.0" as const,
-  id: null,
-  error: { code: -32000, message: "Unauthorized" },
+/** Builds a server bound to one principal, with elicitation when the client supports it. */
+const buildServer = (base: Omit<ToolContext, "principal" | "elicit">, principal: Principal): McpServer => {
+  const server = createMcpServer()
+  const elicit = async (message: string) => {
+    const result = await server.server.elicitInput({ mode: "form", message, requestedSchema: CONFIRM_SCHEMA })
+    return result.action === "accept" && result.content?.confirm === true ? ("accepted" as const) : ("declined" as const)
+  }
+  const context: ToolContext = {
+    ...base,
+    principal,
+    get elicit() {
+      return server.server.getClientCapabilities()?.elicitation ? elicit : undefined
+    },
+  }
+  registerTools(server, context)
+  registerResources(server, context)
+  registerPrompts(server)
+  return server
 }
 
-/** Express app exposing `POST/GET/DELETE /mcp` (Streamable HTTP) and `/health`. */
+const rpcError = (response: Response, status: number, code: number, message: string, id: unknown = null) =>
+  response.status(status).json({ jsonrpc: "2.0", id, error: { code, message } })
+
+const sessionIdOf = (request: Request): string | undefined => {
+  const header = request.headers["mcp-session-id"]
+  return Array.isArray(header) ? header[0] : header
+}
+
+interface ResolvedConfig {
+  mode: "demo" | "live"
+  protectedResource: ProtectedResourceConfig
+  originPolicy: OriginPolicy
+}
+
+const resolveConfig = (options: CreateHttpAppOptions, env: EnvSource): ResolvedConfig => {
+  const parsed = parseEnv(env)
+  return {
+    mode: options.mode ?? parsed.VISITPROOF_MODE,
+    protectedResource: options.protectedResource ?? {
+      ...(env.MCP_PUBLIC_URL ? { resourceUrl: parsed.MCP_PUBLIC_URL } : {}),
+      authorizationServers: parsed.MCP_AUTH_ISSUER ? [parsed.MCP_AUTH_ISSUER] : [],
+    },
+    originPolicy: options.originPolicy ?? originPolicyFromEnv(env),
+  }
+}
+
+/** Express app exposing `POST/GET/DELETE /mcp` (Streamable HTTP), `/health`, and OAuth metadata. */
 export const createHttpApp = (options: CreateHttpAppOptions = {}): Express => {
-  const repo = options.repo ?? DEMO_REPO
-  const context: ToolContext = { repo, now: options.now }
-  const tokens = options.tokens ?? demoTokensFromEnv()
+  const env = options.env ?? process.env
+  const config = resolveConfig(options, env)
+  const authenticate = createAuthenticator({
+    mode: config.mode,
+    demoTokens: parseDemoTokens(options.tokens ?? parseEnv(env).MCP_DEMO_TOKENS),
+    allowAnonymous: options.allowAnonymous ?? (env.MCP_ALLOW_ANONYMOUS === "1"),
+    ...(options.verifyAccessToken ? { verifyAccessToken: options.verifyAccessToken } : {}),
+  })
+  const signer = options.signer ?? (config.mode === "demo" ? DEMO_LEDGER_SIGNER : undefined)
+  const base = { repo: options.repo ?? DEMO_REPO, ...(options.now ? { now: options.now } : {}), ...(signer ? { signer } : {}) }
+  const sessions = new SessionRegistry(options.sessionLimits ?? DEFAULT_SESSION_LIMITS)
+  const guard = [originGuard(config.originPolicy), authMiddleware(authenticate, config.protectedResource)]
 
   const app = express()
-  app.use(express.json({ limit: "1mb" }))
-
-  const sessions = new Map<string, Session>()
-
-  const unauthorized = (response: Response) => {
-    response
-      .status(401)
-      .set("WWW-Authenticate", 'Bearer realm="visitproof"')
-      .json(ERROR_UNAUTHORIZED)
-  }
-
-  /**
-   * Constant-time token membership. Both sides are hashed first so the
-   * compare is length-independent and the timing leaks nothing about how
-   * much of a token prefix was correct.
-   */
-  const tokenDigest = (token: string) =>
-    createHash("sha256").update(token).digest()
-  const trusted = tokens.map(tokenDigest)
-  const tokenMatches = (candidate: string): boolean => {
-    const digest = tokenDigest(candidate)
-    return trusted.some((known) => timingSafeEqual(known, digest))
-  }
-
-  const requireBearer = (request: Request): boolean => {
-    if (tokens.length === 0) return true
-    const header = request.headers.authorization
-    if (!header?.startsWith("Bearer ")) return false
-    return tokenMatches(header.slice("Bearer ".length).trim())
-  }
-
   app.get("/health", (_request, response) => {
-    response.json({ ok: true, service: "mcp" })
+    response.json({ ok: true, service: "mcp", mode: config.mode, stateless: Boolean(options.stateless), sessions: sessions.size })
   })
+  const metadata = (request: Request, response: Response) => {
+    response.json(protectedResourceMetadata(config.protectedResource, request))
+  }
+  app.get(PROTECTED_RESOURCE_PATH, metadata)
+  app.get(`${PROTECTED_RESOURCE_PATH}/mcp`, metadata)
 
-  const handleSessionRequest = async (
-    request: Request,
-    response: Response,
-  ): Promise<void> => {
-    const sessionId = request.headers["mcp-session-id"]
-    const id = Array.isArray(sessionId) ? sessionId[0] : sessionId
-    const session = id ? sessions.get(id) : undefined
-    if (session) {
+  const handlePost = options.stateless ? statelessPost(base) : statefulPost(base, sessions)
+  app.post("/mcp", ...guard, express.json({ limit: "1mb" }), wrap(handlePost))
+  app.get("/mcp", ...guard, wrap(options.stateless ? methodNotAllowed : existingSession(sessions)))
+  app.delete("/mcp", ...guard, wrap(options.stateless ? methodNotAllowed : existingSession(sessions)))
+  app.use(errorHandler)
+  return app
+}
+
+type Handler = (request: Request, response: Response) => Promise<void>
+
+const wrap =
+  (handler: Handler) =>
+  (request: Request, response: Response, next: NextFunction): void => {
+    handler(request, response).catch(next)
+  }
+
+const methodNotAllowed: Handler = async (_request, response) => {
+  response.set("Allow", "POST")
+  rpcError(response, 405, -32000, "Method not allowed in stateless mode")
+}
+
+const statefulPost =
+  (base: Omit<ToolContext, "principal" | "elicit">, sessions: SessionRegistry): Handler =>
+  async (request, response) => {
+    const auth = authOf(response)
+    const id = sessionIdOf(request)
+    if (id) {
+      const session = sessions.get(id)
+      if (!session) return void rpcError(response, 404, -32001, "Session not found")
+      if (session.sessionKey !== auth.sessionKey) return void rpcError(response, 403, -32000, "Forbidden: session belongs to a different credential")
       await session.transport.handleRequest(request, response, request.body)
       return
     }
-    if (id) {
-      response.status(404).json({
-        jsonrpc: "2.0",
-        error: { code: -32001, message: "Session not found" },
-        id: null,
-      })
-      return
+    if (!isInitializeRequest(request.body)) {
+      const rpcId = isJSONRPCNotification(request.body) ? null : (request.body as { id?: unknown } | undefined)?.id ?? null
+      return void rpcError(response, 400, -32002, "Bad Request: no valid session", rpcId)
     }
-    // No session id: only initialization may start a new session.
-    if (isInitializeRequest(request.body)) {
-      await startSession(request, response)
-      return
-    }
-    response.status(400).json({
-      jsonrpc: "2.0",
-      error: { code: -32002, message: "Bad Request: no valid session" },
-      id: isJSONRPCNotification(request.body) ? null : request.body?.id ?? null,
-    })
+    const sessionId = randomUUID()
+    const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: () => sessionId, enableJsonResponse: false })
+    const server = buildServer(base, auth.principal)
+    transport.onclose = () => sessions.remove(sessionId, transport)
+    await server.connect(transport)
+    await sessions.add(sessionId, { server, transport, sessionKey: auth.sessionKey })
+    await transport.handleRequest(request, response, request.body)
   }
 
-  const startSession = async (
-    request: Request,
-    response: Response,
-  ): Promise<void> => {
-    const sessionId = randomUUID()
-    const transport = new StreamableHTTPServerTransport({
-      sessionIdGenerator: () => sessionId,
-      enableJsonResponse: false,
+const statelessPost =
+  (base: Omit<ToolContext, "principal" | "elicit">): Handler =>
+  async (request, response) => {
+    const auth = authOf(response)
+    const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true })
+    const server = buildServer(base, auth.principal)
+    response.on("close", () => {
+      void transport.close()
+      void server.close()
     })
-    const server = createMcpServer()
-    registerTools(server, context)
-    transport.onclose = () => {
-      if (sessions.get(sessionId)?.transport === transport) {
-        sessions.delete(sessionId)
-      }
-    }
     await server.connect(transport)
     await transport.handleRequest(request, response, request.body)
-    sessions.set(sessionId, { server, transport })
   }
 
-  app.post("/mcp", async (request, response, next) => {
-    if (!requireBearer(request)) {
-      unauthorized(response)
-      return
-    }
-    try {
-      await handleSessionRequest(request, response)
-    } catch (error) {
-      next(error)
-    }
-  })
+const existingSession =
+  (sessions: SessionRegistry): Handler =>
+  async (request, response) => {
+    const auth = authOf(response)
+    const id = sessionIdOf(request)
+    const session = id ? sessions.get(id) : undefined
+    if (!session) return void rpcError(response, 404, -32001, "Session not found")
+    if (session.sessionKey !== auth.sessionKey) return void rpcError(response, 403, -32000, "Forbidden: session belongs to a different credential")
+    await session.transport.handleRequest(request, response)
+  }
 
-  app.get("/mcp", async (request, response, next) => {
-    if (!requireBearer(request)) {
-      unauthorized(response)
-      return
-    }
-    try {
-      const sessionId = request.headers["mcp-session-id"]
-      const id = Array.isArray(sessionId) ? sessionId[0] : sessionId
-      const session = id ? sessions.get(id) : undefined
-      if (!session) {
-        response.status(404).json({
-          jsonrpc: "2.0",
-          error: { code: -32001, message: "Session not found" },
-          id: null,
-        })
-        return
-      }
-      await session.transport.handleRequest(request, response)
-    } catch (error) {
-      next(error)
-    }
-  })
-
-  app.delete("/mcp", async (request, response, next) => {
-    if (!requireBearer(request)) {
-      unauthorized(response)
-      return
-    }
-    try {
-      const sessionId = request.headers["mcp-session-id"]
-      const id = Array.isArray(sessionId) ? sessionId[0] : sessionId
-      const session = id ? sessions.get(id) : undefined
-      if (!session) {
-        response.status(404).json({
-          jsonrpc: "2.0",
-          error: { code: -32001, message: "Session not found" },
-          id: null,
-        })
-        return
-      }
-      await session.transport.handleRequest(request, response)
-    } catch (error) {
-      next(error)
-    }
-  })
-
-  // JSON body parse failures and unexpected errors leave JSON-RPC in the body.
-  app.use(
-    (
-      error: unknown,
-      _request: Request,
-      response: Response,
-      next: () => void,
-    ) => {
-      const message = error instanceof Error ? error.message : "Bad Request"
-      if (response.headersSent) {
-        next()
-        return
-      }
-      response.status(400).json({
-        jsonrpc: "2.0",
-        error: { code: -32700, message: `Parse error: ${message}` },
-        id: null,
-      })
-    },
-  )
-
-  return app
+/** JSON body parse failures are 400 -32700; anything else is a 500 with no internals. */
+const errorHandler = (error: unknown, _request: Request, response: Response, next: NextFunction): void => {
+  if (response.headersSent) {
+    next(error)
+    return
+  }
+  const parseFailure = typeof error === "object" && error !== null && (error as { type?: string }).type === "entity.parse.failed"
+  if (parseFailure) {
+    rpcError(response, 400, -32700, "Parse error: invalid JSON")
+    return
+  }
+  process.stderr.write(`[mcp] request failed: ${error instanceof Error ? error.stack ?? error.message : String(error)}\n`)
+  rpcError(response, 500, -32603, "Internal error")
 }

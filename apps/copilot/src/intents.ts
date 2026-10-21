@@ -1,3 +1,5 @@
+import { addDays, DEFAULT_TIME_ZONE, localDateKey } from "./time"
+
 /**
  * Deterministic intent parser: template and rule based, no LLM. Maps an
  * operator question to a tool selection plus extracted arguments, and
@@ -19,26 +21,22 @@ export interface DateRange {
 
 export type Now = () => Date
 
-function isoDate(d: Date): string {
-  return d.toISOString().slice(0, 10)
-}
-
-/** `today`, `this week` (Monday to today), `this month`, or an explicit date. */
-export function resolveRange(question: string, now: Now): DateRange {
-  const today = now()
-  const todayStr = isoDate(today)
+/**
+ * `today`, `yesterday`, `this week` (Monday to today), `this month`, or an
+ * explicit date. Dates are calendar dates in the agency time zone (C1).
+ */
+export function resolveRange(question: string, now: Now, timeZone: string = DEFAULT_TIME_ZONE): DateRange {
+  const todayStr = localDateKey(now(), timeZone)
   if (/\bthis week\b/i.test(question)) {
-    const day = today.getUTCDay() // 0 Sunday
-    const mondayOffset = (day + 6) % 7
-    const monday = new Date(today)
-    monday.setUTCDate(today.getUTCDate() - mondayOffset)
-    return { from: isoDate(monday), to: todayStr }
+    const day = new Date(`${todayStr}T12:00:00Z`).getUTCDay() // 0 Sunday
+    return { from: addDays(todayStr, -((day + 6) % 7)), to: todayStr }
   }
   if (/\bthis month\b/i.test(question)) {
-    return {
-      from: todayStr.slice(0, 8) + "01",
-      to: todayStr,
-    }
+    return { from: todayStr.slice(0, 8) + "01", to: todayStr }
+  }
+  if (/\byesterday\b/i.test(question)) {
+    const yesterday = addDays(todayStr, -1)
+    return { from: yesterday, to: yesterday }
   }
   const explicit = question.match(/\b(\d{4}-\d{2}-\d{2})\b/)
   if (explicit !== null) {
@@ -89,7 +87,7 @@ const RULES: readonly Rule[] = [
     ],
     buildArgs: rangeArgs,
     describe: (r) =>
-      `question mentions "late"; querying visits with an arrival problem between ${r.from} and ${r.to}`,
+      `question mentions "late"; querying visits whose door arrival came after the grace window between ${r.from} and ${r.to}`,
   },
   {
     intent: "no_shows",
@@ -112,8 +110,8 @@ const RULES: readonly Rule[] = [
   },
 ]
 
-export function parseIntent(question: string, now: Now): ParsedIntent {
-  const range = resolveRange(question, now)
+export function parseIntent(question: string, now: Now, timeZone: string = DEFAULT_TIME_ZONE): ParsedIntent {
+  const range = resolveRange(question, now, timeZone)
   for (const rule of RULES) {
     if (rule.patterns.some((p) => p.test(question))) {
       return {

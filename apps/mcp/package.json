@@ -2,9 +2,15 @@
   "name": "@visitproof/mcp",
   "version": "0.1.0",
   "private": true,
-  "description": "VisitProof MCP server (Express + @modelcontextprotocol/sdk 1.x) with conformance tests and the AgentCore deployment.",
+  "description": "VisitProof MCP server (Express + @modelcontextprotocol/sdk 1.x): seven voice tools, resources, a prompt, demo-token scopes, Origin validation, and conformance tests.",
   "license": "Apache-2.0",
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./repo": "./src/repo.ts",
+    "./fixtures": "./src/fixtures.ts",
+    "./golden.json": "./test/golden.json"
+  },
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup",

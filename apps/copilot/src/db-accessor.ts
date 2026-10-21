@@ -1,5 +1,5 @@
 import type { VisitProofRepository } from "@visitproof/db"
-import type { Exception, Visit } from "@visitproof/domain"
+import type { Client, Exception, Visit } from "@visitproof/domain"
 
 import type { CopilotDataAccessor, ExceptionFilter, VisitFilter } from "./accessor"
 
@@ -57,6 +57,10 @@ export const createDbCopilotAccessor = (
       return (
         (await store.exceptions.get(agencyId, exceptionId)) ?? undefined
       )
+    },
+
+    async getClient(clientId: string): Promise<Client | undefined> {
+      return (await store.clients.get(agencyId, clientId)) ?? undefined
     },
   }
 }

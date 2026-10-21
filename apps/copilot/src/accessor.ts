@@ -1,4 +1,5 @@
 import type {
+  Client,
   Exception,
   ExceptionState,
   Visit,
@@ -34,4 +35,6 @@ export interface CopilotDataAccessor {
   listExceptions(filter: ExceptionFilter): Promise<readonly Exception[]>
   getVisit(visitId: string): Promise<Visit | undefined>
   getException(exceptionId: string): Promise<Exception | undefined>
+  /** Optional: lets answers say "Grace" instead of a raw client id. */
+  getClient?(clientId: string): Promise<Client | undefined>
 }
