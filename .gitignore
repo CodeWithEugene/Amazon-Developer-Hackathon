@@ -21,8 +21,10 @@ aws-exports.js
 amplify_outputs.json
 
 # Local data and media (never commit real Ring data)
-data/
-snapshots/
+# Anchored to the repo root: an unanchored "data/" also matched source
+# directories such as apps/console/app/api/family/data/.
+/data/
+/snapshots/
 .demo-data/
 .visitproof/
 *.mp4
