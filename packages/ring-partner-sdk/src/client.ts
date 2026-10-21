@@ -1,4 +1,4 @@
-import { CONTENT_TYPES, ENDPOINTS, HEADERS } from "./endpoints"
+import { CONTENT_TYPES, DEFAULT_RING_API_BASE, ENDPOINTS, HEADERS } from "./endpoints"
 import {
   requestWithRetry,
   resolveFetch,
@@ -6,6 +6,8 @@ import {
   type FetchLike,
   type RateLimitInfo,
   type RetryOptions,
+  type SleepFn,
+  defaultSleep,
 } from "./http"
 import {
   appIntegrationDocumentSchema,
@@ -20,18 +22,32 @@ import {
   userDocumentSchema,
   whepStartResponseSchema,
   type AppIntegrationConfirmRequest,
+  type AppIntegrationDocument,
   type ClipRequest,
   type DeviceInclude,
+  type HistoryDocument,
   type HistoryEvent,
   type HistoryQuery,
+  type UserDocument,
 } from "./types"
-import { parseErrorDocument, RingNotFoundError, RingSchemaError } from "./errors"
+import {
+  historyPagePath,
+  isIdempotent,
+  mediaHeaders,
+  parseOrThrow,
+  readJsonOrEmpty,
+  resolveUrl,
+  type SafeParser,
+} from "./client-support"
 import { snapshotRequestSchema, type SnapshotRequestInput } from "./media"
 
 /**
  * Typed client for the Ring Partner API. Every method validates the response
  * against its Zod schema (`RingSchemaError` on mismatch) and maps non-2xx
- * statuses to the typed error hierarchy via `throwForResponse`.
+ * statuses to the typed error hierarchy via `throwForResponse`. Only
+ * idempotent requests (GET, DELETE, and media downloads) are retried on
+ * 429/503; WHEP and app-integration writes are sent once. A 401 calls
+ * `onUnauthorized` (for example `tokenManager.invalidate`) and retries once.
  */
 
 export interface RingClientOptions {
@@ -43,6 +59,8 @@ export interface RingClientOptions {
   readonly onRateLimit?: (info: RateLimitInfo) => void
   readonly now?: () => number
   readonly maxRetries?: number
+  /** Called on a 401 before the single retry; omit to surface the 401. */
+  readonly onUnauthorized?: () => void | Promise<void>
 }
 
 export interface MediaResult {
@@ -57,36 +75,36 @@ export interface MediaResult {
 export type SnapshotResult = MediaResult
 export type ClipResult = MediaResult
 
-const parseOrThrow = <T>(
-  schema: { safeParse: (input: unknown) => { success: true; data: T } | { success: false } },
-  label: string,
-  body: unknown,
-  url: string
-): T => {
-  const parsed = schema.safeParse(body)
-  if (!parsed.success) {
-    throw new RingSchemaError(
-      { status: 200, method: "GET", url, document: parseErrorDocument(body) },
-      `${label} response did not match the expected schema`
-    )
-  }
-  return parsed.data
+export interface HistoryPage {
+  readonly events: readonly HistoryEvent[]
+  /** `links.next` or `meta.page_key`: pass back as `pageKey` (both are handled). */
+  readonly nextUrl: string | null | undefined
+  readonly document: HistoryDocument
 }
 
-const numberHeader = (response: Response, name: string): number | undefined => {
-  const value = response.headers.get(name)
-  if (value === null || !/^\d+$/.test(value)) return undefined
-  return Number(value)
+export interface HistoryAllOptions {
+  /** Only events at or after this epoch ms; pagination stops once older. */
+  readonly sinceMs?: number
+  /** Delay between pages (pacing under the shared rate limit). */
+  readonly pageDelayMs?: number
+  readonly sleep?: SleepFn
+}
+
+interface RequestOptions {
+  /** Overrides the method-based default (media POSTs are idempotent reads). */
+  readonly idempotent?: boolean
 }
 
 export class RingClient {
   readonly baseUrl: string
   private readonly getAccessToken: () => string | Promise<string>
   private readonly retry: RetryOptions
+  private readonly onUnauthorized: (() => void | Promise<void>) | undefined
 
   constructor(options: RingClientOptions) {
-    this.baseUrl = (options.baseUrl ?? "https://api.amazonvision.com").replace(/\/+$/, "")
+    this.baseUrl = (options.baseUrl ?? DEFAULT_RING_API_BASE).replace(/\/+$/, "")
     this.getAccessToken = options.getAccessToken
+    this.onUnauthorized = options.onUnauthorized
     this.retry = {
       fetch: resolveFetch(options.fetch),
       onRateLimit: options.onRateLimit,
@@ -95,44 +113,56 @@ export class RingClient {
     }
   }
 
-  private async request(path: string, init: RequestInit = {}): Promise<Response> {
+  private url(pathOrUrl: string): string {
+    return resolveUrl(this.baseUrl, pathOrUrl)
+  }
+
+  private async send(url: string, init: RequestInit, options: RequestOptions): Promise<Response> {
     const token = await this.getAccessToken()
-    const url = path.startsWith("http") ? path : `${this.baseUrl}${path}`
     const headers = new Headers(init.headers)
     headers.set("authorization", `Bearer ${token}`)
-    headers.set("accept", headers.get("accept") ?? CONTENT_TYPES.jsonApi)
+    if (!headers.has("accept")) headers.set("accept", CONTENT_TYPES.jsonApi)
     if (init.body !== undefined && !headers.has("content-type")) {
       headers.set("content-type", CONTENT_TYPES.json)
     }
-    return requestWithRetry(url, { ...init, headers }, this.retry)
+    const idempotent = options.idempotent ?? isIdempotent(init.method)
+    const retry = idempotent ? this.retry : { ...this.retry, maxRetries: 0 }
+    return requestWithRetry(url, { ...init, headers }, retry)
   }
 
-  private async getDocument<T>(
-    path: string,
-    schema: { safeParse: (input: unknown) => { success: true; data: T } | { success: false } },
-    label: string
-  ): Promise<T> {
+  private async request(path: string, init: RequestInit = {}, options: RequestOptions = {}) {
+    const url = this.url(path)
+    const response = await this.send(url, init, options)
+    if (response.status !== 401 || this.onUnauthorized === undefined) return response
+    await response.text()
+    await this.onUnauthorized()
+    return this.send(url, init, options)
+  }
+
+  private async getDocument<T>(path: string, schema: SafeParser<T>, label: string): Promise<T> {
     const response = await this.request(path)
-    if (!response.ok) await throwForResponse(response, "GET", `${this.baseUrl}${path}`)
-    return parseOrThrow(schema, label, await response.json(), `${this.baseUrl}${path}`)
+    if (!response.ok) await throwForResponse(response, "GET", this.url(path))
+    return parseOrThrow(schema, label, await response.json(), this.url(path))
   }
 
-  private async postDocument<T>(
+  /** Sends a JSON body; an empty 2xx body (204) resolves to null. */
+  private async writeDocument<T>(
+    method: "POST" | "PATCH" | "DELETE",
     path: string,
     body: unknown,
-    schema: { safeParse: (input: unknown) => { success: true; data: T } | { success: false } },
+    schema: SafeParser<T>,
     label: string
-  ): Promise<T> {
-    const response = await this.request(path, {
-      method: "POST",
-      body: typeof body === "string" ? body : JSON.stringify(body),
-    })
-    if (!response.ok) await throwForResponse(response, "POST", `${this.baseUrl}${path}`)
-    return parseOrThrow(schema, label, await response.json(), `${this.baseUrl}${path}`)
+  ): Promise<T | null> {
+    const init: RequestInit =
+      body === undefined ? { method } : { method, body: JSON.stringify(body) }
+    const response = await this.request(path, init)
+    if (!response.ok) await throwForResponse(response, method, this.url(path))
+    const json = await readJsonOrEmpty(response)
+    return json === undefined ? null : parseOrThrow(schema, label, json, this.url(path), method)
   }
 
   /** The authenticated user (used right after token exchange). */
-  me(): Promise<ReturnType<typeof userDocumentSchema.parse>> {
+  me(): Promise<UserDocument> {
     return this.getDocument(ENDPOINTS.me, userDocumentSchema, "me")
   }
 
@@ -172,20 +202,13 @@ export class RingClient {
   }
 
   /**
-   * One page of history events. `eventTypes` is applied client-side because the
-   * documented `event_types` filter was observed to be ignored (friction log
-   * entry 3). Follows `pageKey`/`links.next` for further pages.
+   * One page of history events. `eventTypes` is sent as `event_types` and
+   * also applied client-side, because the server filter was observed to be
+   * ignored (friction log entry 3). `pageKey` may be a `links.next` URL or an
+   * opaque `meta.page_key` cursor.
    */
-  async historyEvents(id: string, query: HistoryQuery = {}): Promise<{
-    readonly events: readonly HistoryEvent[]
-    readonly nextUrl: string | null | undefined
-    readonly document: ReturnType<typeof historyDocumentSchema.parse>
-  }> {
-    const path = query.pageKey
-      ? query.pageKey.startsWith("http")
-        ? query.pageKey
-        : `${this.baseUrl}${query.pageKey}`
-      : ENDPOINTS.historyEvents(id)
+  async historyEvents(id: string, query: HistoryQuery = {}): Promise<HistoryPage> {
+    const path = historyPagePath(id, query)
     const document = await this.getDocument(path, historyDocumentSchema, "historyEvents")
     const events = query.eventTypes?.length
       ? document.data.filter((event) => query.eventTypes?.includes(event.attributes.event_type))
@@ -193,25 +216,25 @@ export class RingClient {
     return { events, nextUrl: document.links?.next ?? document.meta?.page_key ?? null, document }
   }
 
-  /** All history pages, auto-following `links.next`, with client-side filtering. */
+  /** All history pages (newest first), with client-side filtering and pacing. */
   async historyEventsAll(
     id: string,
     query: Omit<HistoryQuery, "pageKey"> = {},
-    maxPages = 20
+    maxPages = 20,
+    options: HistoryAllOptions = {}
   ): Promise<readonly HistoryEvent[]> {
-    const all: HistoryEvent[] = []
-    let nextUrl: string | null | undefined
-    let pages = 0
-    do {
-      const page: Awaited<ReturnType<typeof RingClient.prototype.historyEvents>> = await this.historyEvents(
-        id,
-        nextUrl ? { ...query, pageKey: nextUrl } : query
-      )
-      all.push(...page.events)
-      nextUrl = page.nextUrl
-      pages += 1
-    } while (nextUrl && pages < maxPages)
-    return all
+    const sleep = options.sleep ?? defaultSleep
+    const since = options.sinceMs ?? Number.NEGATIVE_INFINITY
+    const collect = async (pageKey: string | undefined, pages: number, acc: readonly HistoryEvent[]) => {
+      const page = await this.historyEvents(id, pageKey ? { ...query, pageKey } : query)
+      const fresh = page.events.filter((event) => event.attributes.timestamp >= since)
+      const reachedSince = page.document.data.some((event) => event.attributes.timestamp < since)
+      const next = [...acc, ...fresh]
+      if (!page.nextUrl || reachedSince || pages + 1 >= maxPages) return next
+      if (options.pageDelayMs) await sleep(options.pageDelayMs)
+      return collect(page.nextUrl, pages + 1, next)
+    }
+    return collect(undefined, 0, [])
   }
 
   /**
@@ -221,15 +244,7 @@ export class RingClient {
    */
   async snapshot(deviceId: string, request: SnapshotRequestInput): Promise<SnapshotResult> {
     const body = snapshotRequestSchema.parse(request)
-    const response = await this.request(ENDPOINTS.imageDownload(deviceId), {
-      method: "POST",
-      redirect: "manual",
-      body: JSON.stringify(body),
-    })
-    if (!(response.ok || response.status === 303)) {
-      await throwForResponse(response, "POST", ENDPOINTS.imageDownload(deviceId))
-    }
-    return this.followMedia(response)
+    return this.downloadMedia(ENDPOINTS.imageDownload(deviceId), body)
   }
 
   /** Requests a video clip (capped at 15 minutes) and downloads the bytes. */
@@ -237,56 +252,71 @@ export class RingClient {
     if (request.end_time - request.start_time > 15 * 60 * 1000) {
       throw new RangeError("clip duration exceeds the 15 minute cap")
     }
-    const response = await this.request(ENDPOINTS.videoDownload(deviceId), {
-      method: "POST",
-      redirect: "manual",
-      body: JSON.stringify(request),
-    })
+    return this.downloadMedia(ENDPOINTS.videoDownload(deviceId), request)
+  }
+
+  private async downloadMedia(path: string, body: unknown): Promise<MediaResult> {
+    const response = await this.request(
+      path,
+      { method: "POST", redirect: "manual", body: JSON.stringify(body) },
+      { idempotent: true }
+    )
     if (!(response.ok || response.status === 303)) {
-      await throwForResponse(response, "POST", ENDPOINTS.videoDownload(deviceId))
+      await throwForResponse(response, "POST", this.url(path))
     }
     return this.followMedia(response)
   }
 
+  /**
+   * The presigned URL is fetched WITHOUT the Ring bearer token (it carries
+   * its own signature, and the token must never leave for a storage host).
+   * Media metadata headers are read from Ring's 303 first.
+   */
   private async followMedia(response: Response): Promise<MediaResult> {
     const location = response.headers.get(HEADERS.location)
-    if (!location) {
-      throw new RingNotFoundError({ status: response.status, method: "POST", url: response.url })
+    if (response.status !== 303 || !location) {
+      const bytes = new Uint8Array(await response.arrayBuffer())
+      return {
+        url: response.url,
+        bytes,
+        contentType: response.headers.get("content-type") ?? "application/octet-stream",
+        ...mediaHeaders(response, response),
+      }
     }
-    const url = location.startsWith("http") ? location : `${this.baseUrl}${location}`
-    const media = await this.request(url)
+    const url = this.url(location)
+    const media = await requestWithRetry(url, { method: "GET" }, this.retry)
     if (!media.ok) await throwForResponse(media, "GET", url)
-    const encrypted = media.headers.get(HEADERS.mediaEncrypted) === "true" || undefined
     return {
       url,
       bytes: new Uint8Array(await media.arrayBuffer()),
       contentType: media.headers.get("content-type") ?? "application/octet-stream",
-      origin: media.headers.get(HEADERS.mediaOrigin) ?? undefined,
-      encrypted,
-      length: numberHeader(media, HEADERS.mediaLength),
+      ...mediaHeaders(response, media),
     }
   }
 
   /**
-   * WHEP signaling: POSTs the SDP offer, reads the SDP answer body and the
-   * session URL from the `Location` header. Keep the session URL for `whepStop`.
+   * WHEP signaling: POSTs the SDP offer (sent once, never retried), reads the
+   * SDP answer body and the session URL from `Location`. Keep the session URL
+   * for `whepStop`; sessions are not reaped by Ring.
    */
   async whepStart(deviceId: string, sdpOffer: string): Promise<{ sdpAnswer: string; sessionUrl: string }> {
-    const response = await this.request(ENDPOINTS.whepSessions(deviceId), {
+    const path = ENDPOINTS.whepSessions(deviceId)
+    const response = await this.request(path, {
       method: "POST",
-      headers: { "content-type": CONTENT_TYPES.sdp },
+      headers: { "content-type": CONTENT_TYPES.sdp, accept: CONTENT_TYPES.sdp },
       body: sdpOffer,
     })
-    if (!response.ok) await throwForResponse(response, "POST", ENDPOINTS.whepSessions(deviceId))
+    if (!response.ok) await throwForResponse(response, "POST", this.url(path))
     const sdpAnswer = await response.text()
-    const sessionUrl = response.headers.get(HEADERS.location) ?? ""
+    const location = response.headers.get(HEADERS.location)
+    const sessionUrl = location ? this.url(location) : ""
     return whepStartResponseSchema.parse({ sdpAnswer, sessionUrl })
   }
 
   async whepStop(sessionUrl: string): Promise<void> {
     const response = await this.request(sessionUrl, { method: "DELETE" })
     if (!response.ok && response.status !== 404) {
-      await throwForResponse(response, "DELETE", sessionUrl)
+      await throwForResponse(response, "DELETE", this.url(sessionUrl))
     }
   }
 
@@ -294,8 +324,10 @@ export class RingClient {
     return this.getDocument(ENDPOINTS.subscriptions, subscriptionListDocumentSchema, "subscriptions")
   }
 
-  async appIntegrationConfirm(request: AppIntegrationConfirmRequest) {
-    return this.postDocument(
+  /** Step 8a: `POST app-integrations { account_identifier, nonce }` (status awaiting). */
+  appIntegrationConfirm(request: AppIntegrationConfirmRequest): Promise<AppIntegrationDocument | null> {
+    return this.writeDocument(
+      "POST",
       ENDPOINTS.appIntegrations,
       request,
       appIntegrationDocumentSchema,
@@ -303,8 +335,10 @@ export class RingClient {
     )
   }
 
-  appIntegrationComplete() {
-    return this.postDocument(
+  /** Step 8b: `PATCH app-integrations { status: "completed" }`; without it the integration stays Inactive. */
+  appIntegrationComplete(): Promise<AppIntegrationDocument | null> {
+    return this.writeDocument(
+      "PATCH",
       ENDPOINTS.appIntegrations,
       { status: "completed" },
       appIntegrationDocumentSchema,
@@ -312,10 +346,12 @@ export class RingClient {
     )
   }
 
-  appIntegrationDelete() {
-    return this.postDocument(
+  /** Removes the integration (DELETE; confirm the verb in the Playground explorer). */
+  appIntegrationDelete(): Promise<AppIntegrationDocument | null> {
+    return this.writeDocument(
+      "DELETE",
       ENDPOINTS.appIntegrations,
-      { status: "deleted" },
+      undefined,
       appIntegrationDocumentSchema,
       "appIntegrationDelete"
     )

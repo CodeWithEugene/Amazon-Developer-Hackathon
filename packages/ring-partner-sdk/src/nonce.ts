@@ -59,3 +59,16 @@ export const findMatchingAccount = (
     )
     return matches && found === undefined ? accountId : found
   }, undefined)
+
+/**
+ * Between token exchange and the Account Link visit the Ring account is
+ * UNCLAIMED, yet Ring already sends `device_added` (research.md 2.3 step 4).
+ * Receivers store such events under this bucket id, keyed by account id,
+ * and move them to the client once the nonce match creates the link.
+ */
+export const UNCLAIMED_BUCKET_PREFIX = "unclaimed#ring-account#"
+
+export const unclaimedBucketId = (accountId: string): string =>
+  `${UNCLAIMED_BUCKET_PREFIX}${accountId}`
+
+export const isUnclaimedBucketId = (id: string): boolean => id.startsWith(UNCLAIMED_BUCKET_PREFIX)

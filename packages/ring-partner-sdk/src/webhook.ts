@@ -6,8 +6,10 @@ import {
   utf8,
 } from "./crypto"
 import {
+  rawWebhookEnvelopeSchema,
   WEBHOOK_SIGNATURE_PREFIX,
   webhookEnvelopeSchema,
+  type RawWebhookEnvelope,
   type WebhookEnvelope,
 } from "./types"
 
@@ -56,24 +58,64 @@ export type ParseWebhookResult =
   | { readonly ok: true; readonly envelope: WebhookEnvelope }
   | { readonly ok: false; readonly error: WebhookParseError }
 
+const decodeJson = (rawBody: Uint8Array | string): { ok: true; json: unknown } | { ok: false } => {
+  try {
+    return { ok: true, json: JSON.parse(typeof rawBody === "string" ? rawBody : decoder.decode(rawBody)) }
+  } catch {
+    return { ok: false }
+  }
+}
+
+const issuesOf = (error: { issues: readonly { path: readonly PropertyKey[]; message: string }[] }) =>
+  error.issues.map((issue) => `${issue.path.map(String).join(".") || "<root>"}: ${issue.message}`)
+
 /** Non-throwing parse of the raw body into the discriminated envelope. */
 export const safeParseWebhook = (
   rawBody: Uint8Array | string
 ): ParseWebhookResult => {
-  let json: unknown
-  try {
-    json = JSON.parse(typeof rawBody === "string" ? rawBody : decoder.decode(rawBody))
-  } catch {
-    return { ok: false, error: new WebhookParseError(["body is not JSON"]) }
-  }
-  const parsed = webhookEnvelopeSchema.safeParse(json)
-  if (!parsed.success) {
-    const issues = parsed.error.issues.map(
-      (issue) => `${issue.path.join(".") || "<root>"}: ${issue.message}`
-    )
-    return { ok: false, error: new WebhookParseError(issues) }
-  }
+  const decoded = decodeJson(rawBody)
+  if (!decoded.ok) return { ok: false, error: new WebhookParseError(["body is not JSON"]) }
+  const parsed = webhookEnvelopeSchema.safeParse(decoded.json)
+  if (!parsed.success) return { ok: false, error: new WebhookParseError(issuesOf(parsed.error)) }
   return { ok: true, envelope: parsed.data }
+}
+
+export type LenientParseWebhookResult =
+  | { readonly ok: true; readonly kind: "known"; readonly envelope: WebhookEnvelope }
+  | {
+      readonly ok: true
+      readonly kind: "unknown"
+      readonly envelope: RawWebhookEnvelope
+      /** The raw `data.type`, stored so the event can be reprocessed later. */
+      readonly rawType: string
+      /** Why the strict schema rejected it (for logs). */
+      readonly issues: readonly string[]
+    }
+  | { readonly ok: false; readonly error: WebhookParseError }
+
+/**
+ * Receiver-grade parse for a body whose signature already verified: known
+ * event families parse strictly; anything else with a usable `meta`
+ * (request and account ids) and a `data.type` comes back as `kind: "unknown"`
+ * with the raw type, so the receiver can log and store it and still ack.
+ * Only bodies that are not JSON or carry no ids fail.
+ */
+export const parseWebhookLenient = (
+  rawBody: Uint8Array | string
+): LenientParseWebhookResult => {
+  const decoded = decodeJson(rawBody)
+  if (!decoded.ok) return { ok: false, error: new WebhookParseError(["body is not JSON"]) }
+  const strict = webhookEnvelopeSchema.safeParse(decoded.json)
+  if (strict.success) return { ok: true, kind: "known", envelope: strict.data }
+  const raw = rawWebhookEnvelopeSchema.safeParse(decoded.json)
+  if (!raw.success) return { ok: false, error: new WebhookParseError(issuesOf(raw.error)) }
+  return {
+    ok: true,
+    kind: "unknown",
+    envelope: raw.data,
+    rawType: raw.data.data.type,
+    issues: issuesOf(strict.error),
+  }
 }
 
 /** Throwing variant of `safeParseWebhook`. */
@@ -86,16 +128,18 @@ export const parseWebhook = (rawBody: Uint8Array | string): WebhookEnvelope => {
 const DEVICE_LINK = /\/v1\/devices\/([^/?#]+)/
 
 /** Device id from `attributes.source` (devices) or the relationship link. */
-export const extractDeviceId = (envelope: WebhookEnvelope): string | undefined => {
+export const extractDeviceId = (
+  envelope: WebhookEnvelope | RawWebhookEnvelope
+): string | undefined => {
   const { attributes, relationships } = envelope.data
-  if (attributes.source_type === "devices") return attributes.source
+  if (attributes?.source_type === "devices" && attributes.source) return attributes.source
   const self = relationships?.devices?.links?.self
   const match = self ? DEVICE_LINK.exec(self) : null
   return match?.[1]
 }
 
 /** Idempotency key: Ring retries with the same `meta.request_id`. */
-export const dedupeKey = (envelope: WebhookEnvelope): string =>
+export const dedupeKey = (envelope: WebhookEnvelope | RawWebhookEnvelope): string =>
   envelope.meta.request_id
 
 export interface ReplayGuard {

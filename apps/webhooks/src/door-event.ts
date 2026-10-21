@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto"
 
-import type { DoorEvent, DoorEventType } from "@visitproof/domain"
+import type { DoorEvent, DoorEventType, EventProvenance } from "@visitproof/domain"
 import type {
   WebhookEnvelope,
   WebhookEvent,
@@ -69,6 +69,8 @@ export interface BuildDoorEventInput {
   readonly clientId: string
   readonly rawBody: Uint8Array
   readonly clock: Clock
+  /** Contract C4: "emulated" only for demo-mode emulator deliveries. */
+  readonly provenance?: EventProvenance
 }
 
 /** The persisted `DoorEvent` for a verified envelope, or null if unmappable. */
@@ -77,6 +79,7 @@ export const buildDoorEvent = ({
   clientId,
   rawBody,
   clock,
+  provenance = "ring_webhook",
 }: BuildDoorEventInput): DoorEvent | null => {
   const projected = projectDoorEvent(envelope)
   if (projected === null) return null
@@ -91,7 +94,7 @@ export const buildDoorEvent = ({
     type: projected.type,
     ...(projected.subType !== undefined ? { subType: projected.subType } : {}),
     ...(deviceId !== undefined ? { deviceId } : {}),
-    provenance: "ring_webhook",
+    provenance,
     rawPayloadHash: sha256Hex(rawBody),
     componentIds: projected.componentIds,
     createdAt: now,
@@ -99,6 +102,18 @@ export const buildDoorEvent = ({
     version: 1,
   }
 }
+
+/**
+ * Contract C4: a delivery is labeled "emulated" only when the receiver runs
+ * in demo mode AND the request carries `x-visitproof-provenance: emulated`;
+ * in live mode the header is ignored, so a real Ring delivery can never be
+ * mislabeled by a header.
+ */
+export const provenanceFor = (
+  mode: "demo" | "live",
+  header: string | undefined
+): EventProvenance =>
+  mode === "demo" && header?.trim().toLowerCase() === "emulated" ? "emulated" : "ring_webhook"
 
 export { systemClock }
 export type { Clock }

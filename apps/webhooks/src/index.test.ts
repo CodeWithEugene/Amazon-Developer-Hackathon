@@ -7,10 +7,10 @@ import { createLocalRepository } from "@visitproof/db"
 import type { VisitProofRepository } from "@visitproof/db"
 import type { DoorEvent } from "@visitproof/domain"
 import type { WebhookEnvelope } from "@visitproof/ring-partner-sdk"
-import { signWebhookBody } from "@visitproof/ring-partner-sdk"
+import { signWebhookBody, unclaimedBucketId } from "@visitproof/ring-partner-sdk"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
-import { createApp } from "./index"
+import { createApp, type DeferFn, type WebhookAppOptions } from "./index"
 
 const KEY = "test-signing-key"
 
@@ -54,8 +54,21 @@ const bodyBufferOf = (env: WebhookEnvelope): ArrayBuffer => {
 
 let dir: string
 let repo: VisitProofRepository
+let pending: Promise<void>[] = []
+
+/** Collects deferred engine work so tests can flush it after the response. */
+const collect: DeferFn = (task) => {
+  pending = [...pending, task()]
+}
+const flush = async () => {
+  await Promise.all(pending)
+  pending = []
+}
+const makeApp = (options: Omit<WebhookAppOptions, "repository" | "signingKey"> & { repository?: VisitProofRepository } = {}) =>
+  createApp({ repository: repo, signingKey: KEY, defer: collect, logger: { warn: vi.fn(), error: vi.fn() }, ...options })
 
 beforeEach(async () => {
+  pending = []
   dir = await mkdtemp(join(tmpdir(), "visitproof-webhooks-"))
   repo = createLocalRepository(dir)
 })
@@ -80,7 +93,7 @@ const signedRequest = (
 describe("POST /webhooks/ring", () => {
   it("accepts a correctly signed motion event and persists it", async () => {
     const onEvent = vi.fn()
-    const app = createApp({ repository: repo, signingKey: KEY, onEvent })
+    const app = makeApp({ onEvent })
 
     await repo.ringLinks.link("client-1", "acct-1", new Date())
 
@@ -99,6 +112,7 @@ describe("POST /webhooks/ring", () => {
       createHash("sha256").update(bodyOf(envelope())).digest("hex")
     )
 
+    await flush()
     expect(onEvent).toHaveBeenCalledTimes(1)
     const [eventArg, envelopeArg] = onEvent.mock.calls[0] as [
       DoorEvent | null,
@@ -109,7 +123,7 @@ describe("POST /webhooks/ring", () => {
   })
 
   it("rejects a tampered body with 401 and persists nothing", async () => {
-    const app = createApp({ repository: repo, signingKey: KEY })
+    const app = makeApp()
     await repo.ringLinks.link("client-1", "acct-1", new Date())
 
     const request = await signedRequest(envelope())
@@ -122,13 +136,13 @@ describe("POST /webhooks/ring", () => {
   })
 
   it("rejects a signature made with the wrong key", async () => {
-    const app = createApp({ repository: repo, signingKey: KEY })
+    const app = makeApp()
     const res = await app.request(await signedRequest(envelope(), "other-key"))
     expect(res.status).toBe(401)
   })
 
   it("rejects a missing signature header", async () => {
-    const app = createApp({ repository: repo, signingKey: KEY })
+    const app = makeApp()
     const res = await app.request(
       new Request("http://localhost/webhooks/ring", {
         method: "POST",
@@ -140,7 +154,7 @@ describe("POST /webhooks/ring", () => {
   })
 
   it("rejects a validly signed but malformed body with 400", async () => {
-    const app = createApp({ repository: repo, signingKey: KEY })
+    const app = makeApp()
     const body = new TextEncoder().encode("not json")
     const res = await app.request(
       new Request("http://localhost/webhooks/ring", {
@@ -157,7 +171,7 @@ describe("POST /webhooks/ring", () => {
 
   it("sweeps replays: a redelivered request id is a duplicate, not a second event", async () => {
     const onEvent = vi.fn()
-    const app = createApp({ repository: repo, signingKey: KEY, onEvent })
+    const app = makeApp({ onEvent })
     await repo.ringLinks.link("client-1", "acct-1", new Date())
 
     const first = await app.request(await signedRequest(envelope()))
@@ -167,6 +181,7 @@ describe("POST /webhooks/ring", () => {
     expect(await second.json()).toEqual({ ok: true, duplicate: true })
 
     expect(await repo.events.byClient("client-1")).toHaveLength(1)
+    await flush()
     expect(onEvent).toHaveBeenCalledTimes(1)
   })
 
@@ -174,7 +189,7 @@ describe("POST /webhooks/ring", () => {
     const onEvent = vi.fn(() => {
       throw new Error("engine exploded")
     })
-    const app = createApp({ repository: repo, signingKey: KEY, onEvent })
+    const app = makeApp({ onEvent })
     await repo.ringLinks.link("client-1", "acct-1", new Date())
 
     const res = await app.request(await signedRequest(envelope()))
@@ -184,6 +199,7 @@ describe("POST /webhooks/ring", () => {
       requestId: envelope().meta.request_id,
     })
     expect(await repo.events.byClient("client-1")).toHaveLength(1)
+    await flush()
     expect(onEvent).toHaveBeenCalledTimes(1)
   })
 
@@ -197,7 +213,7 @@ describe("POST /webhooks/ring", () => {
         },
       },
     }
-    const app = createApp({ repository: failing, signingKey: KEY })
+    const app = makeApp({ repository: failing })
     await repo.ringLinks.link("client-1", "acct-1", new Date())
 
     const res = await app.request(await signedRequest(envelope()))
@@ -223,7 +239,7 @@ describe("POST /webhooks/ring", () => {
       },
     }
     const onEvent = vi.fn()
-    const app = createApp({ repository: flaky, signingKey: KEY, onEvent })
+    const app = makeApp({ repository: flaky, onEvent })
     await repo.ringLinks.link("client-1", "acct-1", new Date())
 
     const first = await app.request(await signedRequest(envelope()))
@@ -237,21 +253,25 @@ describe("POST /webhooks/ring", () => {
       requestId: envelope().meta.request_id,
     })
     expect(await repo.events.byClient("client-1")).toHaveLength(1)
+    await flush()
     expect(onEvent).toHaveBeenCalledTimes(1)
   })
 
-  it("acknowledges an unknown Ring account without persisting", async () => {
+  it("stores events for a not yet linked account in the unclaimed bucket", async () => {
     const onEvent = vi.fn()
-    const app = createApp({ repository: repo, signingKey: KEY, onEvent })
+    const app = makeApp({ onEvent })
     const res = await app.request(await signedRequest(envelope()))
     expect(res.status).toBe(202)
-    expect(await res.json()).toEqual({ ok: true, ignored: "unknown_account" })
+    expect(await res.json()).toEqual({ ok: true, requestId: envelope().meta.request_id, unclaimed: true })
+    const bucket = await repo.events.byClient(unclaimedBucketId("acct-1"))
+    expect(bucket).toHaveLength(1)
+    await flush()
     expect(onEvent).not.toHaveBeenCalled()
   })
 
   it("accepts subscription events but persists no door event", async () => {
     const onEvent = vi.fn()
-    const app = createApp({ repository: repo, signingKey: KEY, onEvent })
+    const app = makeApp({ onEvent })
     await repo.ringLinks.link("client-1", "acct-1", new Date())
 
     const env = envelope({
@@ -268,12 +288,13 @@ describe("POST /webhooks/ring", () => {
     const res = await app.request(await signedRequest(env))
     expect(res.status).toBe(202)
     expect(await res.json()).toEqual({ ok: true, ignored: "unmapped_event_type" })
+    await flush()
     expect(onEvent).toHaveBeenCalledWith(null, env)
     expect(await repo.events.byClient("client-1")).toHaveLength(0)
   })
 
   it("serves the alias route POST /ring/webhook identically", async () => {
-    const app = createApp({ repository: repo, signingKey: KEY })
+    const app = makeApp()
     const body = bodyOf(envelope())
     const res = await app.request(
       new Request("http://localhost/ring/webhook", {
@@ -286,7 +307,7 @@ describe("POST /webhooks/ring", () => {
   })
 
   it("answers health checks", async () => {
-    const app = createApp({ repository: repo, signingKey: KEY })
+    const app = makeApp()
     const res = await app.request("http://localhost/health")
     expect(res.status).toBe(200)
     expect(await res.json()).toEqual({ ok: true, service: "webhooks" })

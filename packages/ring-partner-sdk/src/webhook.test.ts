@@ -7,6 +7,7 @@ import {
   dedupeKey,
   extractDeviceId,
   parseWebhook,
+  parseWebhookLenient,
   safeParseWebhook,
   signWebhookBody,
   verifyWebhookSignature,
@@ -120,5 +121,48 @@ describe("createReplayGuard", () => {
     guard.seen("c")
     expect(guard.seen("a")).toBe(false)
     expect(guard.size()).toBe(2)
+  })
+})
+
+describe("parseWebhookLenient", () => {
+  const body = (data: Record<string, unknown>) => JSON.stringify({ meta: envelope.meta, data })
+
+  it("parses known families strictly", () => {
+    const result = parseWebhookLenient(rawBody)
+    expect(result.ok && result.kind).toBe("known")
+  })
+
+  it("keeps an unknown motion sub_type on the known path", () => {
+    const result = parseWebhookLenient(
+      body({ ...envelope.data, attributes: { ...envelope.data.attributes, sub_type: "package" } })
+    )
+    expect(result.ok && result.kind).toBe("known")
+    if (result.ok && result.kind === "known" && result.envelope.data.type === "motion_detected") {
+      expect(result.envelope.data.attributes.sub_type).toBe("package")
+    }
+  })
+
+  it("returns an unknown data.type with its raw type instead of failing", () => {
+    const result = parseWebhookLenient(
+      body({
+        id: "dev1_glass_break_1",
+        type: "glass_break_detected",
+        attributes: { source: "dev1", source_type: "devices", timestamp: 5 },
+      })
+    )
+    expect(result.ok).toBe(true)
+    if (result.ok && result.kind === "unknown") {
+      expect(result.rawType).toBe("glass_break_detected")
+      expect(extractDeviceId(result.envelope)).toBe("dev1")
+      expect(dedupeKey(result.envelope)).toBe(envelope.meta.request_id)
+      expect(result.issues.length).toBeGreaterThan(0)
+    } else {
+      throw new Error("expected the unknown kind")
+    }
+  })
+
+  it("fails only without JSON or without the routing ids", () => {
+    expect(parseWebhookLenient("nope").ok).toBe(false)
+    expect(parseWebhookLenient(JSON.stringify({ meta: {}, data: { type: "x" } })).ok).toBe(false)
   })
 })

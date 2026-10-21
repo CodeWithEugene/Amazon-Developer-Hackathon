@@ -3,15 +3,15 @@ import { Hono } from "hono"
 import type { VisitProofRepository } from "@visitproof/db"
 import type { DoorEvent } from "@visitproof/domain"
 import {
-  dedupeKey,
-  safeParseWebhook,
-  verifyWebhookSignature,
+  PROVENANCE_HEADER,
   WEBHOOK_SIGNATURE_HEADER,
   type WebhookEnvelope,
 } from "@visitproof/ring-partner-sdk"
 
+import { createMemoryArchive, type RawEventArchive } from "./archive"
 import { systemClock, type Clock } from "./clock"
-import { buildDoorEvent } from "./door-event"
+import { errorMeta, stderrLogger, type WebhookLogger } from "./logger"
+import { receiveDelivery, type EngineWork, type ReceiveContext } from "./receive"
 
 /**
  * The engine hook. The server wiring (`server.ts` locally, `lambda.ts` in
@@ -23,100 +23,78 @@ export type EngineHandler = (
   envelope: WebhookEnvelope
 ) => void | Promise<void>
 
+/** Schedules engine work after the response is sent. */
+export type DeferFn = (task: () => Promise<void>) => void
+
 export interface WebhookAppOptions {
   readonly repository: VisitProofRepository
   readonly signingKey: string
   /**
-   * Invoked after the event is persisted. Engine failures must not fail the
-   * response: Ring would retry a webhook we already processed.
+   * Invoked after the 202 is sent (contract C5). Engine failures never fail
+   * the response: Ring would retry a webhook we already processed.
    */
   readonly onEvent?: EngineHandler
   readonly clock?: Clock
+  /** VISITPROOF_MODE; the emulated provenance header is honored only in demo (C4). Default "live". */
+  readonly mode?: "demo" | "live"
+  /** VISITPROOF_ENGINE_INLINE; false skips engine work entirely. Default true. */
+  readonly engineInline?: boolean
+  /** Agency whose client consent is enforced (C3). */
+  readonly agencyId?: string
+  readonly archive?: RawEventArchive
+  readonly logger?: WebhookLogger
+  /** Defaults to `setImmediate`, so the ack never waits for the engine. */
+  readonly defer?: DeferFn
 }
 
-type WebhookRejection = { readonly status: 401 | 400; readonly error: string }
-type WebhookResult = {
-  readonly status: 202
-  readonly body: Record<string, unknown>
+const defaultDefer: DeferFn = (task) => {
+  setImmediate(() => {
+    void task()
+  })
+}
+
+const scheduleEngine = (options: WebhookAppOptions, logger: WebhookLogger, work: EngineWork): void => {
+  const { onEvent } = options
+  if (onEvent === undefined || options.engineInline === false) return
+  ;(options.defer ?? defaultDefer)(async () => {
+    try {
+      await onEvent(work.event, work.envelope)
+    } catch (error) {
+      logger.error("engine handler failed", { requestId: work.envelope.meta.request_id, ...errorMeta(error) })
+    }
+  })
 }
 
 /**
  * Builds the webhook receiver: `POST /webhooks/ring` (alias
  * `POST /ring/webhook`). Verifies the HMAC signature over the raw body
  * bytes, dedupes on `meta.request_id`, resolves the client from the Ring
- * account, persists the `DoorEvent`, then hands off to the engine.
+ * account, persists, acknowledges with 202, and only then hands off to the
+ * engine.
  */
 export const createApp = (options: WebhookAppOptions) => {
-  const { repository, signingKey } = options
-  const clock = options.clock ?? systemClock
-  const onEvent = options.onEvent
-
-  const receive = async (
-    rawBody: Uint8Array,
-    signature: string | undefined
-  ): Promise<WebhookResult | WebhookRejection> => {
-    if (!verifyWebhookSignature(rawBody, signature, signingKey)) {
-      return { status: 401, error: "invalid signature" }
-    }
-    const parsed = safeParseWebhook(rawBody)
-    if (!parsed.ok) {
-      return { status: 400, error: "invalid envelope" }
-    }
-    const envelope = parsed.envelope
-
-    const clientId = await repository.ringLinks.clientIdFor(
-      envelope.meta.account_id
-    )
-    if (clientId === null) {
-      return { status: 202, body: { ok: true, ignored: "unknown_account" } }
-    }
-
-    // Persist the event BEFORE claiming the receipt. If the put (or the
-    // claim itself) throws, nothing is recorded and Ring's retry is
-    // processed cleanly; claiming first would ack that retry as a
-    // `duplicate` and lose the event permanently. The put is idempotent on
-    // (clientId, timestampMs, requestId), so a retry after a mid-flight
-    // failure is absorbed safely.
-    const event = buildDoorEvent({ envelope, clientId, rawBody, clock })
-    if (event !== null) await repository.events.put(event)
-
-    const claimed = await repository.webhookReceipts.claim(
-      dedupeKey(envelope),
-      clock()
-    )
-    if (!claimed) return { status: 202, body: { ok: true, duplicate: true } }
-
-    // Engine failures must never fail the webhook: the event is durable at
-    // this point, and a 5xx would make Ring redeliver an event we already
-    // stored. Log and still 202.
-    if (onEvent !== undefined) {
-      try {
-        await onEvent(event, envelope)
-      } catch (error) {
-        console.error(
-          `[webhooks] engine handler failed for ${envelope.meta.request_id}`,
-          error
-        )
-      }
-    }
-    return event === null
-      ? { status: 202, body: { ok: true, ignored: "unmapped_event_type" } }
-      : { status: 202, body: { ok: true, requestId: event.requestId } }
+  const logger = options.logger ?? stderrLogger
+  const ctx: ReceiveContext = {
+    repository: options.repository,
+    signingKey: options.signingKey,
+    clock: options.clock ?? systemClock,
+    mode: options.mode ?? "live",
+    archive: options.archive ?? createMemoryArchive(),
+    logger,
+    ...(options.agencyId === undefined ? {} : { agencyId: options.agencyId }),
   }
-
   const app = new Hono()
 
   const registerWebhookRoute = (path: string) => {
     app.post(path, async (c) => {
-      const raw = new Uint8Array(await c.req.arrayBuffer())
-      const result = await receive(
-        raw,
-        c.req.header(WEBHOOK_SIGNATURE_HEADER)
-      )
-      if ("error" in result) {
-        return c.json({ error: result.error }, result.status)
-      }
-      return c.json(result.body, result.status)
+      const outcome = await receiveDelivery(ctx, {
+        rawBody: new Uint8Array(await c.req.arrayBuffer()),
+        signature: c.req.header(WEBHOOK_SIGNATURE_HEADER),
+        provenanceHeader: c.req.header(PROVENANCE_HEADER),
+      })
+      if ("error" in outcome) return c.json({ error: outcome.error }, outcome.status)
+      if (outcome.engineWork) scheduleEngine(options, logger, outcome.engineWork)
+      return c.json(outcome.body, outcome.status)
     })
   }
   registerWebhookRoute("/webhooks/ring")
@@ -128,3 +106,5 @@ export const createApp = (options: WebhookAppOptions) => {
 }
 
 export type WebhooksApp = ReturnType<typeof createApp>
+export { readReceiverConfig, type ReceiverConfig } from "./config"
+export { createFileArchive, createMemoryArchive, type RawEventArchive, type RawEventRecord } from "./archive"

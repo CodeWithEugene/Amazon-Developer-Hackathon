@@ -11,9 +11,12 @@ export type PrimitiveKind =
   | "ding"
   | "motion_human"
   | "motion_vehicle"
+  | "motion_animal"
+  | "motion_other"
   | "device_offline"
   | "device_online"
   | "integration_removed"
+  | "integration_added"
   | "subscription_deactivated"
 
 export interface ScenarioStep {
@@ -168,10 +171,17 @@ export type TwoWeeksVisitKind =
   | "unobservable"
   | "double"
 
+/**
+ * Why an unobservable visit cannot be trusted: the front door went offline,
+ * the device is TAKE-encrypted (reported by the device check, events still
+ * flow), or the family removed the integration for part of the window.
+ */
+export type TwoWeeksOutage = "device_offline" | "encrypted_device" | "integration_removed"
+
 export interface TwoWeeksVisit {
   /** Day index within the 14 day window (0 = first day). */
   readonly day: number
-  /** Local wall-clock scheduled start. */
+  /** Local wall-clock scheduled start in the replay time zone (America/New_York). */
   readonly hour: number
   readonly minute: number
   readonly kind: TwoWeeksVisitKind
@@ -179,6 +189,8 @@ export interface TwoWeeksVisit {
   readonly lateMin?: number
   /** Minutes into the visit the caregiver leaves (early departures). */
   readonly leaveAtMin?: number
+  /** Unobservable visits only: the cause of the blind spot. */
+  readonly outage?: TwoWeeksOutage
 }
 
 export interface TwoWeeksClient {
@@ -190,27 +202,47 @@ export interface TwoWeeksClient {
   readonly visits: readonly TwoWeeksVisit[]
 }
 
-/** Morning and afternoon visit slots per client, per day. */
-const DAILY_SLOTS: Readonly<Record<string, readonly [number, number]>> = {
-  Okoro: [9, 14],
-  Nakamura: [10, 15],
-  Alvarez: [8, 13],
+/** Local time zone of the demo agency; visit slots are wall-clock times here. */
+export const TWO_WEEKS_TIME_ZONE = "America/New_York"
+
+type Slot = readonly [hour: number, minute: number]
+
+/**
+ * First and second visit slot per client, per day, as New York wall time:
+ * Okoro 8:00 AM and 4:00 PM, Nakamura 12:00 PM and 6:00 PM, Alvarez 9:30 AM
+ * and 2:00 PM. Slots of one client are at least three hours apart so one
+ * visit's departure never falls inside the next visit's arrival window.
+ */
+const DAILY_SLOTS: Readonly<Record<string, readonly [Slot, Slot]>> = {
+  Okoro: [
+    [8, 0],
+    [16, 0],
+  ],
+  Nakamura: [
+    [12, 0],
+    [18, 0],
+  ],
+  Alvarez: [
+    [9, 30],
+    [14, 0],
+  ],
 }
 
 const visits = (
   client: string,
-  rows: readonly (readonly [number, TwoWeeksVisitKind, number?, number?])[]
+  rows: readonly (readonly [number, TwoWeeksVisitKind, number?, number?, TwoWeeksOutage?])[]
 ): readonly TwoWeeksVisit[] =>
-  rows.map(([dayIndex, kind, lateMin, leaveAtMin]) => {
-    const [morning, afternoon] = DAILY_SLOTS[client]!
-    const slot = dayIndex % 2 === 0 ? morning : afternoon
+  rows.map(([dayIndex, kind, lateMin, leaveAtMin, outage]) => {
+    const [first, second] = DAILY_SLOTS[client]!
+    const [hour, minute] = dayIndex % 2 === 0 ? first : second
     return {
       day: Math.floor(dayIndex / 2),
-      hour: slot,
-      minute: 0,
+      hour,
+      minute,
       kind,
       ...(lateMin === undefined ? {} : { lateMin }),
       ...(leaveAtMin === undefined ? {} : { leaveAtMin }),
+      ...(outage === undefined ? {} : { outage }),
     }
   })
 
@@ -221,7 +253,7 @@ const OKORO: readonly TwoWeeksVisit[] = visits("Okoro", [
   [10, "on_time"], [11, "late", 18], [12, "on_time"], [13, "on_time"], [14, "on_time"],
   [15, "on_time"], [16, "no_show"], [17, "on_time"], [18, "on_time"], [19, "on_time"],
   [20, "late", 25], [21, "on_time"], [22, "on_time"], [23, "on_time"], [24, "on_time"],
-  [25, "on_time"], [26, "unobservable"], [27, "early", undefined, 40],
+  [25, "on_time"], [26, "unobservable", undefined, undefined, "device_offline"], [27, "early", undefined, 40],
 ])
 
 // Nakamura: 28 visits = 20 on-time, 4 late, 2 no-show, 1 early, 1 unobservable
@@ -229,7 +261,7 @@ const NAKAMURA: readonly TwoWeeksVisit[] = visits("Nakamura", [
   [0, "on_time"], [1, "on_time"], [2, "late", 20], [3, "on_time"], [4, "on_time"],
   [5, "on_time"], [6, "on_time"], [7, "early", undefined, 30], [8, "on_time"], [9, "on_time"],
   [10, "late", 17], [11, "on_time"], [12, "on_time"], [13, "no_show"], [14, "on_time"],
-  [15, "on_time"], [16, "on_time"], [17, "on_time"], [18, "unobservable"], [19, "on_time"],
+  [15, "on_time"], [16, "on_time"], [17, "on_time"], [18, "unobservable", undefined, undefined, "encrypted_device"], [19, "on_time"],
   [20, "on_time"], [21, "late", 30], [22, "on_time"], [23, "on_time"], [24, "on_time"],
   [25, "late", 19], [26, "on_time"], [27, "no_show"],
 ])
@@ -240,7 +272,7 @@ const ALVAREZ: readonly TwoWeeksVisit[] = visits("Alvarez", [
   [5, "on_time"], [6, "late", 24], [7, "on_time"], [8, "on_time"], [9, "on_time"],
   [10, "on_time"], [11, "on_time"], [12, "no_show"], [13, "on_time"], [14, "on_time"],
   [15, "early", undefined, 28], [16, "on_time"], [17, "on_time"], [18, "on_time"],
-  [19, "on_time"], [20, "unobservable"], [21, "on_time"], [22, "on_time"], [23, "late", 21],
+  [19, "on_time"], [20, "unobservable", undefined, undefined, "integration_removed"], [21, "on_time"], [22, "on_time"], [23, "late", 21],
   [24, "on_time"], [25, "on_time"], [26, "on_time"], [27, "early", undefined, 33],
 ])
 
@@ -271,6 +303,20 @@ export const TWO_WEEKS_CLIENTS: readonly TwoWeeksClient[] = [
   },
 ]
 
-/** Milliseconds per day; days are UTC days in the replay. */
+/**
+ * Intended EVV clock-in behavior per client, by ordinal among that client's
+ * on-time visits: 6 contradicted and 8 missing clock-ins across the three
+ * clients (docs/build.md Section 15). Every other visit the caregiver
+ * attended gets a normal clock-in with independent jitter; no-shows get none.
+ */
+export const TWO_WEEKS_EVV_EXCEPTIONS: Readonly<
+  Record<string, { readonly contradicted: readonly number[]; readonly missing: readonly number[] }>
+> = {
+  cli_okoro: { contradicted: [3, 14], missing: [5, 11, 18] },
+  cli_nakamura: { contradicted: [2, 13], missing: [6, 12, 17] },
+  cli_alvarez: { contradicted: [4, 15], missing: [7, 16] },
+}
+
+/** Milliseconds per day; day N is the UTC calendar date of `startAt + N days`. */
 export const TWO_WEEKS_DAY_MS = 24 * 60 * 60 * 1000
 export const TWO_WEEKS_DAYS = 14

@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  deviceListDocumentSchema,
   errorDocumentSchema,
+  historyDocumentSchema,
+  isKnownValue,
+  KNOWN_HISTORY_EVENT_TYPES,
   tokenResponseSchema,
   webhookEnvelopeSchema,
   webhookEventTypeSchema,
@@ -70,5 +74,31 @@ describe("tokenResponseSchema", () => {
 describe("errorDocumentSchema", () => {
   it("requires at least one error", () => {
     expect(errorDocumentSchema.safeParse({ errors: [] }).success).toBe(false)
+  })
+})
+
+describe("open enums", () => {
+  it("keeps a history page with an unknown event type", () => {
+    const page = historyDocumentSchema.parse({
+      data: [
+        { id: "h1", type: "history_events", attributes: { event_type: "ding", timestamp: 1 } },
+        { id: "h2", type: "history_events", attributes: { event_type: "package.delivered", timestamp: 2 } },
+      ],
+    })
+    expect(page.data.map((event) => event.attributes.event_type)).toEqual(["ding", "package.delivered"])
+    expect(isKnownValue(KNOWN_HISTORY_EVENT_TYPES, "package.delivered")).toBe(false)
+    expect(isKnownValue(KNOWN_HISTORY_EVENT_TYPES, "ding")).toBe(true)
+  })
+
+  it("keeps devices with unknown kinds, encryption states, and included types", () => {
+    const doc = deviceListDocumentSchema.parse({
+      data: [{ id: "d1", type: "devices", attributes: { name: "Front Door", kind: "intercom" } }],
+      included: [
+        { id: "d1", type: "device_status", attributes: { online: true, encryption_state: "future_mode" } },
+        { id: "d1", type: "device_components", attributes: { count: 2 } },
+      ],
+    })
+    expect(doc.data[0]?.attributes.kind).toBe("intercom")
+    expect(doc.included).toHaveLength(2)
   })
 })

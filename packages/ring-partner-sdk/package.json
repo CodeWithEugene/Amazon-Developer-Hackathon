@@ -1,13 +1,14 @@
 {
   "name": "@visitproof/ring-partner-sdk",
   "version": "0.1.0",
-  "description": "TypeScript SDK for the Ring Partner API: client, Zod schemas, webhook signature verification, account link nonce, WHEP helper, snapshot handling, emulator, and fixtures.",
+  "description": "TypeScript SDK for the Ring Partner API: client, Zod schemas, webhook verification and lenient parsing, account link nonce, WHEP live view helper, snapshot handling, webhook emulator, and fixture redaction.",
   "license": "Apache-2.0",
   "type": "module",
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
-    "./types": "./src/types.ts"
+    "./types": "./src/types.ts",
+    "./whep": "./src/whep.ts"
   },
   "publishConfig": {
     "access": "public",
@@ -15,6 +16,10 @@
       ".": {
         "types": "./dist/index.d.ts",
         "import": "./dist/index.js"
+      },
+      "./whep": {
+        "types": "./dist/whep.d.ts",
+        "import": "./dist/whep.js"
       }
     }
   },
@@ -30,11 +35,10 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "ring:smoke": "tsx ../../scripts/ring-smoke.ts"
   },
   "dependencies": {
-    "@hono/node-server": "2.1.1",
-    "hono": "4.13.9",
     "zod": "4.6.5"
   },
   "devDependencies": {
@@ -43,6 +47,7 @@
     "@vitest/coverage-v8": "5.0.2",
     "eslint": "9.39.5",
     "tsup": "8.5.1",
+    "tsx": "4.23.15",
     "typescript": "5.9.3",
     "vitest": "5.0.2"
   },

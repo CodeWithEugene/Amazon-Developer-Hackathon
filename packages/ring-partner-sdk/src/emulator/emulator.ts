@@ -1,24 +1,48 @@
 import { newRequestId } from "../crypto"
 import { signWebhookBody } from "../webhook"
-import { WEBHOOK_VERSION, type WebhookEnvelope, type WebhookEvent } from "../types"
+import {
+  EMULATED_PROVENANCE,
+  PROVENANCE_HEADER,
+  WEBHOOK_VERSION,
+  type WebhookEnvelope,
+  type WebhookEvent,
+} from "../types"
+import { eventId, KIND_TO_EVENT } from "./payloads"
 import {
   SCENARIOS,
   SCENARIO_ALIASES,
   TWO_WEEKS_CLIENTS,
-  TWO_WEEKS_DAY_MS,
+  TWO_WEEKS_TIME_ZONE,
   type PrimitiveKind,
   type ScenarioName,
   type TwoWeeksClient,
-  type TwoWeeksVisit,
 } from "./scenarios"
+import { planTwoWeeks, type TwoWeeksPlanOptions, type TwoWeeksVisitPlan } from "./two-weeks"
+
+export {
+  emulatedDeviceCheck,
+  ENCRYPTION_REPORTED_MARGIN_MS,
+  EXPECTED_BY_VISIT,
+  OUTAGE_RESTORED_AFTER_END_MS,
+  planTwoWeeks,
+  TWO_WEEKS_VISIT_DURATION_MS,
+  UNOBSERVABLE_OFFLINE_AFTER_MS,
+  type EmulatedDeviceCheck,
+  type EvvBehavior,
+  type EvvPlan,
+  type PlannedEvent,
+  type TwoWeeksPlanOptions,
+  type TwoWeeksVisitPlan,
+} from "./two-weeks"
 
 /**
  * `RingEmulator` generates signed v1.1 webhook payloads (docs/build.md
  * Section 5.1, friction log entry 1: the Playground cannot drive webhooks, so
  * the event path is tested through this emulator). Every delivery is a valid
  * envelope signed with HMAC-SHA256 over the exact serialized bytes, carries a
- * unique `request_id` (idempotency/dedupe key), and a strictly increasing
- * timestamp, so replays cannot collide.
+ * unique `request_id` (idempotency/dedupe key), a strictly increasing
+ * timestamp, and the `x-visitproof-provenance: emulated` header so a demo
+ * receiver labels it "Emulated event".
  */
 
 export interface WebhookDelivery {
@@ -28,7 +52,7 @@ export interface WebhookDelivery {
   /** The `x-signature` header value (`sha256=<hex>`). */
   readonly header: string
   readonly headers: Readonly<Record<string, string>>
-  /** ISO time of the event; useful for ordering the replay. */
+  /** Epoch ms of the event; useful for ordering the replay. */
   readonly at: number
 }
 
@@ -44,20 +68,12 @@ export interface ScenarioOptions extends EmitOptions {
   readonly visitStartAt?: number
 }
 
-export interface TwoWeeksVisitPlan extends TwoWeeksVisit {
-  readonly clientId: string
-  readonly deviceId: string
-  readonly accountId: string
-  readonly caregiver: string
-  readonly scheduledStartAt: number
-  readonly scheduledEndAt: number
-  readonly expected: string
-}
-
 export interface TwoWeeksReplay {
   readonly startAt: number
   readonly endAt: number
+  readonly timeZone: string
   readonly clients: readonly TwoWeeksClient[]
+  /** Ground truth per visit: schedule, intended outcome, door events, EVV plan. */
   readonly visits: readonly TwoWeeksVisitPlan[]
   /** Deliveries sorted oldest first; ready to POST in order. */
   readonly deliveries: readonly WebhookDelivery[]
@@ -69,89 +85,11 @@ export interface RingEmulatorOptions {
   readonly now?: () => number
   readonly requestId?: () => string
   readonly baseUrl?: string
+  /** Device local time zone for `timestamp_readable` (default America/New_York). */
+  readonly timeZone?: string
 }
 
 const DEFAULT_ACCOUNT_ID = "ava1.ring.account.emulated"
-const DEFAULT_VISIT_DURATION_MS = 2 * 60 * 60 * 1000
-
-const KIND_TO_EVENT: Readonly<
-  Record<PrimitiveKind, (deviceId: string, at: number) => Omit<WebhookEvent, "id">>
-> = {
-  ding: (source, at) => ({
-    type: "button_press",
-    relationships: { devices: { links: { self: `/v1/devices/${source}` } } },
-    attributes: {
-      source,
-      source_type: "devices",
-      timestamp: at,
-      timestamp_readable: new Date(at).toISOString(),
-    },
-  }),
-  motion_human: (source, at) => ({
-    type: "motion_detected",
-    relationships: { devices: { links: { self: `/v1/devices/${source}` } } },
-    attributes: {
-      source,
-      source_type: "devices",
-      timestamp: at,
-      timestamp_readable: new Date(at).toISOString(),
-      sub_type: "human",
-      component_ids: ["0"],
-    },
-  }),
-  motion_vehicle: (source, at) => ({
-    type: "motion_detected",
-    relationships: { devices: { links: { self: `/v1/devices/${source}` } } },
-    attributes: {
-      source,
-      source_type: "devices",
-      timestamp: at,
-      timestamp_readable: new Date(at).toISOString(),
-      sub_type: "vehicle",
-      component_ids: ["0"],
-    },
-  }),
-  device_offline: (source, at) => ({
-    type: "device_offline",
-    relationships: { devices: { links: { self: `/v1/devices/${source}` } } },
-    attributes: {
-      source,
-      source_type: "devices",
-      timestamp: at,
-      timestamp_readable: new Date(at).toISOString(),
-    },
-  }),
-  device_online: (source, at) => ({
-    type: "device_online",
-    relationships: { devices: { links: { self: `/v1/devices/${source}` } } },
-    attributes: {
-      source,
-      source_type: "devices",
-      timestamp: at,
-      timestamp_readable: new Date(at).toISOString(),
-    },
-  }),
-  integration_removed: (source, at) => ({
-    type: "app_integration_removed",
-    relationships: undefined,
-    attributes: {
-      source,
-      source_type: "accounts",
-      timestamp: at,
-      timestamp_readable: new Date(at).toISOString(),
-    },
-  }),
-  subscription_deactivated: (source, at) => ({
-    type: "subscription_deactivated",
-    relationships: undefined,
-    attributes: {
-      source,
-      source_type: "subscriptions",
-      timestamp: at,
-      timestamp_readable: new Date(at).toISOString(),
-    },
-  }),
-}
 
 const resolveScenario = (name: string): ScenarioName => {
   const canonical = (SCENARIOS as Record<string, unknown>)[name]
@@ -163,24 +101,10 @@ const resolveScenario = (name: string): ScenarioName => {
   return canonical
 }
 
-/**
- * The engine's actual outcome per scripted visit kind. Note `double`: the
- * vehicle motion is not an arrival signal, so the ding forms a single
- * cluster, the arrival is chosen deterministically (never ambiguous), and
- * the trailing human motion records the departure — a completed visit.
- */
-const EXPECTED_BY_VISIT: Readonly<Record<TwoWeeksVisit["kind"], string>> = {
-  on_time: "arrived_on_time",
-  late: "arrived_late",
-  no_show: "no_show",
-  early: "early_departure",
-  unobservable: "unobservable",
-  double: "completed",
-}
-
 export class RingEmulator {
   readonly signingKey: string
   readonly baseUrl: string
+  readonly timeZone: string
   private readonly now: () => number
   private readonly requestId: () => string
   /** High-water mark so two deliveries never share a timestamp. */
@@ -190,6 +114,7 @@ export class RingEmulator {
     if (!options.signingKey) throw new RangeError("RingEmulator requires a signingKey")
     this.signingKey = options.signingKey
     this.baseUrl = options.baseUrl ?? "https://emu.ring.local"
+    this.timeZone = options.timeZone ?? TWO_WEEKS_TIME_ZONE
     this.now = options.now ?? Date.now
     this.requestId = options.requestId ?? newRequestId
   }
@@ -205,7 +130,7 @@ export class RingEmulator {
   /** Builds, signs, and returns one webhook delivery. */
   emit(kind: PrimitiveKind, options: EmitOptions): WebhookDelivery {
     const at = this.nextAt(options.at)
-    const partial = KIND_TO_EVENT[kind](options.deviceId, at)
+    const partial = KIND_TO_EVENT[kind](options.deviceId, at, this.timeZone)
     const envelope: WebhookEnvelope = {
       meta: {
         version: WEBHOOK_VERSION,
@@ -215,7 +140,7 @@ export class RingEmulator {
       },
       data: {
         ...partial,
-        id: `${options.deviceId}_${partial.type}_${at}`,
+        id: eventId(options.deviceId, partial.type, at),
         ...(partial.relationships === undefined ? {} : { relationships: partial.relationships }),
       } as WebhookEvent,
     }
@@ -225,7 +150,11 @@ export class RingEmulator {
       envelope,
       rawBody,
       header,
-      headers: { "x-signature": header, "content-type": "application/json" },
+      headers: {
+        "x-signature": header,
+        "content-type": "application/json",
+        [PROVENANCE_HEADER]: EMULATED_PROVENANCE,
+      },
       at,
     }
   }
@@ -271,86 +200,24 @@ export class RingEmulator {
   /**
    * The scripted two-week replay for the three demo clients: 84 visits, 62
    * on-time, 9 late, 4 no-show, 5 early departures, 3 unobservable, 1 double
-   * visitor. `startAt` is 00:00 UTC of day 0; days are UTC days.
+   * visitor, at realistic New York local times with seeded jitter.
+   * `startAt` is 00:00 UTC of day 0's calendar date.
    */
-  twoWeeks(options: { readonly startAt: number }): TwoWeeksReplay {
-    if (!Number.isInteger(options.startAt) || options.startAt <= 0) {
-      throw new RangeError("twoWeeks: startAt must be a positive epoch ms integer")
-    }
-    const plans: TwoWeeksVisitPlan[] = []
-    // Events are collected per visit, then emitted in global time order: the
-    // per-client loop would otherwise feed `nextAt` non-monotonic anchors and
-    // the high-water clamp would drag later clients' events out of their
-    // visit windows.
-    const pending: {
-      readonly kind: PrimitiveKind
-      readonly at: number
-      readonly deviceId: string
-      readonly accountId: string
-    }[] = []
-    for (const client of TWO_WEEKS_CLIENTS) {
-      for (const [index, visit] of client.visits.entries()) {
-        const scheduledStartAt =
-          options.startAt + visit.day * TWO_WEEKS_DAY_MS +
-          (visit.hour * 60 + visit.minute) * 60_000
-        const caregiver = client.caregivers[index % client.caregivers.length]!
-        plans.push({
-          ...visit,
-          clientId: client.clientId,
-          deviceId: client.deviceId,
-          accountId: client.accountId,
-          caregiver,
-          scheduledStartAt,
-          scheduledEndAt: scheduledStartAt + DEFAULT_VISIT_DURATION_MS,
-          expected: EXPECTED_BY_VISIT[visit.kind],
-        })
-        const late = (visit.lateMin ?? 20) * 60_000
-        const leaveAt = (visit.leaveAtMin ?? 30) * 60_000
-        const end = scheduledStartAt + DEFAULT_VISIT_DURATION_MS
-        const push = (kind: PrimitiveKind, at: number): void => {
-          pending.push({ kind, at, deviceId: client.deviceId, accountId: client.accountId })
-        }
-        // Front-door realism: the doorbell press is the arrival; the next
-        // front-door human motion is the caregiver leaving. A motion right
-        // after entry would be pinned as the departure by the engine's
-        // quiet-period rule once the door goes quiet mid-visit.
-        switch (visit.kind) {
-          case "on_time":
-          case "double":
-            push("ding", scheduledStartAt)
-            if (visit.kind === "double") push("motion_vehicle", scheduledStartAt + 15_000)
-            push("motion_human", end + 5_000)
-            break
-          case "late":
-            push("ding", scheduledStartAt + late)
-            push("motion_human", end + late)
-            break
-          case "no_show":
-            break
-          case "early":
-            push("ding", scheduledStartAt)
-            push("motion_human", scheduledStartAt + leaveAt)
-            break
-          case "unobservable":
-            push("ding", scheduledStartAt)
-            push("device_offline", scheduledStartAt + 30 * 60_000)
-            break
-        }
-      }
-    }
-    pending.sort((a, b) => a.at - b.at)
+  twoWeeks(options: TwoWeeksPlanOptions): TwoWeeksReplay {
+    const timeZone = options.timeZone ?? TWO_WEEKS_TIME_ZONE
+    const visits = planTwoWeeks({ ...options, timeZone })
+    // Events are emitted in global time order: per-client order would feed
+    // `nextAt` non-monotonic anchors and drag later events out of window.
+    const pending = visits
+      .flatMap((plan) =>
+        plan.events.map((event) => ({ ...event, deviceId: plan.deviceId, accountId: plan.accountId }))
+      )
+      .sort((a, b) => a.at - b.at)
     const deliveries = pending.map((step) =>
-      this.emit(step.kind, {
-        deviceId: step.deviceId,
-        accountId: step.accountId,
-        at: step.at,
-      })
+      this.emit(step.kind, { deviceId: step.deviceId, accountId: step.accountId, at: step.at })
     )
-    const endAt = plans.reduce(
-      (max, plan) => Math.max(max, plan.scheduledEndAt),
-      options.startAt
-    )
-    return { startAt: options.startAt, endAt, clients: TWO_WEEKS_CLIENTS, visits: plans, deliveries }
+    const endAt = visits.reduce((max, plan) => Math.max(max, plan.scheduledEndAt), options.startAt)
+    return { startAt: options.startAt, endAt, timeZone, clients: TWO_WEEKS_CLIENTS, visits, deliveries }
   }
 
   /** Resets the timestamp high-water mark (between independent replays). */

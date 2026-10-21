@@ -6,8 +6,10 @@ import {
   computeAccountLinkNonce,
   findMatchingAccount,
   isFresh,
+  isUnclaimedBucketId,
   matchNonce,
   nonceMessage,
+  unclaimedBucketId,
 } from "./nonce"
 
 const KEY = "hmac-signing-key"
@@ -69,5 +71,13 @@ describe("matchNonce and findMatchingAccount", () => {
     expect(findMatchingAccount(KEY, nonce, TIME, accounts)).toBe(ACCOUNT)
     expect(findMatchingAccount(KEY, nonce, TIME + 1, accounts)).toBeUndefined()
     expect(findMatchingAccount(KEY, nonce, TIME, [])).toBeUndefined()
+  })
+})
+
+describe("unclaimed bucket", () => {
+  it("keys events for unlinked accounts by account id", () => {
+    expect(unclaimedBucketId("ava1.ring.account.X")).toBe("unclaimed#ring-account#ava1.ring.account.X")
+    expect(isUnclaimedBucketId(unclaimedBucketId("a"))).toBe(true)
+    expect(isUnclaimedBucketId("cli_okoro")).toBe(false)
   })
 })

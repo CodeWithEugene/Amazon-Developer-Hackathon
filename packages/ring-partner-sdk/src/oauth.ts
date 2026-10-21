@@ -12,7 +12,8 @@ import { z } from "zod"
 
 export interface TokenStore {
   get(): TokenResponse | undefined
-  set(tokens: TokenResponse): void
+  /** `obtainedAt` is the epoch ms the tokens were issued; persist it with them. */
+  set(tokens: TokenResponse, obtainedAt: number): void | Promise<void>
 }
 
 export interface ExchangeAuthorizationCodeOptions {
@@ -23,6 +24,8 @@ export interface ExchangeAuthorizationCodeOptions {
   readonly redirectUri?: string
   readonly fetch?: FetchLike
   readonly now?: () => number
+  /** Abort the exchange (for example at the 60 s budget). */
+  readonly signal?: AbortSignal
 }
 
 export interface RefreshAccessTokenOptions {
@@ -32,6 +35,8 @@ export interface RefreshAccessTokenOptions {
   readonly refreshToken: string
   readonly fetch?: FetchLike
   readonly now?: () => number
+  /** Abort the exchange (for example at the 60 s budget). */
+  readonly signal?: AbortSignal
 }
 
 /** Refresh responses may omit the refresh token when it was not rotated. */
@@ -42,9 +47,14 @@ const refreshResponseSchema = tokenResponseSchema.extend({
 const postForm = async (
   url: string,
   form: Record<string, string>,
-  options: { readonly fetch?: FetchLike; readonly now?: () => number } = {}
+  options: {
+    readonly fetch?: FetchLike
+    readonly now?: () => number
+    readonly signal?: AbortSignal
+  } = {}
 ): Promise<unknown> => {
   const body = new URLSearchParams(form)
+  // Never retried: a code is single use and a refresh may rotate the token.
   const response = await requestWithRetry(
     url,
     {
@@ -54,8 +64,9 @@ const postForm = async (
         accept: "application/json",
       },
       body,
+      ...(options.signal ? { signal: options.signal } : {}),
     },
-    { fetch: resolveFetch(options.fetch), now: options.now }
+    { fetch: resolveFetch(options.fetch), now: options.now, maxRetries: 0 }
   )
   if (!response.ok) await throwForResponse(response, "POST", url, options.now?.() ?? Date.now())
   return response.json()
@@ -74,7 +85,7 @@ export const exchangeAuthorizationCode = async (
   if (options.redirectUri) form.redirect_uri = options.redirectUri
   const url = options.tokenUrl ?? DEFAULT_RING_OAUTH_TOKEN_URL
   return tokenResponseSchema.parse(
-    await postForm(url, form, { fetch: options.fetch, now: options.now })
+    await postForm(url, form, { fetch: options.fetch, now: options.now, signal: options.signal })
   )
 }
 
@@ -126,6 +137,8 @@ export const createTokenManager = (
     readonly clientSecret: string
     readonly tokenUrl?: string
     readonly tokens: TokenResponse
+    /** Epoch ms the tokens were issued; defaults to now (fresh tokens). */
+    readonly obtainedAt?: number
     readonly store?: TokenStore
     readonly fetch?: FetchLike
     readonly now?: () => number
@@ -134,7 +147,7 @@ export const createTokenManager = (
 ): TokenManager => {
   const now = options.now ?? Date.now
   let current = options.tokens
-  let issuedAt = now()
+  let issuedAt = options.obtainedAt ?? now()
   let inflight: Promise<void> | undefined
 
   const doRefresh = async (): Promise<void> => {
@@ -146,9 +159,12 @@ export const createTokenManager = (
       fetch: options.fetch,
       now: options.now,
     })
+    const obtainedAt = now()
+    // Persist before handing the new access token out: a lost rotated
+    // refresh token forces the family to re-link.
+    await options.store?.set(fresh, obtainedAt)
     current = fresh
-    issuedAt = now()
-    options.store?.set(fresh)
+    issuedAt = obtainedAt
   }
 
   return {
