@@ -1,7 +1,10 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "globalDependencies": [".env.example", "packages/config/tsconfig.base.json"],
+  "globalDependencies": [
+    ".env.example",
+    "packages/config/tsconfig.base.json"
+  ],
   "globalEnv": [
     "NODE_ENV",
     "CI",
@@ -31,28 +34,66 @@
     "TYPESAFE_API_KEY",
     "PORT",
     "CDK_DEFAULT_ACCOUNT",
-    "CDK_DEFAULT_REGION"
+    "CDK_DEFAULT_REGION",
+    "WEBHOOK_PORT",
+    "MCP_HOST",
+    "MCP_PORT",
+    "MCP_URL",
+    "MCP_ALLOW_ANONYMOUS",
+    "MCP_ALLOWED_HOSTS",
+    "MCP_ALLOWED_ORIGINS",
+    "MCP_STATELESS",
+    "VISITPROOF_TIME_ZONE",
+    "VISITPROOF_AGENCY_ID",
+    "VISITPROOF_DEMO_AGENCY_ID",
+    "VISITPROOF_DEMO_STORE_PATH",
+    "VISITPROOF_STORE",
+    "VISITPROOF_ENGINE_INLINE",
+    "VISITPROOF_LEDGER_SECRET",
+    "VISITPROOF_SESSION_SECRET",
+    "VISITPROOF_TOKEN_KEY"
   ],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "cdk.out/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        "cdk.out/**"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
     "test": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", "!README.md"],
-      "outputs": ["coverage/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!README.md"
+      ],
+      "outputs": [
+        "coverage/**"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"]
+      "dependsOn": [
+        "^typecheck"
+      ]
     }
   }
 }

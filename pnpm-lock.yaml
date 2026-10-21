@@ -23,6 +23,9 @@ importers:
       '@visitproof/domain':
         specifier: workspace:*
         version: link:packages/domain
+      '@visitproof/engine':
+        specifier: workspace:*
+        version: link:apps/engine
       '@visitproof/ring-partner-sdk':
         specifier: workspace:*
         version: link:packages/ring-partner-sdk
@@ -50,6 +53,9 @@ importers:
       vitest:
         specifier: 5.0.2
         version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.3)(@vitest/coverage-v8@5.0.2)(vite@8.3.1(@types/node@26.6.3)(esbuild@0.27.7)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+      zod:
+        specifier: 4.6.5
+        version: 4.6.5
 
   apps/console:
     dependencies:
@@ -71,6 +77,9 @@ importers:
       '@visitproof/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@visitproof/copilot':
+        specifier: workspace:*
+        version: link:../copilot
       '@visitproof/db':
         specifier: workspace:*
         version: link:../../packages/db
@@ -135,6 +144,9 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
+      vitest:
+        specifier: 5.0.2
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.3)(@vitest/coverage-v8@5.0.2)(vite@8.3.1(@types/node@26.6.3)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
 
   apps/copilot:
     dependencies:
@@ -160,6 +172,9 @@ importers:
       '@types/node':
         specifier: 26.6.3
         version: 26.6.3
+      '@visitproof/mcp':
+        specifier: workspace:*
+        version: link:../mcp
       eslint:
         specifier: 9.39.5
         version: 9.39.5(jiti@2.7.0)(supports-color@7.2.0)
@@ -176,6 +191,9 @@ importers:
   apps/engine:
     dependencies:
       '@aws-sdk/client-bedrock-runtime':
+        specifier: 3.1141.0
+        version: 3.1141.0
+      '@aws-sdk/client-kms':
         specifier: 3.1141.0
         version: 3.1141.0
       '@aws-sdk/client-rekognition':
@@ -205,6 +223,9 @@ importers:
       '@visitproof/domain':
         specifier: workspace:*
         version: link:../../packages/domain
+      '@visitproof/ring-partner-sdk':
+        specifier: workspace:*
+        version: link:../../packages/ring-partner-sdk
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -337,12 +358,18 @@ importers:
 
   infra:
     dependencies:
+      '@visitproof/db':
+        specifier: workspace:*
+        version: link:../packages/db
       aws-cdk-lib:
         specifier: 2.271.0
         version: 2.271.0(constructs@10.8.1)
       constructs:
         specifier: 10.8.1
         version: 10.8.1
+      zod:
+        specifier: 4.6.5
+        version: 4.6.5
     devDependencies:
       '@types/node':
         specifier: 26.6.3
@@ -353,6 +380,9 @@ importers:
       aws-cdk:
         specifier: 2.1143.0
         version: 2.1143.0
+      esbuild:
+        specifier: 0.28.2
+        version: 0.28.2
       eslint:
         specifier: 9.39.5
         version: 9.39.5(jiti@2.7.0)(supports-color@7.2.0)
@@ -454,6 +484,9 @@ importers:
       tsup:
         specifier: 8.5.1
         version: 8.5.1(jiti@2.7.0)(postcss@8.5.28)(supports-color@7.2.0)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.1)
+      tsx:
+        specifier: 4.23.15
+        version: 4.23.15
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -463,9 +496,6 @@ importers:
 
   packages/domain:
     dependencies:
-      '@typesafe-ai/sdk':
-        specifier: 0.6.0
-        version: 0.6.0
       zod:
         specifier: 4.6.5
         version: 4.6.5
@@ -476,6 +506,9 @@ importers:
       '@visitproof/config':
         specifier: workspace:*
         version: link:../config
+      '@visitproof/ring-partner-sdk':
+        specifier: workspace:*
+        version: link:../ring-partner-sdk
       '@vitest/coverage-v8':
         specifier: 5.0.2
         version: 5.0.2(vitest@5.0.2)
@@ -494,12 +527,6 @@ importers:
 
   packages/ring-partner-sdk:
     dependencies:
-      '@hono/node-server':
-        specifier: 2.1.1
-        version: 2.1.1(hono@4.13.9)
-      hono:
-        specifier: 4.13.9
-        version: 4.13.9
       zod:
         specifier: 4.6.5
         version: 4.6.5
@@ -519,6 +546,9 @@ importers:
       tsup:
         specifier: 8.5.1
         version: 8.5.1(jiti@2.7.0)(postcss@8.5.28)(supports-color@7.2.0)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.1)
+      tsx:
+        specifier: 4.23.15
+        version: 4.23.15
       typescript:
         specifier: 5.9.3
         version: 5.9.3

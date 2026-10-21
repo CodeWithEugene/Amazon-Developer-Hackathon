@@ -5,6 +5,32 @@ const optionalString = z.string().trim().optional()
 const emptyToUndefined = (value: unknown) =>
   typeof value === "string" && value.trim() === "" ? undefined : value
 
+const port = (fallback: number) =>
+  z.preprocess(
+    emptyToUndefined,
+    z.coerce.number().int().min(0).max(65_535).default(fallback)
+  )
+
+/** "true" by default; only the literal "false" turns it off. */
+const flag = (fallback: boolean) =>
+  z.preprocess(
+    emptyToUndefined,
+    z
+      .string()
+      .trim()
+      .toLowerCase()
+      .optional()
+      .transform((value) => (value === undefined ? fallback : value !== "false"))
+  )
+
+/** A 32-byte key, base64 encoded (AES-256-GCM for Ring tokens at rest). */
+const tokenKey = z
+  .string()
+  .trim()
+  .refine((value) => Buffer.from(value, "base64").length === 32, {
+    message: "must be 32 bytes, base64 encoded",
+  })
+
 /**
  * Every variable from `.env.example`. Demo mode is the default and needs no
  * secrets; live subsystems validate their own required values on demand so
@@ -62,8 +88,35 @@ export const envSchema = z.object({
   MCP_AUTH_ISSUER: optionalString,
   MCP_DEMO_TOKENS: z.preprocess(
     emptyToUndefined,
-    z.string().default("family-demo-token,agency-demo-token")
+    z
+      .string()
+      .default("family-demo-token=family:cli_okoro,agency-demo-token=agency")
   ),
+  MCP_HOST: z.preprocess(emptyToUndefined, z.string().default("127.0.0.1")),
+  MCP_PORT: port(8000),
+  MCP_URL: z.preprocess(
+    emptyToUndefined,
+    z.url().default("http://localhost:8000/mcp")
+  ),
+  MCP_ALLOW_ANONYMOUS: optionalString,
+  MCP_ALLOWED_HOSTS: optionalString,
+  MCP_ALLOWED_ORIGINS: optionalString,
+  MCP_STATELESS: optionalString,
+
+  PORT: port(3000),
+  WEBHOOK_PORT: port(3101),
+  VISITPROOF_TIME_ZONE: z.preprocess(
+    emptyToUndefined,
+    z.string().default("America/New_York")
+  ),
+  VISITPROOF_AGENCY_ID: z.preprocess(emptyToUndefined, z.string().default("a1")),
+  VISITPROOF_DEMO_AGENCY_ID: optionalString,
+  VISITPROOF_DEMO_STORE_PATH: optionalString,
+  VISITPROOF_STORE: optionalString,
+  VISITPROOF_ENGINE_INLINE: flag(true),
+  VISITPROOF_LEDGER_SECRET: optionalString,
+  VISITPROOF_SESSION_SECRET: optionalString,
+  VISITPROOF_TOKEN_KEY: z.preprocess(emptyToUndefined, tokenKey.optional()),
 })
 
 export type Env = z.infer<typeof envSchema>

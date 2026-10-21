@@ -18,7 +18,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "demo": "tsx scripts/demo.ts",
-    "mcp:conformance": "pnpm --filter @visitproof/mcp test:conformance"
+    "ring:smoke": "tsx scripts/ring-smoke.ts",
+    "mcp:conformance": "pnpm --filter @visitproof/mcp test:conformance",
+    "typecheck:scripts": "tsc -p scripts/tsconfig.json",
+    "test:scripts": "vitest run --config scripts/vitest.config.mts"
   },
   "prettier": "@visitproof/config/prettier",
   "devDependencies": {
@@ -27,6 +30,7 @@
     "@visitproof/config": "workspace:*",
     "@visitproof/db": "workspace:*",
     "@visitproof/domain": "workspace:*",
+    "@visitproof/engine": "workspace:*",
     "@visitproof/ring-partner-sdk": "workspace:*",
     "eslint": "9.39.5",
     "prettier": "3.9.9",
@@ -35,6 +39,7 @@
     "tsx": "4.23.15",
     "turbo": "2.11.4",
     "typescript": "5.9.3",
-    "vitest": "5.0.2"
+    "vitest": "5.0.2",
+    "zod": "4.6.5"
   }
 }
