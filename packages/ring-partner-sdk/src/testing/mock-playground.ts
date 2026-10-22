@@ -142,7 +142,11 @@ const toRequest = async (req: IncomingMessage, origin: string): Promise<Request>
 }
 
 const writeResponse = async (res: ServerResponse, response: Response): Promise<void> => {
-  res.writeHead(response.status, Object.fromEntries(response.headers.entries()))
+  const headers: Record<string, string> = {}
+  response.headers.forEach((value, key) => {
+    headers[key] = value
+  })
+  res.writeHead(response.status, headers)
   res.end(Buffer.from(await response.arrayBuffer()))
 }
 
