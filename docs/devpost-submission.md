@@ -22,6 +22,8 @@ Proof of presence for home care, from the Ring doorbell already at the door: rea
 
 **TO FILL:** public YouTube or Vimeo URL (under 3 minutes).
 
+Thumbnail image: `docs/assets/thumbnail.png` (a JPEG copy is at `docs/assets/thumbnail.jpg`).
+
 ## Try It Out Links
 
 - Source code: https://github.com/CodeWithEugene/Amazon-Developer-Hackathon (Apache-2.0)
@@ -64,7 +66,9 @@ Principles we held to: corroboration, not surveillance (it says a person arrived
 | Captured Playground responses as fixtures, and a mock Ring Playground that serves them for offline tests | `packages/ring-partner-sdk/src/fixtures/playground/`, `packages/ring-partner-sdk/src/testing/mock-playground.ts` |
 | Emulator: HMAC-signed v1.1 deliveries and a two-week ground-truth plan, because the Playground cannot send webhooks | `packages/ring-partner-sdk/src/emulator/` |
 
-**Live Playground run (22 October 2026).** Against the Playground sandbox doorbell, `users/me`, `devices`, status, capabilities, configurations, location, and history all returned 200 (history with zero events, so no event types were seen), subscriptions returned 422 for the Playground user, and a WHEP session negotiated H264 and Opus with ICE and DTLS connected but no media from the sandbox. Our first schemas rejected all four device sub-resources (real type names and many `null` fields), and our history path was wrong; both are fixed and tested against the captured responses, on which Device Check reads 4 of 4 required checks passing.
+**Live Playground run (22 October 2026).** Against the Playground sandbox doorbell, `users/me`, `devices`, status, capabilities, configurations, location, and history all returned 200 (history with zero events, so no event types were seen), subscriptions returned 422 for the Playground user, and a WHEP session negotiated H264 and Opus with ICE and DTLS connected but no media from the sandbox, because no simulation was running. Our first schemas rejected all four device sub-resources (real type names and many `null` fields), and our history path was wrong; both are fixed and tested against the captured responses, on which Device Check reads 4 of 4 required checks passing.
+
+**Second live run (22 October 2026, about 08:35 EAT, checked by our demo recorder).** Device Check against the live Ring Partner API read 4 of 4 required checks passing. Sync Ring History succeeded live ("Ring History Synced") and returned real `on_demand` events with epoch millisecond times, which we now convert to ISO. After we started a Motion "Simulate live view event" in the Ring Developer Playground, VisitProof's own `/family/live` decoded real video over WHEP from the sandbox doorbell: 250 frames at 1280x720 (sample stream "Birds on Feeders" by Michael Black, CC BY 4.0). This confirms that the sandbox streams only during a simulated event.
 
 **Presence Engine.** A pure, clock-injected TypeScript engine (`packages/domain`) implements twelve EARS requirements: observable windows, arrival clustering, a judge for ambiguous double arrivals, departure revised as events arrive, late, no-show and early-departure cards, an unobservable overlay from device lifecycle events, nearest-visit assignment for overlapping windows, and reconciliation bands at 10 and 30 minutes. Domain coverage is about 99 percent of statements.
 
@@ -82,7 +86,7 @@ Principles we held to: corroboration, not surveillance (it says a person arrived
 
 - The Ring Playground gives a live sandbox doorbell but no motion or doorbell events (history came back empty) and no webhook delivery, so we built a signed-webhook emulator and kept Playground calls for devices, history, and live view, with provenance labels on every event.
 - Our first live run failed on real data: every device sub-resource returned 200, but strict schemas written from the docs rejected the real type names and `null` fields, and Device Check showed 0 of 5 checks passing. We captured the responses as fixtures, corrected the schemas while still validating the fields we rely on, and built a mock Playground so the fix could be tested after the 30 minute token expired.
-- Live view connected (ICE and DTLS) but the sandbox doorbell sent no video. A black player looks like a WebRTC bug, so Live View now ends such a session after 8 seconds and tells the family plainly that Ring connected but no video arrived.
+- Live view connected (ICE and DTLS) but the sandbox doorbell sent no video until we started a live view event simulation in the Playground; with one running we decoded 250 frames at 1280x720. A black player looks like a WebRTC bug, so Live View now ends a session with no video after 8 seconds and tells the family plainly that Ring connected but no video arrived.
 - The official `ring-api-helloworld` sample checks a static bearer token instead of the `X-Signature` HMAC and uses an older payload shape, so we implemented verification from the documentation and tested it with our own vectors.
 - Departure detection: the first quiet gap after arrival is not a departure. The engine revises departure as later in-window events arrive.
 - Time zones: an agency in New York, a developer in Nairobi, and Ring timestamps in UTC. Every user-facing time is now rendered in the agency's zone.
@@ -145,7 +149,7 @@ When the terminal prints "VisitProof demo is ready", open http://localhost:3000 
 3. Family Member: the daily card, consent controls, and `/ask` ("Did the caregiver come today?").
 4. Caregiver: a visit with a missing clock-in and door presence; add a note.
 
-If ports 3000, 3101, or 8000 are taken, the demo names the process and stops. Use `PORT`, `WEBHOOK_PORT`, and `MCP_PORT` to change them. Live Ring mode needs a 30 minute Ring Developer Playground token (README, Live Ring Mode).
+If ports 3000, 3101, or 8000 are taken, the demo names the process and stops. Use `PORT`, `WEBHOOK_PORT`, and `MCP_PORT` to change them. Live Ring mode needs a 30 minute Ring Developer Playground token (README, Live Ring Mode). To see live video, first start a Motion, Package, or Vehicle "Simulate live view event" for the Playground Device in the Ring Developer Playground, then select Start Live View on `/family/live`. Without a running simulation the sandbox doorbell sends no video, and VisitProof says so after 8 seconds.
 
 ---
 
@@ -173,7 +177,7 @@ If ports 3000, 3101, or 8000 are taken, the demo names the process and stops. Us
 
 - The Playground cannot deliver webhooks or produce motion and doorbell events: the sandbox history is empty, so neither the event path nor `event_types` filtering can be tested without hardware or a home-made emulator.
 - Real payloads use type names (`device-status`, `device-capabilities`, `device-configurations`, `locations`) and `null` values that the documentation and the official sample do not show, so strict validators written from the docs reject every device sub-resource. Response examples with nulls, or a JSON schema or OpenAPI document, would fix this.
-- The sandbox doorbell negotiates a live view session but sends no media unless, it seems, a simulated event is triggered, and that is not explained next to the live view docs.
+- The sandbox doorbell negotiates a live view session but sends no media unless a live view event simulation is running (we confirmed this: with a Motion simulation we decoded 250 frames at 1280x720), and that is not explained next to the live view docs.
 - Subscriptions returns 422 "Unable to process subscription request for this user" for the Playground user instead of an empty list or a documented "not available" error.
 - Playground tokens last about 30 minutes with no refresh; ours expired mid-session.
 - The `ring-api-helloworld` webhook route does not verify `X-Signature` and its schema is the older payload shape.
@@ -224,7 +228,7 @@ The webhook URL is not registered with Ring yet, so no real Ring traffic reaches
 - **Contribution URL:** https://github.com/CodeWithEugene/Amazon-Developer-Hackathon
 - **Project repository URL:** https://github.com/CodeWithEugene/Amazon-Developer-Hackathon
 - **GitHub username:** CodeWithEugene
-- **What we did, how it works, why it matters:** VisitProof is a new Apache-2.0 project created during the hackathon window. Its reusable centerpiece is `packages/ring-partner-sdk`, a typed TypeScript Ring Partner API client, because Ring documents that there is no official SDK. It includes webhook HMAC verification over raw bytes, v1.1 schemas that accept future Ring values, the account-link nonce, a token manager with single-flight refresh, a browser-safe WHEP helper that enforces Ring's session caps and ends a connected session that sends no video, the real Playground responses as fixtures with a mock Ring Playground that serves them, and an emulator that delivers signed webhooks and multi-day scenarios. Any Ring developer can use it to test the event path without hardware, which is the biggest gap we hit. It ships with 128 tests in 14 files, and the rest of the repository shows it in a complete product.
+- **What we did, how it works, why it matters:** VisitProof is a new Apache-2.0 project created during the hackathon window. Its reusable centerpiece is `packages/ring-partner-sdk`, a typed TypeScript Ring Partner API client, because Ring documents that there is no official SDK. It includes webhook HMAC verification over raw bytes, v1.1 schemas that accept future Ring values, the account-link nonce, a token manager with single-flight refresh, a browser-safe WHEP helper that enforces Ring's session caps and ends a connected session that sends no video, the real Playground responses as fixtures with a mock Ring Playground that serves them, and an emulator that delivers signed webhooks and multi-day scenarios. Any Ring developer can use it to test the event path without hardware, which is the biggest gap we hit. It ships with 132 tests in 14 files, and the rest of the repository shows it in a complete product.
 
 ---
 
@@ -238,7 +242,7 @@ Not applicable. The repository and all code were created after the submission pe
 
 Full entries in the required format (task, steps, expected, actual, severity, workaround, suggestion): `docs/friction-log.md`.
 
-Live Ring Playground run on 22 October 2026: entries 1 and 2 reproduced; entry 3 could not be evaluated because the sandbox history is empty; entry 8 corrected (end to end encryption is exposed in configurations, TAKE mode is not); entries 16, 17, and 18 are new from that run. Entries 5 and 7 are still anticipated: we did not create a Ring app registration or download a snapshot.
+Live Ring Playground run on 22 October 2026: entries 1 and 2 reproduced; entry 3 could not be evaluated because the sandbox history is empty; entry 8 corrected (end to end encryption is exposed in configurations, TAKE mode is not); entries 16, 17, and 18 are new from that run. Entry 18 was resolved later that day by triggering a Playground simulation, which produced real video. Entries 5 and 7 are still anticipated: we did not create a Ring app registration or download a snapshot.
 
 | # | Area | Task | Severity | Status |
 |---|---|---|---|---|
@@ -254,7 +258,7 @@ Live Ring Playground run on 22 October 2026: entries 1 and 2 reproduced; entry 3
 | 13 | Ring emulator and engine | Replay the two-week dataset end to end | High | Resolved |
 | 16 | Ring API | Parse real device payloads with strict schemas (real type names and nulls not documented) | High | Reproduced 22 October 2026, worked around |
 | 17 | Ring API | Read subscriptions as the Playground user (422) | Low | Reproduced 22 October 2026 |
-| 18 | Ring Playground | See video in live view from the sandbox doorbell (connected, no media) | High | Reproduced 22 October 2026 |
+| 18 | Ring Playground | See video in live view from the sandbox doorbell (connected, no media without a simulation) | High | Reproduced and resolved 22 October 2026 |
 
 ## Feature Requests
 

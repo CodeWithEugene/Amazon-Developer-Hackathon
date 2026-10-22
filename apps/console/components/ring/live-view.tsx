@@ -57,7 +57,7 @@ const teardown = async (sessionUrl: string): Promise<void> => {
  * WHEP live view: recvonly, time boxed by Ring's cap, explicit Stop. If the
  * connection is up but no frame decodes within 8 seconds, the peer DELETEs
  * the session and a warning explains why (the Playground sandbox doorbell
- * may only stream during a simulated event; that is unverified).
+ * only streams while a simulated event is running; confirmed live).
  */
 export function LiveView({
   devices,

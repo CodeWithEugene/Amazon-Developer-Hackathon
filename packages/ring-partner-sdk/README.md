@@ -15,12 +15,14 @@ Verified:
 - `GET /v1/history/devices/{id}/events`, with and without `event_types=motion.human,ding,on_demand`: 200 with `data: []`. The SDK's earlier `/v1/devices/{id}/history/events` returned 404 and is fixed.
 - `GET /v1/accounts/me/subscriptions`: 422 "Unable to process subscription request for this user" for the Playground user. `subscriptions()` throws `RingNotAvailableForAccountError`; treat it as "not available for this account".
 - WHEP `POST /v1/devices/{id}/media/streaming/whep/sessions`: an SDP answer came back, ICE and DTLS reached `connected` in the embedded browser and in Google Chrome, and H264 (payload 118), RTX, and Opus were negotiated.
+- WHEP media (22 October 2026, about 08:35 EAT): after a Motion "Simulate live view event" was started in the Ring Developer Playground, `createWhepPeer` in the console's `/family/live` decoded real video from the sandbox doorbell, 250 frames at 1280x720 (sample stream "Birds on Feeders" by Michael Black, CC BY 4.0).
+- History with real events: a later live call returned `on_demand` events whose times are epoch milliseconds; the client converts them to ISO.
+- Live view without a simulation: the sandbox doorbell sends no video unless a live view event simulation (Motion, Package, or Vehicle) is running; in our first sessions only about 2.4 KB arrived in 13 seconds. This is confirmed, not a bug in the helper. `createWhepPeer` ends such a session after 8 seconds with reason `no_video`.
 
 Not verified:
 
 - Webhooks: the Playground cannot send them, so every delivery in this repository comes from the emulator.
-- Media in live view: only about 2.4 KB arrived in 13 seconds and no `inbound-rtp` stats appeared, because the sandbox doorbell appears to send no video outside a simulated event (untested; the Playground release notes describe live view event simulation for Package, Vehicle, and Motion). `createWhepPeer` now ends such a session after 8 seconds with reason `no_video`.
-- History events: the history page was empty, so the history event schema is still based on the docs, not on a real event.
+- History events other than `on_demand` (motion, ding): the sandbox produced none, so those event shapes are still based on the docs.
 - Snapshot and clip downloads and app integration writes were not called.
 
 ## Client
@@ -95,7 +97,7 @@ const peer = createWhepPeer({
 await peer.start()
 ```
 
-Track handlers are attached before `createOffer`, both transceivers are recvonly, the offer is sent after ICE gathering, and `getStats` detects stalls. Once the connection is `connected`, a session that decodes no frame within 8 seconds (`noVideoMs`) is DELETEd and ends with reason `no_video` after `onNoVideo(sample)`; this is what the Playground doorbell did when no simulated event was running. `readInboundMedia` and `classifyVideoProgress` are the pure pieces. The cap is enforced with a countdown and a DELETE; a `pagehide` listener sends a keepalive DELETE; a session created while `stop()` raced signaling is DELETEd immediately. Browsers cannot call Ring directly (CORS), so `signaling` and `teardown` go through your server.
+Track handlers are attached before `createOffer`, both transceivers are recvonly, the offer is sent after ICE gathering, and `getStats` detects stalls. Once the connection is `connected`, a session that decodes no frame within 8 seconds (`noVideoMs`) is DELETEd and ends with reason `no_video` after `onNoVideo(sample)`; this is what the Playground doorbell does when no simulated event is running. `readInboundMedia` and `classifyVideoProgress` are the pure pieces. The cap is enforced with a countdown and a DELETE; a `pagehide` listener sends a keepalive DELETE; a session created while `stop()` raced signaling is DELETEd immediately. Browsers cannot call Ring directly (CORS), so `signaling` and `teardown` go through your server.
 
 ## Media helpers
 
@@ -172,4 +174,4 @@ src/
 
 ## Scripts
 
-`pnpm build` (tsup to `dist/`, entries `index` and `whep`), `pnpm test` (Vitest: 128 tests in 14 files, all passing on 22 October 2026), `pnpm typecheck`, `pnpm lint`, `pnpm ring:smoke`, `pnpm mock:playground`.
+`pnpm build` (tsup to `dist/`, entries `index` and `whep`), `pnpm test` (Vitest: 132 tests in 14 files, all passing on 22 October 2026), `pnpm typecheck`, `pnpm lint`, `pnpm ring:smoke`, `pnpm mock:playground`.

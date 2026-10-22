@@ -3,10 +3,10 @@ import { describe, expect, it } from "vitest"
 import { ENDED_TEXT, noVideoNotice } from "./live-view-copy"
 
 describe("noVideoNotice", () => {
-  it("suggests a simulated event to a Playground user without claiming it is the cause", () => {
+  it("tells a Playground user the sandbox only streams during a simulated event", () => {
     const notice = noVideoNotice("playground")
     expect(notice.title).toBe("Connected To Ring, But No Video Arrived")
-    expect(notice.description).toMatch(/may only stream during a simulated event/)
+    expect(notice.description).toMatch(/only streams while a simulated event is running/)
     expect(notice.description).not.toMatch(/only streams video|connection is up/)
     expect(notice.description).toMatch(/Ring Developer Playground/)
     expect(notice.description).toMatch(/does not hold one of Ring's live view slots/)

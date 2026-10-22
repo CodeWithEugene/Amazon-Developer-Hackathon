@@ -3,9 +3,9 @@ import { NO_VIDEO_TIMEOUT_MS, type WhepEndReason } from "@visitproof/ring-partne
 /**
  * Live View copy (client safe). The "no video" case was seen live on
  * 22 October 2026: the Ring Playground doorbell negotiated H264 and Opus and
- * reached `connected`, but sent no frames. The sandbox may only stream during
- * a simulated event; that was not tested (friction log entry 18), so the copy
- * says "may".
+ * reached `connected`, but sent no frames. A later run confirmed the sandbox
+ * streams only during a simulated event: with a Motion simulation running,
+ * 250 frames decoded at 1280x720 (friction log entry 18).
  */
 
 export type LiveViewSource = "playground" | "linked"
@@ -33,6 +33,6 @@ export const noVideoNotice = (source: LiveViewSource): NoVideoNotice => ({
   title: "Connected To Ring, But No Video Arrived",
   description:
     source === "playground"
-      ? `Ring accepted the live view and connected, but no video arrived within ${SECONDS} seconds. The Playground sandbox doorbell may only stream during a simulated event. You can try starting a Motion, Package, or Vehicle simulation for the Playground Device in the Ring Developer Playground, then select Start Live View again. ${RELEASED}`
+      ? `Ring accepted the live view and connected, but no video arrived within ${SECONDS} seconds. The Playground sandbox doorbell only streams while a simulated event is running. Start a Motion, Package, or Vehicle simulation for the Playground Device in the Ring Developer Playground, then select Start Live View again. ${RELEASED}`
       : `Ring accepted the live view and the connection was up, but the doorbell sent no video within ${SECONDS} seconds. It may be asleep, serving another live view, or on a weak Wi-Fi signal. ${RELEASED} Try again in a minute.`,
 })

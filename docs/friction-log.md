@@ -23,7 +23,7 @@
 | 15 | Spec drift | Align assurance and deletion copy with actual code | Medium | Resolved |
 | 16 | Ring API | Parse real device payloads with strict schemas | High | Reproduced 22 October 2026, worked around |
 | 17 | Ring API | Read subscriptions as the Playground user | Low | Reproduced 22 October 2026 |
-| 18 | Ring Playground | See video in live view from the sandbox doorbell | High | Reproduced 22 October 2026 |
+| 18 | Ring Playground | See video in live view from the sandbox doorbell | High | Reproduced and resolved 22 October 2026 |
 
 ## Entries
 
@@ -209,14 +209,14 @@
 
 ### 18. Ring Playground: see video in live view from the sandbox doorbell
 
-- **Status:** Reproduced 22 October 2026 in the embedded browser and in Google Chrome.
+- **Status:** Reproduced 22 October 2026 in the embedded browser and in Google Chrome, then resolved the same day at about 08:35 EAT by triggering a Playground simulation. It stays in this log because the documentation does not say a simulation is needed.
 - **Task attempted:** Show the sandbox doorbell's live view on `/family/live` over WHEP.
 - **Steps taken:** Started a session through the console's `/api/ring/stream`, which posts the SDP offer to `POST /v1/devices/{id}/media/streaming/whep/sessions`, then watched the peer connection state and WebRTC stats.
 - **Expected:** Sample video from the sandbox doorbell, or a clear note in the live view documentation that the sandbox streams only after a simulated event.
-- **Actual:** The session was created (200 with an SDP answer). ICE reached connected and DTLS connected, and the answer negotiated H264 (payload 118), RTX, and Opus. In 13 seconds only about 2.4 KB arrived and no `inbound-rtp` stats appeared: the sandbox doorbell sent no media. The Playground release notes mention live view event simulation for Package, Vehicle, and Motion, so triggering one may be required, but nothing next to the live view documentation says so. We did not trigger one, so whether it starts video is unverified.
+- **Actual:** The session was created (200 with an SDP answer). ICE reached connected and DTLS connected, and the answer negotiated H264 (payload 118), RTX, and Opus. In 13 seconds only about 2.4 KB arrived and no `inbound-rtp` stats appeared: the sandbox doorbell sent no media. The Playground release notes mention live view event simulation for Package, Vehicle, and Motion, so triggering one may be required, but nothing next to the live view documentation says so. In our first sessions we did not trigger one. In a later run (about 08:35 EAT) we started a Motion "Simulate live view event" in the Ring Developer Playground first, and `/family/live` then decoded real video over WHEP: 250 frames at 1280x720 (the sample stream is "Birds on Feeders" by Michael Black, CC BY 4.0). Sessions without a simulation got no media, so the sandbox streams only during a simulated event.
 - **Severity:** High. A connected session with a black player looks exactly like a bug in our WebRTC code, and we spent the time ruling that out.
 - **Workaround:** Live View now ends a session that reaches connected but decodes no frame within 8 seconds: it sends DELETE for the session and shows a warning titled "Connected To Ring, But No Video Arrived". While it waits, the session cap countdown runs as usual; once the session ends, the countdown stops and the warning replaces it.
-- **Suggestion:** Make the sandbox doorbell stream sample video continuously, or document the exact trigger next to the live view and WHEP documentation.
+- **Suggestion:** Make the sandbox doorbell stream sample video continuously, or state next to the live view and WHEP documentation that video flows only while a live view event simulation is running.
 
 ## Feature Requests
 
