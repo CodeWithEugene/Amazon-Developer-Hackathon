@@ -1,4 +1,5 @@
-import { historyEventSchema, type HistoryEvent } from "@visitproof/ring-partner-sdk"
+import { historyDocumentSchema, historyEventSchema, type HistoryEvent } from "@visitproof/ring-partner-sdk"
+import { PLAYGROUND_DEVICE_ID, PLAYGROUND_FIXTURES } from "@visitproof/ring-partner-sdk/testing"
 import { describe, expect, it, vi } from "vitest"
 
 import { historyEventToDoorEvent, syncRingHistory } from "./history-sync"
@@ -42,5 +43,22 @@ describe("syncRingHistory", () => {
     const second = await syncRingHistory(input)
     expect(second).toMatchObject({ saved: 0, alreadyStored: 2 })
     expect(await repository.events.byClient("cli_1")).toHaveLength(2)
+  })
+})
+
+describe("historyEventToDoorEvent with the real Ring history page", () => {
+  it("maps live on_demand events with epoch ms start to ISO times and the source device", () => {
+    const events = historyDocumentSchema.parse(PLAYGROUND_FIXTURES.historyEvents).data
+    const input = { clientId: "cli_1", deviceId: "fallback", now: new Date("2026-10-22T12:00:00Z") }
+    const mapped = events.map((event) => historyEventToDoorEvent(event, input))
+    expect(mapped).toHaveLength(3)
+    expect(mapped[0]).toMatchObject({
+      type: "on_demand",
+      provenance: "ring_history",
+      deviceId: PLAYGROUND_DEVICE_ID,
+      timestampMs: 1792629988552,
+      at: new Date(1792629988552).toISOString(),
+    })
+    for (const door of mapped) expect(door?.at).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/)
   })
 })

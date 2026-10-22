@@ -8,7 +8,7 @@
 |---|---|---|---|---|
 | 1 | Ring Playground | Drive the webhook path from the sandbox device | High | Reproduced 22 October 2026 |
 | 2 | Ring Playground | Keep a token alive during a development session | Medium | Reproduced 22 October 2026 |
-| 3 | Ring API docs | Filter event history by type | Medium | Could not be evaluated 22 October 2026 (sandbox history is empty) |
+| 3 | Ring API docs | Filter event history by type | Medium | Partly evaluated 22 October 2026 (history now returns our own on_demand events; timestamps are epoch ms, undocumented) |
 | 4 | ring-api-helloworld | Verify webhook signatures using the sample | High | Open |
 | 5 | Ring Developer Console | Recover credentials after closing the creation dialog | Medium | Anticipated, not yet reproduced |
 | 6 | Ring docs | Understand the hardware requirement for testing | Medium | Open |
@@ -51,14 +51,15 @@
 
 ### 3. Ring API docs: filter event history by type
 
-- **Status:** Could not be evaluated on 22 October 2026. The filtered call succeeded, but the sandbox doorbell has no history events, so there was nothing to filter. The "appears unfiltered" finding below comes from another entrant's forum report and is neither confirmed nor refuted by our run.
+- **Status:** Partly evaluated on 22 October 2026. The first runs returned an empty page. A later live call returned 3 `on_demand` events, all created by our own Live View sessions on the Playground doorbell, so there were still no motion or ding events to filter out. Whether `event_types` filters server side remains unconfirmed; the "appears unfiltered" finding below comes from another entrant's forum report.
+- **Payload shape differs from the docs:** the real events use `type: "history-events"` (hyphen), `attributes.start` and `attributes.end` as epoch milliseconds numbers (not ISO strings and not a `timestamp` field), `attributes.is_third_party_reviewed`, the device in `relationships.source`, an empty `relationships.cv_detections`, `meta.riid: null`, and no `links`. Our SDK schema rejected this page until we accepted that shape (fixture `packages/ring-partner-sdk/src/fixtures/playground/history-events.json`); consumers now convert epoch ms to ISO 8601.
 - **Task attempted:** Retrieve only human motion events with `event_types`.
 - **Steps taken:** Called `GET /v1/history/devices/{id}/events?event_types=motion.human,ding,on_demand` and the same path without the filter against the Playground; read the forum correction from Amazon staff about plural syntax.
 - **Expected:** Only events of the requested types.
-- **Actual:** Both calls returned 200 with `data: []`. Ring accepted the parameter (no 400), but an empty page cannot show whether it filters. A forum entrant reports that the response is unfiltered, and the documented parameter name and syntax did not match staff guidance until corrected in the forum.
+- **Actual:** Both calls initially returned 200 with `data: []`; a later unfiltered call returned the 3 `on_demand` events described above. Ring accepted the parameter (no 400), but an empty page cannot show whether it filters. A forum entrant reports that the response is unfiltered, and the documented parameter name and syntax did not match staff guidance until corrected in the forum.
 - **Severity:** Medium. History filtering cannot be tested at all without events in the sandbox.
 - **Workaround:** Client-side filtering in the SDK; documented in the README.
-- **Suggestion:** Fix the parameter documentation with a working example and return a 400 with a helpful message when the filter syntax is wrong instead of silently ignoring it.
+- **Suggestion:** Document the real event shape (epoch ms `start`/`end`, `history-events` type, `relationships.source`) with a sample response, fix the parameter documentation with a working example, and return a 400 with a helpful message when the filter syntax is wrong instead of silently ignoring it.
 
 ### 4. ring-api-helloworld: verify webhook signatures using the sample
 

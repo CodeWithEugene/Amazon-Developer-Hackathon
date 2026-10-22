@@ -1,0 +1,76 @@
+{
+  "data": [
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.HHMSBAMZLJX7JCP7ENORADRUTQMOVCZZ4WU5FZKUU7OLJDN7U4PF7QLHDXDGPAYRH46RBGV7GEH37GB6TCXAESEKJXOXFURF",
+      "attributes": {
+        "end": 1792630008568,
+        "is_third_party_reviewed": true,
+        "event_type": "on_demand",
+        "start": 1792629988552
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.JGB7ARA4Y2CWKXHPYNAHJTGIF4BTO42FJZPXTKJDPJ4D46RKBW32RJL646YQIIXNM6QV4H5IKU2HMAK6B7FTLY4KCRFNI4WF",
+      "attributes": {
+        "is_third_party_reviewed": true,
+        "event_type": "on_demand",
+        "end": 1792629963292,
+        "start": 1792629943181
+      },
+      "relationships": {
+        "cv_detections": {
+          "data": []
+        },
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37"
+          }
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    },
+    {
+      "type": "history-events",
+      "id": "ava1.ring.history.event.EMSUQ7S5Z7XP4AEDAZNAUSPIYKLCK3QP53CN7FDBGSMFB54HVIB5IFD5AZEUYXJMNBM54DK5QADKXEVS2HFJSC2RMK3LXRTY",
+      "attributes": {
+        "event_type": "on_demand",
+        "end": 1792629903253,
+        "start": 1792629883048,
+        "is_third_party_reviewed": true
+      },
+      "relationships": {
+        "source": {
+          "data": {
+            "type": "devices",
+            "id": "ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37"
+          }
+        },
+        "cv_detections": {
+          "data": []
+        }
+      },
+      "meta": {
+        "riid": null
+      }
+    }
+  ]
+}

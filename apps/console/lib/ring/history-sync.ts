@@ -2,7 +2,12 @@ import { createHash } from "node:crypto"
 
 import type { VisitProofRepository } from "@visitproof/db"
 import type { DoorEvent } from "@visitproof/domain"
-import type { HistoryEvent, RingClient } from "@visitproof/ring-partner-sdk"
+import {
+  historyEventDeviceId,
+  historyEventTimeMs,
+  type HistoryEvent,
+  type RingClient,
+} from "@visitproof/ring-partner-sdk"
 
 /**
  * "Sync Ring History": pulls history events since consent for every shared
@@ -29,14 +34,16 @@ export const historyEventToDoorEvent = (
 ): DoorEvent | null => {
   const mapped = mapType(event.attributes.event_type)
   if (mapped === null) return null
+  const timestampMs = historyEventTimeMs(event)
+  if (!Number.isFinite(timestampMs)) return null
   const nowIso = input.now.toISOString()
   return {
     clientId: input.clientId,
     requestId: historyRequestId(event.id),
-    timestampMs: event.attributes.timestamp,
-    at: new Date(event.attributes.timestamp).toISOString(),
+    timestampMs,
+    at: new Date(timestampMs).toISOString(),
     ...mapped,
-    deviceId: event.attributes.device_id ?? input.deviceId,
+    deviceId: historyEventDeviceId(event) ?? input.deviceId,
     provenance: "ring_history",
     rawPayloadHash: createHash("sha256").update(JSON.stringify(event)).digest("hex"),
     componentIds: [],

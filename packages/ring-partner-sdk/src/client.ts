@@ -18,6 +18,7 @@ import {
   deviceLocationDocumentSchema,
   deviceStatusDocumentSchema,
   historyDocumentSchema,
+  historyEventTimeMs,
   subscriptionListDocumentSchema,
   userDocumentSchema,
   whepStartResponseSchema,
@@ -206,8 +207,7 @@ export class RingClient {
   /**
    * One page of history events. `eventTypes` is sent as `event_types` and
    * also applied client-side, because whether the server honours the filter
-   * is unverified: the Playground sandbox history is empty (friction log
-   * entry 3). `pageKey` may be a `links.next` URL or an opaque
+   * is unverified (friction log entry 3). `pageKey` may be a `links.next` URL or an opaque
    * `meta.page_key` cursor.
    */
   async historyEvents(id: string, query: HistoryQuery = {}): Promise<HistoryPage> {
@@ -230,8 +230,8 @@ export class RingClient {
     const since = options.sinceMs ?? Number.NEGATIVE_INFINITY
     const collect = async (pageKey: string | undefined, pages: number, acc: readonly HistoryEvent[]) => {
       const page = await this.historyEvents(id, pageKey ? { ...query, pageKey } : query)
-      const fresh = page.events.filter((event) => event.attributes.timestamp >= since)
-      const reachedSince = page.document.data.some((event) => event.attributes.timestamp < since)
+      const fresh = page.events.filter((event) => historyEventTimeMs(event) >= since)
+      const reachedSince = page.document.data.some((event) => historyEventTimeMs(event) < since)
       const next = [...acc, ...fresh]
       if (!page.nextUrl || reachedSince || pages + 1 >= maxPages) return next
       if (options.pageDelayMs) await sleep(options.pageDelayMs)

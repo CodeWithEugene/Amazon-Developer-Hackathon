@@ -22,6 +22,7 @@
     "configurations.json",
     "location.json",
     "history.json",
+    "history-events.json",
     "subscriptions-422.json"
   ],
   "requests": {
@@ -72,6 +73,12 @@
           "body": "same as history.json"
         }
       ]
+    },
+    "history-events.json": {
+      "method": "GET",
+      "path": "/v1/history/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/events",
+      "status": 200,
+      "note": "Captured live on 22 October 2026 after our own Live View sessions: 3 on_demand events. type is history-events, attributes.start and end are epoch milliseconds, the device is in relationships.source, meta.riid is null, and there are no links."
     },
     "subscriptions-422.json": {
       "method": "GET",

@@ -9,7 +9,7 @@
  * then status, capabilities, configurations, location, one history page, and
  * subscriptions. Prints PASS, INFO, or FAIL per call with provenance, then
  * the Device Check summary for each shared device. An empty history page is
- * a PASS ("0 events": the Playground doorbell has no recorded events), and a
+ * a PASS ("0 events"); event times are epoch ms and print as ISO 8601. A
  * 422 on subscriptions is INFO (not available for Playground users).
  * Writes REDACTED bodies to packages/ring-partner-sdk/src/fixtures/playground/
  * and merges manifest.json (files, request paths, status codes). The token
@@ -29,6 +29,8 @@ import {
   type DeviceListDocument,
 } from "@visitproof/ring-partner-sdk"
 import { z } from "zod"
+
+import { historySummary } from "./ring-smoke-summary"
 
 import { buildDeviceChecks, deviceCheckSummary } from "../apps/console/lib/ring/device-check"
 
@@ -108,12 +110,6 @@ const step = async <T>(spec: StepSpec<T>): Promise<StepResult> => {
 }
 
 const count = (value: unknown): number => (Array.isArray(value) ? value.length : 0)
-
-const historySummary = (events: readonly { attributes: { event_type: string } }[], hasNext: boolean): string => {
-  if (events.length === 0) return "0 events (Ring returned no events for this device since consent)"
-  const types = [...new Set(events.map((event) => event.attributes.event_type))].join(", ")
-  return `${events.length} events on the first page, types ${types}, next page ${hasNext ? "yes" : "no"}`
-}
 
 const deviceSteps = async (ring: RingClient, id: string): Promise<StepResult[]> => [
   await step({ name: "status", file: "status.json", path: ENDPOINTS.deviceStatus(id), call: () => ring.deviceStatus(id), summarize: (doc) => `online ${doc.data.attributes.online}, reported ${doc.data.attributes.reported_at ?? "not reported"}` }),

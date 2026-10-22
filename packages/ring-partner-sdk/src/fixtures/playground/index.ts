@@ -2,6 +2,7 @@ import capabilities from "./capabilities.json"
 import configurations from "./configurations.json"
 import devicesNoInclude from "./devices-no-include.json"
 import devices from "./devices.json"
+import historyEvents from "./history-events.json"
 import history from "./history.json"
 import location from "./location.json"
 import manifest from "./manifest.json"
@@ -28,6 +29,8 @@ export const PLAYGROUND_FIXTURES: Readonly<Record<PlaygroundFixtureName, unknown
   configurations,
   location,
   history,
+  /** Live history page with 3 `on_demand` events (epoch ms `start`/`end`). */
+  historyEvents,
   subscriptions422,
 }
 
@@ -40,6 +43,7 @@ export type PlaygroundFixtureName =
   | "configurations"
   | "location"
   | "history"
+  | "historyEvents"
   | "subscriptions422"
 
 export interface PlaygroundRequest {

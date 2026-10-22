@@ -16,6 +16,9 @@ import {
   deviceStatusDocumentSchema,
   errorDocumentSchema,
   historyDocumentSchema,
+  historyEventDeviceId,
+  historyEventTimeIso,
+  historyEventTimeMs,
   knownIncludedResourceSchema,
   userDocumentSchema,
 } from "./types"
@@ -27,7 +30,7 @@ import {
  */
 
 const clone = <T>(value: T): T => structuredClone(value)
-const { status, capabilities, configurations, location, history, devices } = PLAYGROUND_FIXTURES
+const { status, capabilities, configurations, location, history, historyEvents, devices } = PLAYGROUND_FIXTURES
 
 describe("real Playground fixtures parse", () => {
   it("parses the device status with null fields and keeps reported_at", () => {
@@ -133,6 +136,47 @@ describe("malformed payloads still fail", () => {
   it("rejects a history event without a timestamp", () => {
     const page = { data: [{ id: "h1", type: "history_events", attributes: { event_type: "ding" } }] }
     expect(historyDocumentSchema.safeParse(page).success).toBe(false)
+  })
+})
+
+describe("live history events (history-events.json)", () => {
+  it("parses the real page: 3 on_demand events with epoch ms start and end", () => {
+    const page = historyDocumentSchema.parse(historyEvents)
+    expect(page.data).toHaveLength(3)
+    expect(page.links).toBeUndefined()
+    for (const event of page.data) {
+      expect(event.type).toBe("history-events")
+      expect(event.attributes.event_type).toBe("on_demand")
+      expect(event.attributes.is_third_party_reviewed).toBe(true)
+      expect(typeof event.attributes.start).toBe("number")
+      expect(event.attributes.timestamp).toBeUndefined()
+      expect(historyEventDeviceId(event)).toBe(PLAYGROUND_DEVICE_ID)
+      expect(event.relationships?.cv_detections?.data).toEqual([])
+    }
+  })
+
+  it("converts epoch ms start to ISO 8601", () => {
+    const [first] = historyDocumentSchema.parse(historyEvents).data
+    expect(first && historyEventTimeMs(first)).toBe(1792629988552)
+    expect(first && historyEventTimeIso(first)).toBe(new Date(1792629988552).toISOString())
+    expect(first && historyEventTimeIso(first)).toMatch(/^2026-10-2\dT/)
+  })
+
+  it("still accepts the documented shape and an ISO start", () => {
+    const documented = { data: [{ id: "h1", type: "history_events", attributes: { event_type: "ding", timestamp: 5, device_id: "d1" } }] }
+    const [event] = historyDocumentSchema.parse(documented).data
+    expect(event && historyEventTimeMs(event)).toBe(5)
+    expect(event && historyEventDeviceId(event)).toBe("d1")
+    const iso = { data: [{ id: "h2", type: "history-events", attributes: { event_type: "ding", start: "2026-10-22T00:00:00Z" } }] }
+    const [isoEvent] = historyDocumentSchema.parse(iso).data
+    expect(isoEvent && historyEventTimeIso(isoEvent)).toBe("2026-10-22T00:00:00.000Z")
+  })
+
+  it("rejects an unknown resource type and an unparseable start", () => {
+    const wrongType = { data: [{ id: "h1", type: "events", attributes: { event_type: "ding", start: 1 } }] }
+    expect(historyDocumentSchema.safeParse(wrongType).success).toBe(false)
+    const badStart = { data: [{ id: "h1", type: "history-events", attributes: { event_type: "ding", start: "soon" } }] }
+    expect(historyDocumentSchema.safeParse(badStart).success).toBe(false)
   })
 })
 
