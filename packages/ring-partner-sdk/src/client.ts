@@ -28,6 +28,7 @@ import {
   type HistoryDocument,
   type HistoryEvent,
   type HistoryQuery,
+  type SubscriptionListDocument,
   type UserDocument,
 } from "./types"
 import {
@@ -40,6 +41,7 @@ import {
   type SafeParser,
 } from "./client-support"
 import { snapshotRequestSchema, type SnapshotRequestInput } from "./media"
+import { RingNotAvailableForAccountError, RingUnprocessableError } from "./errors"
 
 /**
  * Typed client for the Ring Partner API. Every method validates the response
@@ -203,9 +205,10 @@ export class RingClient {
 
   /**
    * One page of history events. `eventTypes` is sent as `event_types` and
-   * also applied client-side, because the server filter was observed to be
-   * ignored (friction log entry 3). `pageKey` may be a `links.next` URL or an
-   * opaque `meta.page_key` cursor.
+   * also applied client-side, because whether the server honours the filter
+   * is unverified: the Playground sandbox history is empty (friction log
+   * entry 3). `pageKey` may be a `links.next` URL or an opaque
+   * `meta.page_key` cursor.
    */
   async historyEvents(id: string, query: HistoryQuery = {}): Promise<HistoryPage> {
     const path = historyPagePath(id, query)
@@ -320,8 +323,21 @@ export class RingClient {
     }
   }
 
-  subscriptions() {
-    return this.getDocument(ENDPOINTS.subscriptions, subscriptionListDocumentSchema, "subscriptions")
+  /**
+   * The account's Ring subscriptions. A 422 (seen for Playground users)
+   * becomes `RingNotAvailableForAccountError`: treat it as "not available
+   * for this account" rather than a failure.
+   */
+  async subscriptions(): Promise<SubscriptionListDocument> {
+    try {
+      return await this.getDocument(ENDPOINTS.subscriptions, subscriptionListDocumentSchema, "subscriptions")
+    } catch (error) {
+      if (!(error instanceof RingUnprocessableError)) throw error
+      throw new RingNotAvailableForAccountError(
+        { status: error.status, method: error.method, url: error.url, document: error.document, cause: error },
+        "subscriptions"
+      )
+    }
   }
 
   /** Step 8a: `POST app-integrations { account_identifier, nonce }` (status awaiting). */

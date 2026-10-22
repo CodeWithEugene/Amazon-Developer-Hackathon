@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "status": "422",
+      "title": "Unprocessable Entity",
+      "detail": "Unable to process subscription request for this user"
+    }
+  ]
+}

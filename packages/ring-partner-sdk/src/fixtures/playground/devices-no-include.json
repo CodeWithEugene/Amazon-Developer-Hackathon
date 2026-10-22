@@ -1,0 +1,53 @@
+{
+  "data": [
+    {
+      "type": "devices",
+      "id": "ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37",
+      "attributes": {
+        "name": "Playground Device",
+        "image_url": "https://app-content.ring.com/shared/images/devices/square_device_images/DoorbellPro/rvdp_3x.png"
+      },
+      "relationships": {
+        "configurations": {
+          "data": {
+            "type": "device-configurations",
+            "id": "ava1.ring.device.configurations.RPMKUFLTADF2E77RBSAKAAOUVOXQ2MYMZGMOXJ6T7OERBQYP26IZCFHQRR6JVINJTWFX7ZMKRDHGAPMUT7PXYPPF7A4BKCY6BRPE7BM4DKYLYHT5WP6SXJU2GI"
+          },
+          "links": {
+            "related": "/v1/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/configurations"
+          }
+        },
+        "location": {
+          "data": {
+            "type": "locations",
+            "id": "ava1.ring.location.CTXRIKWZ7YCSGXRFFYHUHTUNT7CDPVH2VFMSP5OI27W4FSTWVS2OK3OABVU6QLKVSEFLUYHFLKMSYVHB522WCZCRYLDOKC45JBN26OCIEOJUYZL37IRAHBAM3Y"
+          },
+          "links": {
+            "related": "/v1/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/location"
+          }
+        },
+        "capabilities": {
+          "data": {
+            "type": "device-capabilities",
+            "id": "ava1.ring.device.capabilities.E4GD6AGLFZTEN57HDVKBLBUUGAZ2MMLPXQ7MILA4HFKDYRSPBUAJUBDVIMWQ5OQ5TOEBQWWIWYOJCNGIGP7DZSBZDXMYLKIM"
+          },
+          "links": {
+            "related": "/v1/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/capabilities"
+          }
+        },
+        "status": {
+          "data": {
+            "type": "device-status",
+            "id": "ava1.ring.device.status.FOISMNNIVD2MAMXDDMIISK65HGBJ5ERSPX5HROMTXKCZX2YF2RKSLTWPYJ46K3VPF6QQKSXC3NDYHHMPLOFL6TR2SMGY74IG"
+          },
+          "links": {
+            "related": "/v1/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/status"
+          }
+        }
+      }
+    }
+  ],
+  "meta": {
+    "time": "2026-10-22T00:43:15Z"
+  }
+}

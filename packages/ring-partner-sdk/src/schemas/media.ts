@@ -29,7 +29,7 @@ export type WhepStartResponse = z.infer<typeof whepStartResponseSchema>
 export const WHEP_BATTERY_CAP_MS = 30_000
 export const WHEP_WIRED_CAP_MS = 60_000
 
-export const whepCapFor = (batteryPowered: boolean | undefined): number =>
+export const whepCapFor = (batteryPowered: boolean | null | undefined): number =>
   batteryPowered === false ? WHEP_WIRED_CAP_MS : WHEP_BATTERY_CAP_MS
 
 export const clipRequestSchema = z.object({

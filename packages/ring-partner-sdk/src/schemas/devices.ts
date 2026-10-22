@@ -34,13 +34,15 @@ export const KNOWN_DEVICE_KINDS = ["doorbell", "camera", "chime", "sensor", "unk
 export const deviceKindSchema = openEnum(KNOWN_DEVICE_KINDS)
 export type DeviceKind = z.infer<typeof deviceKindSchema>
 
+/** The Playground device carries only `name` and `image_url`; the rest are optional. */
 export const deviceAttributesSchema = z.looseObject({
   name: z.string().min(1),
-  kind: deviceKindSchema.optional(),
-  device_type: z.string().optional(),
-  model: z.string().optional(),
-  firmware_version: z.string().optional(),
-  battery_powered: z.boolean().optional(),
+  image_url: z.string().nullable().optional(),
+  kind: deviceKindSchema.nullable().optional(),
+  device_type: z.string().nullable().optional(),
+  model: z.string().nullable().optional(),
+  firmware_version: z.string().nullable().optional(),
+  battery_powered: z.boolean().nullable().optional(),
 })
 export type DeviceAttributes = z.infer<typeof deviceAttributesSchema>
 
@@ -53,38 +55,90 @@ export const deviceResourceSchema = z.looseObject({
 })
 export type DeviceResource = z.infer<typeof deviceResourceSchema>
 
+/**
+ * Device sub-resources, shaped by real Ring Playground responses captured on
+ * 22 October 2026 (src/fixtures/playground/). Ring returns `null` for many
+ * fields a device does not support (snooze, sensor detections, audio slots),
+ * so every attribute that is not load bearing is `nullish`. The fields
+ * VisitProof depends on are still validated: `online`, `reported_at`,
+ * `motion_detection.enabled`, motion zone geometry, and
+ * `e2e_encryption.enabled`.
+ */
+
+const nullish = <T extends z.ZodType>(schema: T) => schema.nullable().optional()
+
+export const DEVICE_RESOURCE_TYPES = {
+  status: "device-status",
+  capabilities: "device-capabilities",
+  configurations: "device-configurations",
+  location: "locations",
+} as const
+
+/** Not observed on the Playground; kept for older or future payloads. */
 export const KNOWN_ENCRYPTION_STATES = ["clear", "take", "e2ee", "unknown"] as const
 export const encryptionStateWireSchema = openEnum(KNOWN_ENCRYPTION_STATES)
 
 export const deviceStatusAttributesSchema = z.looseObject({
   online: z.boolean(),
-  last_seen_at: z.string().optional(),
-  battery_level: z.number().min(0).max(100).optional(),
-  encryption_state: encryptionStateWireSchema.optional(),
+  reported_at: nullish(z.iso.datetime({ offset: true })),
+  /** Device state (null on the Playground doorbell). */
+  state: nullish(z.string()),
+  audio: nullish(
+    z.looseObject({
+      snooze: nullish(
+        z.looseObject({ active: nullish(z.boolean()), until: nullish(z.string()) })
+      ),
+    })
+  ),
+  battery_level: nullish(z.number().min(0).max(100)),
+  encryption_state: nullish(encryptionStateWireSchema),
 })
 export type DeviceStatusAttributes = z.infer<typeof deviceStatusAttributesSchema>
 
 export const deviceStatusResourceSchema = z.looseObject({
   id: z.string().min(1),
-  type: z.literal("device_status"),
+  type: z.literal(DEVICE_RESOURCE_TYPES.status),
   attributes: deviceStatusAttributesSchema,
 })
 export type DeviceStatusResource = z.infer<typeof deviceStatusResourceSchema>
 
+/** A capability: `null` when unsupported, otherwise the settings it exposes. */
+export const capabilityFeatureSchema = nullish(
+  z.looseObject({ configurations: nullish(z.array(z.string())) })
+)
+
 export const deviceCapabilitiesAttributesSchema = z.looseObject({
-  motion_detection: z.boolean().optional(),
-  human_detection: z.boolean().optional(),
-  live_view: z.boolean().optional(),
-  snapshots: z.boolean().optional(),
-  chime_controls: z.boolean().optional(),
-  video_codecs: z.array(z.string()).optional(),
-  components: z.array(z.looseObject({ id: z.string() })).optional(),
+  motion_detection: capabilityFeatureSchema,
+  image_enhancements: capabilityFeatureSchema,
+  video: nullish(
+    z.looseObject({
+      configurations: nullish(z.array(z.string())),
+      codecs: nullish(z.array(z.string())),
+      ratio: nullish(z.string()),
+      max_resolution: nullish(z.number()),
+      supported_resolutions: nullish(z.array(z.number())),
+    })
+  ),
+  audio: nullish(
+    z.looseObject({
+      customizable_slots: nullish(z.array(z.unknown())),
+      supported_actions: nullish(z.array(z.string())),
+    })
+  ),
+  battery_status: capabilityFeatureSchema,
+  flood_detection: capabilityFeatureSchema,
+  freeze_detection: capabilityFeatureSchema,
+  smoke_detection: capabilityFeatureSchema,
+  co_detection_listener: capabilityFeatureSchema,
+  glass_break_detection: capabilityFeatureSchema,
+  tamper_detection: capabilityFeatureSchema,
+  contact_detection: capabilityFeatureSchema,
 })
 export type DeviceCapabilitiesAttributes = z.infer<typeof deviceCapabilitiesAttributesSchema>
 
 export const deviceCapabilitiesResourceSchema = z.looseObject({
   id: z.string().min(1),
-  type: z.literal("device_capabilities"),
+  type: z.literal(DEVICE_RESOURCE_TYPES.capabilities),
   attributes: deviceCapabilitiesAttributesSchema,
 })
 export type DeviceCapabilitiesResource = z.infer<typeof deviceCapabilitiesResourceSchema>
@@ -95,35 +149,54 @@ export const normalizedPointSchema = z.object({
 })
 
 export const zoneSchema = z.looseObject({
-  id: z.string().optional(),
-  name: z.string().optional(),
-  enabled: z.boolean().optional(),
+  id: nullish(z.string()),
+  name: nullish(z.string()),
+  enabled: nullish(z.boolean()),
   vertices: z.array(normalizedPointSchema),
 })
 export type Zone = z.infer<typeof zoneSchema>
 
+/** Ring reports toggles as "on" or "off" strings. */
+export const KNOWN_TOGGLE_STATES = ["on", "off"] as const
+export const toggleStateSchema = openEnum(KNOWN_TOGGLE_STATES)
+
 export const deviceConfigurationsAttributesSchema = z.looseObject({
-  motion_recording_enabled: z.boolean().optional(),
-  motion_zones: z.array(zoneSchema).optional(),
-  privacy_zones: z.array(zoneSchema).optional(),
+  motion_detection: nullish(
+    z.looseObject({
+      enabled: nullish(toggleStateSchema),
+      motion_zones: nullish(z.array(zoneSchema)),
+    })
+  ),
+  /** `false` is standard encryption; `true` hides events and media from partners. */
+  e2e_encryption: nullish(z.looseObject({ enabled: nullish(z.boolean()) })),
+  image_enhancements: nullish(
+    z.looseObject({ privacy_zones: nullish(z.array(zoneSchema)) })
+  ),
+  audio: nullish(
+    z.looseObject({
+      volume: nullish(z.number()),
+      customizable_slots: nullish(z.array(z.unknown())),
+    })
+  ),
 })
 export type DeviceConfigurationsAttributes = z.infer<typeof deviceConfigurationsAttributesSchema>
 
 export const deviceConfigurationsResourceSchema = z.looseObject({
   id: z.string().min(1),
-  type: z.literal("device_configurations"),
+  type: z.literal(DEVICE_RESOURCE_TYPES.configurations),
   attributes: deviceConfigurationsAttributesSchema,
 })
 export type DeviceConfigurationsResource = z.infer<typeof deviceConfigurationsResourceSchema>
 
 export const deviceLocationAttributesSchema = z.looseObject({
   country: z.string().min(2),
-  state: z.string().optional(),
+  state: nullish(z.string()),
 })
+export type DeviceLocationAttributes = z.infer<typeof deviceLocationAttributesSchema>
 
 export const deviceLocationResourceSchema = z.looseObject({
   id: z.string().min(1),
-  type: z.literal("device_location"),
+  type: z.literal(DEVICE_RESOURCE_TYPES.location),
   attributes: deviceLocationAttributesSchema,
 })
 export type DeviceLocationResource = z.infer<typeof deviceLocationResourceSchema>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { REDACTED, redactFixture } from "./redact"
+import { REDACTED, REDACTED_ACCOUNT_ID, redactFixture } from "./redact"
 
 describe("redactFixture", () => {
   it("strips personal fields and tokens at any depth, immutably", () => {
@@ -23,7 +23,7 @@ describe("redactFixture", () => {
       last_name: REDACTED,
       email: REDACTED,
       phone_number: REDACTED,
-      account_id: "ava1.ring.account.X",
+      account_id: REDACTED_ACCOUNT_ID,
     })
     expect(out.included[0]).toEqual({
       access_token: REDACTED,
@@ -32,6 +32,18 @@ describe("redactFixture", () => {
       nested: { authorization: REDACTED },
     })
     expect(input.data.attributes.email).toBe("priya@example.com")
+  })
+
+  it("replaces a users document's id with a placeholder but keeps other resource ids", () => {
+    const input = {
+      data: { id: "ava1.ring.account.REALACCOUNT", type: "users", attributes: { email: "a@b.test" } },
+      included: [{ id: "device-1", type: "devices" }],
+    }
+    const out = redactFixture(input) as typeof input
+    expect(out.data.id).toBe(REDACTED_ACCOUNT_ID)
+    expect(out.data.type).toBe("users")
+    expect(out.included[0]).toEqual({ id: "device-1", type: "devices" })
+    expect(input.data.id).toBe("ava1.ring.account.REALACCOUNT")
   })
 
   it("scrubs bearer strings and presigned URL signatures inside values", () => {

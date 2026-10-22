@@ -72,6 +72,27 @@ export class RingUnprocessableError extends subclass(
   "RingUnprocessableError",
   "Ring rejected the request body"
 ) {}
+/**
+ * 422 on an account level read (observed on `GET /v1/accounts/me/subscriptions`
+ * for a Playground user: "Unable to process subscription request for this
+ * user"). Callers treat it as "not available for this account", not a failure.
+ * It is still a `RingUnprocessableError`, so existing `instanceof` checks hold.
+ */
+export class RingNotAvailableForAccountError extends RingUnprocessableError {
+  /** What is unavailable, for example "subscriptions". */
+  readonly feature: string
+
+  constructor(init: RingApiErrorInit, feature: string) {
+    super(init, `Ring ${feature} are not available for this account`)
+    this.name = "RingNotAvailableForAccountError"
+    this.feature = feature
+  }
+}
+
+/** True when Ring said a feature is not available for this account. */
+export const isNotAvailableForAccount = (error: unknown): error is RingNotAvailableForAccountError =>
+  error instanceof RingNotAvailableForAccountError
+
 /** 425 RECORDING_NOT_READY: the recording is still being processed. */
 export class RingRecordingNotReadyError extends subclass(
   "RingRecordingNotReadyError",

@@ -1,17 +1,28 @@
 import { whepCapFor } from "./schemas/media"
+import {
+  classifyVideoProgress,
+  NO_VIDEO_TIMEOUT_MS,
+  readInboundMedia,
+  VIDEO_CHECK_INTERVAL_MS,
+  type InboundMediaSample,
+} from "./whep-video"
+
+export * from "./whep-video"
 
 /**
  * Browser WHEP live view helper (docs/research.md Section 2.6 pattern):
  * track handlers are attached BEFORE `createOffer`; both transceivers are
  * recvonly; the offer is sent once ICE gathering completes; `getStats`
- * detects a stalled connection. Ring caps sessions at 30 s (battery) or 60 s
+ * detects a stalled connection and a connection that never decodes a video
+ * frame ("no_video", as the Ring Playground doorbell did when no simulated
+ * event was running). Ring caps sessions at 30 s (battery) or 60 s
  * (wired) and never reaps them, so this helper enforces the cap with a
  * countdown, DELETEs on explicit stop and at the cap, and registers a
  * `pagehide` keepalive DELETE so closing the tab never leaks a session.
  * Browser-safe: no Node imports (import from "@visitproof/ring-partner-sdk/whep").
  */
 
-export type WhepEndReason = "cap" | "stopped" | "unload"
+export type WhepEndReason = "cap" | "stopped" | "unload" | "no_video"
 
 export interface WhepCountdown {
   readonly remainingMs: number
@@ -34,6 +45,15 @@ export interface WhepPeerOptions {
   /** Stall detection: called when no inbound packets arrive for `stallMs`. */
   readonly onStall?: () => void
   readonly stallMs?: number
+  /**
+   * No video detection: once the connection is `connected`, if no frame is
+   * decoded within `noVideoMs` (default 8 s) the session is DELETEd, so it
+   * does not hold Ring's session cap, and `onEnded("no_video")` fires after
+   * `onNoVideo` receives the last stats sample.
+   */
+  readonly onNoVideo?: (sample: InboundMediaSample) => void
+  readonly noVideoMs?: number
+  readonly videoCheckIntervalMs?: number
   /** Session cap; defaults to 30 s, or 60 s when `batteryPowered` is false. */
   readonly maxDurationMs?: number
   readonly batteryPowered?: boolean
@@ -100,6 +120,43 @@ const watchForStall = (
   }, options.stallMs ?? DEFAULT_STALL_MS)
 }
 
+interface VideoWatch {
+  readonly now: () => number
+  /** False once the peer was stopped or replaced. */
+  readonly isCurrent: () => boolean
+  readonly track: (timer: ReturnType<typeof setInterval>) => void
+  readonly onNoVideo: (sample: InboundMediaSample) => Promise<void>
+}
+
+/**
+ * Starts polling `getStats` the first time the connection is `connected`;
+ * stops once a frame decodes, or reports "no video" after `noVideoMs`.
+ */
+const watchForVideo = (connection: RTCPeerConnection, watch: VideoWatch, options: WhepPeerOptions): void => {
+  let watching = false
+  const onState = (): void => {
+    if (watching || connection.connectionState !== "connected") return
+    watching = true
+    const connectedAt = watch.now()
+    const check = async (): Promise<void> => {
+      if (!watch.isCurrent()) return clearInterval(timer)
+      const sample = readInboundMedia(await connection.getStats())
+      const timeoutMs = options.noVideoMs ?? NO_VIDEO_TIMEOUT_MS
+      const progress = classifyVideoProgress({ sample, connectedAt, now: watch.now(), timeoutMs })
+      if (progress === "waiting" || !watch.isCurrent()) return
+      clearInterval(timer)
+      if (progress === "no_video") await watch.onNoVideo(sample)
+    }
+    const timer = setInterval(
+      () => void check().catch(() => undefined),
+      options.videoCheckIntervalMs ?? VIDEO_CHECK_INTERVAL_MS
+    )
+    watch.track(timer)
+  }
+  connection.addEventListener("connectionstatechange", onState)
+  onState()
+}
+
 const negotiate = async (connection: RTCPeerConnection, options: WhepPeerOptions): Promise<string> => {
   // Handlers BEFORE createOffer, per the documented pattern.
   connection.addTransceiver("video", { direction: "recvonly" })
@@ -137,8 +194,13 @@ export const createWhepPeer = (options: WhepPeerOptions): WhepPeer => {
     sessionUrl = undefined
     stopped = true
     clearLocal()
-    if (url && options.teardown) await options.teardown(url)
-    if (url) options.onEnded?.(reason)
+    try {
+      if (url && options.teardown) await options.teardown(url)
+    } finally {
+      // The session is over locally either way, so the caller always hears
+      // about it, even when the DELETE fails (the error still propagates).
+      if (url) options.onEnded?.(reason)
+    }
   }
 
   function onPageHide(): void {
@@ -155,7 +217,7 @@ export const createWhepPeer = (options: WhepPeerOptions): WhepPeer => {
     const tick = (): void => {
       const remainingMs = Math.max(0, totalMs - (now() - startedAt))
       options.onCountdown?.({ remainingMs, totalMs })
-      if (remainingMs === 0) void end("cap")
+      if (remainingMs === 0) void end("cap").catch(() => undefined)
     }
     tick()
     timers = [...timers, setInterval(tick, options.countdownIntervalMs ?? DEFAULT_COUNTDOWN_INTERVAL_MS)]
@@ -181,6 +243,17 @@ export const createWhepPeer = (options: WhepPeerOptions): WhepPeer => {
       unloadTarget?.addEventListener("pagehide", onPageHide)
       await connection.setRemoteDescription({ type: "answer", sdp: answer.sdpAnswer })
       timers = [...timers, watchForStall(connection, options)]
+      watchForVideo(connection, {
+        now,
+        isCurrent: () => pc === connection,
+        track: (timer) => {
+          timers = [...timers, timer]
+        },
+        onNoVideo: async (sample) => {
+          options.onNoVideo?.(sample)
+          await end("no_video")
+        },
+      }, options)
       startCountdown()
     },
     async stop() {

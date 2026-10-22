@@ -1,0 +1,20 @@
+{
+  "data": {
+    "type": "device-status",
+    "id": "ava1.ring.device.status.FOISMNNIVD2MAMXDDMIISK65HGBJ5ERSPX5HROMTXKCZX2YF2RKSLTWPYJ46K3VPF6QQKSXC3NDYHHMPLOFL6TR2SMGY74IG",
+    "attributes": {
+      "audio": {
+        "snooze": {
+          "active": null,
+          "until": null
+        }
+      },
+      "reported_at": "2026-10-22T00:37:53Z",
+      "state": null,
+      "online": true
+    }
+  },
+  "meta": {
+    "time": "2026-10-22T00:43:17Z"
+  }
+}

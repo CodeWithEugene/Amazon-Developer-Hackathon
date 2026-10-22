@@ -1,0 +1,67 @@
+{
+  "data": {
+    "type": "device-configurations",
+    "id": "ava1.ring.device.configurations.RPMKUFLTADF2E77RBSAKAAOUVOXQ2MYMZGMOXJ6T7OERBQYP26IZCFHQRR6JVINJTWFX7ZMKRDHGAPMUT7PXYPPF7A4BKCY6BRPE7BM4DKYLYHT5WP6SXJU2GI",
+    "attributes": {
+      "motion_detection": {
+        "enabled": "on",
+        "motion_zones": [
+          {
+            "id": "f055c32b-f7c3-4c5a-9c0b-341c7b45ffc6",
+            "vertices": [
+              {
+                "x": 0,
+                "y": 0
+              },
+              {
+                "x": 0.5,
+                "y": 0
+              },
+              {
+                "x": 1,
+                "y": 0
+              },
+              {
+                "x": 1,
+                "y": 0.6
+              },
+              {
+                "x": 1,
+                "y": 1
+              },
+              {
+                "x": 0.5,
+                "y": 1
+              },
+              {
+                "x": 0,
+                "y": 1
+              },
+              {
+                "x": 0,
+                "y": 0.6
+              }
+            ]
+          }
+        ]
+      },
+      "e2e_encryption": {
+        "enabled": false
+      },
+      "image_enhancements": {
+        "color_night_vision": "off",
+        "hdr": "off",
+        "ir_led_night_vision": "off",
+        "auto_zoom_track": "off",
+        "privacy_zones": []
+      },
+      "audio": {
+        "customizable_slots": null,
+        "volume": 11
+      }
+    }
+  },
+  "meta": {
+    "time": "2026-10-22T00:43:19Z"
+  }
+}

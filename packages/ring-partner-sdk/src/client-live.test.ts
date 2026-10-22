@@ -125,18 +125,18 @@ describe("history pagination", () => {
     const { client, fetch } = make(() => json(pages[call++]))
     const all = await client.historyEventsAll("dev 1")
     expect(all.map((event) => event.id)).toEqual(["h1", "h2"])
-    expect(fetch.mock.calls[1]![0]).toBe("https://api.test/v1/devices/dev%201/history/events?page_key=abc123")
+    expect(fetch.mock.calls[1]![0]).toBe("https://api.test/v1/history/devices/dev%201/events?page_key=abc123")
   })
 
   it("follows links.next as a URL and passes event_types on the first page", async () => {
-    const pages = [page(["h1"], undefined, { next: "/v1/devices/dev1/history/events?cursor=2" }), page(["h2"])]
+    const pages = [page(["h1"], undefined, { next: "/v1/history/devices/dev1/events?cursor=2" }), page(["h2"])]
     let call = 0
     const { client, fetch } = make(() => json(pages[call++]))
     await client.historyEventsAll("dev1", { eventTypes: ["ding", "motion.human"] })
     expect(fetch.mock.calls[0]![0]).toBe(
-      "https://api.test/v1/devices/dev1/history/events?event_types=ding,motion.human"
+      "https://api.test/v1/history/devices/dev1/events?event_types=ding,motion.human"
     )
-    expect(fetch.mock.calls[1]![0]).toBe("https://api.test/v1/devices/dev1/history/events?cursor=2")
+    expect(fetch.mock.calls[1]![0]).toBe("https://api.test/v1/history/devices/dev1/events?cursor=2")
   })
 
   it("stops at sinceMs because pages are newest first", async () => {

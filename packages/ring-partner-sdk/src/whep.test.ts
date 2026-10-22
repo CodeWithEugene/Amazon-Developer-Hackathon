@@ -107,6 +107,29 @@ describe("createWhepPeer", () => {
     expect(peer.sessionUrl()).toBeUndefined()
   })
 
+  it("still reports the cap when the teardown DELETE fails", async () => {
+    const onEnded = vi.fn()
+    const teardown = vi.fn(async () => {
+      throw new Error("Stop failed with 500")
+    })
+    const { peer } = setup({ onEnded, teardown })
+    await peer.start()
+    await vi.advanceTimersByTimeAsync(WHEP_BATTERY_CAP_MS)
+    expect(teardown).toHaveBeenCalledOnce()
+    expect(onEnded).toHaveBeenCalledExactlyOnceWith("cap")
+  })
+
+  it("stop() reports the end and rethrows when the teardown DELETE fails", async () => {
+    const onEnded = vi.fn()
+    const teardown = vi.fn(async () => {
+      throw new Error("Stop failed with 403")
+    })
+    const { peer } = setup({ onEnded, teardown })
+    await peer.start()
+    await expect(peer.stop()).rejects.toThrow("403")
+    expect(onEnded).toHaveBeenCalledExactlyOnceWith("stopped")
+  })
+
   it("uses the 60 s cap for wired devices", async () => {
     const onEnded = vi.fn()
     const { peer } = setup({ batteryPowered: false, onEnded })

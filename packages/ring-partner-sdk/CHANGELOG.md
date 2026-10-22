@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Verified against the live Ring Playground on 22 October 2026. Device sub-resource schemas now use Ring's real type names (`device-status`, `device-capabilities`, `device-configurations`, `locations`), accept `null` wherever Ring returns it, and validate `online`, `reported_at`, `motion_detection.enabled`, motion zone geometry, and `e2e_encryption.enabled`. The guessed fields (`human_detection`, `live_view`, `motion_recording_enabled`) are gone. Real responses are committed under `src/fixtures/playground/` with a manifest of request paths and status codes.
+- Fixed the history URL: `/v1/history/devices/{deviceId}/events` (the earlier `/v1/devices/{id}/history/events` returned 404).
+- `subscriptions()` turns a 422 into `RingNotAvailableForAccountError` (a `RingUnprocessableError`); `isNotAvailableForAccount` helper.
+- `createWhepPeer` ends a session that reaches `connected` but decodes no frame within 8 s (`onNoVideo`, end reason `no_video`), DELETEing it so it does not hold Ring's session cap. Pure helpers `readInboundMedia` and `classifyVideoProgress`.
+- `@visitproof/ring-partner-sdk/testing` (source only, not published): the Playground fixtures and a mock Ring Playground server (`pnpm mock:playground`).
 - `appIntegrationComplete` sends `PATCH { status: "completed" }`; `appIntegrationDelete` sends `DELETE`; empty 204 responses resolve to `null`.
 - Presigned media is fetched without the Ring bearer token; media headers are read from the 303 first.
 - Open enums for motion sub types, history event types, device kinds, encryption states, integration and subscription states; unknown `included` resources are kept. `parseWebhookLenient` returns unknown `data.type` deliveries with their raw type instead of failing.

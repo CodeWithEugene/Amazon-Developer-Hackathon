@@ -73,7 +73,7 @@ describe("RingClient", () => {
   })
 
   it("filters history client-side and follows pagination", async () => {
-    const pages = [historyPage(["h1", "h2", "h3"], "/v1/devices/dev1/history/events?page=2"), historyPage(["h4", "h5"])]
+    const pages = [historyPage(["h1", "h2", "h3"], "/v1/history/devices/dev1/events?page=2"), historyPage(["h4", "h5"])]
     let call = 0
     const { client } = make(() => jsonResponse(pages[call++]))
     const all = await client.historyEventsAll("dev1", { eventTypes: ["motion.human", "motion.vehicle"] })

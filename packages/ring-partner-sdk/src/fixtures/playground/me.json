@@ -1,0 +1,11 @@
+{
+  "data": {
+    "id": "ava1.ring.account.PLAYGROUND_REDACTED",
+    "type": "users",
+    "attributes": {
+      "email": "[redacted]",
+      "last_name": "[redacted]",
+      "first_name": "[redacted]"
+    }
+  }
+}

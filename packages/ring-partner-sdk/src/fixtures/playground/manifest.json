@@ -1,0 +1,82 @@
+{
+  "provenance": "Ring Playground sandbox device",
+  "source": "Ring Developer Playground (live Ring Partner API)",
+  "apiBase": "https://api.amazonvision.com",
+  "recordedAt": "2026-10-22T00:42:57.048Z",
+  "capturedAt": "2026-10-22T00:43:20Z",
+  "notes": "me.json and devices.json (with every include) were written by pnpm ring:smoke at recordedAt. The other files are response bodies captured live at about 00:43 UTC the same day with the same Playground token. Bodies only; no tokens or personal data. The shared device id is kept so request paths can be checked.",
+  "deviceId": "ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37",
+  "redacted": [
+    "first_name",
+    "last_name",
+    "email",
+    "phone_number",
+    "tokens"
+  ],
+  "files": [
+    "me.json",
+    "devices.json",
+    "devices-no-include.json",
+    "status.json",
+    "capabilities.json",
+    "configurations.json",
+    "location.json",
+    "history.json",
+    "subscriptions-422.json"
+  ],
+  "requests": {
+    "me.json": {
+      "method": "GET",
+      "path": "/v1/users/me",
+      "status": 200
+    },
+    "devices.json": {
+      "method": "GET",
+      "path": "/v1/devices?include=status,capabilities,configurations,location",
+      "status": 200
+    },
+    "devices-no-include.json": {
+      "method": "GET",
+      "path": "/v1/devices",
+      "status": 200
+    },
+    "status.json": {
+      "method": "GET",
+      "path": "/v1/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/status",
+      "status": 200
+    },
+    "capabilities.json": {
+      "method": "GET",
+      "path": "/v1/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/capabilities",
+      "status": 200
+    },
+    "configurations.json": {
+      "method": "GET",
+      "path": "/v1/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/configurations",
+      "status": 200
+    },
+    "location.json": {
+      "method": "GET",
+      "path": "/v1/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/location",
+      "status": 200
+    },
+    "history.json": {
+      "method": "GET",
+      "path": "/v1/history/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/events",
+      "status": 200,
+      "alsoVerified": [
+        {
+          "method": "GET",
+          "path": "/v1/history/devices/ava1.ring.device.IKSLPMW2AYHHODS2Q4RSS22SCSWSCR7MUKA5EKE5IGS6MRTHQE3ZGEVUZJZ2HK5EGKZID7NOF5B5ZPKFFQR3J3NZF7KMVF37/events?event_types=motion.human,ding,on_demand",
+          "status": 200,
+          "body": "same as history.json"
+        }
+      ]
+    },
+    "subscriptions-422.json": {
+      "method": "GET",
+      "path": "/v1/accounts/me/subscriptions",
+      "status": 422
+    }
+  }
+}

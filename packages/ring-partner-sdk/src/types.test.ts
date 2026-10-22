@@ -94,7 +94,7 @@ describe("open enums", () => {
     const doc = deviceListDocumentSchema.parse({
       data: [{ id: "d1", type: "devices", attributes: { name: "Front Door", kind: "intercom" } }],
       included: [
-        { id: "d1", type: "device_status", attributes: { online: true, encryption_state: "future_mode" } },
+        { id: "d1", type: "device-status", attributes: { online: true, encryption_state: "future_mode" } },
         { id: "d1", type: "device_components", attributes: { count: 2 } },
       ],
     })
