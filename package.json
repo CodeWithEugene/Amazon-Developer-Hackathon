@@ -21,7 +21,8 @@
     "ring:smoke": "tsx scripts/ring-smoke.ts",
     "mcp:conformance": "pnpm --filter @visitproof/mcp test:conformance",
     "typecheck:scripts": "tsc -p scripts/tsconfig.json",
-    "test:scripts": "vitest run --config scripts/vitest.config.mts"
+    "test:scripts": "vitest run --config scripts/vitest.config.mts",
+    "ring:token": "sh scripts/ring-token.sh"
   },
   "prettier": "@visitproof/config/prettier",
   "devDependencies": {

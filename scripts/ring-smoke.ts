@@ -124,7 +124,12 @@ const main = async (): Promise<number> => {
   out(`Ring smoke test against ${apiBase} (provenance: ${PROVENANCE})`)
   const results = await run(ring)
   for (const result of results) out(`  ${result.ok ? "PASS" : "FAIL"}  ${result.name.padEnd(15)} ${result.summary}`)
-  if (!process.argv.includes("--no-write")) {
+  const anyPassed = results.some((result) => result.ok)
+  if (process.argv.includes("--no-write")) {
+    out("Fixtures not written (--no-write).")
+  } else if (!anyPassed) {
+    out("No call succeeded, so no fixtures were written.")
+  } else {
     await writeFixtures(results, apiBase)
     out(`Redacted fixtures written to ${FIXTURE_DIR}`)
   }
