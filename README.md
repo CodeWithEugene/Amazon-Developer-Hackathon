@@ -27,22 +27,23 @@ Principles: corroboration, not surveillance; events first, pixels optional; thre
 
 ## What Runs Where
 
-| Capability | Live against the Ring Partner API with a Playground token | Emulated in the demo | Code ready, not deployed |
+| Capability | Live against the Ring Partner API with a Playground token | Emulated in the demo | On AWS (us-east-1) |
 | --- | --- | --- | --- |
-| Ring webhooks (motion, doorbell press, device and integration lifecycle) | No: the Playground cannot send webhooks (friction log entry 1) | Yes: 181 HMAC-signed v1.1 deliveries from the SDK emulator, posted over HTTP to the real receiver | Yes: API Gateway plus Lambda receiver in `infra/` |
-| Device check (devices, status, capabilities, configurations) | Yes: `/family/devices` | No | |
-| Event history sync | Yes: Sync Ring History on `/family/devices` (stored with provenance `ring_history`) | No | |
-| Live view (WHEP) | Yes: `/family/live`, with Ring's session cap countdown | No | |
+| Ring webhooks (motion, doorbell press, device and integration lifecycle) | No: the Playground cannot send webhooks (friction log entry 1) | Yes: 181 HMAC-signed v1.1 deliveries from the SDK emulator, posted over HTTP to the real receiver | Deployed: API Gateway plus Lambda receiver, verified on 22 October 2026 with a signed synthetic webhook (202 signed, 401 unsigned or tampered) |
+| Account (`users/me`, subscriptions) | Yes: `users/me` returned 200 on 22 October 2026. Subscriptions returned 422 for the Playground user, which the SDK reports as "not available for this account" | No | |
+| Device check (devices, status, capabilities, configurations, location) | Yes: `/family/devices`. All five calls returned 200 on 22 October 2026 (one shared "Playground Device" doorbell). The schemas were then corrected against the captured responses, on which Device Check reads 4 of 4 required checks passing plus 1 informational item | No | |
+| Event history sync | Yes: Sync Ring History on `/family/devices` (stored with provenance `ring_history`). On 22 October 2026 history returned 200 with zero events, and the console shows "No Ring Events Since Consent" | No | |
+| Live view (WHEP) | Signaling only: on 22 October 2026 the WHEP session was created and ICE and DTLS connected (H264 and Opus negotiated), but the sandbox doorbell sent no media. `/family/live` ends a session that decodes no frame within 8 seconds and says so, with Ring's session cap countdown | No | |
 | Account linking (Account Link URL, Token Exchange URL, App Homepage URL) | Routes exist: `/link`, `/api/ring/token-exchange`, `/ring`; a real link needs a Ring app registration and Ring's Appstore flow | No | |
-| Presence Engine (arrival, departure, late, no-show, early departure, unobservable) | | Yes: the real engine handlers replayed in simulated time | Yes: DynamoDB Streams and EventBridge Lambdas |
+| Presence Engine (arrival, departure, late, no-show, early departure, unobservable) | | Yes: the real engine handlers replayed in simulated time | Deployed: DynamoDB Streams event processor and an EventBridge visit sweeper every minute, both verified |
 | EVV reconciliation | | Yes: an independent vendor CSV generated from the emulator's ground truth, imported through the domain parser | |
-| Signed evidence ledger | | Yes: local HMAC stand-in for the KMS signer | Yes: KMS ECDSA P-256 signer |
-| Narratives | | Yes: deterministic template, agency time zone | Yes: Bedrock Nova 2 Lite with template fallback |
-| Snapshots | | No | Yes: Ring snapshot to S3 with retention tags (disabled in the deployed stack until a token store exists) |
-| Ask VisitProof | | Yes: offline fixture brain calling the local MCP server | Yes: Strands Agents on Bedrock (`MODEL_PROVIDER=bedrock`) |
-| Email digests and alerts | | Logged only | Yes: SES |
+| Signed evidence ledger | | Yes: local HMAC stand-in for the KMS signer | Deployed: KMS ECDSA P-256 signer, which signed a ledger record in the end to end check |
+| Narratives | | Yes: deterministic template, agency time zone | Deployed with a template fallback; Bedrock Nova 2 Lite calls are throttled until the account's Nova quotas (0 today) are raised |
+| Snapshots | | No | Code ready: Ring snapshot to S3 with retention tags (the bucket is deployed; snapshots stay off until a token store exists) |
+| Ask VisitProof | | Yes: offline fixture brain calling the local MCP server | Code ready: Strands Agents on Bedrock (`MODEL_PROVIDER=bedrock`), not deployed |
+| Email digests and alerts | | Logged only | Code ready: SES, not configured (no sender identity) |
 
-Nothing in this repository has been deployed to AWS. The arrival Judge runs the deterministic rule judge; a TypeSafe Jev judge behind the same port is planned, not built.
+Four CDK stacks (Data, Observability, Webhook, Engine) are deployed in `us-east-1`; the console, the MCP server, and Ask VisitProof still run locally. The arrival Judge runs the deterministic rule judge; a TypeSafe Jev judge behind the same port is planned, not built.
 
 ## Judge Quick Start
 
@@ -83,10 +84,23 @@ Things to try: resolve or snooze an exception card and use Backfill Times on the
 
 ## Live Ring Mode
 
-1. Mint a token in the Ring Developer Playground (it lasts about 30 minutes and cannot be refreshed).
-2. Paste it into `.env` at the repository root as `RING_PLAYGROUND_ACCESS_TOKEN=...`.
-3. Run `pnpm ring:smoke`. It calls `me`, `devices`, and the first device's status, capabilities, configurations, location, and one history page, prints PASS or FAIL per call, and writes redacted responses to `packages/ring-partner-sdk/src/fixtures/playground/` (add `-- --no-write` to skip that).
+1. Mint a token in the Ring Developer Playground and copy it (it lasts about 30 minutes and cannot be refreshed).
+2. Run `pnpm ring:token` (macOS). It reads the token from the clipboard, writes it to `.env` at the repository root as `RING_PLAYGROUND_ACCESS_TOKEN`, never prints it, and clears the clipboard. On other systems, add that line to `.env` yourself.
+3. Run `pnpm ring:smoke`. It calls `users/me`, `devices`, the first device's status, capabilities, configurations, and location, one history page, and subscriptions. It prints PASS, INFO, or FAIL per call and the Device Check summary for each shared device, and writes redacted responses to `packages/ring-partner-sdk/src/fixtures/playground/` (add `-- --no-write` to skip that; nothing is written when no call succeeds).
 4. Run `pnpm demo`. From `.env` the demo passes only `RING_PLAYGROUND_ACCESS_TOKEN`, `RING_API_BASE`, and `VISITPROOF_TOKEN_KEY` to the console, which then runs `/family/devices` and `/family/live` against the real API with the provenance label "Ring Playground sandbox device". Everything else in the demo stays emulated.
+
+What we verified against the live Playground on 22 October 2026 (about 00:43 UTC, `https://api.amazonvision.com`):
+
+- `GET /v1/users/me` and `GET /v1/devices`: 200. One shared device, "Playground Device", a doorbell.
+- `GET /v1/devices/{id}/status`, `/capabilities`, `/configurations`, and `/location`: 200. The sandbox doorbell reports online, motion detection on with one motion zone, end to end encryption off, and location US, CA. Our first schemas rejected all four (real type names such as `device-status`, and many `null` fields); they are fixed and tested against the captured bodies (friction log entry 16).
+- `GET /v1/history/devices/{id}/events`, with and without `event_types`: 200 with zero events. The sandbox doorbell has no history, so `event_types` filtering could not be checked.
+- `GET /v1/accounts/me/subscriptions`: 422 for the Playground user, reported as INFO.
+- WHEP live view: the session was created and ICE and DTLS connected in the embedded browser and in Google Chrome, but only about 2.4 KB arrived in 13 seconds and no video frame was decoded. The sandbox doorbell appears to stream only after a simulated event, which we did not trigger (friction log entry 18).
+- Not verified live: webhooks (the Playground cannot send them), snapshot and clip downloads, and app integration writes.
+
+On those responses (served by the mock Ring Playground below) `pnpm ring:smoke` prints PASS for me, devices, status, capabilities, configurations, location, and history ("0 events"), INFO for subscriptions, and a Device Check summary of "4 of 4 required checks passing"; Human Detection is a fifth, informational item that does not count.
+
+Without a token, the mock Ring Playground serves the same captured responses on 127.0.0.1, so the smoke run and the console's live mode work offline. See "Mock Ring Playground" in [packages/ring-partner-sdk/README.md](packages/ring-partner-sdk/README.md); use a dummy token such as `mock-playground`, never a real one.
 
 ## How VisitProof Uses The Ring Partner API
 
@@ -98,7 +112,8 @@ Things to try: resolve or snooze an exception card and use Backfill Times on the
 | Account Link URL and App Homepage URL | `apps/console/app/link/`, `apps/console/app/ring/` |
 | Webhook URL receiver: verify, dedupe on request id, route the Ring account, persist, 202 before any engine work | `apps/webhooks/src/receive.ts`, `apps/webhooks/src/index.ts` |
 | Device check and history sync | `apps/console/lib/ring/device-check.ts`, `apps/console/lib/ring/history-sync.ts`, `apps/console/app/family/devices/` |
-| Live view over WHEP (browser-safe helper, session caps) | `packages/ring-partner-sdk/src/whep.ts`, `apps/console/app/api/ring/stream/`, `apps/console/app/family/live/` |
+| Live view over WHEP (browser-safe helper, session caps, ends a session that decodes no video within 8 seconds) | `packages/ring-partner-sdk/src/whep.ts`, `packages/ring-partner-sdk/src/whep-video.ts`, `apps/console/app/api/ring/stream/`, `apps/console/app/family/live/` |
+| Captured Playground responses and a mock Ring Playground that serves them | `packages/ring-partner-sdk/src/fixtures/playground/`, `packages/ring-partner-sdk/src/testing/mock-playground.ts` |
 | Snapshot download to S3 (deployable, not used in the demo) | `apps/engine/src/adapters/ring-snapshot-service.ts` |
 | Emulator: signed v1.1 deliveries, scenarios, and the two-week ground-truth plan | `packages/ring-partner-sdk/src/emulator/` |
 
@@ -106,12 +121,12 @@ Every door event carries its provenance (`ring_webhook`, `ring_history`, `playgr
 
 ## AWS Integrations
 
-The engine and receiver are written for AWS: DynamoDB (single table, streams), Lambda, API Gateway, EventBridge, S3, KMS (ledger signing), SES, SQS, CloudWatch, SNS, Budgets, and Bedrock (Nova 2 Lite narratives with Guardrails, and Strands Agents for Ask VisitProof). The CDK app in `infra/` synthesizes four stacks (`VisitProof-<env>-Data`, `-Observability`, `-Webhook`, `-Engine`); none has been deployed. Every adapter is tested with `aws-sdk-client-mock`. Cognito, AgentCore Runtime, Amplify Hosting, and Rekognition are planned. See [docs/aws-integrations.md](docs/aws-integrations.md) for each service, its file path, its status, and how to deploy safely.
+VisitProof's backend is a CDK v2 app in `infra/` with four stacks, and they are live in `us-east-1` (env `dev`): Data (DynamoDB single table with streams and PITR, an S3 media bucket, KMS token and ECDSA P-256 ledger signing keys), Observability (SNS alerts topic and a 100 USD budget), Webhook (API Gateway HTTP API `POST /ring/webhook` to the receiver Lambda) and Engine (stream event processor, visit sweeper every minute, daily digest). On 22 October 2026 we checked the whole event path with a synthetic signed Ring webhook. The signed request returned 202, while unsigned, wrong-key and tampered requests returned 401, and a duplicate returned 202 duplicate. The door event landed in DynamoDB, the stream ran the Presence Engine, and the engine wrote a ledger record signed by KMS. Not live yet: Bedrock narratives (the account's Nova 2 Lite quotas are 0, so the engine falls back to the deterministic template), SES mail, alert email subscriptions, the Ring webhook registration, and the Auth, MCP on AgentCore and Hosting stacks. The console still runs locally. Status, evidence, cost (about 3 to 5 USD a month) and teardown steps are in [docs/aws-integrations.md](docs/aws-integrations.md). Every adapter is also tested with `aws-sdk-client-mock`.
 
 ## MCP And Ask VisitProof
 
 - `apps/mcp` is an MCP server over Streamable HTTP on `MCP_PORT` (default 8000). Tools: `get_visit_status`, `list_visits`, `list_exceptions`, `explain_visit`, `get_client_summary`, `acknowledge_exception`, and `add_visit_note` (the two writes ask for confirmation and append to the signed ledger). Resources: `visitproof://schedule/{clientId}/{date}` and `visitproof://feed/{clientId}/today`. Prompt: `morning_briefing`. A bearer token is required; demo tokens work only in demo mode. Agency answers hide households that stopped sharing with the agency.
-- `/ask` in the console is an Alexa+ style simulator: the copilot (`apps/copilot`) picks tools and calls the MCP server at `MCP_URL`. The default brain is an offline fixture; `MODEL_PROVIDER=bedrock` uses a Strands agent on Bedrock.
+- `/ask` in the console is an Alexa+ style simulator: the copilot (`apps/copilot`) picks tools and calls the MCP server at `MCP_URL`. The default brain is an offline fixture; `MODEL_PROVIDER=bedrock` uses a Strands agent on Bedrock. The page shows tools by readable titles ("Visit Status"), opens on the Visual tab, and keeps the raw MCP request and result (code-form tool names, UTC timestamps) in a Response Detail tab labeled as protocol data.
 - Checks: `pnpm mcp:conformance` and the golden utterances in `pnpm --filter @visitproof/copilot test`.
 
 ## Development
@@ -124,6 +139,22 @@ pnpm typecheck:scripts && pnpm test:scripts   # the demo scripts
 pnpm --filter @visitproof/console build
 pnpm --filter infra exec cdk synth --no-lookups
 ```
+
+Last verified run (22 October 2026): `pnpm -r test` passes 655 of 655 tests in 77 files, and `pnpm test:scripts` passes 16 of 16 in 3 files, so 671 tests pass in all.
+
+| Package | Tests | Files |
+| --- | --- | --- |
+| `packages/config` | 5 | 1 |
+| `packages/ring-partner-sdk` | 128 | 14 |
+| `packages/domain` | 140 | 12 |
+| `packages/db` | 36 | 5 |
+| `apps/mcp` | 61 | 5 |
+| `infra` | 17 | 1 |
+| `apps/engine` | 53 | 9 |
+| `apps/copilot` | 43 | 4 |
+| `apps/webhooks` | 22 | 3 |
+| `apps/console` | 150 | 23 |
+| `scripts` (`pnpm test:scripts`) | 16 | 3 |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/build.md](docs/build.md). Friction we hit with the platforms is in [docs/friction-log.md](docs/friction-log.md).
 

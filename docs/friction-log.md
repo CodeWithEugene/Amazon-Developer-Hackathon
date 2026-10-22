@@ -6,14 +6,14 @@
 
 | # | Area | Task | Severity | Status |
 |---|---|---|---|---|
-| 1 | Ring Playground | Drive the webhook path from the sandbox device | High | Anticipated, not yet reproduced |
-| 2 | Ring Playground | Keep a token alive during a development session | Medium | Anticipated, not yet reproduced |
-| 3 | Ring API docs | Filter event history by type | Medium | Anticipated, not yet reproduced |
+| 1 | Ring Playground | Drive the webhook path from the sandbox device | High | Reproduced 22 October 2026 |
+| 2 | Ring Playground | Keep a token alive during a development session | Medium | Reproduced 22 October 2026 |
+| 3 | Ring API docs | Filter event history by type | Medium | Could not be evaluated 22 October 2026 (sandbox history is empty) |
 | 4 | ring-api-helloworld | Verify webhook signatures using the sample | High | Open |
 | 5 | Ring Developer Console | Recover credentials after closing the creation dialog | Medium | Anticipated, not yet reproduced |
 | 6 | Ring docs | Understand the hardware requirement for testing | Medium | Open |
 | 7 | Ring media | Size the watermark band for computer vision | Low | Anticipated, not yet reproduced |
-| 8 | Ring encryption | Detect whether a device is TAKE or E2EE encrypted | Medium | Anticipated, not yet reproduced |
+| 8 | Ring encryption | Detect whether a device is TAKE or E2EE encrypted | Low | Corrected 22 October 2026 (E2EE is exposed; TAKE is not) |
 | 9 | Alexa+ docs | Reconcile the MCP protocol version across pages | Medium | Open |
 | 10 | Alexa+ docs | Reconcile authentication guidance across pages | Medium | Open |
 | 11 | AWS AgentCore | Install the CLI when the older Python CLI is present | Low | Anticipated, not yet reproduced |
@@ -21,39 +21,42 @@
 | 13 | Ring emulator + Presence Engine | Replay the two-week dataset end to end | High | Resolved |
 | 14 | shadcn/ui | Ship the specced initial component set | Low | Resolved |
 | 15 | Spec drift | Align assurance and deletion copy with actual code | Medium | Resolved |
+| 16 | Ring API | Parse real device payloads with strict schemas | High | Reproduced 22 October 2026, worked around |
+| 17 | Ring API | Read subscriptions as the Playground user | Low | Reproduced 22 October 2026 |
+| 18 | Ring Playground | See video in live view from the sandbox doorbell | High | Reproduced 22 October 2026 |
 
 ## Entries
 
 ### 1. Ring Playground: drive the webhook path from the sandbox device
 
-- **Status:** Anticipated, not yet reproduced. No Playground token has been used in this repository yet (no calls, no recorded fixtures). The steps above are the planned reproduction; the finding comes from the Playground documentation and the Devpost forum.
+- **Status:** Reproduced 22 October 2026 (about 00:43 UTC) against `https://api.amazonvision.com` with a Playground token. The response bodies are committed in `packages/ring-partner-sdk/src/fixtures/playground/`.
 - **Task attempted:** Use the Playground sandbox doorbell to generate `motion_detected` and `button_press` webhooks so the visit-matching engine could be exercised against real Ring deliveries.
-- **Steps taken:** Generated a Playground token, listed devices, queried `GET /v1/history/devices/{id}/events`, opened a WHEP session, waited for events, checked the Devpost forum thread on the Playground for non-US entrants.
+- **Steps taken:** Minted a Playground token, called `GET /v1/users/me` and `GET /v1/devices` (one shared device, "Playground Device", a doorbell), called `GET /v1/history/devices/{id}/events` with and without `event_types`, opened a WHEP live view session, and looked for any place in the Playground to register a webhook URL.
 - **Expected:** Simulated motion or doorbell events (the release notes for 28 May 2026 mention "event simulation") delivered to a registered webhook URL, or at least visible in history.
-- **Actual:** History shows only `on_demand` entries created by our own live-view sessions; no motion or doorbell events exist; Playground sessions have no webhook URL so nothing can be delivered to a local or hosted endpoint.
+- **Actual:** History returned 200 with `data: []` on every call, with or without the filter: no motion, doorbell, or `on_demand` entries. A Playground session has no webhook URL, so nothing can be delivered to a local or hosted endpoint.
 - **Severity:** High. It changed the architecture: we built a TypeScript emulator that signs and delivers v1.1 webhooks so the event path could be tested at all.
-- **Workaround:** Emulator with HMAC-signed payloads and scenario replay; Playground used only for device metadata, history, snapshots, and live view; provenance labels on every event in the UI.
+- **Workaround:** Emulator with HMAC-signed payloads and scenario replay; Playground used only for device metadata, history, and live view; provenance labels on every event in the UI.
 - **Suggestion:** Add a "Send test event" control to the Playground that emits signed `motion_detected` (with `sub_type`) and `button_press` webhooks to a URL the developer pastes in, and let the sandbox device carry a few pre-seeded history events of each type.
 
 ### 2. Ring Playground: keep a token alive during a development session
 
-- **Status:** Anticipated, not yet reproduced. No Playground session has been run yet, so the 30 minute expiry has not been hit in practice. The expiry is documented; the steps above are the planned reproduction.
-- **Task attempted:** Run a two-hour development session against the Playground.
-- **Steps taken:** Generated a token, stored it in `.env`, worked, hit 401 after about 30 minutes, regenerated, repeated.
+- **Status:** Reproduced 22 October 2026. The token lasted about 30 minutes, came with no refresh token, and expired during our session while we were still debugging the schema and live view problems in entries 16 and 18.
+- **Task attempted:** Run a multi-hour development session against the Playground.
+- **Steps taken:** Minted a token, saved it to `.env` with `pnpm ring:token`, ran `pnpm ring:smoke` and the console in live mode, then kept working on the failures it found.
 - **Expected:** A refresh token or a longer-lived development token.
-- **Actual:** Access tokens expire after about 30 minutes with no refresh path; every expiry interrupts work and breaks long-running scripts such as history backfills.
+- **Actual:** The access token expires after about 30 minutes with no refresh path. Every fix after expiry needs a new token, and anything left unverified when it expires stays unverified.
 - **Severity:** Medium.
-- **Workaround:** Token provider prompts for a new token and pauses queued requests; scripts checkpoint cursors so they resume.
+- **Workaround:** `pnpm ring:token` saves a freshly copied token from the clipboard into `.env` without printing it. `pnpm ring:smoke` records every response in one pass, and a mock Ring Playground (`packages/ring-partner-sdk/src/testing/mock-playground.ts`) serves those captured responses so the fixes could be finished and tested after the token expired.
 - **Suggestion:** Offer a 24-hour developer token in the Playground, or a refresh token scoped to the sandbox device.
 
 ### 3. Ring API docs: filter event history by type
 
-- **Status:** Anticipated, not yet reproduced. The history call has not been made against the Playground yet. The finding comes from the documentation and forum reports; the steps above are the planned reproduction.
+- **Status:** Could not be evaluated on 22 October 2026. The filtered call succeeded, but the sandbox doorbell has no history events, so there was nothing to filter. The "appears unfiltered" finding below comes from another entrant's forum report and is neither confirmed nor refuted by our run.
 - **Task attempted:** Retrieve only human motion events with `event_types`.
-- **Steps taken:** Called `GET /v1/history/devices/{id}/events?event_types=motion.human` per the documentation; compared with an unfiltered call; read the forum correction from Amazon staff about plural syntax.
-- **Expected:** Only `motion.human` events.
-- **Actual:** The response appears unfiltered (also reported by another entrant); the documented parameter name and syntax did not match staff guidance until corrected in the forum.
-- **Severity:** Medium.
+- **Steps taken:** Called `GET /v1/history/devices/{id}/events?event_types=motion.human,ding,on_demand` and the same path without the filter against the Playground; read the forum correction from Amazon staff about plural syntax.
+- **Expected:** Only events of the requested types.
+- **Actual:** Both calls returned 200 with `data: []`. Ring accepted the parameter (no 400), but an empty page cannot show whether it filters. A forum entrant reports that the response is unfiltered, and the documented parameter name and syntax did not match staff guidance until corrected in the forum.
+- **Severity:** Medium. History filtering cannot be tested at all without events in the sandbox.
 - **Workaround:** Client-side filtering in the SDK; documented in the README.
 - **Suggestion:** Fix the parameter documentation with a working example and return a 400 with a helpful message when the filter syntax is wrong instead of silently ignoring it.
 
@@ -101,14 +104,14 @@
 
 ### 8. Ring encryption: detect whether a device is TAKE or E2EE encrypted
 
-- **Status:** Anticipated, not yet reproduced. Device status and capabilities have not been inspected against the Playground yet. The finding comes from the encryption documentation; the steps above are the planned reproduction.
+- **Status:** Corrected 22 October 2026. Our earlier entry said the encryption state was not exposed. That was wrong for end to end encryption: `GET /v1/devices/{id}/configurations` returns `e2e_encryption: { enabled: false }` for the sandbox doorbell. What remains undocumented is TAKE mode.
 - **Task attempted:** Decide up front whether snapshots for a device will be readable.
-- **Steps taken:** Inspected device status and capabilities; read the encryption documentation added on 16 September 2026.
-- **Expected:** A device attribute for encryption state.
-- **Actual:** TAKE devices return encrypted bytes from media endpoints; E2EE devices are absent from the device list; the status flag is described as "coming."
-- **Severity:** Medium.
-- **Workaround:** Treat undecodable media as an "encrypted device" observability reason and keep every feature event-only.
-- **Suggestion:** Ship the encryption attribute on the device resource and a webhook when it changes.
+- **Steps taken:** Called status, capabilities, and configurations for the Playground doorbell; read the encryption documentation added on 16 September 2026.
+- **Expected:** A device attribute for encryption state that covers both E2EE and TAKE.
+- **Actual:** E2EE is detectable from `configurations.e2e_encryption.enabled`. Nothing in status, capabilities, or configurations mentions TAKE, so an app still learns that a TAKE device's media is encrypted only when the bytes come back unreadable.
+- **Severity:** Low (was Medium before the correction).
+- **Workaround:** Device Check reads `e2e_encryption.enabled` for its encryption item. The Presence Engine marks a door whose encryption state is E2EE or TAKE unobservable with the reason "encrypted device", the snapshot service never stores a frame Ring flags as encrypted, and every feature stays event-only.
+- **Suggestion:** Add TAKE to the same object (for example an `encryption.mode` of `none`, `take`, or `e2ee`), document it next to `e2e_encryption`, and send a webhook when it changes.
 
 ### 9. Alexa+ docs: reconcile the MCP protocol version across pages
 
@@ -181,13 +184,50 @@
 - **Workaround:** Rewrote the dialog to describe the tombstone behavior honestly, wired the domain's `verifyChain` into the render path with an explicit "HMAC stand-in for the demo; KMS ECDSA P-256 in production" label, and populated `caregiverMobile` from the caregiver record.
 - **Suggestion:** Review destructive and assurance copy ("delete", "permanent", "verified", "signed") against the repository interface and the code that executes, not the product intent; add a claims-audit item to the review checklist.
 
+### 16. Ring API: parse real device payloads with strict schemas
+
+- **Status:** Reproduced 22 October 2026 against the Playground doorbell; worked around in the SDK the same day.
+- **Task attempted:** Validate device status, capabilities, configurations, and location with strict Zod schemas written from the Partner API documentation and the official `ring-api-helloworld` sample's schemas.
+- **Steps taken:** Ran `pnpm ring:smoke` with a Playground token, then compared each raw response with the schema that rejected it.
+- **Expected:** Payloads with the resource type names and field types the documentation shows.
+- **Actual:** All four calls returned 200, and the SDK threw `RingSchemaError` on each. The real `type` values are `device-status`, `device-capabilities`, `device-configurations`, and `locations`, which neither the documentation nor the sample shows. Many fields are `null`: `state`, `audio.snooze.active`, `audio.snooze.until`, `audio.customizable_slots`, `audio.supported_actions`, `battery_status`, `flood_detection`, and the other sensor capabilities. In the console, Device Check showed "0 of 5 checks passing" with every item "Not Reported", while the real data said online, motion detection on, one motion zone, and end to end encryption off.
+- **Severity:** High. Every device read failed on first contact, and a family would have been told their doorbell reported nothing.
+- **Workaround:** Committed the captured bodies as fixtures with a manifest of request paths and status codes. The schemas now use the real type names, accept `null` wherever Ring returned it, and keep unknown keys, while still validating the fields VisitProof relies on (`online`, `reported_at`, `motion_detection.enabled`, motion zone vertices, `e2e_encryption.enabled`, `country`). On the captured data Device Check reads "4 of 4 required checks passing, plus 1 informational item".
+- **Suggestion:** Publish a complete response example for every resource, with the real `type` value and with `null` shown wherever Ring can return it, and state which fields are nullable. A JSON schema or OpenAPI document for the Partner API would let partners generate validators instead of guessing.
+
+### 17. Ring API: read subscriptions as the Playground user
+
+- **Status:** Reproduced 22 October 2026.
+- **Task attempted:** Read the account's Ring subscriptions with the SDK's `subscriptions()` call as part of the Playground smoke run.
+- **Steps taken:** Called `GET /v1/accounts/me/subscriptions` with a Playground token.
+- **Expected:** 200 with an empty list, or a documented error that says subscriptions are not available in the Playground.
+- **Actual:** 422 Unprocessable Entity with "Unable to process subscription request for this user". A 422 usually means the request was malformed, which it was not.
+- **Severity:** Low.
+- **Workaround:** The SDK maps this 422 to a typed `RingNotAvailableForAccountError`, and `pnpm ring:smoke` reports it as INFO rather than FAIL.
+- **Suggestion:** Return an empty list for the Playground user, or a documented error code meaning "not available for this account", and note it in the subscriptions reference.
+
+### 18. Ring Playground: see video in live view from the sandbox doorbell
+
+- **Status:** Reproduced 22 October 2026 in the embedded browser and in Google Chrome.
+- **Task attempted:** Show the sandbox doorbell's live view on `/family/live` over WHEP.
+- **Steps taken:** Started a session through the console's `/api/ring/stream`, which posts the SDP offer to `POST /v1/devices/{id}/media/streaming/whep/sessions`, then watched the peer connection state and WebRTC stats.
+- **Expected:** Sample video from the sandbox doorbell, or a clear note in the live view documentation that the sandbox streams only after a simulated event.
+- **Actual:** The session was created (200 with an SDP answer). ICE reached connected and DTLS connected, and the answer negotiated H264 (payload 118), RTX, and Opus. In 13 seconds only about 2.4 KB arrived and no `inbound-rtp` stats appeared: the sandbox doorbell sent no media. The Playground release notes mention live view event simulation for Package, Vehicle, and Motion, so triggering one may be required, but nothing next to the live view documentation says so. We did not trigger one, so whether it starts video is unverified.
+- **Severity:** High. A connected session with a black player looks exactly like a bug in our WebRTC code, and we spent the time ruling that out.
+- **Workaround:** Live View now ends a session that reaches connected but decodes no frame within 8 seconds: it sends DELETE for the session and shows a warning titled "Connected To Ring, But No Video Arrived". While it waits, the session cap countdown runs as usual; once the session ends, the countdown stops and the warning replaces it.
+- **Suggestion:** Make the sandbox doorbell stream sample video continuously, or document the exact trigger next to the live view and WHEP documentation.
+
 ## Feature Requests
 
 | Priority | Platform | Request | Why |
 |---|---|---|---|
 | High | Ring Playground | Signed test webhooks to a developer-supplied URL | Makes the event path testable without hardware |
-| High | Ring API | Encryption state on the device resource | Lets apps degrade gracefully before requesting media |
+| High | Ring Playground | A sandbox doorbell that streams sample video continuously, or a documented trigger for it | A connected live view with no media is indistinguishable from a client bug |
+| High | Ring API | Response examples that show real type names and every field that can be `null` | Strict validators written from the docs reject every real device payload |
 | High | Ring API | Official test vectors for webhook signatures and nonces | Prevents certification failures |
+| Medium | Ring API | A JSON schema or OpenAPI document for the Partner API | Partners can generate validators instead of guessing |
+| Medium | Ring API | TAKE mode next to `e2e_encryption` on the device resource | Lets apps degrade gracefully before requesting media |
+| Medium | Ring Playground | Pre-seeded history events of each type on the sandbox doorbell | History parsing and `event_types` filtering cannot be tested on an empty page |
 | Medium | Ring API | Server-side `event_types` filtering that works as documented | Reduces client-side paging |
 | Medium | Ring Developer Console | Secret rotation | Standard OAuth hygiene |
 | Medium | Alexa+ | Public conformance checker for MCP add-ons | Everyone is guessing today |

@@ -171,19 +171,20 @@ Access patterns are enumerated in `packages/db/README.md` with the query for eac
 
 ### 5.1 `@visitproof/ring-partner-sdk` (packages/ring-partner-sdk)
 
-Exports:
+Exports (as built; `packages/ring-partner-sdk/README.md` is the reference):
 
-- `RingClient({ baseUrl, getAccessToken, onRateLimit })` with methods `me()`, `devices({ include })`, `device(id)`, `deviceStatus(id)`, `deviceCapabilities(id)`, `deviceConfigurations(id)`, `deviceLocation(id)`, `historyEvents(id, { eventTypes?, pageKey? })` (client-side filter fallback), `snapshot(id, { type: "at_timestamp" | "latest_in_range", ... })` returning the presigned URL and bytes after following the 303 and mapping 416/425/403/422 to typed errors, `clip(id, {...})`, `whepStart(id, sdpOffer)` returning `{ sdpAnswer, sessionUrl }`, `whepStop(sessionUrl)`, `subscriptions()`, `appIntegrationConfirm({ nonce, accountIdentifier })`, `appIntegrationComplete()`, `appIntegrationDelete()`.
-- `exchangeAuthorizationCode`, `refreshAccessToken` (single-flight, rotation-aware).
-- `verifyWebhookSignature(rawBody: Uint8Array, header: string, key: string): boolean` (constant time, `sha256=` hex).
+- `RingClient({ baseUrl, getAccessToken, fetch, onRateLimit, onUnauthorized })` with methods `me()`, `devices({ include })`, `device(id)`, `deviceStatus(id)`, `deviceCapabilities(id)`, `deviceConfigurations(id)`, `deviceLocation(id)`, `historyEvents(id, { eventTypes?, pageKey? })` and `historyEventsAll(...)` on `GET /v1/history/devices/{id}/events` (the path verified against the Playground; `event_types` is sent and also applied client-side), `snapshot(id, { type: "at_timestamp" | "latest_in_range", ... })` returning the presigned URL and bytes after following the 303 and mapping 416/425/403/422 to typed errors, `clip(id, {...})`, `whepStart(id, sdpOffer)` returning `{ sdpAnswer, sessionUrl }`, `whepStop(sessionUrl)`, `subscriptions()` (a 422 raises `RingNotAvailableForAccountError`), `appIntegrationConfirm({ nonce, accountIdentifier })`, `appIntegrationComplete()`, `appIntegrationDelete()`.
+- `exchangeAuthorizationCode`, `refreshAccessToken`, and `createTokenManager` (single-flight, rotation-aware).
+- `verifyWebhookSignature(rawBody: Uint8Array, header: string, key: string): boolean` (constant time, `sha256=` hex) and `parseWebhookLenient` (an unknown `data.type` is kept, not rejected).
 - `computeAccountLinkNonce(key, timeMs, accountId)` (URL-safe base64, no padding) and `matchNonce(...)`.
-- Zod schemas for webhook v1.1 (`WebhookEnvelope`, discriminated union on `data.type` for all event types including sensors and subscriptions), JSON:API device documents, history events, error documents.
-- `createWhepPeer({ videoEl, iceServers, onStall })` browser helper implementing the documented pattern (handlers before `createOffer`, `recvonly`, ICE gathering complete, `getStats` stall detection, keepalive DELETE on unload).
+- Zod schemas for webhook v1.1 (`WebhookEnvelope`, discriminated union on `data.type` for all event types including sensors and subscriptions), JSON:API device documents, history events, error documents. Device sub-resources use Ring's real type names (`device-status`, `device-capabilities`, `device-configurations`, `locations`) and accept `null` wherever the Playground returned it.
+- `createWhepPeer({ videoEl, signaling, teardown, batteryPowered, onCountdown, onEnded, onStall, onNoVideo })` browser helper (subpath `./whep`) implementing the documented pattern (handlers before `createOffer`, `recvonly`, ICE gathering complete, `getStats` stall detection, keepalive DELETE on `pagehide`), enforcing the 30 s battery and 60 s wired caps with a countdown, and ending a connected session that decodes no video within 8 s with reason `no_video`.
 - `cropWatermarkBand(imageData, ratio = 0.15)` for inference only.
-- `emulator`: `startEmulator({ port, signingKey, webhookUrl })` serving mock `/v1/*` (devices, status, capabilities, configurations, history with cursors, snapshot 303 to a local presigned URL, WHEP signaling), a `/_emulator` control plane (`POST /events`, `POST /scenario/{name}`, `POST /device/{id}/offline`, `POST /encryption/{state}`, `POST /reset`), and a scenario runner with speed control. Scenarios: `on_time`, `late_arrival`, `no_show`, `early_departure`, `double_visitor` (delivery before the aide), `device_offline_mid_visit`, `encrypted_device`, `integration_removed`, plus `two_weeks` (composite for three clients).
-- `fixtures/`: recorded Playground responses (devices, capabilities, configurations, history, one WHEP SDP exchange, one snapshot frame with provenance metadata).
+- `RingEmulator`: a payload generator (not an HTTP server) that signs v1.1 deliveries. Scenarios: `on_time`, `late_arrival`, `no_show`, `early_departure`, `double_visitor` (delivery before the aide), `device_offline_mid_visit`, `encrypted_device`, `integration_removed`, `ding`, `motion`, `arrival`, `departure`, plus `twoWeeks()` (composite for three clients with per-visit ground truth). `withRedeliveries` adds Ring style resends.
+- `fixtures/playground/`: the real Playground responses captured on 22 October 2026 (users/me, devices, the four sub-resources, an empty history page, the subscriptions 422) with a manifest of request paths and status codes.
+- `./testing` (not published): `createMockPlaygroundHandler()` and `startMockPlayground()` (127.0.0.1, default port 3271), a mock Ring Playground that serves those fixtures and answers WHEP POST and DELETE.
 
-Published to npm during the window with Apache-2.0, README, tests, and a changelog; `visitproof` and `@visitproof/*` names are unregistered as of 27 September 2026.
+Packaged for npm (version 0.1.0, Apache-2.0, README, 128 tests, changelog); `visitproof` and `@visitproof/*` names were unregistered as of 27 September 2026.
 
 ### 5.2 Ring endpoints in `apps/console`
 
@@ -192,14 +193,14 @@ Published to npm during the window with Apache-2.0, README, tests, and a changel
 | Token Exchange URL | `POST /api/ring/token-exchange` | Validate body, exchange code within 60 s, call `me()`, store `UnclaimedToken` encrypted; return 200 in under 2 s |
 | Account Link URL | `GET /link?nonce&time` | Freshness check (600 s, not future); render sign-in/create with Ring email pre-filled; after code verification, match nonce, `appIntegrationConfirm`, `appIntegrationComplete`, create `RingIntegration`, redirect to consent |
 | App Homepage URL | `GET /ring` | "Account Linked Successfully" or "Link Your Ring" with routes to the portal; never a dead end |
-| Webhook URL | `POST /api/ring/webhook` (local) and `apps/webhooks` Lambda (production) | Read raw body, verify signature, 401 on failure, dedupe on `meta.request_id` (conditional put), persist `DoorEvent`, return 202; DynamoDB Streams trigger the engine |
-| Stream proxy | `POST /api/ring/stream`, `DELETE /api/ring/stream` | Browser sends SDP; server calls WHEP; countdown enforced (30 s battery, 60 s wired) |
-| Snapshot | server action | Requested 15 s after arrival when consent allows; stored to S3 with watermark intact; labels via Rekognition on the cropped copy which is discarded |
-| History backfill | engine job on link | From consent time forward, paced at 5 requests per second per client, cursor persisted |
+| Webhook URL | `apps/webhooks` (a local Node server in the demo, an API Gateway Lambda in production; the console has no webhook route) | Read raw body, verify signature, 401 on failure, dedupe on `meta.request_id` (conditional put), persist `DoorEvent`, return 202; DynamoDB Streams trigger the engine |
+| Stream proxy | `POST /api/ring/stream`, `DELETE /api/ring/stream` | Browser sends SDP; server calls WHEP and keeps the Ring session URL server-side; the browser helper counts down the cap (30 s battery, 60 s wired) and the server registry also stops the session at the cap |
+| Snapshot | engine adapter (`apps/engine/src/adapters/ring-snapshot-service.ts`), disabled in the deployed stack until a token store exists | Requested after arrival when consent allows; stored to S3 with watermark intact; an encrypted frame is never stored; Rekognition labels are planned, not built |
+| History sync | `POST /api/ring/history` (Sync Ring History on `/family/devices`) | From consent time forward for every shared device, paced at 5 pages per second (200 ms apart, at most 20 pages), deduped on the Ring event id and saved with provenance `ring_history`; an empty result shows "No Ring Events Since Consent" |
 
 ### 5.3 Device Check (family onboarding)
 
-Reads status, capabilities, configurations; produces a checklist: Online, Motion Recording On, Motion Zone Covers Walkway (zone present), Human Detection Available, Encryption State Known. Each failed item shows "what is wrong, why it matters, exactly where to change it in the Ring app" per the UX guide.
+Reads `GET /v1/devices?include=status,capabilities,configurations,location` in one call (`apps/console/lib/ring/device-check.ts`) and produces a checklist per shared device with four required items, Online, Motion Recording On, Motion Zone Present, and Encryption State Known (end to end encryption on is a fail), plus Human Detection as an informational item that never counts, because Ring's capabilities do not report person detection. The summary reads "N of M required checks passing"; on the captured Playground doorbell it is 4 of 4. Every item shows what VisitProof observed, why it matters, and where to change it in the Ring app. In demo mode (no token) the page explains that Device Check needs live Ring mode.
 
 ---
 
@@ -233,7 +234,7 @@ Jev questions (server-side, `packages/domain/judgments.ts`):
 
 All judgments are logged with inputs and outputs for the evidence trail and are replayable from fixtures without calling the API in tests.
 
-Narratives (`packages/domain/narratives.ts`): build a structured summary, call Bedrock Nova 2 Lite with a system prompt that forbids speculation, identity, and health language, apply Guardrails, validate the output against rules (must contain the times, must be under 60 words, must not contain names other than the caregiver's when a clock-in exists), else fall back to the template with `provenance: "template"`.
+Narratives: `packages/domain/src/narratives.ts` builds the deterministic template (times in the agency time zone, for example "8:04 AM ET") and validates text against rules (must contain the arrival time, must be under 60 words, must not contain names other than the caregiver's). `apps/engine/src/adapters/bedrock-narrator.ts` sends Bedrock Nova 2 Lite the template as a draft plus statuses and agency-local times only, with a system prompt that forbids added facts, names, health details, guesses, and dashes and optional Guardrails; any failure, intervention, or rule violation falls back to the template with `provenance: "template"`. The demo uses the template only.
 
 ---
 
@@ -277,7 +278,7 @@ Narratives (`packages/domain/narratives.ts`): build a structured summary, call B
 
 ### 8.2 Ask VisitProof simulator (`/ask`)
 
-Mirrors Amazon's web simulator layout: left conversation (shadcn chat components `MessageScroller`, `Message`, `Bubble`), "Ask VisitProof" input with optional browser speech recognition, right panel device preview (Echo Show small and large toggle via `ToggleGroup`) rendering the structured content as a Card, bottom `Tabs`: Response Detail (tool call JSON), Trace (timings), Visual. Brain: Strands agent with the MCP client over Streamable HTTP (`MODEL_PROVIDER=fixture` uses golden-utterance mappings offline). Golden utterances in `apps/mcp/test/golden.json` map phrases to expected tool selections and run with `pnpm --filter @visitproof/copilot test` against the fixture brain (Nova 2 Lite runs are planned).
+Mirrors Amazon's web simulator layout: left conversation (shadcn chat components `MessageScroller`, `Message`, `Bubble`), "Ask VisitProof" input with optional browser speech recognition, right panel device preview (Echo Show small and large toggle via `ToggleGroup`) rendering the structured content as a Card, bottom `Tabs`: Visual (opens first), Trace (timings, with readable step titles such as "Tool Call: Visit Status"), and Response Detail (tool call JSON, labeled as protocol data with code-form tool names and UTC timestamps). Everywhere else on the page, tool names show as readable titles such as "Visit Status". Brain: Strands agent with the MCP client over Streamable HTTP (`MODEL_PROVIDER=fixture` uses golden-utterance mappings offline). Golden utterances in `apps/mcp/test/golden.json` map phrases to expected tool selections and run with `pnpm --filter @visitproof/copilot test` against the fixture brain (Nova 2 Lite runs are planned).
 
 ---
 
@@ -326,10 +327,10 @@ Status badge mapping (single source `packages/ui/src/components/status-badge.tsx
 | Route | Purpose | Components | Buttons |
 |---|---|---|---|
 | `/family/link` | Post-link consent | `Questionnaire` (3 steps: What Is Shared, Snapshots, Notifications) | **Next**, **Back**, **Finish Setup** |
-| `/family/devices` | Device Check | `ItemGroup` checklist with `Badge`s, `Alert` per failed check with Ring app path | **Run Check Again**, **Open Ring App Instructions** |
+| `/family/devices` | Device Check (live Ring mode) | Provenance `Badge`, one `Card` per shared device with an `ItemGroup` checklist, a state `Badge` per item, and the Ring app path for every item not passing | **Sync Ring History** |
 | `/family` | Feed | One `Card` per day (title with date, `Badge` status, arrival and departure, narrative, optional snapshot `AspectRatio` image with provenance caption); `Empty` before the first visit | **View Details**, **Report A Problem** |
 | `/family/visits/[id]` | Visit detail | Timeline `Item`s (Observed, Reported, Resolved columns as `Tabs`), snapshot, notes | **Add Note**, **Share With Agency** (toggle), **Download Evidence** |
-| `/family/live` | Live view | `AspectRatio` video, countdown `Progress`, provenance label | **Start Live View**, **Stop** |
+| `/family/live` | Live view (live Ring mode) | Video, countdown `Progress` ("Live View Time Left"), provenance label, and an `Alert` titled "Connected To Ring, But No Video Arrived" when no frame decodes within 8 s | **Start Live View**, **Stop Live View** |
 | `/family/privacy` | Consent and data | `FieldSet` toggles, retention `Select`, export and delete | **Save**, **Export My Data**, **Pause Sharing**, **Delete Everything** (AlertDialog) |
 
 ### 9.4 Caregiver Record (`/me/*`, magic link)
@@ -374,8 +375,10 @@ Family invitation; Account Linked; Daily Digest (one per client per day, dedupe 
 | MCP conformance | Vitest over HTTP | Transport rules for 2025-03-26 and 2025-11-25, auth, tools, structured output, golden utterances with fixture brain | CI required |
 | E2E | Playwright | Judge quick start: sign in as each role, run the two-week scenario, verify Today board, exception resolution, family feed, caregiver note, export download, simulator turn | CI required on `main` |
 | Accessibility | Playwright + axe | Every route at desktop and mobile widths | Warnings fail on `main` |
-| Live smoke (manual) | scripts | Playground token: devices, capabilities, history, snapshot request, WHEP frame capture; record fixtures | Run in integration week and before the video |
+| Live smoke (manual) | `pnpm ring:smoke` | Playground token: users/me, devices, status, capabilities, configurations, location, one history page, subscriptions; prints PASS, INFO, or FAIL and the Device Check summary; records redacted fixtures. Snapshot and WHEP are not part of it. Ran on 22 October 2026 | Before the video; the mock Ring Playground replays the fixtures offline |
 | Load | k6 (small) | Webhook receiver 100 rps for 60 s, p95 under 100 ms | Once before submission |
+
+Last verified run (22 October 2026): `pnpm -r test` passes 655 of 655 tests in 77 files (config 5, ring-partner-sdk 128, domain 140, db 36, mcp 61, infra 17, engine 53, copilot 43, webhooks 22, console 150), and `pnpm test:scripts` passes 16 of 16 in 3 files: 671 tests in all. `packages/domain` statement coverage is 99.2 percent.
 
 Definition of done per feature: tests written first for domain logic, storybook-free visual check in the browser at 390 px and 1440 px, empty and error states present, copy rules pass a lint script (`pnpm lint:copy` greps for dashes and lowercase button labels in `messages/*.ts`).
 
