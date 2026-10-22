@@ -11,13 +11,18 @@ import {
  * is the default so a missing argument never falls back to server time.
  */
 
-/** Formats an ISO datetime as a short agency-local time, e.g. 10:41 AM. */
+/**
+ * Formats an ISO datetime as an agency-local time with the zone, e.g.
+ * 10:41 AM ET, so a lone time never reads differently from the window
+ * beside it. A missing time renders as `fallback`.
+ */
 export function formatTime(
   iso: string | undefined,
-  timeZone: string = DEFAULT_TIME_ZONE
+  timeZone: string = DEFAULT_TIME_ZONE,
+  fallback = "not observed"
 ): string {
-  if (!iso) return "not observed"
-  return formatLocalTime(iso, timeZone)
+  if (!iso) return fallback
+  return formatLocalTimeZoned(iso, timeZone)
 }
 
 /** Formats a window, e.g. 7:00 AM to 9:00 AM ET. */

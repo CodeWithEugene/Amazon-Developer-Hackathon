@@ -91,8 +91,9 @@ export function ReconciliationCard({
       <CardHeader>
         <CardTitle>Reconciliation</CardTitle>
         <CardDescription>
-          Door observations joined with EVV clock-ins, newest first. Choose a
-          range, then filter by outcome.
+          Door observations joined with EVV clock-ins, newest first. Delta is
+          the EVV time minus the door time, in minutes. Choose a range, then filter by
+          outcome.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
@@ -110,7 +111,7 @@ export function ReconciliationCard({
           <ToggleGroupItem value="two-weeks">Two Weeks</ToggleGroupItem>
         </ToggleGroup>
         <Tabs value={outcome} onValueChange={(value) => setOutcome(value as OutcomeFilter)}>
-          <TabsList className="h-auto flex-wrap">
+          <TabsList className="h-auto flex-wrap justify-start group-data-horizontal/tabs:h-auto">
             {OUTCOME_TABS.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value}>
                 {tab.label} ({count(tab.value)})
@@ -146,10 +147,8 @@ function ReconciliationTable({ rows }: { rows: ReconRow[] }) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Client</TableHead>
-            <TableHead>Caregiver</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead>Window</TableHead>
+            <TableHead>Visit</TableHead>
+            <TableHead>Date And Window</TableHead>
             <TableHead>Door Arrival</TableHead>
             <TableHead>Door Departure</TableHead>
             <TableHead>Clock-In</TableHead>
@@ -179,21 +178,33 @@ function ReconRowView({ row }: { row: ReconRow }) {
   return (
     <TableRow>
       <TableCell>
-        <Link
-          href={`/agency/visits/${encodeURIComponent(row.visitId)}`}
-          className="font-medium underline-offset-4 hover:underline"
-        >
-          {row.clientName}
-        </Link>
+        <div className="flex flex-col">
+          <Link
+            href={`/agency/visits/${encodeURIComponent(row.visitId)}`}
+            className="font-medium underline-offset-4 hover:underline"
+          >
+            {row.clientName}
+          </Link>
+          <span className="text-xs text-muted-foreground">{row.caregiverName}</span>
+        </div>
       </TableCell>
-      <TableCell>{row.caregiverName}</TableCell>
-      <TableCell className="whitespace-nowrap">{row.dateLabel}</TableCell>
-      <TableCell className="whitespace-nowrap">{row.window}</TableCell>
-      <TableCell>{row.doorArrival}</TableCell>
-      <TableCell>{row.doorDeparture}</TableCell>
-      <TableCell>{row.clockIn}</TableCell>
-      <TableCell>{row.clockOut}</TableCell>
-      <TableCell className="whitespace-nowrap">{row.delta}</TableCell>
+      <TableCell>
+        <div className="flex flex-col">
+          <span>{row.dateLabel}</span>
+          <span className="text-xs text-muted-foreground">{row.window}</span>
+        </div>
+      </TableCell>
+      <TableCell className="tabular-nums">{row.doorArrival}</TableCell>
+      <TableCell className="tabular-nums">{row.doorDeparture}</TableCell>
+      <TableCell className="tabular-nums">{row.clockIn}</TableCell>
+      <TableCell className="tabular-nums">{row.clockOut}</TableCell>
+      <TableCell className="tabular-nums">
+        <div className="flex flex-col">
+          {row.deltaLines.map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </div>
+      </TableCell>
       <TableCell>
         <StatusBadge status={row.outcome} />
       </TableCell>

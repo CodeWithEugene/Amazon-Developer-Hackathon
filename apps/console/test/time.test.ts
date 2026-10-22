@@ -7,6 +7,7 @@ import {
   localDateKey,
   localWallTimeToIso,
   zoneAbbreviation,
+  zoneDescription,
 } from "@/lib/time"
 
 const TZ = "America/New_York"
@@ -16,6 +17,11 @@ describe("agency time zone helpers", () => {
     expect(formatLocalTime("2026-09-14T13:04:00Z", TZ)).toBe("9:04 AM")
     expect(formatLocalTimeZoned("2026-09-14T13:04:00Z", TZ)).toBe("9:04 AM ET")
     expect(zoneAbbreviation("2026-09-14T13:04:00Z", TZ)).toBe("ET")
+  })
+
+  it("describes the zone in words instead of the IANA name", () => {
+    expect(zoneDescription("2026-09-14T13:04:00Z", TZ)).toBe("ET (Eastern Time)")
+    expect(zoneDescription("2026-09-14T13:04:00Z", TZ)).not.toContain("/")
   })
 
   it("computes today as the agency-local calendar date", () => {

@@ -45,7 +45,7 @@ export class RingLiveError extends Error {
 export const liveModeOff = (): RingLiveError =>
   new RingLiveError(
     "live_mode_off",
-    "Live mode is off. Set RING_PLAYGROUND_ACCESS_TOKEN on the server or link a Ring account to call the Ring Partner API."
+    "Live mode is off. Link a Ring account, or add a Ring Developer Playground token on the server, to use the Ring Partner API."
   )
 
 export const tokenExpired = (source: "playground" | "linked", cause?: unknown): RingLiveError =>

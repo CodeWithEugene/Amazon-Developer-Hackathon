@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     const live = await getRingClient({ clientId: family.clientId })
     source = live.source
     const result = await syncRingHistory({ ring: live.client, repository, clientId: family.clientId, sinceMs, now })
-    return NextResponse.json({ result, provenance: live.provenanceLabel })
+    return NextResponse.json({ result, source: live.source, provenance: live.provenanceLabel })
   } catch (error) {
     return ringErrorResponse(error, source)
   }

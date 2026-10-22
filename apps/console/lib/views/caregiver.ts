@@ -20,14 +20,19 @@ import {
   zoneAbbreviation,
 } from "@/lib/time"
 
+import { clockInSummary, doorSummary } from "./visit-copy"
+
 export interface CaregiverVisit {
   id: string
   clientName: string
   dateLabel: string
   window: string
+  /** Door arrival with the zone, or "not observed". */
   doorArrival: string
-  doorDeparture: string
-  clockIn: string
+  /** For example "Door: arrived 8:08 AM ET, departure not observed." */
+  doorSummary: string
+  /** For example "Clock-in: none recorded." */
+  clockInSummary: string
   status: Visit["status"]
   outcome: ReconciliationOutcome
   missingClockInWithDoor: boolean
@@ -55,15 +60,15 @@ export interface CaregiverData {
 
 const HISTORY_DAYS = 14
 
-function caregiverVisit(visit: Visit, clientName: string, tz: string): CaregiverVisit {
+export function caregiverVisit(visit: Visit, clientName: string, tz: string): CaregiverVisit {
   return {
     id: visit.id,
     clientName,
     dateLabel: formatDateKeyWeekday(localDateKey(visit.scheduledStart, tz)),
     window: formatWindow(visit.scheduledStart, visit.scheduledEnd, tz),
     doorArrival: formatTime(visit.arrival?.at, tz),
-    doorDeparture: formatTime(visit.departure?.at, tz),
-    clockIn: visit.reconciliation?.clockIn ? formatTime(visit.reconciliation.clockIn, tz) : "none",
+    doorSummary: doorSummary(visit.arrival?.at, visit.departure?.at, tz),
+    clockInSummary: clockInSummary(visit.reconciliation?.clockIn, tz),
     status: visit.status,
     outcome: visit.reconciliation?.outcome ?? "pending",
     missingClockInWithDoor: isMissingClockInWithDoor(visit),

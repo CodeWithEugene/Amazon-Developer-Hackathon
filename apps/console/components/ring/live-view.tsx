@@ -1,23 +1,32 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { PlayIcon, SquareIcon } from "lucide-react"
+import { PlayIcon, SquareIcon, TriangleAlertIcon } from "lucide-react"
 
-import { createWhepPeer, type WhepEndReason, type WhepPeer } from "@visitproof/ring-partner-sdk/whep"
+import { createWhepPeer, type WhepPeer } from "@visitproof/ring-partner-sdk/whep"
+import { Alert, AlertDescription, AlertTitle } from "@workspace/ui/components/alert"
 import { Button } from "@workspace/ui/components/button"
 import { Field, FieldDescription, FieldLabel } from "@workspace/ui/components/field"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@workspace/ui/components/select"
 import { Spinner } from "@workspace/ui/components/spinner"
 
 import { CapCountdown } from "@/components/ring/cap-countdown"
+import { ENDED_TEXT, noVideoNotice, STOP_UNCONFIRMED_TEXT, type LiveViewSource } from "@/lib/ring/live-view-copy"
+import { startOutcome } from "@/lib/ring/live-view-state"
 import type { LiveDevice } from "@/lib/ring/views"
 
-type Status = "idle" | "connecting" | "live" | "ended" | "error"
+type Status = "idle" | "connecting" | "live" | "ended" | "no_video" | "error"
 
-const ENDED_TEXT: Readonly<Record<WhepEndReason, string>> = {
-  cap: "Live view ended at Ring's time limit. Start it again if you need another look.",
-  stopped: "Live view stopped.",
-  unload: "Live view stopped.",
+/** Shown when Ring connected but no frame decoded in time (session already stopped). */
+function NoVideoAlert({ source }: { source: LiveViewSource }) {
+  const notice = noVideoNotice(source)
+  return (
+    <Alert variant="warning">
+      <TriangleAlertIcon aria-hidden="true" />
+      <AlertTitle>{notice.title}</AlertTitle>
+      <AlertDescription>{notice.description}</AlertDescription>
+    </Alert>
+  )
 }
 
 class SignalingError extends Error {}
@@ -44,8 +53,21 @@ const teardown = async (sessionUrl: string): Promise<void> => {
   if (!response.ok && response.status !== 404) throw new Error(`Stop failed with ${response.status}`)
 }
 
-/** WHEP live view: recvonly, time boxed by Ring's cap, explicit Stop. */
-export function LiveView({ devices, provenanceLabel }: { devices: LiveDevice[]; provenanceLabel: string }) {
+/**
+ * WHEP live view: recvonly, time boxed by Ring's cap, explicit Stop. If the
+ * connection is up but no frame decodes within 8 seconds, the peer DELETEs
+ * the session and a warning explains why (the Playground sandbox doorbell
+ * may only stream during a simulated event; that is unverified).
+ */
+export function LiveView({
+  devices,
+  provenanceLabel,
+  source,
+}: {
+  devices: LiveDevice[]
+  provenanceLabel: string
+  source: LiveViewSource
+}) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const peerRef = useRef<WhepPeer | null>(null)
   const [deviceId, setDeviceId] = useState<string | null>(devices[0]?.id ?? null)
@@ -55,7 +77,7 @@ export function LiveView({ devices, provenanceLabel }: { devices: LiveDevice[]; 
   const device = devices.find((candidate) => candidate.id === deviceId)
   const items = devices.map((candidate) => ({ value: candidate.id, label: candidate.name }))
 
-  useEffect(() => () => void peerRef.current?.stop(), [])
+  useEffect(() => () => void peerRef.current?.stop().catch(() => undefined), [])
 
   async function start() {
     const video = videoRef.current
@@ -69,7 +91,9 @@ export function LiveView({ devices, provenanceLabel }: { devices: LiveDevice[]; 
       teardown,
       onCountdown: setCountdown,
       onEnded: (reason) => {
-        setStatus("ended")
+        // A peer the component already let go of (Stop, or a newer start) must not overwrite the UI.
+        if (peerRef.current !== peer) return
+        setStatus(reason === "no_video" ? "no_video" : "ended")
         setCountdown(null)
         setMessage(ENDED_TEXT[reason])
       },
@@ -78,17 +102,31 @@ export function LiveView({ devices, provenanceLabel }: { devices: LiveDevice[]; 
     peerRef.current = peer
     try {
       await peer.start()
-      setStatus("live")
+      // Stop during negotiate or signaling makes start() resolve with no session.
+      if (startOutcome({ isCurrent: peerRef.current === peer, sessionUrl: peer.sessionUrl() }) === "live") {
+        setStatus("live")
+      }
     } catch (error) {
-      await peer.stop()
+      await peer.stop().catch(() => undefined)
+      if (peerRef.current !== peer) return
       setStatus("error")
       setMessage(error instanceof SignalingError ? error.message : "Live view could not start in this browser.")
     }
   }
 
+  // The component owns the stopped state: onEnded only fires when a session
+  // existed, which is not the case while the peer is still connecting.
   async function stop() {
-    await peerRef.current?.stop()
+    const peer = peerRef.current
     peerRef.current = null
+    setStatus("ended")
+    setCountdown(null)
+    setMessage(ENDED_TEXT.stopped)
+    try {
+      await peer?.stop()
+    } catch {
+      setMessage(STOP_UNCONFIRMED_TEXT)
+    }
   }
 
   const running = status === "connecting" || status === "live"
@@ -121,6 +159,7 @@ export function LiveView({ devices, provenanceLabel }: { devices: LiveDevice[]; 
         className="aspect-video w-full rounded-lg border bg-muted"
       />
       {countdown && status === "live" ? <CapCountdown {...countdown} /> : null}
+      {status === "no_video" ? <NoVideoAlert source={source} /> : null}
       <div className="flex flex-wrap items-center gap-2">
         {running ? (
           <Button variant="destructive" onClick={stop}>

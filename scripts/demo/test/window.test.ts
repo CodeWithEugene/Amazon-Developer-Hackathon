@@ -75,19 +75,30 @@ describe("demo config", () => {
   })
 })
 
+/** First port in the 3290 to 3299 range that nothing else holds right now. */
+async function firstFreePort(): Promise<number> {
+  for (let port = 3290; port <= 3299; port += 1) {
+    if (await isPortFree(port)) return port
+  }
+  throw new Error("no free port in 3290 to 3299 for the preflight test")
+}
+
 describe("port preflight", () => {
   it("sees a port as taken while something listens on it", async () => {
+    // Pick a port nothing else holds, so another local dev server cannot
+    // make the final "free again" check fail.
+    const port = await firstFreePort()
     const { createServer } = await import("node:net")
     const server = createServer()
     await new Promise<void>((resolve) =>
-      server.listen(3290, "127.0.0.1", resolve)
+      server.listen(port, "127.0.0.1", resolve)
     )
     try {
-      expect(await bindTest(3290, "127.0.0.1")).toBe("in_use")
-      expect(await isPortFree(3290)).toBe(false)
+      expect(await bindTest(port, "127.0.0.1")).toBe("in_use")
+      expect(await isPortFree(port)).toBe(false)
     } finally {
       await new Promise((resolve) => server.close(resolve))
     }
-    expect(await isPortFree(3290)).toBe(true)
+    expect(await isPortFree(port)).toBe(true)
   })
 })

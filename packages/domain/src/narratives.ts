@@ -23,7 +23,11 @@ export interface NarrativeInput extends NarrativeOptions {
   now: Date
 }
 
-/** The time as a narrative renders it. */
+/**
+ * The time as a narrative renders it: with a time zone, the shared
+ * formatLocalTime ("8:04 AM ET"), the same form the console shows
+ * everywhere; without one, the legacy UTC "HH:MM".
+ */
 export function narrativeTime(iso: string, options: NarrativeOptions = {}): string {
   if (options.timeZone) return formatLocalTime(iso, options.timeZone)
   return new Date(Date.parse(iso)).toISOString().slice(11, 16)

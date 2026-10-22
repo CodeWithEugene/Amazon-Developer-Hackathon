@@ -19,6 +19,8 @@ import {
   zoneAbbreviation,
 } from "@/lib/time"
 
+import { formatDeltaLines, formatDeltaMinutes } from "./visit-copy"
+
 export interface ReconRow {
   visitId: string
   clientId: string
@@ -31,7 +33,12 @@ export interface ReconRow {
   doorDeparture: string
   clockIn: string
   clockOut: string
-  delta: string
+  /** Clock-in minus door arrival, for example "+12 min", or "None". */
+  deltaIn: string
+  /** Clock-out minus door departure, for example "-3 min", or "None". */
+  deltaOut: string
+  /** The delta cell as lines, for example ["In +12 min", "Out -3 min"] or ["No clock data"]. */
+  deltaLines: readonly string[]
   outcome: ReconciliationOutcome
 }
 
@@ -63,10 +70,11 @@ export interface ComplianceData {
   chains: LedgerChain[]
 }
 
-const minutes = (value: number | undefined): string =>
-  value === undefined ? "none" : `${value > 0 ? "+" : ""}${Math.round(value)} min`
+const NOT_OBSERVED = "Not observed"
+const NOT_RECORDED = "None"
 
-function reconRow(
+/** One reconciliation table row; every time carries the agency zone. */
+export function reconRow(
   visit: Visit,
   names: { client: string; caregiver: string },
   timeZone: string
@@ -80,14 +88,19 @@ function reconRow(
     dayKey: localDateKey(visit.scheduledStart, timeZone),
     dateLabel: formatLocalDate(visit.scheduledStart, timeZone),
     window: formatWindow(visit.scheduledStart, visit.scheduledEnd, timeZone),
-    doorArrival: formatTime(visit.arrival?.at, timeZone),
-    doorDeparture: formatTime(visit.departure?.at, timeZone),
-    clockIn: r?.clockIn ? formatTime(r.clockIn, timeZone) : "none",
-    clockOut: r?.clockOut ? formatTime(r.clockOut, timeZone) : "none",
-    delta:
-      r?.deltaArrivalMin === undefined && r?.deltaDepartureMin === undefined
-        ? "none"
-        : `In ${minutes(r?.deltaArrivalMin)}, out ${minutes(r?.deltaDepartureMin)}`,
+    doorArrival: formatTime(visit.arrival?.at, timeZone, NOT_OBSERVED),
+    doorDeparture: formatTime(visit.departure?.at, timeZone, NOT_OBSERVED),
+    clockIn: formatTime(r?.clockIn, timeZone, NOT_RECORDED),
+    clockOut: formatTime(r?.clockOut, timeZone, NOT_RECORDED),
+    deltaIn: formatDeltaMinutes(r?.deltaArrivalMin),
+    deltaOut: formatDeltaMinutes(r?.deltaDepartureMin),
+    deltaLines: formatDeltaLines({
+      inMin: r?.deltaArrivalMin,
+      outMin: r?.deltaDepartureMin,
+      clockIn: r?.clockIn,
+      clockOut: r?.clockOut,
+      doorDeparture: visit.departure?.at,
+    }),
     outcome: r?.outcome ?? "pending",
   }
 }

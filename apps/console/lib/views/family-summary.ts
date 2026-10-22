@@ -11,9 +11,33 @@ import type { Exception, ExceptionKind, Visit } from "@visitproof/domain"
  * departure not observed (never "in progress" hours later).
  */
 export function familyStatus(visit: Visit, now?: Date): Visit["status"] {
-  if (visit.status !== "unobservable" || !visit.arrival) return visit.status
-  if (visit.departure) return "completed"
-  const ended = now !== undefined && now.getTime() > Date.parse(visit.scheduledEnd)
+  return observedStatus(
+    {
+      status: visit.status,
+      arrived: Boolean(visit.arrival),
+      departed: Boolean(visit.departure),
+      scheduledEnd: visit.scheduledEnd,
+    },
+    now
+  )
+}
+
+/** The facts `observedStatus` needs, so a tool payload can use the same rule. */
+export interface StatusFacts<S extends string> {
+  readonly status: S
+  readonly arrived: boolean
+  readonly departed: boolean
+  readonly scheduledEnd: string
+}
+
+/** Same rule as `familyStatus`, for any surface that shows a visit status. */
+export function observedStatus<S extends string>(
+  facts: StatusFacts<S>,
+  now?: Date
+): S | "completed" | "in_progress" | "departure_not_observed" {
+  if (facts.status !== "unobservable" || !facts.arrived) return facts.status
+  if (facts.departed) return "completed"
+  const ended = now !== undefined && now.getTime() > Date.parse(facts.scheduledEnd)
   return ended ? "departure_not_observed" : "in_progress"
 }
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { buildNarrative, validateNarrative } from "./narratives"
+import { buildNarrative, narrativeTime, validateNarrative } from "./narratives"
 import type { Visit } from "./types"
 
 const audit = {
@@ -118,6 +118,24 @@ describe("narratives in the agency time zone (contract C1)", () => {
     expect(narrative.text).not.toMatch(/[–—]/)
     const rules = validateNarrative(narrative.text, eastern, undefined, { timeZone: "America/New_York" })
     expect(rules).toEqual({ mustContainTimes: true, under60Words: true, noOtherNames: true })
+  })
+
+  it("labels every time with the agency zone, matching the rest of the app", () => {
+    const morning = { ...eastern, arrival: { at: "2026-10-01T12:04:00.000Z", source: "rule" as const } }
+    const text = buildNarrative({ visit: morning, now, timeZone: "America/New_York" }).text
+    expect(text).toContain("A caregiver arrived at 8:04 AM ET, 56 minutes before the scheduled time (9:00 AM ET).")
+    expect(narrativeTime("2026-10-01T12:04:00.000Z", { timeZone: "America/New_York" })).toBe("8:04 AM ET")
+    expect(narrativeTime("2026-12-01T13:04:00.000Z", { timeZone: "America/New_York" })).toBe("8:04 AM ET")
+    expect(narrativeTime("2026-10-01T15:04:00.000Z", { timeZone: "America/Los_Angeles" })).toBe("8:04 AM PT")
+    const clockTimes = text.match(/\d{1,2}:\d{2}(?: [AP]M [A-Z]+)?/g) ?? []
+    expect(clockTimes).toHaveLength(4)
+    expect(clockTimes.every((time) => / [AP]M ET$/.test(time))).toBe(true)
+  })
+
+  it("rejects a narrative whose arrival time lacks the zone label", () => {
+    const options = { timeZone: "America/New_York" }
+    expect(validateNarrative("A caregiver arrived at 9:04 AM.", eastern, undefined, options).mustContainTimes).toBe(false)
+    expect(validateNarrative("A caregiver arrived at 9:04 AM ET.", eastern, undefined, options).mustContainTimes).toBe(true)
   })
 
   it("keeps the legacy UTC form when no time zone is given", () => {

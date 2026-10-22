@@ -22,7 +22,7 @@ import {
   ItemHeader,
   ItemTitle,
 } from "@workspace/ui/components/item"
-import { StatusBadge } from "@workspace/ui/components/status-badge"
+import { StatusBadge, statusLabel } from "@workspace/ui/components/status-badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/tabs"
 
 import type { RecordEntry, VisitRecordData } from "@/lib/views/visit-record"
@@ -49,7 +49,9 @@ export function VisitRecord({ data }: { data: VisitRecordData }) {
         <CardContent className="flex flex-col gap-3">
           <div className="flex flex-wrap gap-2">
             <StatusBadge status={data.status} />
-            <StatusBadge status={data.outcome} />
+            {statusLabel(data.outcome) === statusLabel(data.status) ? null : (
+              <StatusBadge status={data.outcome} />
+            )}
           </div>
           {data.narrative ? (
             <p className="text-sm text-muted-foreground">

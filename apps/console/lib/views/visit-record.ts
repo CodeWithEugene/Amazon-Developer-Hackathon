@@ -43,6 +43,8 @@ import {
   splitNotes,
 } from "@/lib/visit-evidence"
 
+import { familyStatus } from "./family-summary"
+
 export interface RecordEntry {
   id: string
   title: string
@@ -190,7 +192,7 @@ export async function loadVisitRecord(visitId: string, viewer: Role): Promise<Vi
       caregiverName: caregivers.find((c) => c.id === visit.caregiverId)?.name ?? "Unassigned",
       dateLabel: formatLocalDate(visit.scheduledStart, tz),
       window: formatWindow(visit.scheduledStart, visit.scheduledEnd, tz),
-      status: visit.status,
+      status: familyStatus(visit, new Date()),
       outcome: visit.reconciliation?.outcome ?? "pending",
       narrative: displayNarrative(visit, tz),
       observed: observedEntries(visit, events, tz),

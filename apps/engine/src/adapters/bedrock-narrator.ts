@@ -16,8 +16,10 @@ import {
 } from "@aws-sdk/client-bedrock-runtime"
 import {
   buildNarrative,
+  narrativeTime,
   validateNarrative,
   type Narrative,
+  type NarrativeOptions,
   type Visit,
 } from "@visitproof/domain"
 
@@ -36,7 +38,7 @@ const TEMPERATURE = 0.2
 const SYSTEM_PROMPT = [
   "You rewrite home care visit summaries for a family member.",
   "Rewrite the DRAFT in plain, warm, factual language.",
-  "Keep every clock time exactly as written in the DRAFT.",
+  "Keep every clock time and its time zone exactly as written in the DRAFT.",
   "Use fewer than 60 words. Do not add facts, names, health details, or guesses.",
   "Do not use dashes. Reply with the summary text only.",
 ].join(" ")
@@ -48,14 +50,23 @@ export interface BedrockNarratorOptions {
   logger?: Logger
 }
 
-/** Facts only: statuses and times, never names or free text. */
-function factsFor(visit: Visit): Record<string, unknown> {
+/**
+ * Facts only: statuses and times, never names or free text. Times are
+ * rendered exactly as the DRAFT renders them (agency-local with the zone,
+ * "8:04 AM ET"), so the model never sees a raw UTC instant to copy.
+ */
+function factsFor(
+  visit: Visit,
+  options: NarrativeOptions
+): Record<string, unknown> {
+  const time = (iso: string | undefined) =>
+    iso === undefined ? undefined : narrativeTime(iso, options)
   return {
     status: visit.status,
-    scheduledStart: visit.scheduledStart,
-    scheduledEnd: visit.scheduledEnd,
-    arrivalAt: visit.arrival?.at,
-    departureAt: visit.departure?.at,
+    scheduledStart: time(visit.scheduledStart),
+    scheduledEnd: time(visit.scheduledEnd),
+    arrivalAt: time(visit.arrival?.at),
+    departureAt: time(visit.departure?.at),
     observability: visit.observability.state,
     reconciliation: visit.reconciliation?.outcome,
   }
@@ -63,10 +74,11 @@ function factsFor(visit: Visit): Record<string, unknown> {
 
 function requestFor(
   options: BedrockNarratorOptions,
-  visit: Visit,
+  input: NarratorInput,
   draft: Narrative
 ): ConverseCommandInput {
-  const prompt = `DRAFT: ${draft.text}\nFACTS: ${JSON.stringify(factsFor(visit))}`
+  const facts = factsFor(input.visit, { timeZone: input.timeZone })
+  const prompt = `DRAFT: ${draft.text}\nFACTS: ${JSON.stringify(facts)}`
   return {
     modelId: options.modelId ?? DEFAULT_BEDROCK_MODEL_ID,
     system: [{ text: SYSTEM_PROMPT }],
@@ -124,7 +136,7 @@ export function createBedrockNarrator(
       let output: ConverseCommandOutput
       try {
         output = await options.client.send(
-          new ConverseCommand(requestFor(options, input.visit, draft))
+          new ConverseCommand(requestFor(options, input, draft))
         )
       } catch (error) {
         logger.warn("[bedrock-narrator] Converse failed; using the template", {

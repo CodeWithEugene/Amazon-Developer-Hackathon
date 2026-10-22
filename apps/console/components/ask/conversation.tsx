@@ -25,7 +25,7 @@ import {
 } from "@workspace/ui/components/message-scroller"
 import { Spinner } from "@workspace/ui/components/spinner"
 
-import { BRAIN_LABELS, type Turn } from "./ask-types"
+import { BRAIN_LABELS, toolTitle, type Turn } from "./ask-types"
 
 export interface ConversationEntry {
   readonly id: string
@@ -60,7 +60,7 @@ function Reply({ entry, selected, onSelect }: { entry: ConversationEntry; select
       </Bubble>
     )
   }
-  const tools = entry.turn.toolCalls.map((call) => call.name).join(", ")
+  const tools = [...new Set(entry.turn.toolCalls.map((call) => toolTitle(call.name)))].join(", ")
   return (
     <>
       <Bubble variant={selected ? "tinted" : "secondary"}>

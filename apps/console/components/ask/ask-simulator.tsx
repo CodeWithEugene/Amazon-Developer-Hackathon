@@ -20,11 +20,10 @@ import { ToggleGroup, ToggleGroupItem } from "@workspace/ui/components/toggle-gr
 import { cn } from "@workspace/ui/lib/utils"
 
 import { AskInput } from "./ask-input"
-import { askErrorSchema, askResponseSchema, BRAIN_LABELS, SUGGESTIONS, type DeviceSize, type Pending, type Turn } from "./ask-types"
+import { askErrorSchema, askResponseSchema, BRAIN_LABELS, SUGGESTIONS, toolTitle, type DeviceSize, type Pending, type Turn } from "./ask-types"
 import { Conversation, type ConversationEntry } from "./conversation"
 import { DetailTabs } from "./detail-tabs"
 import { DeviceCard } from "./device-card"
-import { ASK_PROVENANCE } from "./provenance"
 import { useSpeechOutput } from "./use-speech"
 
 interface AskSimulatorProps {
@@ -82,7 +81,7 @@ export function AskSimulator({ persona, brain, mcpUrl }: AskSimulatorProps) {
         <InfoIcon aria-hidden="true" />
         <AlertTitle>Simulated Alexa+ Experience</AlertTitle>
         <AlertDescription>
-          {ASK_PROVENANCE} Brain: {BRAIN_LABELS[brain]}. MCP endpoint: {mcpUrl}. Asking as the {persona === "family" ? "family" : "agency"}.
+          Alexa is simulated here, but every tool runs on the VisitProof MCP server. Brain: {BRAIN_LABELS[brain]}. MCP endpoint: {mcpUrl}. Asking as the {persona === "family" ? "family" : "agency"}.
         </AlertDescription>
       </Alert>
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
@@ -109,10 +108,10 @@ export function AskSimulator({ persona, brain, mcpUrl }: AskSimulatorProps) {
           </CardFooter>
         </Card>
         <Card>
-          <CardHeader>
+          <CardHeader className="has-data-[slot=card-action]:grid-cols-1 sm:has-data-[slot=card-action]:grid-cols-[1fr_auto]">
             <CardTitle>Device Preview</CardTitle>
             <CardDescription>The structured content from the tool, rendered as a card.</CardDescription>
-            <CardAction>
+            <CardAction className="col-start-1 row-span-1 row-start-3 justify-self-start sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:justify-self-end">
               <ToggleGroup variant="outline" size="sm" value={[size]} onValueChange={(value: string[]) => setSize(value[0] === "small" ? "small" : "large")} aria-label="Echo Show size">
                 <ToggleGroupItem value="small">Echo Show Small</ToggleGroupItem>
                 <ToggleGroupItem value="large">Echo Show Large</ToggleGroupItem>
@@ -138,7 +137,7 @@ export function AskSimulator({ persona, brain, mcpUrl }: AskSimulatorProps) {
               <Badge variant="outline">{BRAIN_LABELS[selected.brain]}</Badge>
               {selected.toolCalls.map((call, index) => (
                 <Badge key={`${call.name}-${index}`} variant={call.isError ? "destructive" : "secondary"}>
-                  {call.name}
+                  {toolTitle(call.name)}
                 </Badge>
               ))}
             </CardFooter>

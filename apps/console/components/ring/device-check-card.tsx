@@ -1,4 +1,4 @@
-import { CircleCheckIcon, CircleHelpIcon, CircleXIcon } from "lucide-react"
+import { CircleCheckIcon, CircleHelpIcon, CircleXIcon, InfoIcon } from "lucide-react"
 
 import { Badge } from "@workspace/ui/components/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@workspace/ui/components/card"
@@ -11,14 +11,15 @@ import {
   ItemTitle,
 } from "@workspace/ui/components/item"
 
-import type { CheckItem, CheckState, DeviceCheck } from "@/lib/ring/device-check"
+import { deviceCheckSummary, type CheckItem, type CheckState, type DeviceCheck } from "@/lib/ring/device-check"
 
 const STATE: Readonly<
-  Record<CheckState, { label: string; variant: "success" | "destructive" | "secondary"; Icon: typeof CircleCheckIcon }>
+  Record<CheckState, { label: string; variant: "success" | "destructive" | "secondary" | "outline"; Icon: typeof CircleCheckIcon }>
 > = {
   pass: { label: "Passing", variant: "success", Icon: CircleCheckIcon },
   fail: { label: "Needs Attention", variant: "destructive", Icon: CircleXIcon },
   unknown: { label: "Not Reported", variant: "secondary", Icon: CircleHelpIcon },
+  info: { label: "Not Checked Here", variant: "outline", Icon: InfoIcon },
 }
 
 function CheckRow({ item }: { item: CheckItem }) {
@@ -41,7 +42,7 @@ function CheckRow({ item }: { item: CheckItem }) {
               {item.whyItMatters}
             </p>
             <p>
-              <span className="font-medium text-foreground">Where to change it: </span>
+              <span className="font-medium text-foreground">{item.required ? "Where to change it: " : "Where to check it: "}</span>
               {item.whereToChange}
             </p>
           </div>
@@ -52,7 +53,8 @@ function CheckRow({ item }: { item: CheckItem }) {
 }
 
 export function DeviceCheckCard({ check }: { check: DeviceCheck }) {
-  const summary = `${check.passed} of ${check.items.length} checks passing`
+  const informational = check.items.filter((item) => !item.required).length
+  const summary = `${deviceCheckSummary(check)}${informational ? `, plus ${informational} informational ${informational === 1 ? "item" : "items"}` : ""}`
   return (
     <Card>
       <CardHeader>

@@ -39,15 +39,7 @@ export const BRAIN_LABELS: Record<Turn["brain"], string> = {
   bedrock: "Strands Agent on Bedrock",
 }
 
-export const TOOL_TITLES: Record<string, string> = {
-  get_visit_status: "Visit Status",
-  list_visits: "Visits",
-  list_exceptions: "Exceptions",
-  explain_visit: "Visit Evidence",
-  get_client_summary: "Client Summary",
-  acknowledge_exception: "Acknowledge Exception",
-  add_visit_note: "Visit Note",
-}
+export { TOOL_TITLES, toolTitle } from "@/lib/ask-reasoning"
 
 export const SUGGESTIONS: Record<Turn["persona"], readonly string[]> = {
   family: ["Did the caregiver come today?", "Was anyone late this week?", "Tell the agency I'll be there Thursday instead"],

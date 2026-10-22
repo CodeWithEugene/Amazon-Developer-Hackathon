@@ -3,7 +3,7 @@ import { redirect } from "next/navigation"
 import { PageShell } from "@/components/page-shell"
 import { TodayBoard } from "@/components/today-board"
 import { getSessionRole } from "@/lib/session"
-import { zoneAbbreviation } from "@/lib/time"
+import { zoneDescription } from "@/lib/time"
 import { loadTodayBoard } from "@/lib/views/today"
 
 export const metadata = { title: "Agency Today" }
@@ -22,7 +22,7 @@ export default async function TodayPage() {
     >
       <TodayBoard
         data={data}
-        timeZoneLabel={`${zoneAbbreviation(new Date(), data.timeZone)} (${data.timeZone})`}
+        timeZoneLabel={zoneDescription(new Date(), data.timeZone)}
       />
     </PageShell>
   )

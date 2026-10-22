@@ -8,11 +8,7 @@ import { Button } from "@workspace/ui/components/button"
 import { Spinner } from "@workspace/ui/components/spinner"
 import { toast } from "@workspace/ui/components/toast"
 
-interface SyncResponse {
-  readonly result?: { readonly saved: number; readonly alreadyStored: number; readonly fetched: number }
-  readonly provenance?: string
-  readonly error?: string
-}
+import { historySyncNotice, historySyncResponseSchema, type HistorySyncResponse } from "@/lib/ring/history-sync-notice"
 
 /** Pulls Ring history since consent into the household's door record. */
 export function SyncHistoryButton() {
@@ -23,17 +19,14 @@ export function SyncHistoryButton() {
     setBusy(true)
     try {
       const response = await fetch("/api/ring/history", { method: "POST", headers: { "Content-Type": "application/json" } })
-      const body = (await response.json().catch(() => ({}))) as SyncResponse
+      const parsed = historySyncResponseSchema.safeParse(await response.json().catch(() => ({})))
+      const body: HistorySyncResponse = parsed.success ? parsed.data : {}
       if (!response.ok || !body.result) {
         toast.add({ type: "error", title: "Could Not Sync Ring History", description: body.error ?? "Try again." })
         return
       }
-      toast.add({
-        type: "success",
-        title: "Ring History Synced",
-        description: `${body.result.saved} new events saved from ${body.provenance ?? "Ring"}. ${body.result.alreadyStored} were already stored.`,
-      })
-      router.refresh()
+      toast.add(historySyncNotice(body.result, body))
+      if (body.result.saved > 0) router.refresh()
     } catch {
       toast.add({ type: "error", title: "Could Not Sync Ring History", description: "Check your connection and try again." })
     } finally {

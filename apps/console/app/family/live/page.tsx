@@ -34,7 +34,7 @@ export default async function LiveViewPage() {
           {view.data.length === 0 ? (
             <p className="text-muted-foreground">No devices are shared with VisitProof yet.</p>
           ) : (
-            <LiveView devices={view.data} provenanceLabel={view.provenanceLabel} />
+            <LiveView devices={view.data} provenanceLabel={view.provenanceLabel} source={view.source} />
           )}
         </div>
       ) : (

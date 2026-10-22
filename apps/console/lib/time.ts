@@ -39,6 +39,18 @@ export function zoneAbbreviation(iso: string | Date, timeZone: string): string {
   return parts.find((part) => part.type === "timeZoneName")?.value ?? timeZone
 }
 
+/** Readable zone for page copy, for example "ET (Eastern Time)". */
+export function zoneDescription(iso: string | Date, timeZone: string): string {
+  const short = zoneAbbreviation(iso, timeZone)
+  const long = formatter(timeZone, {
+    hour: "numeric",
+    timeZoneName: "longGeneric",
+  })
+    .formatToParts(toDate(iso))
+    .find((part) => part.type === "timeZoneName")?.value
+  return long && long !== short ? `${short} (${long})` : short
+}
+
 /** 12-hour local time, for example "8:04 AM". */
 export function formatLocalTime(iso: string | Date, timeZone: string): string {
   return formatter(timeZone, { hour: "numeric", minute: "2-digit" }).format(

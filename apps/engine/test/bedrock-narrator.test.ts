@@ -65,6 +65,45 @@ describe("Bedrock narrator (Converse)", () => {
     expect(logger.warnings[0]).toContain("rejected")
   })
 
+  it("gives the model agency times with the zone and keeps them in the answer", async () => {
+    const timeZone = "America/New_York"
+    bedrock
+      .on(ConverseCommand)
+      .resolves(
+        reply("A caregiver arrived at 8:04 AM ET and left at 10:01 AM ET.")
+      )
+    const narrator = createBedrockNarrator({
+      client: new BedrockRuntimeClient({}),
+    })
+    const narrative = await narrator.write({ visit, now, timeZone })
+    expect(narrative.provenance).toBe("bedrock")
+    const prompt =
+      bedrock.commandCalls(ConverseCommand)[0]?.args[0].input.messages?.[0]
+        ?.content?.[0]?.text ?? ""
+    expect(prompt).toContain("arrived at 8:04 AM ET")
+    expect(prompt).toContain('"arrivalAt":"8:04 AM ET"')
+    expect(prompt).toContain('"scheduledStart":"8:00 AM ET"')
+    expect(prompt).toContain('"departureAt":"10:01 AM ET"')
+    expect(prompt).not.toContain("2026-10-01T")
+  })
+
+  it("falls back to the template when the model drops the zone label", async () => {
+    bedrock
+      .on(ConverseCommand)
+      .resolves(reply("A caregiver arrived at 8:04 AM and stayed."))
+    const narrator = createBedrockNarrator({
+      client: new BedrockRuntimeClient({}),
+      logger: silentLogger(),
+    })
+    const narrative = await narrator.write({
+      visit,
+      now,
+      timeZone: "America/New_York",
+    })
+    expect(narrative.provenance).toBe("template")
+    expect(narrative.text).toContain("arrived at 8:04 AM ET")
+  })
+
   it("falls back to the template when the guardrail intervenes", async () => {
     bedrock
       .on(ConverseCommand)

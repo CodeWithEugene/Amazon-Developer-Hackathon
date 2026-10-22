@@ -1,7 +1,7 @@
 import type { Visit } from "@visitproof/domain"
 
 import { NARRATIVE_PROVENANCE_LABELS } from "@/lib/labels"
-import { formatLocalTime } from "@/lib/time"
+import { formatLocalTimeZoned } from "@/lib/time"
 
 export interface DisplayNarrative {
   text: string
@@ -15,8 +15,9 @@ const HAS_MERIDIEM = /\b(AM|PM)\b/
  * The stored narrative, shown in the agency time zone. Template narratives
  * written before the engine knew the agency zone carry 24-hour UTC clock
  * times ("09:00"); those tokens are re-rendered on the visit's UTC day as
- * agency-local 12-hour times. Text that already uses AM or PM is shown as
- * written.
+ * agency-local 12-hour times with the zone ("5:00 AM ET"), like every other
+ * time in the app. Text that already uses AM or PM is shown as written: the
+ * domain template and the Bedrock narrator already write zoned times.
  */
 export function displayNarrative(
   visit: Visit,
@@ -30,7 +31,7 @@ export function displayNarrative(
   }
   const utcDay = visit.scheduledStart.slice(0, 10)
   const text = narrative.text.replace(UTC_CLOCK, (_match, hh: string, mm: string) =>
-    formatLocalTime(`${utcDay}T${hh}:${mm}:00Z`, timeZone)
+    formatLocalTimeZoned(`${utcDay}T${hh}:${mm}:00Z`, timeZone)
   )
   return { text, provenance }
 }

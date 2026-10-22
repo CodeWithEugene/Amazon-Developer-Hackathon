@@ -27,9 +27,8 @@ export function LiveModeEmpty({ feature }: { feature: string }) {
       </EmptyHeader>
       <EmptyContent>
         <p className="text-sm text-muted-foreground">
-          To turn it on, mint a 30 minute token in the Ring Developer Playground, set RING_PLAYGROUND_ACCESS_TOKEN
-          on the server, and restart the console. A family that links Ring from the Ring app turns it on for their
-          own home.
+          To turn it on for your home, link your Ring account from the Ring app. For a demo, the person who runs
+          this console can add a 30-minute Ring Developer Playground token on the server and restart it.
         </p>
         <Button variant="outline" render={<Link href="/family" />} nativeButton={false}>
           Back To Home

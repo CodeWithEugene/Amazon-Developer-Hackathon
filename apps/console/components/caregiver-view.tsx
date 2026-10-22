@@ -95,8 +95,7 @@ function SelectedVisitCard({ visit, notes }: { visit: CaregiverVisit; notes: Not
           <StatusBadge status={visit.outcome} />
         </div>
         <p className="text-sm text-muted-foreground">
-          Door arrival {visit.doorArrival}. Door departure {visit.doorDeparture}.
-          Clock-in {visit.clockIn}.
+          {visit.doorSummary} {visit.clockInSummary}
         </p>
         <Button
           variant="outline"
@@ -213,11 +212,10 @@ function VisitHistory({ data, selectedId }: { data: CaregiverData; selectedId: s
                   render={<Link href={`/me?visit=${encodeURIComponent(visit.id)}`} scroll={false} />}
                   aria-current={visit.id === selectedId ? "true" : undefined}
                 >
-                  <ItemContent>
-                    <ItemTitle>{visit.clientName}</ItemTitle>
-                    <ItemDescription>
-                      {visit.window}. Door {visit.doorArrival} to {visit.doorDeparture}.
-                      Clock-in {visit.clockIn}.
+                  <ItemContent className="min-w-0 basis-full sm:basis-0">
+                    <ItemTitle className="line-clamp-none">{visit.clientName}</ItemTitle>
+                    <ItemDescription className="line-clamp-none">
+                      {visit.window}. {visit.doorSummary} {visit.clockInSummary}
                     </ItemDescription>
                   </ItemContent>
                   <StatusBadge status={visit.missingClockInWithDoor ? "missing_clock_in" : visit.outcome} />

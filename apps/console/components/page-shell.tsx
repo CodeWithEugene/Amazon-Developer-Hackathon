@@ -5,6 +5,12 @@ import { cn } from "@workspace/ui/lib/utils"
 import { AppHeader } from "@/components/app-header"
 import type { Role } from "@/lib/roles"
 
+const PAGE_WIDTH = {
+  full: "max-w-7xl",
+  wide: "max-w-6xl",
+  narrow: "max-w-2xl",
+} as const
+
 /** Shared page frame: header, page heading, content, and policy footer. */
 export function PageShell({
   role,
@@ -16,7 +22,7 @@ export function PageShell({
   role: Role | null
   title: string
   description?: string
-  width?: "wide" | "narrow"
+  width?: "full" | "wide" | "narrow"
   children: React.ReactNode
 }) {
   return (
@@ -25,7 +31,7 @@ export function PageShell({
       <main
         className={cn(
           "mx-auto w-full flex-1 px-4 py-8",
-          width === "wide" ? "max-w-6xl" : "max-w-2xl"
+          PAGE_WIDTH[width]
         )}
       >
         <div className="mb-6 flex flex-col gap-1">

@@ -13,6 +13,8 @@ import { Item, ItemContent, ItemDescription, ItemGroup, ItemTitle } from "@works
 import { StatusBadge } from "@workspace/ui/components/status-badge"
 import { cn } from "@workspace/ui/lib/utils"
 
+import { observedStatus } from "@/lib/views/family-summary"
+
 import { TOOL_TITLES, type DeviceSize, type ToolCall } from "./ask-types"
 
 /**
@@ -37,9 +39,20 @@ const localTime = (iso: unknown, timeZone: string): string | undefined => {
   return zone ? `${time} ${zone}` : time
 }
 
+/** Shows the same status the family and visit pages show for this visit. */
+const visitStatus = (visit: Record<string, unknown>): string | undefined => {
+  const status = text(visit.status)
+  const scheduledEnd = text(visit.scheduledEnd)
+  if (!status || !scheduledEnd) return status
+  return observedStatus(
+    { status, arrived: Boolean(text(visit.arrivalAt)), departed: Boolean(text(visit.departureAt)), scheduledEnd },
+    new Date()
+  )
+}
+
 const ROW_BUILDERS: Record<string, (content: Record<string, unknown>) => Row[]> = {
   get_visit_status: (content) =>
-    asArray(content.visits).map((visit) => ({ key: String(visit.visitId), title: text(visit.window) ?? "Visit", description: text(visit.spoken), status: text(visit.status) })),
+    asArray(content.visits).map((visit) => ({ key: String(visit.visitId), title: text(visit.window) ?? "Visit", description: text(visit.spoken), status: visitStatus(visit) })),
   list_visits: (content) =>
     asArray(content.visits).map((visit) => ({
       key: String(visit.visitId),

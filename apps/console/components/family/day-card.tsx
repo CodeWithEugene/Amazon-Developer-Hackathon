@@ -67,8 +67,8 @@ export function VisitItems({ visits }: { visits: FamilyVisit[] }) {
           variant="outline"
           render={<Link href={`/family/visits/${encodeURIComponent(visit.id)}`} />}
         >
-          <ItemContent>
-            <ItemTitle>{visit.window}</ItemTitle>
+          <ItemContent className="min-w-0 basis-full sm:basis-0">
+            <ItemTitle className="line-clamp-none">{visit.window}</ItemTitle>
             {visit.narrative ? (
               <ItemDescription className="line-clamp-none">
                 {visit.narrative.text}{" "}

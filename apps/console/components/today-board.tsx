@@ -197,11 +197,11 @@ function VisitTodayItem({ visit }: { visit: TodayBoardData["visits"][number] }) 
       variant="outline"
       render={<Link href={`/agency/visits/${encodeURIComponent(visit.id)}`} />}
     >
-      <ItemContent>
-        <ItemTitle>
+      <ItemContent className="min-w-0 basis-full sm:basis-0">
+        <ItemTitle className="line-clamp-none">
           {visit.clientName} with {visit.caregiverName}
         </ItemTitle>
-        <ItemDescription>
+        <ItemDescription className="line-clamp-none">
           {visit.hidden
             ? `${visit.window}. The family paused sharing, so door times are hidden.`
             : `${visit.window}. Arrival ${visit.arrival}. Departure ${visit.departure}.`}

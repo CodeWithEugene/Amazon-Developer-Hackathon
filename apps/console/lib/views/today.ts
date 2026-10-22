@@ -16,6 +16,7 @@ import {
   formatDateKeyWeekday,
   formatLocalDateTime,
   localDateKey,
+  zoneAbbreviation,
 } from "@/lib/time"
 
 import { exceptionGroup, type ExceptionGroup } from "./grouping"
@@ -90,7 +91,9 @@ function exceptionRow(exception: Exception, lookup: Lookup): BoardExceptionRow {
       ? formatWindow(visit.scheduledStart, visit.scheduledEnd, timeZone)
       : null,
     ...(snoozedNow && exception.snoozeUntil
-      ? { snoozedUntilLabel: formatLocalDateTime(exception.snoozeUntil, timeZone) }
+      ? {
+          snoozedUntilLabel: `${formatLocalDateTime(exception.snoozeUntil, timeZone)} ${zoneAbbreviation(exception.snoozeUntil, timeZone)}`,
+        }
       : {}),
     sortKey: visit?.scheduledStart ?? exception.openedAt,
   }
