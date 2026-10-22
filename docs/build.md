@@ -184,7 +184,7 @@ Exports (as built; `packages/ring-partner-sdk/README.md` is the reference):
 - `fixtures/playground/`: the real Playground responses captured on 22 October 2026 (users/me, devices, the four sub-resources, an empty history page, the subscriptions 422) with a manifest of request paths and status codes.
 - `./testing` (not published): `createMockPlaygroundHandler()` and `startMockPlayground()` (127.0.0.1, default port 3271), a mock Ring Playground that serves those fixtures and answers WHEP POST and DELETE.
 
-Packaged for npm (version 0.1.0, Apache-2.0, README, 128 tests, changelog); `visitproof` and `@visitproof/*` names were unregistered as of 27 September 2026.
+Packaged for npm (version 0.1.0, Apache-2.0, README, 132 tests, changelog); `visitproof` and `@visitproof/*` names were unregistered as of 27 September 2026.
 
 ### 5.2 Ring endpoints in `apps/console`
 
@@ -378,7 +378,7 @@ Family invitation; Account Linked; Daily Digest (one per client per day, dedupe 
 | Live smoke (manual) | `pnpm ring:smoke` | Playground token: users/me, devices, status, capabilities, configurations, location, one history page, subscriptions; prints PASS, INFO, or FAIL and the Device Check summary; records redacted fixtures. Snapshot and WHEP are not part of it. Ran on 22 October 2026 | Before the video; the mock Ring Playground replays the fixtures offline |
 | Load | k6 (small) | Webhook receiver 100 rps for 60 s, p95 under 100 ms | Once before submission |
 
-Last verified run (22 October 2026): `pnpm -r test` passes 655 of 655 tests in 77 files (config 5, ring-partner-sdk 128, domain 140, db 36, mcp 61, infra 17, engine 53, copilot 43, webhooks 22, console 150), and `pnpm test:scripts` passes 16 of 16 in 3 files: 671 tests in all. `packages/domain` statement coverage is 99.2 percent.
+Last verified run (22 October 2026): `pnpm -r test` passes 664 of 664 tests (config 5, ring-partner-sdk 132, domain 140, db 36, mcp 61, infra 17, engine 53, copilot 43, webhooks 22, console 155), and `pnpm test:scripts` passes 18 of 18: 682 tests in all. `packages/domain` statement coverage is 99.2 percent.
 
 Definition of done per feature: tests written first for domain logic, storybook-free visual check in the browser at 390 px and 1440 px, empty and error states present, copy rules pass a lint script (`pnpm lint:copy` greps for dashes and lowercase button labels in `messages/*.ts`).
 

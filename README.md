@@ -150,12 +150,12 @@ pnpm --filter @visitproof/console build
 pnpm --filter infra exec cdk synth --no-lookups
 ```
 
-Last verified run (22 October 2026): `pnpm -r test` passes 655 of 655 tests in 77 files, and `pnpm test:scripts` passes 16 of 16 in 3 files, so 671 tests pass in all.
+Last verified run (22 October 2026): `pnpm -r test` passes 664 of 664 tests, and `pnpm test:scripts` passes 18 of 18, so 682 tests pass in all.
 
 | Package | Tests | Files |
 | --- | --- | --- |
 | `packages/config` | 5 | 1 |
-| `packages/ring-partner-sdk` | 128 | 14 |
+| `packages/ring-partner-sdk` | 132 | 14 |
 | `packages/domain` | 140 | 12 |
 | `packages/db` | 36 | 5 |
 | `apps/mcp` | 61 | 5 |
@@ -163,8 +163,8 @@ Last verified run (22 October 2026): `pnpm -r test` passes 655 of 655 tests in 7
 | `apps/engine` | 53 | 9 |
 | `apps/copilot` | 43 | 4 |
 | `apps/webhooks` | 22 | 3 |
-| `apps/console` | 150 | 23 |
-| `scripts` (`pnpm test:scripts`) | 16 | 3 |
+| `apps/console` | 155 | 24 |
+| `scripts` (`pnpm test:scripts`) | 18 | 4 |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/build.md](docs/build.md). Friction we hit with the platforms is in [docs/friction-log.md](docs/friction-log.md).
 

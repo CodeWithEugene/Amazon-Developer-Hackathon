@@ -83,7 +83,7 @@ Principles we held to: corroboration, not surveillance (it says a person arrived
 
 **UI.** Next.js 16 App Router, React 19, Tailwind CSS v4, and strictly shadcn/ui on Base UI primitives, with agency-local times everywhere and WCAG 2.2 AA as the bar.
 
-**Quality.** 671 automated tests (Vitest), all passing on 22 October 2026: 655 across the ten workspace packages and 16 for the demo scripts. GitHub Actions CI, TypeScript strict, Zod at every boundary.
+**Quality.** 682 automated tests (Vitest), all passing on 22 October 2026: 664 across the ten workspace packages and 18 for the demo scripts. GitHub Actions CI, TypeScript strict, Zod at every boundary.
 
 ### Challenges We Ran Into
 
@@ -121,7 +121,7 @@ VisitProof is not an EVV system of record, not identity verification, not reside
 
 | Criterion | Evidence |
 |---|---|
-| Tech Implementation | Ring Partner API client, HMAC webhook receiver, account-linking endpoints, WHEP live view, Presence Engine with 12 EARS requirements, signed ledger, 671 passing tests, CI |
+| Tech Implementation | Ring Partner API client, HMAC webhook receiver, account-linking endpoints, WHEP live view, Presence Engine with 12 EARS requirements, signed ledger, 682 passing tests, CI |
 | Design | Four coherent role journeys, agency-local times, one calm daily message for families, strict shadcn/ui, designed empty, loading, and error states |
 | Potential Impact | 2026 Medicaid EVV hard edits, unreliable GPS clock-ins, family transparency; distribution through the Ring Appstore elder-care category and agency sales |
 | Quality Of The Idea | The doorbell already at the door as an independent proof-of-presence signal; agency-first and EVV-aware, where existing Ring apps watch the resident |
