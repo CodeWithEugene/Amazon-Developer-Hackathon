@@ -3,6 +3,8 @@ import "server-only"
 import { existsSync } from "node:fs"
 import { dirname, isAbsolute, join, resolve } from "node:path"
 
+import { hostedStoreDir, isHostedDemo } from "./hosted-seed"
+
 /**
  * Resolves the monorepo root by walking up from the working directory to
  * the folder holding `pnpm-workspace.yaml`, so the console finds the shared
@@ -21,9 +23,11 @@ export function findRepoRoot(start: string = process.cwd()): string {
 /**
  * The local store directory: `VISITPROOF_DEMO_STORE_PATH` when set
  * (relative paths resolve against the repo root, like scripts/demo.ts),
- * otherwise `<repo root>/.demo-data`.
+ * otherwise `<repo root>/.demo-data`. The hosted demo
+ * (`VISITPROOF_HOSTED_DEMO=1`) uses a temp-directory copy of the shipped seed.
  */
 export function storeDir(): string {
+  if (isHostedDemo()) return hostedStoreDir()
   const configured = process.env.VISITPROOF_DEMO_STORE_PATH
   const root = findRepoRoot()
   if (!configured) return join(root, ".demo-data")

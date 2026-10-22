@@ -1,0 +1,20 @@
+[
+  {
+    "key": "RINGACCT#ava1.ring.account.okoro￿META",
+    "item": {
+      "clientId": "cli_okoro"
+    }
+  },
+  {
+    "key": "RINGACCT#ava1.ring.account.nakamura￿META",
+    "item": {
+      "clientId": "cli_nakamura"
+    }
+  },
+  {
+    "key": "RINGACCT#ava1.ring.account.alvarez￿META",
+    "item": {
+      "clientId": "cli_alvarez"
+    }
+  }
+]

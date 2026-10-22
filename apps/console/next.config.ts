@@ -6,6 +6,8 @@ const contentSecurityPolicy = buildContentSecurityPolicy({ dev: process.env.NODE
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  // The hosted demo (VISITPROOF_HOSTED_DEMO=1) reads the shipped seed store at runtime.
+  outputFileTracingIncludes: { "/**": ["./demo-seed/**"] },
   transpilePackages: [
     "@workspace/ui",
     "@visitproof/config",

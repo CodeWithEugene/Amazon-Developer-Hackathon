@@ -1,0 +1,26 @@
+[
+  {
+    "key": "AGENCY#a1￿META",
+    "item": {
+      "id": "a1",
+      "name": "Caring Hands Home Care",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "tolerances": {
+        "graceMin": 15,
+        "escalationMin": 45,
+        "earlyDepartureMin": 10,
+        "departureQuietMin": 10
+      },
+      "retentionDays": 365,
+      "evvVendor": "State EVV Portal",
+      "notificationDefaults": {
+        "digestHour": 19,
+        "exceptionAlerts": true
+      },
+      "createdAt": "2026-10-09T00:00:00.000Z",
+      "updatedAt": "2026-10-09T00:00:00.000Z",
+      "version": 1
+    }
+  }
+]

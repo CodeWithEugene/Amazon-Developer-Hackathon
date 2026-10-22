@@ -47,6 +47,10 @@ Four CDK stacks (Data, Observability, Webhook, Engine) are deployed in `us-east-
 
 ## Judge Quick Start
 
+**Live demo:** https://visitproof.codewitheugene.top. Sign in with one click as any role; no install needed. It runs the console on the sample data `pnpm demo` produces (one recorded run, moved onto the current week with times kept in Eastern Time, and the demo ledger re-signed). Changes you make there (resolving a card, a backfill, consent) last only while that server instance stays warm. Two things need a local run: Ask VisitProof (the hosted site does not run the MCP server, so `/ask` explains that) and live Ring mode (it needs a Ring Developer Playground token, so the hosted Ring screens show "Live Mode Is Off").
+
+To run everything locally:
+
 Requirements: Node 22 or newer and pnpm 10 or newer. No AWS account or Ring credentials are needed.
 
 ```bash

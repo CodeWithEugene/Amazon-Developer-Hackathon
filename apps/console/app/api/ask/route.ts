@@ -13,6 +13,7 @@ import { ASK_PROVENANCE } from "@/components/ask/provenance"
 import { rejectCrossSite } from "@/lib/api"
 import type { Role } from "@/lib/roles"
 import { getSessionRole } from "@/lib/session"
+import { ASK_HOSTED_UNAVAILABLE, isHostedDemo } from "@/lib/store/hosted"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -56,6 +57,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (rejected) return rejected
   const persona = personaFor(await getSessionRole())
   if (!persona) return errorJson(401, "Sign in as a family member or agency staff to use Ask VisitProof.")
+  if (isHostedDemo()) return errorJson(503, ASK_HOSTED_UNAVAILABLE)
   const parsed = requestSchema.safeParse(await request.json().catch(() => null))
   if (!parsed.success) return errorJson(400, "Say or type a question of up to 500 characters.")
   const config = askConfigFromEnv(process.env)

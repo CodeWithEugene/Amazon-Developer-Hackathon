@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { LogInIcon, MessageCircleQuestionIcon } from "lucide-react"
+import { LogInIcon, MessageCircleQuestionIcon, ServerOffIcon } from "lucide-react"
 
 import { askConfigFromEnv } from "@visitproof/copilot"
 import { Button } from "@workspace/ui/components/button"
@@ -16,6 +16,7 @@ import {
 import { AskSimulator } from "@/components/ask/ask-simulator"
 import { PageShell } from "@/components/page-shell"
 import { getSessionRole } from "@/lib/session"
+import { ASK_HOSTED_UNAVAILABLE, isHostedDemo } from "@/lib/store/hosted"
 
 export const metadata: Metadata = {
   title: "Ask VisitProof",
@@ -32,7 +33,17 @@ export default async function AskPage() {
       title="Ask VisitProof"
       description="Ask by voice or text, the way you would on an Echo Show. Answers come from the VisitProof MCP server."
     >
-      {persona ? (
+      {persona && isHostedDemo() ? (
+        <Empty className="border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <ServerOffIcon aria-hidden="true" />
+            </EmptyMedia>
+            <EmptyTitle>Ask VisitProof Runs Locally</EmptyTitle>
+            <EmptyDescription>{ASK_HOSTED_UNAVAILABLE}</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
+      ) : persona ? (
         <AskSimulator persona={persona} brain={config.modelProvider} mcpUrl={config.mcpUrl} />
       ) : (
         <Empty className="border">

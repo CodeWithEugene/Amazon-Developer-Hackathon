@@ -1,0 +1,18 @@
+[
+  {
+    "key": "VISIT#v_okoro_03￿NOTE#2026-10-10T20:27:02.000Z#note_caregiver_roadwork",
+    "item": {
+      "createdAt": "2026-10-10T20:27:02.000Z",
+      "updatedAt": "2026-10-10T20:27:02.000Z",
+      "version": 1,
+      "id": "note_caregiver_roadwork",
+      "visitId": "v_okoro_03",
+      "authorRole": "caregiver",
+      "authorId": "cg_daniel",
+      "at": "2026-10-10T20:27:02.000Z",
+      "text": "I was delayed by road work and arrived as soon as I could.",
+      "classification": "explanation",
+      "confidence": 0.82
+    }
+  }
+]

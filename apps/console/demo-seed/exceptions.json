@@ -1,0 +1,577 @@
+[
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-10T16:15:00.000Z#v_nakamura_02#late_no_arrival",
+    "item": {
+      "id": "v_nakamura_02#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_02",
+      "clientId": "cli_nakamura",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-10T16:15:00.000Z",
+      "createdAt": "2026-10-10T16:15:00.000Z",
+      "updatedAt": "2026-10-10T16:20:20.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-10T16:20:20.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-10T16:20:20.000Z#v_nakamura_02#late_arrival",
+    "item": {
+      "id": "v_nakamura_02#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_02",
+      "clientId": "cli_nakamura",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-10T16:20:20.000Z",
+      "createdAt": "2026-10-10T16:20:20.000Z",
+      "updatedAt": "2026-10-10T16:20:20.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-10T20:15:00.000Z#v_okoro_03#late_no_arrival",
+    "item": {
+      "id": "v_okoro_03#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_okoro_03",
+      "clientId": "cli_okoro",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-10T20:15:00.000Z",
+      "createdAt": "2026-10-10T20:15:00.000Z",
+      "updatedAt": "2026-10-10T20:22:03.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-10T20:22:03.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-10T20:22:03.000Z#v_okoro_03#late_arrival",
+    "item": {
+      "id": "v_okoro_03#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_okoro_03",
+      "clientId": "cli_okoro",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-10T20:22:03.000Z",
+      "createdAt": "2026-10-10T20:22:03.000Z",
+      "updatedAt": "2026-10-10T20:22:03.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-12T13:45:00.000Z#v_alvarez_06#late_no_arrival",
+    "item": {
+      "id": "v_alvarez_06#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_06",
+      "clientId": "cli_alvarez",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-12T13:45:00.000Z",
+      "createdAt": "2026-10-12T13:45:00.000Z",
+      "updatedAt": "2026-10-12T13:56:05.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-12T13:56:05.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-12T13:56:05.000Z#v_alvarez_06#late_arrival",
+    "item": {
+      "id": "v_alvarez_06#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_06",
+      "clientId": "cli_alvarez",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-12T13:56:05.000Z",
+      "createdAt": "2026-10-12T13:56:05.000Z",
+      "updatedAt": "2026-10-12T13:56:05.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-13T01:00:00.000Z#v_nakamura_07#early_departure",
+    "item": {
+      "id": "v_nakamura_07#early_departure",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_07",
+      "clientId": "cli_nakamura",
+      "kind": "early_departure",
+      "state": "open",
+      "openedAt": "2026-10-13T01:00:00.000Z",
+      "createdAt": "2026-10-13T01:00:00.000Z",
+      "updatedAt": "2026-10-13T01:00:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-13T15:00:00.000Z#v_okoro_08#early_departure",
+    "item": {
+      "id": "v_okoro_08#early_departure",
+      "agencyId": "a1",
+      "visitId": "v_okoro_08",
+      "clientId": "cli_okoro",
+      "kind": "early_departure",
+      "state": "open",
+      "openedAt": "2026-10-13T15:00:00.000Z",
+      "createdAt": "2026-10-13T15:00:00.000Z",
+      "updatedAt": "2026-10-13T15:00:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-14T16:15:00.000Z#v_nakamura_10#late_no_arrival",
+    "item": {
+      "id": "v_nakamura_10#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_10",
+      "clientId": "cli_nakamura",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-14T16:15:00.000Z",
+      "createdAt": "2026-10-14T16:15:00.000Z",
+      "updatedAt": "2026-10-14T16:19:17.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-14T16:19:17.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-14T16:19:17.000Z#v_nakamura_10#late_arrival",
+    "item": {
+      "id": "v_nakamura_10#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_10",
+      "clientId": "cli_nakamura",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-14T16:19:17.000Z",
+      "createdAt": "2026-10-14T16:19:17.000Z",
+      "updatedAt": "2026-10-14T16:19:17.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-14T20:15:00.000Z#v_okoro_11#late_no_arrival",
+    "item": {
+      "id": "v_okoro_11#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_okoro_11",
+      "clientId": "cli_okoro",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-14T20:15:00.000Z",
+      "createdAt": "2026-10-14T20:15:00.000Z",
+      "updatedAt": "2026-10-14T20:20:42.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-14T20:20:42.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-14T20:20:42.000Z#v_okoro_11#late_arrival",
+    "item": {
+      "id": "v_okoro_11#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_okoro_11",
+      "clientId": "cli_okoro",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-14T20:20:42.000Z",
+      "createdAt": "2026-10-14T20:20:42.000Z",
+      "updatedAt": "2026-10-14T20:20:42.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-15T13:45:00.000Z#v_alvarez_12#late_no_arrival",
+    "item": {
+      "id": "v_alvarez_12#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_12",
+      "clientId": "cli_alvarez",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-15T13:45:00.000Z",
+      "createdAt": "2026-10-15T13:45:00.000Z",
+      "updatedAt": "2026-10-15T14:15:00.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-15T14:15:00.000Z",
+        "reason": "Escalated to no-show"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-15T14:15:00.000Z#v_alvarez_12#no_show",
+    "item": {
+      "id": "v_alvarez_12#no_show",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_12",
+      "clientId": "cli_alvarez",
+      "kind": "no_show",
+      "state": "open",
+      "openedAt": "2026-10-15T14:15:00.000Z",
+      "createdAt": "2026-10-15T14:15:00.000Z",
+      "updatedAt": "2026-10-15T14:15:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-15T22:15:00.000Z#v_nakamura_13#late_no_arrival",
+    "item": {
+      "id": "v_nakamura_13#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_13",
+      "clientId": "cli_nakamura",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-15T22:15:00.000Z",
+      "createdAt": "2026-10-15T22:15:00.000Z",
+      "updatedAt": "2026-10-15T22:45:00.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-15T22:45:00.000Z",
+        "reason": "Escalated to no-show"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-15T22:45:00.000Z#v_nakamura_13#no_show",
+    "item": {
+      "id": "v_nakamura_13#no_show",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_13",
+      "clientId": "cli_nakamura",
+      "kind": "no_show",
+      "state": "open",
+      "openedAt": "2026-10-15T22:45:00.000Z",
+      "createdAt": "2026-10-15T22:45:00.000Z",
+      "updatedAt": "2026-10-15T22:45:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-16T21:00:00.000Z#v_alvarez_15#early_departure",
+    "item": {
+      "id": "v_alvarez_15#early_departure",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_15",
+      "clientId": "cli_alvarez",
+      "kind": "early_departure",
+      "state": "open",
+      "openedAt": "2026-10-16T21:00:00.000Z",
+      "createdAt": "2026-10-16T21:00:00.000Z",
+      "updatedAt": "2026-10-16T21:00:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-17T12:15:00.000Z#v_okoro_16#late_no_arrival",
+    "item": {
+      "id": "v_okoro_16#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_okoro_16",
+      "clientId": "cli_okoro",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-17T12:15:00.000Z",
+      "createdAt": "2026-10-17T12:15:00.000Z",
+      "updatedAt": "2026-10-17T12:45:00.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-17T12:45:00.000Z",
+        "reason": "Escalated to no-show"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-17T12:45:00.000Z#v_okoro_16#no_show",
+    "item": {
+      "id": "v_okoro_16#no_show",
+      "agencyId": "a1",
+      "visitId": "v_okoro_16",
+      "clientId": "cli_okoro",
+      "kind": "no_show",
+      "state": "open",
+      "openedAt": "2026-10-17T12:45:00.000Z",
+      "createdAt": "2026-10-17T12:45:00.000Z",
+      "updatedAt": "2026-10-17T12:45:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-18T15:30:00.000Z#v_nakamura_18#unobservable",
+    "item": {
+      "id": "v_nakamura_18#unobservable",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_18",
+      "clientId": "cli_nakamura",
+      "kind": "unobservable",
+      "state": "open",
+      "openedAt": "2026-10-18T15:30:00.000Z",
+      "createdAt": "2026-10-18T15:30:00.000Z",
+      "updatedAt": "2026-10-18T15:30:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-19T12:15:00.000Z#v_okoro_20#late_no_arrival",
+    "item": {
+      "id": "v_okoro_20#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_okoro_20",
+      "clientId": "cli_okoro",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-19T12:15:00.000Z",
+      "createdAt": "2026-10-19T12:15:00.000Z",
+      "updatedAt": "2026-10-19T12:25:48.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-19T12:25:48.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-19T12:25:48.000Z#v_okoro_20#late_arrival",
+    "item": {
+      "id": "v_okoro_20#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_okoro_20",
+      "clientId": "cli_okoro",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-19T12:25:48.000Z",
+      "createdAt": "2026-10-19T12:25:48.000Z",
+      "updatedAt": "2026-10-19T12:25:48.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-19T14:00:01.000Z#v_alvarez_20#unobservable",
+    "item": {
+      "id": "v_alvarez_20#unobservable",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_20",
+      "clientId": "cli_alvarez",
+      "kind": "unobservable",
+      "state": "open",
+      "openedAt": "2026-10-19T14:00:01.000Z",
+      "createdAt": "2026-10-19T14:00:01.000Z",
+      "updatedAt": "2026-10-19T14:00:01.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-19T22:15:00.000Z#v_nakamura_21#late_no_arrival",
+    "item": {
+      "id": "v_nakamura_21#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_21",
+      "clientId": "cli_nakamura",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-19T22:15:00.000Z",
+      "createdAt": "2026-10-19T22:15:00.000Z",
+      "updatedAt": "2026-10-19T22:31:28.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-19T22:31:28.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-19T22:31:28.000Z#v_nakamura_21#late_arrival",
+    "item": {
+      "id": "v_nakamura_21#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_21",
+      "clientId": "cli_nakamura",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-19T22:31:28.000Z",
+      "createdAt": "2026-10-19T22:31:28.000Z",
+      "updatedAt": "2026-10-19T22:31:28.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-20T18:15:00.000Z#v_alvarez_23#late_no_arrival",
+    "item": {
+      "id": "v_alvarez_23#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_23",
+      "clientId": "cli_alvarez",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-20T18:15:00.000Z",
+      "createdAt": "2026-10-20T18:15:00.000Z",
+      "updatedAt": "2026-10-20T18:21:33.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-20T18:21:33.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-20T18:21:33.000Z#v_alvarez_23#late_arrival",
+    "item": {
+      "id": "v_alvarez_23#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_23",
+      "clientId": "cli_alvarez",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-20T18:21:33.000Z",
+      "createdAt": "2026-10-20T18:21:33.000Z",
+      "updatedAt": "2026-10-20T18:21:33.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-21T22:15:00.000Z#v_nakamura_25#late_no_arrival",
+    "item": {
+      "id": "v_nakamura_25#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_25",
+      "clientId": "cli_nakamura",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-21T22:15:00.000Z",
+      "createdAt": "2026-10-21T22:15:00.000Z",
+      "updatedAt": "2026-10-21T22:21:23.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-21T22:21:23.000Z",
+        "reason": "Arrival observed"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-21T22:21:23.000Z#v_nakamura_25#late_arrival",
+    "item": {
+      "id": "v_nakamura_25#late_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_25",
+      "clientId": "cli_nakamura",
+      "kind": "late_arrival",
+      "state": "open",
+      "openedAt": "2026-10-21T22:21:23.000Z",
+      "createdAt": "2026-10-21T22:21:23.000Z",
+      "updatedAt": "2026-10-21T22:21:23.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-22T12:30:01.000Z#v_okoro_26#unobservable",
+    "item": {
+      "id": "v_okoro_26#unobservable",
+      "agencyId": "a1",
+      "visitId": "v_okoro_26",
+      "clientId": "cli_okoro",
+      "kind": "unobservable",
+      "state": "open",
+      "openedAt": "2026-10-22T12:30:01.000Z",
+      "createdAt": "2026-10-22T12:30:01.000Z",
+      "updatedAt": "2026-10-22T12:30:01.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-22T21:00:00.000Z#v_alvarez_27#early_departure",
+    "item": {
+      "id": "v_alvarez_27#early_departure",
+      "agencyId": "a1",
+      "visitId": "v_alvarez_27",
+      "clientId": "cli_alvarez",
+      "kind": "early_departure",
+      "state": "open",
+      "openedAt": "2026-10-22T21:00:00.000Z",
+      "createdAt": "2026-10-22T21:00:00.000Z",
+      "updatedAt": "2026-10-22T21:00:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-22T22:15:00.000Z#v_nakamura_27#late_no_arrival",
+    "item": {
+      "id": "v_nakamura_27#late_no_arrival",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_27",
+      "clientId": "cli_nakamura",
+      "kind": "late_no_arrival",
+      "state": "resolved",
+      "openedAt": "2026-10-22T22:15:00.000Z",
+      "createdAt": "2026-10-22T22:15:00.000Z",
+      "updatedAt": "2026-10-22T22:45:00.000Z",
+      "version": 2,
+      "resolution": {
+        "by": "system",
+        "at": "2026-10-22T22:45:00.000Z",
+        "reason": "Escalated to no-show"
+      }
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-22T22:45:00.000Z#v_nakamura_27#no_show",
+    "item": {
+      "id": "v_nakamura_27#no_show",
+      "agencyId": "a1",
+      "visitId": "v_nakamura_27",
+      "clientId": "cli_nakamura",
+      "kind": "no_show",
+      "state": "open",
+      "openedAt": "2026-10-22T22:45:00.000Z",
+      "createdAt": "2026-10-22T22:45:00.000Z",
+      "updatedAt": "2026-10-22T22:45:00.000Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "AGENCY#a1￿EXC#2026-10-22T23:00:00.000Z#v_okoro_27#early_departure",
+    "item": {
+      "id": "v_okoro_27#early_departure",
+      "agencyId": "a1",
+      "visitId": "v_okoro_27",
+      "clientId": "cli_okoro",
+      "kind": "early_departure",
+      "state": "open",
+      "openedAt": "2026-10-22T23:00:00.000Z",
+      "createdAt": "2026-10-22T23:00:00.000Z",
+      "updatedAt": "2026-10-22T23:00:00.000Z",
+      "version": 1
+    }
+  }
+]

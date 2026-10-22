@@ -1,0 +1,95 @@
+[
+  {
+    "key": "AGENCY#a1￿CLIENT#cli_okoro",
+    "item": {
+      "createdAt": "2026-10-09T00:00:00.000Z",
+      "updatedAt": "2026-10-09T00:00:00.000Z",
+      "version": 1,
+      "id": "cli_okoro",
+      "agencyId": "a1",
+      "name": "Grace Okoro",
+      "homeLabel": "Maple Street",
+      "familyContacts": [
+        {
+          "name": "Priya Okoro",
+          "email": "priya@example.com",
+          "relationship": "Daughter"
+        }
+      ],
+      "ringLinkStatus": "linked",
+      "consent": {
+        "shareWithAgency": true,
+        "snapshotsEnabled": true,
+        "snapshotRetentionDays": 7,
+        "digestHour": 19,
+        "exceptionAlerts": true,
+        "consentedAt": "2026-10-09T00:00:00.000Z"
+      },
+      "serviceCodes": [
+        "T1019"
+      ]
+    }
+  },
+  {
+    "key": "AGENCY#a1￿CLIENT#cli_nakamura",
+    "item": {
+      "createdAt": "2026-10-09T00:00:00.000Z",
+      "updatedAt": "2026-10-09T00:00:00.000Z",
+      "version": 1,
+      "id": "cli_nakamura",
+      "agencyId": "a1",
+      "name": "Ken Nakamura",
+      "homeLabel": "Elm Court",
+      "familyContacts": [
+        {
+          "name": "Mika Nakamura",
+          "email": "mika@example.com",
+          "relationship": "Son"
+        }
+      ],
+      "ringLinkStatus": "linked",
+      "consent": {
+        "shareWithAgency": true,
+        "snapshotsEnabled": false,
+        "snapshotRetentionDays": 7,
+        "digestHour": 19,
+        "exceptionAlerts": true,
+        "consentedAt": "2026-10-09T00:00:00.000Z"
+      },
+      "serviceCodes": [
+        "T1019"
+      ]
+    }
+  },
+  {
+    "key": "AGENCY#a1￿CLIENT#cli_alvarez",
+    "item": {
+      "createdAt": "2026-10-09T00:00:00.000Z",
+      "updatedAt": "2026-10-09T00:00:00.000Z",
+      "version": 1,
+      "id": "cli_alvarez",
+      "agencyId": "a1",
+      "name": "Rosa Alvarez",
+      "homeLabel": "Cedar Avenue",
+      "familyContacts": [
+        {
+          "name": "Luis Alvarez",
+          "email": "luis@example.com",
+          "relationship": "Son"
+        }
+      ],
+      "ringLinkStatus": "linked",
+      "consent": {
+        "shareWithAgency": true,
+        "snapshotsEnabled": false,
+        "snapshotRetentionDays": 7,
+        "digestHour": 19,
+        "exceptionAlerts": true,
+        "consentedAt": "2026-10-09T00:00:00.000Z"
+      },
+      "serviceCodes": [
+        "G0299"
+      ]
+    }
+  }
+]

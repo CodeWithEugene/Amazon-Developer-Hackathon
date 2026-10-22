@@ -1,0 +1,17 @@
+# Never upload local secrets, partial .env writes, or local demo data.
+.env
+.env.*
+*.env
+.!*
+**/.env
+**/.env.*
+/.demo-data
+/.visitproof
+/data
+/snapshots
+node_modules
+**/node_modules
+**/.next
+**/.turbo
+*.mp4
+*.log

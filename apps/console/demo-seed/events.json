@@ -1,0 +1,3452 @@
+[
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791546920000#42f41c7b-f55d-4887-9723-ae26d388644f",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "42f41c7b-f55d-4887-9723-ae26d388644f",
+      "timestampMs": 1791546920000,
+      "at": "2026-10-09T11:55:20.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "1cd79591384e1d7d259bb4566cb3ba62dfe332a611956eb0e3bdabc93ca68919",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.597Z",
+      "updatedAt": "2026-10-22T06:04:58.597Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791549422000#5ca95918-4b59-496b-837d-3f3842de63a5",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "5ca95918-4b59-496b-837d-3f3842de63a5",
+      "timestampMs": 1791549422000,
+      "at": "2026-10-09T12:37:02.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "650e8a9ade4ce8e43c9071f80ba51e6e4feef61eecddbdae36205973deef0cd9",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.602Z",
+      "updatedAt": "2026-10-22T06:04:58.602Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791552421000#07cc367d-d4b9-40f2-9d13-94ef621b37ab",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "07cc367d-d4b9-40f2-9d13-94ef621b37ab",
+      "timestampMs": 1791552421000,
+      "at": "2026-10-09T13:27:01.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "4609641f5c35a24a08908bc468d1d69159198f08936cf79b797539d04d56d598",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.611Z",
+      "updatedAt": "2026-10-22T06:04:58.611Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791554345000#90f0821f-d471-4ab6-b634-148428dc7e2d",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "90f0821f-d471-4ab6-b634-148428dc7e2d",
+      "timestampMs": 1791554345000,
+      "at": "2026-10-09T13:59:05.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "860d2ac6636ddb15fb49f42aaeee3982d9c4844d56d40839ee8222a90e86cfe0",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.616Z",
+      "updatedAt": "2026-10-22T06:04:58.616Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791560153000#849c0216-0ff2-43ec-ad1c-6fa465150c2f",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "849c0216-0ff2-43ec-ad1c-6fa465150c2f",
+      "timestampMs": 1791560153000,
+      "at": "2026-10-09T15:35:53.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "63361c635c42ba8d54851bf4bbbc06d38f259850ff362f4cd3d9fc26f8ef1541",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.621Z",
+      "updatedAt": "2026-10-22T06:04:58.621Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791561801000#b678ed10-e231-4fb4-bc26-6d105d796ea1",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "b678ed10-e231-4fb4-bc26-6d105d796ea1",
+      "timestampMs": 1791561801000,
+      "at": "2026-10-09T16:03:21.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "ca53e14c5e711122f7cb4bf8eb673b631122188bbc69ae573c57b0eb79fa0c53",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.625Z",
+      "updatedAt": "2026-10-22T06:04:58.625Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791564914000#37e89d83-48d5-4217-a599-15b34ac56ebf",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "37e89d83-48d5-4217-a599-15b34ac56ebf",
+      "timestampMs": 1791564914000,
+      "at": "2026-10-09T16:55:14.000Z",
+      "type": "motion",
+      "subType": "animal",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "79a25c3f1cee4e8be74a4b1059f4a25ea87415a484b0b0cb6f51d457a9f4a6ec",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.627Z",
+      "updatedAt": "2026-10-22T06:04:58.627Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791569104000#88407854-a51a-408b-b199-cacd9fda837f",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "88407854-a51a-408b-b199-cacd9fda837f",
+      "timestampMs": 1791569104000,
+      "at": "2026-10-09T18:05:04.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "aa643ce37018e0709d26077b51d31b800f9054bc8e8abe80aa72118f9cb2d3cf",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.630Z",
+      "updatedAt": "2026-10-22T06:04:58.630Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791569169000#e713f6cf-f0f8-47ee-a74f-df018ff52549",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "e713f6cf-f0f8-47ee-a74f-df018ff52549",
+      "timestampMs": 1791569169000,
+      "at": "2026-10-09T18:06:09.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "197b520d4f8e2065518ea35b268ecee9a0dc1c5cff1e035161d54a89436e4646",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.633Z",
+      "updatedAt": "2026-10-22T06:04:58.633Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791575957000#4f492d31-7fe0-4ef1-9b73-05c5824a9dbb",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "4f492d31-7fe0-4ef1-9b73-05c5824a9dbb",
+      "timestampMs": 1791575957000,
+      "at": "2026-10-09T19:59:17.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "c9c0f4e9de5dad1f6a6578eb05c9ecd4490efd5a959fcec27fdc39ca39d731ef",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.635Z",
+      "updatedAt": "2026-10-22T06:04:58.635Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791576346000#aba4dfdb-9d4a-4917-86e4-6e17647f2c7e",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "aba4dfdb-9d4a-4917-86e4-6e17647f2c7e",
+      "timestampMs": 1791576346000,
+      "at": "2026-10-09T20:05:46.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "f99190f55ee597f4a61a4ce1c2bdbab6aac676d6537f9b4b1575ba90b5534dbf",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.637Z",
+      "updatedAt": "2026-10-22T06:04:58.637Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791582897000#6a72364f-53cd-4c73-9a3b-2dec5232c6de",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "6a72364f-53cd-4c73-9a3b-2dec5232c6de",
+      "timestampMs": 1791582897000,
+      "at": "2026-10-09T21:54:57.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "3304aa5a2a4aefdf70484884457b7ad6427d04e590d6d5f8c8e1069bb7c4fd7d",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.638Z",
+      "updatedAt": "2026-10-22T06:04:58.638Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791583447000#1fb5620a-c063-41ef-8f55-7163cf8ed9a2",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "1fb5620a-c063-41ef-8f55-7163cf8ed9a2",
+      "timestampMs": 1791583447000,
+      "at": "2026-10-09T22:04:07.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "c0c3ed41d4674c850adaf3738a8f4127d89da7237680d6bffd1f5da10370ff9a",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.640Z",
+      "updatedAt": "2026-10-22T06:04:58.640Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791590608000#ad58fff0-5776-4e92-90fb-37fa7244ec19",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "ad58fff0-5776-4e92-90fb-37fa7244ec19",
+      "timestampMs": 1791590608000,
+      "at": "2026-10-10T00:03:28.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "551a02557656632357f1363f45b9af8750dd65140ac8a9e9b2bc7be18d984a43",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.642Z",
+      "updatedAt": "2026-10-22T06:04:58.642Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791633505000#6de99d72-d49b-463d-bfbf-f433a7eac56a",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "6de99d72-d49b-463d-bfbf-f433a7eac56a",
+      "timestampMs": 1791633505000,
+      "at": "2026-10-10T11:58:25.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "51d5b195790d4305e6fc6031c5f682aff95d6ca60baedf4ba6248ea61fc19f7a",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.643Z",
+      "updatedAt": "2026-10-22T06:04:58.643Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791639066000#b56a03d8-d4cf-4076-aa66-2c43c893f5f7",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "b56a03d8-d4cf-4076-aa66-2c43c893f5f7",
+      "timestampMs": 1791639066000,
+      "at": "2026-10-10T13:31:06.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "2e11d66ef5f78951e90e754385e293890936ea9184b20eb885b4417bbd740764",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.644Z",
+      "updatedAt": "2026-10-22T06:04:58.644Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791641132000#62ff7367-a9eb-4f8f-b529-df455fb5a98e",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "62ff7367-a9eb-4f8f-b529-df455fb5a98e",
+      "timestampMs": 1791641132000,
+      "at": "2026-10-10T14:05:32.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "49275f63e634f05dea600b248c517745825943f6c52d13d498394e44b0b9c516",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.646Z",
+      "updatedAt": "2026-10-22T06:04:58.646Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791646540000#955c5dc2-d04c-44e5-912a-8abbe2d739e0",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "955c5dc2-d04c-44e5-912a-8abbe2d739e0",
+      "timestampMs": 1791646540000,
+      "at": "2026-10-10T15:35:40.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "a6e3dfb94d049420b6da2f8a41a6698da3a864d63de5caab5902a0f9aa4177ee",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.649Z",
+      "updatedAt": "2026-10-22T06:04:58.649Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791649219000#f5164313-d07e-45d8-8c95-42aa02d064c1",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "f5164313-d07e-45d8-8c95-42aa02d064c1",
+      "timestampMs": 1791649219000,
+      "at": "2026-10-10T16:20:19.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "e87f59ad0ccb94cf2e6230f0f2dd89276b4d6d389793e86329d3dfb7410c1e54",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.650Z",
+      "updatedAt": "2026-10-22T06:04:58.650Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791652490000#72956f5c-7315-4c9b-97c4-75da3025c9ae",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "72956f5c-7315-4c9b-97c4-75da3025c9ae",
+      "timestampMs": 1791652490000,
+      "at": "2026-10-10T17:14:50.000Z",
+      "type": "motion",
+      "subType": "animal",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "9bc928b1ed626d402c4d697c401ff606d0a01dcc72cfa3a48cf20a41a64dbdea",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.652Z",
+      "updatedAt": "2026-10-22T06:04:58.652Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791655586000#38dbe04f-1fd5-4afc-acf8-433dcf7e080c",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "38dbe04f-1fd5-4afc-acf8-433dcf7e080c",
+      "timestampMs": 1791655586000,
+      "at": "2026-10-10T18:06:26.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "91fa22ff1acfa8f48be30543f7f0a258c67c1db4f84b13bbd45a8409ee2a2720",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.653Z",
+      "updatedAt": "2026-10-22T06:04:58.653Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791656378000#9989f3d4-50c5-4ff0-bc88-8e95b507c539",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "9989f3d4-50c5-4ff0-bc88-8e95b507c539",
+      "timestampMs": 1791656378000,
+      "at": "2026-10-10T18:19:38.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "c87609f9f4b8ef8cc91a1c0f63a9bc026bdb86559d4e20806cca7bbd5e0115dc",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.654Z",
+      "updatedAt": "2026-10-22T06:04:58.654Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791662270000#024a8ae5-835f-449a-a1bd-9651697178b8",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "024a8ae5-835f-449a-a1bd-9651697178b8",
+      "timestampMs": 1791662270000,
+      "at": "2026-10-10T19:57:50.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "d9b841598b88a911c00cd33f53f45f16a62c35770aee3bf5aec9736d9422e59f",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.657Z",
+      "updatedAt": "2026-10-22T06:04:58.657Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791663722000#5b7db3b0-5789-47d6-ac9e-a4b136e1dfa8",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "5b7db3b0-5789-47d6-ac9e-a4b136e1dfa8",
+      "timestampMs": 1791663722000,
+      "at": "2026-10-10T20:22:02.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "71a99522cadc0b244aa482f7e8a22ea8ca1d6b2a8a0dc3122af57a09ddcfa6cd",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.658Z",
+      "updatedAt": "2026-10-22T06:04:58.658Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791669895000#935df1c3-fab8-4261-95cb-8b7894132baa",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "935df1c3-fab8-4261-95cb-8b7894132baa",
+      "timestampMs": 1791669895000,
+      "at": "2026-10-10T22:04:55.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "8906d884fd1eb26c7c2a5adcf33e8568bd3695eee0106b9a73c0c40206c1e44c",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.659Z",
+      "updatedAt": "2026-10-22T06:04:58.659Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791670946000#965feda1-6e2e-4372-98b3-7de7397a3996",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "965feda1-6e2e-4372-98b3-7de7397a3996",
+      "timestampMs": 1791670946000,
+      "at": "2026-10-10T22:22:26.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "b222fc842cd61a1e4fecbf2061ffe482df3b1540acff69799f850f15e4e3e54a",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.660Z",
+      "updatedAt": "2026-10-22T06:04:58.660Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791676598000#41df5084-4cf4-4aa2-8db0-eab7b23af53b",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "41df5084-4cf4-4aa2-8db0-eab7b23af53b",
+      "timestampMs": 1791676598000,
+      "at": "2026-10-10T23:56:38.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "8b453ef25936007f7a4e20b7c9970c5b79893e1698601471bb13aee333959bca",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.662Z",
+      "updatedAt": "2026-10-22T06:04:58.662Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791720448000#77aaaa26-4f53-4320-88c2-5ba1d2af37de",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "77aaaa26-4f53-4320-88c2-5ba1d2af37de",
+      "timestampMs": 1791720448000,
+      "at": "2026-10-11T12:07:28.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "3eb96d9a77b9764ed37f81e1a65d8f5d18d66360354880cee84f3e83c2e887c2",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.663Z",
+      "updatedAt": "2026-10-22T06:04:58.663Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791725872000#c3343074-0a5f-4c70-95c9-58fc41704246",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "c3343074-0a5f-4c70-95c9-58fc41704246",
+      "timestampMs": 1791725872000,
+      "at": "2026-10-11T13:37:52.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "0895bb7541093f7306f72046ec273c2c770ae2ab8f2083e67a1cee07c05a19b0",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.664Z",
+      "updatedAt": "2026-10-22T06:04:58.664Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791725887000#2ef755ec-0ec1-4009-8b3c-c2dd3866b799",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "2ef755ec-0ec1-4009-8b3c-c2dd3866b799",
+      "timestampMs": 1791725887000,
+      "at": "2026-10-11T13:38:07.000Z",
+      "type": "motion",
+      "subType": "vehicle",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "27afe93c0c3b3bb51de78638acc56a0cc218cb36aee28e9505ab3c3391bf9e57",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.666Z",
+      "updatedAt": "2026-10-22T06:04:58.666Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791727656000#7f6767eb-f6f9-4680-8d7e-1e44debd3811",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "7f6767eb-f6f9-4680-8d7e-1e44debd3811",
+      "timestampMs": 1791727656000,
+      "at": "2026-10-11T14:07:36.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "1adaa122fca25314e5e0cc95357ddafd5a2a8dc33f976940329a515902a09430",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.667Z",
+      "updatedAt": "2026-10-22T06:04:58.667Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791730627000#45c6967c-b4ad-4967-9e98-67c5ac8b0da6",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "45c6967c-b4ad-4967-9e98-67c5ac8b0da6",
+      "timestampMs": 1791730627000,
+      "at": "2026-10-11T14:57:07.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "6c623093ffbae01b3b071c3be8ac179ab88b8f8c224d28dda9477bc9400d33da",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.668Z",
+      "updatedAt": "2026-10-22T06:04:58.668Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791732886000#00dd8b70-b7f9-4ce0-9d3d-c8e5886396fd",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "00dd8b70-b7f9-4ce0-9d3d-c8e5886396fd",
+      "timestampMs": 1791732886000,
+      "at": "2026-10-11T15:34:46.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "b64f7676034241ffffda5f50b0f6bd03a2d43fb7a0ab98004ed76dc97c17dadd",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.670Z",
+      "updatedAt": "2026-10-22T06:04:58.670Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791734186000#0801b838-3672-48ee-812a-620f63a4424b",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "0801b838-3672-48ee-812a-620f63a4424b",
+      "timestampMs": 1791734186000,
+      "at": "2026-10-11T15:56:26.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "9a0ab0cc9de819078dcfaa1cb1f899c89bbc20b191b8f0d7ed896e3bd607468b",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.671Z",
+      "updatedAt": "2026-10-22T06:04:58.671Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791741481000#b6277c6f-5e26-4ae5-8f1f-97ba20a2fa09",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "b6277c6f-5e26-4ae5-8f1f-97ba20a2fa09",
+      "timestampMs": 1791741481000,
+      "at": "2026-10-11T17:58:01.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "aefe7a60dc6928cf10a1d9a2f5d37d8082f6218a0723b66ed1c46e123a8ae4f1",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.672Z",
+      "updatedAt": "2026-10-22T06:04:58.672Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791741599000#f4bab689-eae2-4e2a-89d7-391c4b9e6278",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "f4bab689-eae2-4e2a-89d7-391c4b9e6278",
+      "timestampMs": 1791741599000,
+      "at": "2026-10-11T17:59:59.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "e99934fd819eb91d6919b450c1f13118a883d7f1181f4fe6f2a28d80f5912fc1",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.675Z",
+      "updatedAt": "2026-10-22T06:04:58.675Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791748964000#c3a15f83-d54e-4df9-ad36-daf7c133addc",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "c3a15f83-d54e-4df9-ad36-daf7c133addc",
+      "timestampMs": 1791748964000,
+      "at": "2026-10-11T20:02:44.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "d4c494b43c26206f0ab9e56416f4f00505ec4743667df82723d380a7211b787d",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.676Z",
+      "updatedAt": "2026-10-22T06:04:58.676Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791749047000#f380d174-9b7a-44d5-b1ee-d18b7eabaf5e",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "f380d174-9b7a-44d5-b1ee-d18b7eabaf5e",
+      "timestampMs": 1791749047000,
+      "at": "2026-10-11T20:04:07.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "223a2611f3d3af417cd1fdfe3d71edec4a2a29e9d631c983d7a34e63922f28cc",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.678Z",
+      "updatedAt": "2026-10-22T06:04:58.678Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791756239000#a4ac99ec-b1fa-4a71-86fe-aa6f609d5ffc",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "a4ac99ec-b1fa-4a71-86fe-aa6f609d5ffc",
+      "timestampMs": 1791756239000,
+      "at": "2026-10-11T22:03:59.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "93893eba61572fa7ceb83f24e23e94285af71ac3e4fd0a0ab580bde5afe70e21",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.679Z",
+      "updatedAt": "2026-10-22T06:04:58.679Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791756281000#18e3bef6-cbe3-4173-b3cf-e41b9bf01844",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "18e3bef6-cbe3-4173-b3cf-e41b9bf01844",
+      "timestampMs": 1791756281000,
+      "at": "2026-10-11T22:04:41.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "f91420b88ce5022dcc408610b89c943709813dec822ec498c6187bdb969a4bad",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.681Z",
+      "updatedAt": "2026-10-22T06:04:58.681Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791760391000#bafd1cea-8a73-4f47-9c30-29c458390c4b",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "bafd1cea-8a73-4f47-9c30-29c458390c4b",
+      "timestampMs": 1791760391000,
+      "at": "2026-10-11T23:13:11.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "6d4993787e538eec4fe8855cc0846df0a9d8bb6d25b1e75731e7715667e5611b",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.683Z",
+      "updatedAt": "2026-10-22T06:04:58.683Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791763373000#1de43c57-c40b-4489-b66d-c2dc5f7849a2",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "1de43c57-c40b-4489-b66d-c2dc5f7849a2",
+      "timestampMs": 1791763373000,
+      "at": "2026-10-12T00:02:53.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "1495178a8222f0212eea67ef1cfc0e35576ed85291c9f36204a7a9f22b21750f",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.684Z",
+      "updatedAt": "2026-10-22T06:04:58.684Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791806553000#a7cacc7f-0a8e-483c-8c31-0ad7cbd5e2b8",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "a7cacc7f-0a8e-483c-8c31-0ad7cbd5e2b8",
+      "timestampMs": 1791806553000,
+      "at": "2026-10-12T12:02:33.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "741a9d62a22cf3d0035075cae8958fc4fb016328c0bc9c1502d1cee1d12de06c",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.686Z",
+      "updatedAt": "2026-10-22T06:04:58.686Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791813364000#28304a05-b138-46fe-b224-051db7dcdecd",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "28304a05-b138-46fe-b224-051db7dcdecd",
+      "timestampMs": 1791813364000,
+      "at": "2026-10-12T13:56:04.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "f296ac613a02b7e182c3d8b4eed388f11ca844b3fbbfc9f09eb93db980c08d37",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.688Z",
+      "updatedAt": "2026-10-22T06:04:58.688Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791813549000#2ee653f1-8544-4968-a4c1-1ed9788f3693",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "2ee653f1-8544-4968-a4c1-1ed9788f3693",
+      "timestampMs": 1791813549000,
+      "at": "2026-10-12T13:59:09.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "87e7299fec795a4f9cd12e020402ee873cabcb39bea5194f4bf25f4e98cc8c12",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.690Z",
+      "updatedAt": "2026-10-22T06:04:58.690Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791820734000#6f946cae-ad1d-4e1e-981e-1da144405028",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "6f946cae-ad1d-4e1e-981e-1da144405028",
+      "timestampMs": 1791820734000,
+      "at": "2026-10-12T15:58:54.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "6b7fbf04718dbbfb1c84650554b7eb5a682e3f4a54c8a902df7c7f2e93c5645b",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.691Z",
+      "updatedAt": "2026-10-22T06:04:58.691Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791820781000#4babebec-64fd-4b4c-a6f1-d5c35da80544",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "4babebec-64fd-4b4c-a6f1-d5c35da80544",
+      "timestampMs": 1791820781000,
+      "at": "2026-10-12T15:59:41.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "37bebbc707daed063f02c7d94808b2444ccf188cbf9d227a9b92208161762f29",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.694Z",
+      "updatedAt": "2026-10-22T06:04:58.694Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791824899000#a61e2622-0026-4bf0-93cb-045e92fc37b5",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "a61e2622-0026-4bf0-93cb-045e92fc37b5",
+      "timestampMs": 1791824899000,
+      "at": "2026-10-12T17:08:19.000Z",
+      "type": "motion",
+      "subType": "animal",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "23299d55777c3a068505e34d1bb8499c1e1c97a90e7e0be7968764bd8716b44e",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.696Z",
+      "updatedAt": "2026-10-22T06:04:58.696Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791828062000#75bf683a-008f-406c-8b87-0ea26d382476",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "75bf683a-008f-406c-8b87-0ea26d382476",
+      "timestampMs": 1791828062000,
+      "at": "2026-10-12T18:01:02.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "bcb0975d9dcee7f9c2a49b090dcee104a143505a175dba8a825bc10b933798e0",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.698Z",
+      "updatedAt": "2026-10-22T06:04:58.698Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791828385000#00658b2d-90e7-4575-9134-84743d5a0eb0",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "00658b2d-90e7-4575-9134-84743d5a0eb0",
+      "timestampMs": 1791828385000,
+      "at": "2026-10-12T18:06:25.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "f72cfee580dbb0c04d97eb37ee0fb8528e66a5d420b9e6367ce6cd92ff95e221",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.700Z",
+      "updatedAt": "2026-10-22T06:04:58.700Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791832760000#af0d7a1f-8a27-45df-a0cc-d6f4052350ba",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "af0d7a1f-8a27-45df-a0cc-d6f4052350ba",
+      "timestampMs": 1791832760000,
+      "at": "2026-10-12T19:19:20.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "207d1dba0cf7d1864b6ab6953968a7f9a2b31b6c32a25787265820d2fefa9e0b",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.701Z",
+      "updatedAt": "2026-10-22T06:04:58.701Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791835099000#08f2ca0f-94a5-4fec-a6c6-975c0c3c062a",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "08f2ca0f-94a5-4fec-a6c6-975c0c3c062a",
+      "timestampMs": 1791835099000,
+      "at": "2026-10-12T19:58:19.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "fb0718e65b721f1f6fbefedfdd73c67020f637f8d8558d393bba50e1dd892dd5",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.703Z",
+      "updatedAt": "2026-10-22T06:04:58.703Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791835392000#8f5a10b6-08c2-49ca-b56d-645d303aa483",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "8f5a10b6-08c2-49ca-b56d-645d303aa483",
+      "timestampMs": 1791835392000,
+      "at": "2026-10-12T20:03:12.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "68b1b573a67d52801acce290fe2152490f043d060f086bec8fb2aba5860323fa",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.705Z",
+      "updatedAt": "2026-10-22T06:04:58.705Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791839695000#5a145959-c876-42df-bf63-a8564358177c",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "5a145959-c876-42df-bf63-a8564358177c",
+      "timestampMs": 1791839695000,
+      "at": "2026-10-12T21:14:55.000Z",
+      "type": "motion",
+      "subType": "animal",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "01cbecedf791db045b43e513ed620d123d6572448af5cc7afbc2ce0440444b03",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.707Z",
+      "updatedAt": "2026-10-22T06:04:58.707Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791842365000#076ea617-52cd-47a6-b5cc-19862e89636f",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "076ea617-52cd-47a6-b5cc-19862e89636f",
+      "timestampMs": 1791842365000,
+      "at": "2026-10-12T21:59:25.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "dbf4652a1c7a1ebb0dd864964d7957f361d987fa2092cb9e9dae03659659a884",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.709Z",
+      "updatedAt": "2026-10-22T06:04:58.709Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791842569000#2835e627-3e37-4980-a46a-ea5b39b57fe2",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "2835e627-3e37-4980-a46a-ea5b39b57fe2",
+      "timestampMs": 1791842569000,
+      "at": "2026-10-12T22:02:49.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "0dc0a513eb9f169fa3a0d6b9925f2f97971fe15648d3db1d59b28de1ab27fc57",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.710Z",
+      "updatedAt": "2026-10-22T06:04:58.710Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791844260000#d1e9ba8a-04aa-4c12-b395-63aee43f7ec9",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "d1e9ba8a-04aa-4c12-b395-63aee43f7ec9",
+      "timestampMs": 1791844260000,
+      "at": "2026-10-12T22:31:00.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "cec4d153663341c673af7b8bb4ce5c29f94ce85e26b7ee2c1867152533194bf9",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.712Z",
+      "updatedAt": "2026-10-22T06:04:58.712Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791893217000#5231cab7-f2e6-4d3a-b93d-8de92c0ca102",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "5231cab7-f2e6-4d3a-b93d-8de92c0ca102",
+      "timestampMs": 1791893217000,
+      "at": "2026-10-13T12:06:57.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "a257b3d57bdf3c13a3a5924054ee43c15486b1f05ae5851d0927b7dfcd903c53",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.714Z",
+      "updatedAt": "2026-10-22T06:04:58.714Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791894842000#328d20e2-99ac-4fcd-8216-eddd94222450",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "328d20e2-99ac-4fcd-8216-eddd94222450",
+      "timestampMs": 1791894842000,
+      "at": "2026-10-13T12:34:02.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "984f1400b20a716b7924f60c8e4cb5611cbe6db20184903a6231418560fcab05",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.717Z",
+      "updatedAt": "2026-10-22T06:04:58.717Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791898181000#5b1dac6e-a4bb-4cd8-812a-5fde9b1b6897",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "5b1dac6e-a4bb-4cd8-812a-5fde9b1b6897",
+      "timestampMs": 1791898181000,
+      "at": "2026-10-13T13:29:41.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "0240e5ecbdaa86d8a7bacd3008865ca89bb24dee3c800902ddab884873205355",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.718Z",
+      "updatedAt": "2026-10-22T06:04:58.718Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791905335000#6d05fa75-5f16-46de-8828-6749da1ccddd",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "6d05fa75-5f16-46de-8828-6749da1ccddd",
+      "timestampMs": 1791905335000,
+      "at": "2026-10-13T15:28:55.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "8a8ab5d050d404ab5d09e9247c77a7de37d88acb509b19dc67436ca22921da2c",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.720Z",
+      "updatedAt": "2026-10-22T06:04:58.720Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791907099000#13197c5a-6bd1-4ac4-b46f-5add11385284",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "13197c5a-6bd1-4ac4-b46f-5add11385284",
+      "timestampMs": 1791907099000,
+      "at": "2026-10-13T15:58:19.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "8e9be55eb7c1c6fb66a6cb717918e8cfdc3bf11884f8e47a569a9c8dfc2d4ba3",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.722Z",
+      "updatedAt": "2026-10-22T06:04:58.722Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791914466000#775b5220-68eb-4097-9802-36d5d9325864",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "775b5220-68eb-4097-9802-36d5d9325864",
+      "timestampMs": 1791914466000,
+      "at": "2026-10-13T18:01:06.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "cce18389da2f4dfdbe047c3f31b0f63db685416c17e319be862f5dd3c30b2321",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.723Z",
+      "updatedAt": "2026-10-22T06:04:58.723Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791914828000#f3e221d9-89e4-460b-a958-312637fa6646",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "f3e221d9-89e4-460b-a958-312637fa6646",
+      "timestampMs": 1791914828000,
+      "at": "2026-10-13T18:07:08.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "82c4dcde1bbb9477c110dfeca78890660db7c25652b13866c7e242ea943ab2dc",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.725Z",
+      "updatedAt": "2026-10-22T06:04:58.725Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791921393000#48e9250e-8822-4d63-8d25-d994da3c3b75",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "48e9250e-8822-4d63-8d25-d994da3c3b75",
+      "timestampMs": 1791921393000,
+      "at": "2026-10-13T19:56:33.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "a3573e5b901395c80391d9ff6527e70619db884ab38e84cbe04ff246797db834",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.727Z",
+      "updatedAt": "2026-10-22T06:04:58.727Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791921677000#6dcc77d3-32b1-474d-8d43-d8d6bfb5f3be",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "6dcc77d3-32b1-474d-8d43-d8d6bfb5f3be",
+      "timestampMs": 1791921677000,
+      "at": "2026-10-13T20:01:17.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "8a10129fe35228638e74635892ef76155a6cf07b7232a7d495dd4f3af0a7454f",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.728Z",
+      "updatedAt": "2026-10-22T06:04:58.728Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791928453000#9d9a2f0f-c0ea-41e8-9d33-2468df9a581f",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "9d9a2f0f-c0ea-41e8-9d33-2468df9a581f",
+      "timestampMs": 1791928453000,
+      "at": "2026-10-13T21:54:13.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "01cd421d1ec1812d231962b2ad99020be6411508d473a2e2c1098abf487054fe",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.730Z",
+      "updatedAt": "2026-10-22T06:04:58.730Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791929073000#fdae6e3b-95b3-458a-b2e9-a55734d121d2",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "fdae6e3b-95b3-458a-b2e9-a55734d121d2",
+      "timestampMs": 1791929073000,
+      "at": "2026-10-13T22:04:33.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "eae9fd17a7c40a8048b6d5c1553d1ed69a5684a6539a01691794585ac957b4f9",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.732Z",
+      "updatedAt": "2026-10-22T06:04:58.732Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791935767000#49530d60-58e3-471d-bf73-023fa08dfb42",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "49530d60-58e3-471d-bf73-023fa08dfb42",
+      "timestampMs": 1791935767000,
+      "at": "2026-10-13T23:56:07.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "0abfa1744c77423cbe24f2c49437517617abb11f527a8f9564526b4e8a82c1f8",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.733Z",
+      "updatedAt": "2026-10-22T06:04:58.733Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791979253000#bb20cbdd-04fc-4e11-9156-e561c4d2555c",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "bb20cbdd-04fc-4e11-9156-e561c4d2555c",
+      "timestampMs": 1791979253000,
+      "at": "2026-10-14T12:00:53.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "5573157da02a99e4bbb19868b3f7683d9eb2a0612d47030fcf02ee5d46871e58",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.735Z",
+      "updatedAt": "2026-10-22T06:04:58.735Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791984579000#a3bedeb4-e30f-40a6-8361-5db06b18396e",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "a3bedeb4-e30f-40a6-8361-5db06b18396e",
+      "timestampMs": 1791984579000,
+      "at": "2026-10-14T13:29:39.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "6269961b2424dc7a2d0ab2d90dbb8de11cfa95bb9e4844afd90ff8460927c80e",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.736Z",
+      "updatedAt": "2026-10-22T06:04:58.736Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1791986173000#3af97e5b-a021-4e94-84cb-eadc30a573bf",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "3af97e5b-a021-4e94-84cb-eadc30a573bf",
+      "timestampMs": 1791986173000,
+      "at": "2026-10-14T13:56:13.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "ecfd282e9b2151252d1c53f78b03a5bb6ff1cd76990292b2c761f2f9f8d05320",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.738Z",
+      "updatedAt": "2026-10-22T06:04:58.738Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1791992243000#0bad30f7-89d3-4a22-97a3-5a2ab4458ebf",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "0bad30f7-89d3-4a22-97a3-5a2ab4458ebf",
+      "timestampMs": 1791992243000,
+      "at": "2026-10-14T15:37:23.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "434e78687b2f745b313ad7816f342747378cbcdbdda674046427e2912acb4202",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.740Z",
+      "updatedAt": "2026-10-22T06:04:58.740Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1791994756000#a1995dd4-390e-4fb6-9bbc-06365cf248e3",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "a1995dd4-390e-4fb6-9bbc-06365cf248e3",
+      "timestampMs": 1791994756000,
+      "at": "2026-10-14T16:19:16.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "dfbfe094b514760daafbf96acd0c39ae5170ddcf197f307469e966da28269b28",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.741Z",
+      "updatedAt": "2026-10-22T06:04:58.741Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792000804000#d26f93e8-f21a-4541-a1a6-fedcf4f894cf",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "d26f93e8-f21a-4541-a1a6-fedcf4f894cf",
+      "timestampMs": 1792000804000,
+      "at": "2026-10-14T18:00:04.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "d5b08e6817238af5c835b85256760b147991732f73caf9726eaef9b57c4facce",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.743Z",
+      "updatedAt": "2026-10-22T06:04:58.743Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792002137000#e51f2840-d107-4ec3-834e-2ad46cdce482",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "e51f2840-d107-4ec3-834e-2ad46cdce482",
+      "timestampMs": 1792002137000,
+      "at": "2026-10-14T18:22:17.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "13ccc884249954f61720f02158dbabdb58706a614f9980a12c7abc078720b3f3",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.745Z",
+      "updatedAt": "2026-10-22T06:04:58.745Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792007822000#7d671a27-2e92-42a5-a52a-98b62ed84936",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "7d671a27-2e92-42a5-a52a-98b62ed84936",
+      "timestampMs": 1792007822000,
+      "at": "2026-10-14T19:57:02.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "2f2a5bb81f32bde6f443ca4a72ad3fa9e4e861e26fd93bd7a153227ed381989a",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.746Z",
+      "updatedAt": "2026-10-22T06:04:58.746Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792009241000#064fc011-f49a-4e74-a133-31b956ab3aaf",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "064fc011-f49a-4e74-a133-31b956ab3aaf",
+      "timestampMs": 1792009241000,
+      "at": "2026-10-14T20:20:41.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "61a71e438c9ec59554bf527fa2aee7d9f6affa7c0c45e13fa17d634d2d4e49b7",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.748Z",
+      "updatedAt": "2026-10-22T06:04:58.748Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792015459000#9a96e18e-62ae-4008-899c-db98d742648b",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "9a96e18e-62ae-4008-899c-db98d742648b",
+      "timestampMs": 1792015459000,
+      "at": "2026-10-14T22:04:19.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "852860801649896826af2f07ed3559ba682701c3c6f2622d21b6522e6b6529a4",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.750Z",
+      "updatedAt": "2026-10-22T06:04:58.750Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792016286000#357cf3a0-990e-4a35-80db-4628f1d8288a",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "357cf3a0-990e-4a35-80db-4628f1d8288a",
+      "timestampMs": 1792016286000,
+      "at": "2026-10-14T22:18:06.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "97f76b1fff3bb936150c0c5b8c15932162d1b7321221d11695c0cadaba9f69cc",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.752Z",
+      "updatedAt": "2026-10-22T06:04:58.752Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792019360000#f3e36824-6f8a-4bc3-9726-cadfb7958957",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "f3e36824-6f8a-4bc3-9726-cadfb7958957",
+      "timestampMs": 1792019360000,
+      "at": "2026-10-14T23:09:20.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "3481ae72fcb66b6a3c735c4dceeb345904f279305d28d8c5cf3f6b0ad904dd0f",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.753Z",
+      "updatedAt": "2026-10-22T06:04:58.753Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792022829000#4bc36c3c-641b-4e60-84f7-051b702b0fa9",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "4bc36c3c-641b-4e60-84f7-051b702b0fa9",
+      "timestampMs": 1792022829000,
+      "at": "2026-10-15T00:07:09.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "7411ca1ece39e0351a79b3772ff444f2e78c8192500730d3b8e40c0294c23a38",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.756Z",
+      "updatedAt": "2026-10-22T06:04:58.756Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792065564000#12e41f75-2ddb-46a2-bbd6-a33ad6caf648",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "12e41f75-2ddb-46a2-bbd6-a33ad6caf648",
+      "timestampMs": 1792065564000,
+      "at": "2026-10-15T11:59:24.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "0a40137c89c09577db425b309f4a4eb9e44b7da54d63c1ed74a8ef6916872ded",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.758Z",
+      "updatedAt": "2026-10-22T06:04:58.758Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792072772000#e8950656-bb86-4c35-aeee-662b4ae8e344",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "e8950656-bb86-4c35-aeee-662b4ae8e344",
+      "timestampMs": 1792072772000,
+      "at": "2026-10-15T13:59:32.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "adce293d7c567a29e3d76dcddc99d1ffb8681393303eef4d47aad1561d0d4f46",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.760Z",
+      "updatedAt": "2026-10-22T06:04:58.760Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792080456000#5a2acbe5-5062-4c49-a77e-e43ab85b8a5c",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "5a2acbe5-5062-4c49-a77e-e43ab85b8a5c",
+      "timestampMs": 1792080456000,
+      "at": "2026-10-15T16:07:36.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "97fba8af2adcda0bc1ab109c5a410ff768aecd3bc037f84828ee73ee7949ff3b",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.762Z",
+      "updatedAt": "2026-10-22T06:04:58.762Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792087342000#f6083a55-7078-483c-ac4e-de17df242c80",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "f6083a55-7078-483c-ac4e-de17df242c80",
+      "timestampMs": 1792087342000,
+      "at": "2026-10-15T18:02:22.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "3a7402db0cf2e87772cd6c24c7362146f2ddd872a389a380bcf94bce35923d8f",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.764Z",
+      "updatedAt": "2026-10-22T06:04:58.764Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792087651000#732bea76-a651-446c-8ca7-c59ffe41f31b",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "732bea76-a651-446c-8ca7-c59ffe41f31b",
+      "timestampMs": 1792087651000,
+      "at": "2026-10-15T18:07:31.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "90d1fe0de6b045d6ec09a855aecb5026ac483daff41c2f9f5ce88c803f4d209e",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.768Z",
+      "updatedAt": "2026-10-22T06:04:58.768Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792091180000#a6a1fffb-6548-4dae-868b-15c4738980ba",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "a6a1fffb-6548-4dae-868b-15c4738980ba",
+      "timestampMs": 1792091180000,
+      "at": "2026-10-15T19:06:20.000Z",
+      "type": "motion",
+      "subType": "animal",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "cb40fe33ec47f4ac46aaa304a621a2745154ee5dc2b0732e61a0568c55a96d34",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.770Z",
+      "updatedAt": "2026-10-22T06:04:58.770Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792094378000#06995d0a-65f1-4386-9a75-129c85036152",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "06995d0a-65f1-4386-9a75-129c85036152",
+      "timestampMs": 1792094378000,
+      "at": "2026-10-15T19:59:38.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "3299ec3ca3cc27e9619948afd391119392740cfde3356d4760c6add1a6d28b5b",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.772Z",
+      "updatedAt": "2026-10-22T06:04:58.772Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792094590000#5c366245-94fa-4062-9018-ac5ccc07c11e",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "5c366245-94fa-4062-9018-ac5ccc07c11e",
+      "timestampMs": 1792094590000,
+      "at": "2026-10-15T20:03:10.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "66d49cd1aa784d4e6f377458ccd3aeddbf48ba93864831acdad7563eaf36d321",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.774Z",
+      "updatedAt": "2026-10-22T06:04:58.774Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792102004000#40290820-d918-4c75-b08a-5b02fa05f103",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "40290820-d918-4c75-b08a-5b02fa05f103",
+      "timestampMs": 1792102004000,
+      "at": "2026-10-15T22:06:44.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "de0c918fb069d039b8711c384636cf062ef475fc4f38fd3613407b68ad008cb5",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.776Z",
+      "updatedAt": "2026-10-22T06:04:58.776Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792152518000#150fec08-25b9-463f-8b42-e9f19a837265",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "150fec08-25b9-463f-8b42-e9f19a837265",
+      "timestampMs": 1792152518000,
+      "at": "2026-10-16T12:08:38.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "eb5f86e354506862d02e725c90486ef0f2e72fe398e13aadd7a635aff891463d",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.778Z",
+      "updatedAt": "2026-10-22T06:04:58.778Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792157229000#35082fde-a9ea-43cc-ae31-f051011f53e2",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "35082fde-a9ea-43cc-ae31-f051011f53e2",
+      "timestampMs": 1792157229000,
+      "at": "2026-10-16T13:27:09.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "c181f36c7f36d8814a734c9064b1a8214613871d8a71781289651564a6b53751",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.779Z",
+      "updatedAt": "2026-10-22T06:04:58.779Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792157572000#3deb301a-11c5-4552-8e9a-8740a148b885",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "3deb301a-11c5-4552-8e9a-8740a148b885",
+      "timestampMs": 1792157572000,
+      "at": "2026-10-16T13:32:52.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "9e7cd95daccc1dfac92a1bbe8eb44e00fd217b8c7b471032f7ed27186d4649e9",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.781Z",
+      "updatedAt": "2026-10-22T06:04:58.781Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792159449000#0406b7bb-cad7-48b5-8d85-10dec585f91c",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "0406b7bb-cad7-48b5-8d85-10dec585f91c",
+      "timestampMs": 1792159449000,
+      "at": "2026-10-16T14:04:09.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "5ca9506499affc3aedba58e0b210926c975ebfee9dae7c6e2a32a5d36248cd66",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.783Z",
+      "updatedAt": "2026-10-22T06:04:58.783Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792164952000#9852a6c6-d2d3-4444-a70b-4a6980108ec0",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "9852a6c6-d2d3-4444-a70b-4a6980108ec0",
+      "timestampMs": 1792164952000,
+      "at": "2026-10-16T15:35:52.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "44cfbd0dd66e458076dc6f7cf4d07ebc13ecdbd02e142aeeb76a6349c1609d9f",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.785Z",
+      "updatedAt": "2026-10-22T06:04:58.785Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792166474000#85507411-df5e-44fd-b871-d97cb97db704",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "85507411-df5e-44fd-b871-d97cb97db704",
+      "timestampMs": 1792166474000,
+      "at": "2026-10-16T16:01:14.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "e925c3e4f5bf8a3140b4557347b0644b38ebe3785455a92de5d8683fc366ea7e",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.787Z",
+      "updatedAt": "2026-10-22T06:04:58.787Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792169536000#d450e7bf-c571-49b1-bdac-2efd94545d11",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "d450e7bf-c571-49b1-bdac-2efd94545d11",
+      "timestampMs": 1792169536000,
+      "at": "2026-10-16T16:52:16.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "b7623ba34149694c575718b3882fa18bb997def61af8d9c7ecc005c38138bc01",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.790Z",
+      "updatedAt": "2026-10-22T06:04:58.790Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792173356000#f3abd635-cb27-4aed-ba36-480b966b03ba",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "f3abd635-cb27-4aed-ba36-480b966b03ba",
+      "timestampMs": 1792173356000,
+      "at": "2026-10-16T17:55:56.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "830b8578be008559168392c61be031c76393e3d19c4f3a6198d0f9e3ce1c7c5b",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.793Z",
+      "updatedAt": "2026-10-22T06:04:58.793Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792173546000#4b86e36e-d093-49c6-adcc-432ece3750a7",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "4b86e36e-d093-49c6-adcc-432ece3750a7",
+      "timestampMs": 1792173546000,
+      "at": "2026-10-16T17:59:06.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "9f3cb1e74a0d881f4cc53831cd91d3b31dac9cc24922c6039cc5350c5d5de4fe",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.795Z",
+      "updatedAt": "2026-10-22T06:04:58.795Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792175296000#d1d78140-8fcf-4110-980d-c2e843b298ce",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "d1d78140-8fcf-4110-980d-c2e843b298ce",
+      "timestampMs": 1792175296000,
+      "at": "2026-10-16T18:28:16.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "7b047a5634264e31952b7f96e406d312ef0d0f8f8d02e6e1b3a33eabe77dec4e",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.797Z",
+      "updatedAt": "2026-10-22T06:04:58.797Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792180801000#0a9c55ac-bee9-4d1c-a62d-bf3e60af09af",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "0a9c55ac-bee9-4d1c-a62d-bf3e60af09af",
+      "timestampMs": 1792180801000,
+      "at": "2026-10-16T20:00:01.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "30251544bed5ba2777518e33b855a94bcfcc955d983d9d58b5e4430629668ab4",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.799Z",
+      "updatedAt": "2026-10-22T06:04:58.799Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792187766000#4c35cb2d-c832-41fc-b92b-ed89c0eb7f74",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "4c35cb2d-c832-41fc-b92b-ed89c0eb7f74",
+      "timestampMs": 1792187766000,
+      "at": "2026-10-16T21:56:06.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "e5e09469af22209c3f765e94ce6e01dd1a5875e5b94789e48d09b1e6efb2766b",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.801Z",
+      "updatedAt": "2026-10-22T06:04:58.801Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792188253000#828a7e00-6283-4ad8-bb8e-6f2127ce2d0e",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "828a7e00-6283-4ad8-bb8e-6f2127ce2d0e",
+      "timestampMs": 1792188253000,
+      "at": "2026-10-16T22:04:13.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "00c7b8e6097db3e719986651c1652b9e70e39aa5baa67fd2615b92e817a334d7",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.804Z",
+      "updatedAt": "2026-10-22T06:04:58.804Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792195294000#a47a2aa7-875e-4048-b873-d1a489979c32",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "a47a2aa7-875e-4048-b873-d1a489979c32",
+      "timestampMs": 1792195294000,
+      "at": "2026-10-17T00:01:34.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "6bf98416809a9a478e6f62fcda6700e67b95da95e65c367d5eade4e6d4fc6b17",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.807Z",
+      "updatedAt": "2026-10-22T06:04:58.807Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792191917000#2de95b11-4c92-48ff-be43-e1c2f9faa2d3",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "2de95b11-4c92-48ff-be43-e1c2f9faa2d3",
+      "timestampMs": 1792191917000,
+      "at": "2026-10-16T23:05:17.000Z",
+      "type": "motion",
+      "subType": "animal",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "1067b42b08d9c077c4df75d79ae809080c724174f9db644b4984801f86c74965",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.809Z",
+      "updatedAt": "2026-10-22T06:04:58.809Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792243456000#111aeb5a-120d-456a-b418-2c0f29d0da82",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "111aeb5a-120d-456a-b418-2c0f29d0da82",
+      "timestampMs": 1792243456000,
+      "at": "2026-10-17T13:24:16.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "25bf0ea9f59b294ad034af713a7aa040b84e34c570076de0d52dd5111fdb96c9",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.811Z",
+      "updatedAt": "2026-10-22T06:04:58.811Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792247002000#00017e02-d424-4695-bc4f-9d4d52bbf601",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "00017e02-d424-4695-bc4f-9d4d52bbf601",
+      "timestampMs": 1792247002000,
+      "at": "2026-10-17T14:23:22.000Z",
+      "type": "motion",
+      "subType": "animal",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "10d933e22490408c931bdc9c6c0de520f33a47292a1982ddc7b17633d0595ad4",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.814Z",
+      "updatedAt": "2026-10-22T06:04:58.814Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792250985000#792d121a-d67d-4d82-afeb-c4ade5e836a7",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "792d121a-d67d-4d82-afeb-c4ade5e836a7",
+      "timestampMs": 1792250985000,
+      "at": "2026-10-17T15:29:45.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "1e0942cbbe0d6b89d9a4febfaf88d56505561790da950216eb8b1d09285407f8",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.815Z",
+      "updatedAt": "2026-10-22T06:04:58.815Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792252491000#b67de363-14d7-42c1-b075-4ad553841308",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "b67de363-14d7-42c1-b075-4ad553841308",
+      "timestampMs": 1792252491000,
+      "at": "2026-10-17T15:54:51.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "8f5f87485891e349026d62bc2a5b9fe21e16189d122f24a069d2aedf11b4af22",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.818Z",
+      "updatedAt": "2026-10-22T06:04:58.818Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792259903000#258ce0b1-e6af-4294-8093-054e7b28634b",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "258ce0b1-e6af-4294-8093-054e7b28634b",
+      "timestampMs": 1792259903000,
+      "at": "2026-10-17T17:58:23.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "aee8d2754d5e665ecfd049554a1adda40d5e6ab0ee988872e6613323ba7eaaac",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.820Z",
+      "updatedAt": "2026-10-22T06:04:58.820Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792260440000#c485f098-6c06-48d4-aec2-8befb908d842",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "c485f098-6c06-48d4-aec2-8befb908d842",
+      "timestampMs": 1792260440000,
+      "at": "2026-10-17T18:07:20.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "e277ccb422b2bbb86f0a64466c5dd4aada2f2aa799d60c77ac7bbbd9cdb50625",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.826Z",
+      "updatedAt": "2026-10-22T06:04:58.826Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792267453000#f27ee577-ba2d-47ac-8d67-022be9615b97",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "f27ee577-ba2d-47ac-8d67-022be9615b97",
+      "timestampMs": 1792267453000,
+      "at": "2026-10-17T20:04:13.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "1f009b77ec21551464f92eb1368632fe9ec58d50e0a8938b233af109a09c08a9",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.828Z",
+      "updatedAt": "2026-10-22T06:04:58.828Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792267181000#03d6d889-5e6b-4650-ae45-ad38c8de7f13",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "03d6d889-5e6b-4650-ae45-ad38c8de7f13",
+      "timestampMs": 1792267181000,
+      "at": "2026-10-17T19:59:41.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "34977dadeda581a8b961d5b2e63e274fe34f8bcc325193a9cd4a77b28b5cc548",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.831Z",
+      "updatedAt": "2026-10-22T06:04:58.831Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792274142000#35be7eb9-b441-4534-9157-a047e50938dd",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "35be7eb9-b441-4534-9157-a047e50938dd",
+      "timestampMs": 1792274142000,
+      "at": "2026-10-17T21:55:42.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "225b0eedfacac6eeb4bbb78afce4f7a49feedad6cc170528c020df36959e3b62",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.833Z",
+      "updatedAt": "2026-10-22T06:04:58.833Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792274823000#ceca6444-fb2c-4af9-b7ed-a89b9d1d3db3",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "ceca6444-fb2c-4af9-b7ed-a89b9d1d3db3",
+      "timestampMs": 1792274823000,
+      "at": "2026-10-17T22:07:03.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "006db76a8fcac22f7220dd1ef62393e7e04f538c13e6e6f267c31ab7f5e8f0ef",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.835Z",
+      "updatedAt": "2026-10-22T06:04:58.835Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792281823000#7dfc8301-52c0-43d3-b0ae-fdc6a74273d8",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "7dfc8301-52c0-43d3-b0ae-fdc6a74273d8",
+      "timestampMs": 1792281823000,
+      "at": "2026-10-18T00:03:43.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "387dec33e2efa8a2951ccf62653ac896788a8333c9b172131a20080e0e68742d",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.838Z",
+      "updatedAt": "2026-10-22T06:04:58.838Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792324693000#b6a2f289-30c0-483d-bbd7-7b0b02d0b267",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "b6a2f289-30c0-483d-bbd7-7b0b02d0b267",
+      "timestampMs": 1792324693000,
+      "at": "2026-10-18T11:58:13.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "d3fdb167a2d4a66e6642e723c08caa74fd3c30967580d2b8716c1da9a5367860",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.840Z",
+      "updatedAt": "2026-10-22T06:04:58.840Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792330075000#ba768ae9-14e5-41c3-9252-3af6c90df234",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "ba768ae9-14e5-41c3-9252-3af6c90df234",
+      "timestampMs": 1792330075000,
+      "at": "2026-10-18T13:27:55.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "313af002b452f77203025e470d002843b3a424b89ba782f2eda35bc9e9eecbca",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.843Z",
+      "updatedAt": "2026-10-22T06:04:58.843Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792331805000#d4f29063-bfdf-46f5-a053-b81dda0e71e2",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "d4f29063-bfdf-46f5-a053-b81dda0e71e2",
+      "timestampMs": 1792331805000,
+      "at": "2026-10-18T13:56:45.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "84730f59d11e401fd77c552bb146fd198a486d13e2d7a39599c2cf4271a7e430",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.846Z",
+      "updatedAt": "2026-10-22T06:04:58.846Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792337630000#951430df-c2a2-4c73-9d09-e7273cc62b12",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "951430df-c2a2-4c73-9d09-e7273cc62b12",
+      "timestampMs": 1792337630000,
+      "at": "2026-10-18T15:33:50.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "1c578158434418b612edd1678b2df25fe6ce75b88130ff36e032e85b59b912d6",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.849Z",
+      "updatedAt": "2026-10-22T06:04:58.849Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792339278000#09336541-c4af-4c48-8730-790c1b70dfa0",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "09336541-c4af-4c48-8730-790c1b70dfa0",
+      "timestampMs": 1792339278000,
+      "at": "2026-10-18T16:01:18.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "15d49685f0baf3ac6948fd6b155842cd014239d2805e4f664434e32615776623",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.857Z",
+      "updatedAt": "2026-10-22T06:04:58.857Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792346512000#45058cda-42a5-4e0f-b0fe-3d7c11f77dd5",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "45058cda-42a5-4e0f-b0fe-3d7c11f77dd5",
+      "timestampMs": 1792346512000,
+      "at": "2026-10-18T18:01:52.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "0f65a4257efb9fbf44a18b1b79e4f08403ca47c0b8c930571c1dc8b1413f968e",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.860Z",
+      "updatedAt": "2026-10-22T06:04:58.860Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792346635000#b5ce1d8d-1ff3-4568-b731-2b488f955623",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "b5ce1d8d-1ff3-4568-b731-2b488f955623",
+      "timestampMs": 1792346635000,
+      "at": "2026-10-18T18:03:55.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "877040559d1ec2e6c3b08991155608232c636dbbf5a6a56a47b0019049e826e4",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.862Z",
+      "updatedAt": "2026-10-22T06:04:58.862Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792353589000#be3ee431-d47f-43ef-a702-a3e3f95a19a6",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "be3ee431-d47f-43ef-a702-a3e3f95a19a6",
+      "timestampMs": 1792353589000,
+      "at": "2026-10-18T19:59:49.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "3099d57440e0bd39078f900f904cd4424e13c6a46a045a40515674f0658829e7",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.864Z",
+      "updatedAt": "2026-10-22T06:04:58.864Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792361076000#36f3872e-a845-4507-9d76-65f6f9e4c6b7",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "36f3872e-a845-4507-9d76-65f6f9e4c6b7",
+      "timestampMs": 1792361076000,
+      "at": "2026-10-18T22:04:36.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "8470b202828ff6fc6fef1a261ad4e2f0502ebb1c0a8652d185c7462f753cc00d",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.867Z",
+      "updatedAt": "2026-10-22T06:04:58.867Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792353726000#0bee9e9c-61a4-424b-ab3c-f889dbb7413d",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "0bee9e9c-61a4-424b-ab3c-f889dbb7413d",
+      "timestampMs": 1792353726000,
+      "at": "2026-10-18T20:02:06.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "5e054b83c67e7c38bacd6e4d3fd8f5362f8141ac11c06bd913a56a4dc1b253a5",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.869Z",
+      "updatedAt": "2026-10-22T06:04:58.869Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792361160000#683cab17-a596-4a37-a035-eddabadfaa8a",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "683cab17-a596-4a37-a035-eddabadfaa8a",
+      "timestampMs": 1792361160000,
+      "at": "2026-10-18T22:06:00.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "f2fe6e07104310e01bab5b19c9e37edc222de5d9785ea6e4020f87e64c74e46d",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.871Z",
+      "updatedAt": "2026-10-22T06:04:58.871Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792368380000#b10bed43-32fa-418d-9aa5-65a38ce389e0",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "b10bed43-32fa-418d-9aa5-65a38ce389e0",
+      "timestampMs": 1792368380000,
+      "at": "2026-10-19T00:06:20.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "585b742354898a9a99b59e6654293a89844353246198106a5c3be8c869636f64",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.873Z",
+      "updatedAt": "2026-10-22T06:04:58.873Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792412747000#078bdee1-3356-4e70-b2e0-fd4ff5c19e85",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "078bdee1-3356-4e70-b2e0-fd4ff5c19e85",
+      "timestampMs": 1792412747000,
+      "at": "2026-10-19T12:25:47.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "fa38ad3dd814b605a79394c5ef250a62d02f4640a06116dd0c66168f6222a087",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.875Z",
+      "updatedAt": "2026-10-22T06:04:58.875Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792417024000#e6b77f04-50f1-4592-adb9-5b2fe087897c",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "e6b77f04-50f1-4592-adb9-5b2fe087897c",
+      "timestampMs": 1792417024000,
+      "at": "2026-10-19T13:37:04.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "d60a4309fd7621dffdce266877c0553d11d4ec4f034eafc78fbe590aa29fcfa4",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.877Z",
+      "updatedAt": "2026-10-22T06:04:58.877Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792418400000#5cb8ad82-6644-413f-9d26-51bd3b5bf89e",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "5cb8ad82-6644-413f-9d26-51bd3b5bf89e",
+      "timestampMs": 1792418400000,
+      "at": "2026-10-19T14:00:00.000Z",
+      "type": "integration_removed",
+      "subType": "app_integration_removed",
+      "provenance": "emulated",
+      "rawPayloadHash": "8b9ea839b5951c10a08f310a52a44317e0111d5a284180f899b0090bc70fc28e",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.880Z",
+      "updatedAt": "2026-10-22T06:04:58.880Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792425372000#142989e0-40a6-449d-b2cf-342617e6db9a",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "142989e0-40a6-449d-b2cf-342617e6db9a",
+      "timestampMs": 1792425372000,
+      "at": "2026-10-19T15:56:12.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "c6a0aa23d59a2bfebd08a022c08ff6ded9313244238049b2995b1129fb98b2ec",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.882Z",
+      "updatedAt": "2026-10-22T06:04:58.882Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792419809000#8f945f60-184d-431b-87a4-03eea93f5f26",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "8f945f60-184d-431b-87a4-03eea93f5f26",
+      "timestampMs": 1792419809000,
+      "at": "2026-10-19T14:23:29.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "58175745bf0be781e7be960bcf86625f1747936a1f4a5667d732ae6c85298be0",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.884Z",
+      "updatedAt": "2026-10-22T06:04:58.884Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792427400000#b87cdbd4-255e-4d09-99c9-835c6ad8964a",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "b87cdbd4-255e-4d09-99c9-835c6ad8964a",
+      "timestampMs": 1792427400000,
+      "at": "2026-10-19T16:30:00.000Z",
+      "type": "integration_added",
+      "subType": "app_integration_added",
+      "provenance": "emulated",
+      "rawPayloadHash": "b0fd82b339dd78fea7f02084fbebbba011455f69116be96ad66b9e9a6e41504c",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.886Z",
+      "updatedAt": "2026-10-22T06:04:58.886Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792432985000#288ec719-2760-4902-a7dc-9dd6739df1d1",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "288ec719-2760-4902-a7dc-9dd6739df1d1",
+      "timestampMs": 1792432985000,
+      "at": "2026-10-19T18:03:05.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "6f564dea658843e68237768620c024397c3a504b03c21b9d9a60716e264d81df",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.888Z",
+      "updatedAt": "2026-10-22T06:04:58.888Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792433136000#52dc5486-14be-4c29-a386-cc5794fb1506",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "52dc5486-14be-4c29-a386-cc5794fb1506",
+      "timestampMs": 1792433136000,
+      "at": "2026-10-19T18:05:36.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "c52cf979cf179f44fe45198f71114b2cd196a9e6a589eaf6a6107f0959497780",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.893Z",
+      "updatedAt": "2026-10-22T06:04:58.893Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792440155000#3c00d693-93c1-4e90-b9fa-893881f7c18d",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "3c00d693-93c1-4e90-b9fa-893881f7c18d",
+      "timestampMs": 1792440155000,
+      "at": "2026-10-19T20:02:35.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "ae2f66bf897e5ecd0120a5918921b19aa05ad2eafb2500c591e540bf21538dd0",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.895Z",
+      "updatedAt": "2026-10-22T06:04:58.895Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792440407000#5f173d5b-8763-47ca-8544-e28c0ed4a302",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "5f173d5b-8763-47ca-8544-e28c0ed4a302",
+      "timestampMs": 1792440407000,
+      "at": "2026-10-19T20:06:47.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "cd5aadd71c1fc1b9fa788a848285dd3f38226b90ee67e89c6362d6eb7c41508f",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.898Z",
+      "updatedAt": "2026-10-22T06:04:58.898Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792447324000#46a2f589-45a9-40a9-807a-db021f1909da",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "46a2f589-45a9-40a9-807a-db021f1909da",
+      "timestampMs": 1792447324000,
+      "at": "2026-10-19T22:02:04.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "eed2e7356ef9d44a4e461647c3ef38c0ce52baac910137755982636b8b4f6ffa",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.900Z",
+      "updatedAt": "2026-10-22T06:04:58.900Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792449087000#dbdcf855-1841-4da0-a4d9-0fc64f488a20",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "dbdcf855-1841-4da0-a4d9-0fc64f488a20",
+      "timestampMs": 1792449087000,
+      "at": "2026-10-19T22:31:27.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "726b9d050cb969fe238d32b7971c823f23952f5d632d89d3987f99cecf460168",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.902Z",
+      "updatedAt": "2026-10-22T06:04:58.902Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792456461000#6bb88837-4c63-47f7-b3f8-8fc224770839",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "6bb88837-4c63-47f7-b3f8-8fc224770839",
+      "timestampMs": 1792456461000,
+      "at": "2026-10-20T00:34:21.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "d5220774fbbb53f8b0c1b03a457be62816e6e541d5636037db11fd5ab9ea2277",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.904Z",
+      "updatedAt": "2026-10-22T06:04:58.904Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792497709000#ff76a95e-c143-450b-b1a9-3fec4db562c9",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "ff76a95e-c143-450b-b1a9-3fec4db562c9",
+      "timestampMs": 1792497709000,
+      "at": "2026-10-20T12:01:49.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "0f9265adbbe160d0744767c34c965f4f5566c28cd3c5028dd1f398530dbb1cff",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.906Z",
+      "updatedAt": "2026-10-22T06:04:58.906Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792503318000#3183d16a-c2c0-4e8a-bf20-ec98a9511e64",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "3183d16a-c2c0-4e8a-bf20-ec98a9511e64",
+      "timestampMs": 1792503318000,
+      "at": "2026-10-20T13:35:18.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "c9e61c3b9108ecab75104374120ef3a0c5dad868c6e923d0ac62545d3a3bc92c",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.908Z",
+      "updatedAt": "2026-10-22T06:04:58.908Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792504697000#35f47036-0592-4291-8a13-9193d2658deb",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "35f47036-0592-4291-8a13-9193d2658deb",
+      "timestampMs": 1792504697000,
+      "at": "2026-10-20T13:58:17.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "ba17892271767c585df455d2d18ac833eabf52740bb5cbbeca5c6fa3f1d9f68f",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.910Z",
+      "updatedAt": "2026-10-22T06:04:58.910Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792510033000#74576feb-e8ae-44f1-bdb2-8338f253f576",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "74576feb-e8ae-44f1-bdb2-8338f253f576",
+      "timestampMs": 1792510033000,
+      "at": "2026-10-20T15:27:13.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "697754dd47ddec651a8a6213cc387f562d89ce438a0edf16cf2843f12c80004f",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.913Z",
+      "updatedAt": "2026-10-22T06:04:58.913Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792511841000#d8b1f5a0-50ee-4b16-84de-ce7f9d31c2d4",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "d8b1f5a0-50ee-4b16-84de-ce7f9d31c2d4",
+      "timestampMs": 1792511841000,
+      "at": "2026-10-20T15:57:21.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "d91db5ecbde64ae9f49232cfe9814475b28c02348789c4937252c1eca4e80850",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.914Z",
+      "updatedAt": "2026-10-22T06:04:58.914Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792519359000#82e9e545-86b0-4c00-958e-3a010184e122",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "82e9e545-86b0-4c00-958e-3a010184e122",
+      "timestampMs": 1792519359000,
+      "at": "2026-10-20T18:02:39.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "a996d43bf824cfff8eeea34e5ad978fa05329da1e644dec5e85d164c96468f22",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.917Z",
+      "updatedAt": "2026-10-22T06:04:58.917Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792520492000#e988c242-aac1-42bc-873a-a5bd9b58e207",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "e988c242-aac1-42bc-873a-a5bd9b58e207",
+      "timestampMs": 1792520492000,
+      "at": "2026-10-20T18:21:32.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "35ce56a76c9539981f5262b95e4bfab1632cb40c6e7098dc04a954907e9db1a9",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.919Z",
+      "updatedAt": "2026-10-22T06:04:58.919Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792523843000#971e4cde-c1dd-499c-9d70-9c421d1ca594",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "971e4cde-c1dd-499c-9d70-9c421d1ca594",
+      "timestampMs": 1792523843000,
+      "at": "2026-10-20T19:17:23.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "c526f9c2ec027c39b055df5608c13fc648d421787ee1f5fe4b554d7f02c097e2",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.922Z",
+      "updatedAt": "2026-10-22T06:04:58.922Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792526113000#3882d6ae-125d-4c2f-9e62-07f4aaa762ff",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "3882d6ae-125d-4c2f-9e62-07f4aaa762ff",
+      "timestampMs": 1792526113000,
+      "at": "2026-10-20T19:55:13.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "94942c663d5dad929d40880ac589cc83083d19cd41f15bd9d2a88b2a7e15ede2",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.925Z",
+      "updatedAt": "2026-10-22T06:04:58.925Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792527487000#233bba2a-0dc5-4257-9bde-a994d4c9e287",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "233bba2a-0dc5-4257-9bde-a994d4c9e287",
+      "timestampMs": 1792527487000,
+      "at": "2026-10-20T20:18:07.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "7be081e0d192e203f46ea847d8ee24ba73ab52202c81a4c1b456ad4b3629ef40",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.929Z",
+      "updatedAt": "2026-10-22T06:04:58.929Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792528525000#57de0469-6a10-46b7-a083-ffa20bbeea82",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "57de0469-6a10-46b7-a083-ffa20bbeea82",
+      "timestampMs": 1792528525000,
+      "at": "2026-10-20T20:35:25.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "87767452a3ae031b77a32375d8f827e7a4a2b3e74d6604f0d3d27a3b3275f622",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.931Z",
+      "updatedAt": "2026-10-22T06:04:58.931Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792533378000#777c37d4-2784-4c10-bfa4-803221d70a01",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "777c37d4-2784-4c10-bfa4-803221d70a01",
+      "timestampMs": 1792533378000,
+      "at": "2026-10-20T21:56:18.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "b3da0e97e498e66e4526453ddf0292d6a6251114adcedd039c9164c5be0535c2",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.934Z",
+      "updatedAt": "2026-10-22T06:04:58.934Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792534080000#ad91560d-cd82-4eee-8e8c-64068d21e114",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "ad91560d-cd82-4eee-8e8c-64068d21e114",
+      "timestampMs": 1792534080000,
+      "at": "2026-10-20T22:08:00.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "2bdfd13f9b60ec9667de545b5bdf068dd3ebe2d034a52788e1013c7633b27e4d",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.936Z",
+      "updatedAt": "2026-10-22T06:04:58.936Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792541083000#b16035c0-a5be-4541-8175-b3a04dac4bcb",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "b16035c0-a5be-4541-8175-b3a04dac4bcb",
+      "timestampMs": 1792541083000,
+      "at": "2026-10-21T00:04:43.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "264cbdc0e104320c2310e6ae64a6fd619430bd0135beceb1abaff747ceaa0dc3",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.939Z",
+      "updatedAt": "2026-10-22T06:04:58.939Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792583850000#b66a188b-5276-4e75-94ec-126b72b6cd15",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "b66a188b-5276-4e75-94ec-126b72b6cd15",
+      "timestampMs": 1792583850000,
+      "at": "2026-10-21T11:57:30.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "83756a1efd86e3155fe2eb75105334e76432c5268ef5113e8700be998cbc8e48",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.942Z",
+      "updatedAt": "2026-10-22T06:04:58.942Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792588623000#3ab5818b-125e-42fe-be36-822fe18dedac",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "3ab5818b-125e-42fe-be36-822fe18dedac",
+      "timestampMs": 1792588623000,
+      "at": "2026-10-21T13:17:03.000Z",
+      "type": "motion",
+      "subType": "animal",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "e603ebfc38e66e13649e4183a82ca820bceb8993c6cf63007812bf6bf1737f41",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.944Z",
+      "updatedAt": "2026-10-22T06:04:58.944Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792589462000#8c184784-0785-4fbb-a29b-989be315a825",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "8c184784-0785-4fbb-a29b-989be315a825",
+      "timestampMs": 1792589462000,
+      "at": "2026-10-21T13:31:02.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "15b4df7d513788d43bbfc376974c6a72206527a37cb29504ddc39ef5bd54b6c7",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.946Z",
+      "updatedAt": "2026-10-22T06:04:58.946Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792590983000#25261a75-5796-4045-83c0-9a43c4792038",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "25261a75-5796-4045-83c0-9a43c4792038",
+      "timestampMs": 1792590983000,
+      "at": "2026-10-21T13:56:23.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "ebdec36b3f4ba2e411c0c52b585b78eb6e694198a33ed30d2575f4635da8057f",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.948Z",
+      "updatedAt": "2026-10-22T06:04:58.948Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792596762000#7b45ef30-3b2c-43fb-9ca4-f5cca6528acf",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "7b45ef30-3b2c-43fb-9ca4-f5cca6528acf",
+      "timestampMs": 1792596762000,
+      "at": "2026-10-21T15:32:42.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "b609c32216ad41b1eeb87c4a53cf2b998086bc54fe00d7d4e654fb2e5ab24560",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.951Z",
+      "updatedAt": "2026-10-22T06:04:58.951Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792598293000#5a635496-e0db-420b-8583-a7759981f5a5",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "5a635496-e0db-420b-8583-a7759981f5a5",
+      "timestampMs": 1792598293000,
+      "at": "2026-10-21T15:58:13.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "cc12305ecddc1f8f7b92ae1b65b215a633ffe85f2376fdd64d85867df8828a4f",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.953Z",
+      "updatedAt": "2026-10-22T06:04:58.953Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792605748000#e6e0a3d2-e253-49d8-a4f0-4efcefd77e40",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "e6e0a3d2-e253-49d8-a4f0-4efcefd77e40",
+      "timestampMs": 1792605748000,
+      "at": "2026-10-21T18:02:28.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "6213dedc8b8064ebea411b7f35b2a16511d4f0753857e1e9a9f2d62e4aa80465",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.955Z",
+      "updatedAt": "2026-10-22T06:04:58.955Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792606074000#badcec3c-2b01-4004-a599-8f5398682e3e",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "badcec3c-2b01-4004-a599-8f5398682e3e",
+      "timestampMs": 1792606074000,
+      "at": "2026-10-21T18:07:54.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "17bfe6003c76bacca6945ba005b152985cd0d39f60dddf8348729999433915d4",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.958Z",
+      "updatedAt": "2026-10-22T06:04:58.958Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792610003000#8dc1f4d8-0855-4672-baa6-a8929bc019ac",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "8dc1f4d8-0855-4672-baa6-a8929bc019ac",
+      "timestampMs": 1792610003000,
+      "at": "2026-10-21T19:13:23.000Z",
+      "type": "motion",
+      "subType": "other_motion",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "610bf0d66bd0d306ea0d531edae97339000a48ef0f02990ab7c3f816b923071a",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.961Z",
+      "updatedAt": "2026-10-22T06:04:58.961Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792612638000#b71b2e5b-f686-4fa8-8893-3ca495967fc6",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "b71b2e5b-f686-4fa8-8893-3ca495967fc6",
+      "timestampMs": 1792612638000,
+      "at": "2026-10-21T19:57:18.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "da6738e6ee4bc4a84305ad1e1df654a778db09526a3376b2b6403019033a5a47",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.965Z",
+      "updatedAt": "2026-10-22T06:04:58.965Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792612680000#52e94b1a-1aa8-477c-884f-44d291da7edb",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "52e94b1a-1aa8-477c-884f-44d291da7edb",
+      "timestampMs": 1792612680000,
+      "at": "2026-10-21T19:58:00.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "626cac033a18b051b11f2e80c60c6077a30fb9a0c7cca06ec7b15f7ee2327470",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.967Z",
+      "updatedAt": "2026-10-22T06:04:58.967Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792620293000#ac0cfb75-306e-41cf-a712-be6280baa56b",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "ac0cfb75-306e-41cf-a712-be6280baa56b",
+      "timestampMs": 1792620293000,
+      "at": "2026-10-21T22:04:53.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "56b978dc055d11983ec85ee10488d18475814dfa5557b7b81bca33272fe910f6",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.969Z",
+      "updatedAt": "2026-10-22T06:04:58.969Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792621282000#2a33f9ae-9a0c-4de9-895e-100eabc71b41",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "2a33f9ae-9a0c-4de9-895e-100eabc71b41",
+      "timestampMs": 1792621282000,
+      "at": "2026-10-21T22:21:22.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "505c66c8596c0b8224f1e8cd95c6c087a529328e061052f75b95d0378aa1c0a6",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.971Z",
+      "updatedAt": "2026-10-22T06:04:58.971Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792628540000#d033656d-5177-48f0-8b00-52702b1914f6",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "d033656d-5177-48f0-8b00-52702b1914f6",
+      "timestampMs": 1792628540000,
+      "at": "2026-10-22T00:22:20.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "5f2f1f2f2c93c738149813d434c6af982df648f50867543cde530d057ad5c192",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.973Z",
+      "updatedAt": "2026-10-22T06:04:58.973Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792670908000#271898d7-e62e-45ea-a80b-d0b61e3c5956",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "271898d7-e62e-45ea-a80b-d0b61e3c5956",
+      "timestampMs": 1792670908000,
+      "at": "2026-10-22T12:08:28.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "a6bc0bfd4f2672ab500b2a6281f9a8d5baf53f6b8f102536b2d97704cfb2c139",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.976Z",
+      "updatedAt": "2026-10-22T06:04:58.976Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792672200000#39a7ff6c-e40f-476e-a27a-cb80d94699af",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "39a7ff6c-e40f-476e-a27a-cb80d94699af",
+      "timestampMs": 1792672200000,
+      "at": "2026-10-22T12:30:00.000Z",
+      "type": "device_offline",
+      "subType": "device_offline",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "cded70f00125fa65a26ba3b0e6a759c0eb83d5e400ad5cd643970d48205f04d1",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.979Z",
+      "updatedAt": "2026-10-22T06:04:58.979Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792676313000#a1fb70bc-5f44-43be-87db-0404680132e5",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "a1fb70bc-5f44-43be-87db-0404680132e5",
+      "timestampMs": 1792676313000,
+      "at": "2026-10-22T13:38:33.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "01590270aad6747f4344dadd81d9efb2780fb644b6c64db54e685c5ab3ad8123",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.981Z",
+      "updatedAt": "2026-10-22T06:04:58.981Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792681200000#482e676b-e966-40fc-a90d-cd6ef36890c3",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "482e676b-e966-40fc-a90d-cd6ef36890c3",
+      "timestampMs": 1792681200000,
+      "at": "2026-10-22T15:00:00.000Z",
+      "type": "device_online",
+      "subType": "device_online",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "a558fcd23f8156d8d99c508c9c17c4349aaf6305a751e7ce7ed2fd6f35c9a79d",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.983Z",
+      "updatedAt": "2026-10-22T06:04:58.983Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792683187000#3b20aedf-8191-4493-9694-1f43b208fbb5",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "3b20aedf-8191-4493-9694-1f43b208fbb5",
+      "timestampMs": 1792683187000,
+      "at": "2026-10-22T15:33:07.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "3ba966bef133d95993e910438d3e37e7c7a1ad6142e224f50081b7a4af28c977",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.988Z",
+      "updatedAt": "2026-10-22T06:04:58.988Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792684523000#7605d029-851c-4161-8b72-fdb01a28e6e8",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "7605d029-851c-4161-8b72-fdb01a28e6e8",
+      "timestampMs": 1792684523000,
+      "at": "2026-10-22T15:55:23.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "cb010445cbf9ac1cb8b3368f8358838a5920befc1dc3da7d71b9202d6a97c930",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.992Z",
+      "updatedAt": "2026-10-22T06:04:58.992Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792691777000#34e48af1-066a-470e-aa68-1824dd076c4c",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "34e48af1-066a-470e-aa68-1824dd076c4c",
+      "timestampMs": 1792691777000,
+      "at": "2026-10-22T17:56:17.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "d77ae2af3d03a2528988085e9c15a08669fae6e0023dd629c646029a7e885167",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:58.994Z",
+      "updatedAt": "2026-10-22T06:04:58.994Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVENT#1792692294000#1b21d724-6df0-44de-8024-ef862f59fc4f",
+    "item": {
+      "clientId": "cli_nakamura",
+      "requestId": "1b21d724-6df0-44de-8024-ef862f59fc4f",
+      "timestampMs": 1792692294000,
+      "at": "2026-10-22T18:04:54.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_nakamura_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "7ac8adb1e484e8270aba5a860a9da5f14d30be25e67e9a8add3be8a58db465b2",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.996Z",
+      "updatedAt": "2026-10-22T06:04:58.996Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVENT#1792694007000#f6b9e3bd-ab3e-434f-b92f-e44226586d92",
+    "item": {
+      "clientId": "cli_alvarez",
+      "requestId": "f6b9e3bd-ab3e-434f-b92f-e44226586d92",
+      "timestampMs": 1792694007000,
+      "at": "2026-10-22T18:33:27.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_alvarez_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "1ca4023eccdd59a6305f1f6ee382ad529a243195a07833a44676e038689a2022",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:58.998Z",
+      "updatedAt": "2026-10-22T06:04:58.998Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792699234000#c7c543c0-e21a-4837-a98c-93e43c431b58",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "c7c543c0-e21a-4837-a98c-93e43c431b58",
+      "timestampMs": 1792699234000,
+      "at": "2026-10-22T20:00:34.000Z",
+      "type": "ding",
+      "subType": "button_press",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "cfa1124742746b5f1509de3f56acdb52d846f1d0dfe72d090c1480b7d8db5c05",
+      "componentIds": [],
+      "createdAt": "2026-10-22T06:04:59.001Z",
+      "updatedAt": "2026-10-22T06:04:59.001Z",
+      "version": 1
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVENT#1792701683000#a68d4539-3d8f-44e7-b5a4-8601c27202d8",
+    "item": {
+      "clientId": "cli_okoro",
+      "requestId": "a68d4539-3d8f-44e7-b5a4-8601c27202d8",
+      "timestampMs": 1792701683000,
+      "at": "2026-10-22T20:41:23.000Z",
+      "type": "motion",
+      "subType": "human",
+      "deviceId": "emu_dev_okoro_front_door",
+      "provenance": "emulated",
+      "rawPayloadHash": "9f0cb78987711104c4228cb27039853fc850fbfa6cb470714608b8dcf6dccc9d",
+      "componentIds": [
+        "0"
+      ],
+      "createdAt": "2026-10-22T06:04:59.003Z",
+      "updatedAt": "2026-10-22T06:04:59.003Z",
+      "version": 1
+    }
+  }
+]

@@ -25,6 +25,9 @@ const ledgerSecret = (): string =>
 const hmac = (digest: string): string =>
   createHmac("sha256", ledgerSecret()).update(digest).digest("hex")
 
+/** The local demo signer over a ledger signing digest. */
+export const signLedgerDigest = hmac
+
 const sameHex = (a: string, b: string): boolean => {
   const left = Buffer.from(a, "hex")
   const right = Buffer.from(b, "hex")

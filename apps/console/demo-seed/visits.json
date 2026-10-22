@@ -1,0 +1,3808 @@
+[
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-09T12:00:00.000Z#v_okoro_00",
+    "item": {
+      "createdAt": "2026-10-02T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_00",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-09",
+      "scheduledStart": "2026-10-09T12:00:00.000Z",
+      "scheduledEnd": "2026-10-09T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-09T11:55:20.000Z",
+        "eventId": "42f41c7b-f55d-4887-9723-ae26d388644f",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-09T13:59:05.000Z",
+        "eventId": "90f0821f-d471-4ab6-b634-148428dc7e2d",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_a6371612bb63",
+        "clockIn": "2026-10-09T11:53:00.000Z",
+        "clockOut": "2026-10-09T13:58:00.000Z",
+        "deltaArrivalMin": -2.33,
+        "deltaDepartureMin": -1.08
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 7:55 AM ET, 5 minutes before the scheduled time (8:00 AM ET). They left at 9:59 AM ET, 1 minute before the scheduled time (10:00 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-09T20:00:00.000Z#v_okoro_01",
+    "item": {
+      "createdAt": "2026-10-02T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_01",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-09",
+      "scheduledStart": "2026-10-09T20:00:00.000Z",
+      "scheduledEnd": "2026-10-09T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-09T20:05:46.000Z",
+        "eventId": "aba4dfdb-9d4a-4917-86e4-6e17647f2c7e",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-09T22:04:07.000Z",
+        "eventId": "1fb5620a-c063-41ef-8f55-7163cf8ed9a2",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_6a778b7b1f97",
+        "clockIn": "2026-10-09T20:03:00.000Z",
+        "clockOut": "2026-10-09T22:05:00.000Z",
+        "deltaArrivalMin": -2.77,
+        "deltaDepartureMin": 0.88
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:05 PM ET, 5 minutes after the scheduled time (4:00 PM ET). They left at 6:04 PM ET, 4 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-10T12:00:00.000Z#v_okoro_02",
+    "item": {
+      "createdAt": "2026-10-03T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_02",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-10",
+      "scheduledStart": "2026-10-10T12:00:00.000Z",
+      "scheduledEnd": "2026-10-10T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-10T11:58:25.000Z",
+        "eventId": "6de99d72-d49b-463d-bfbf-f433a7eac56a",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-10T14:05:32.000Z",
+        "eventId": "62ff7367-a9eb-4f8f-b529-df455fb5a98e",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_fa2f4fe452ac",
+        "clockIn": "2026-10-10T11:55:00.000Z",
+        "clockOut": "2026-10-10T14:05:00.000Z",
+        "deltaArrivalMin": -3.42,
+        "deltaDepartureMin": -0.53
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 7:58 AM ET, 2 minutes before the scheduled time (8:00 AM ET). They left at 10:05 AM ET, 5 minutes after the scheduled time (10:00 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-10T20:00:00.000Z#v_okoro_03",
+    "item": {
+      "createdAt": "2026-10-03T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_03",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-10",
+      "scheduledStart": "2026-10-10T20:00:00.000Z",
+      "scheduledEnd": "2026-10-10T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-10T20:22:02.000Z",
+        "eventId": "5b7db3b0-5789-47d6-ac9e-a4b136e1dfa8",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-10T22:22:26.000Z",
+        "eventId": "965feda1-6e2e-4372-98b3-7de7397a3996",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_e0c20981cba1",
+        "clockIn": "2026-10-10T20:23:00.000Z",
+        "clockOut": "2026-10-10T22:25:00.000Z",
+        "deltaArrivalMin": 0.97,
+        "deltaDepartureMin": 2.57
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:22 PM ET, 22 minutes after the scheduled time (4:00 PM ET). They left at 6:22 PM ET, 22 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-11T12:00:00.000Z#v_okoro_04",
+    "item": {
+      "createdAt": "2026-10-04T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_04",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-11",
+      "scheduledStart": "2026-10-11T12:00:00.000Z",
+      "scheduledEnd": "2026-10-11T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-11T12:07:28.000Z",
+        "eventId": "77aaaa26-4f53-4320-88c2-5ba1d2af37de",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-11T14:07:36.000Z",
+        "eventId": "7f6767eb-f6f9-4680-8d7e-1e44debd3811",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "contradicted",
+        "evvRecordId": "evv_fa7f9664d6b3",
+        "clockIn": "2026-10-11T11:22:00.000Z",
+        "clockOut": "2026-10-11T14:06:00.000Z",
+        "deltaArrivalMin": -45.47,
+        "deltaDepartureMin": -1.6
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 8:07 AM ET, 7 minutes after the scheduled time (8:00 AM ET). They left at 10:07 AM ET, 7 minutes after the scheduled time (10:00 AM ET). The door record does not match the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-11T20:00:00.000Z#v_okoro_05",
+    "item": {
+      "createdAt": "2026-10-04T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_05",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-11",
+      "scheduledStart": "2026-10-11T20:00:00.000Z",
+      "scheduledEnd": "2026-10-11T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-11T20:02:44.000Z",
+        "eventId": "c3a15f83-d54e-4df9-ad36-daf7c133addc",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-11T22:04:41.000Z",
+        "eventId": "18e3bef6-cbe3-4173-b3cf-e41b9bf01844",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_b486c1da7b49",
+        "clockIn": "2026-10-11T20:00:00.000Z",
+        "clockOut": "2026-10-11T22:08:00.000Z",
+        "deltaArrivalMin": -2.73,
+        "deltaDepartureMin": 3.32
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:02 PM ET, 2 minutes after the scheduled time (4:00 PM ET). They left at 6:04 PM ET, 4 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-12T12:00:00.000Z#v_okoro_06",
+    "item": {
+      "createdAt": "2026-10-05T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_06",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-12",
+      "scheduledStart": "2026-10-12T12:00:00.000Z",
+      "scheduledEnd": "2026-10-12T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-12T12:02:33.000Z",
+        "eventId": "a7cacc7f-0a8e-483c-8c31-0ad7cbd5e2b8",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-12T13:59:09.000Z",
+        "eventId": "2ee653f1-8544-4968-a4c1-1ed9788f3693",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "missing_clock_in"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 8:02 AM ET, 2 minutes after the scheduled time (8:00 AM ET). They left at 9:59 AM ET, 1 minute before the scheduled time (10:00 AM ET). No caregiver clock-in has been matched to this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-12T20:00:00.000Z#v_okoro_07",
+    "item": {
+      "createdAt": "2026-10-05T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_07",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-12",
+      "scheduledStart": "2026-10-12T20:00:00.000Z",
+      "scheduledEnd": "2026-10-12T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-12T20:03:12.000Z",
+        "eventId": "8f5a10b6-08c2-49ca-b56d-645d303aa483",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-12T21:59:25.000Z",
+        "eventId": "076ea617-52cd-47a6-b5cc-19862e89636f",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_a350397bacc6",
+        "clockIn": "2026-10-12T20:06:00.000Z",
+        "clockOut": "2026-10-12T21:55:00.000Z",
+        "deltaArrivalMin": 2.8,
+        "deltaDepartureMin": -4.42
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:03 PM ET, 3 minutes after the scheduled time (4:00 PM ET). They left at 5:59 PM ET, 1 minute before the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-13T12:00:00.000Z#v_okoro_08",
+    "item": {
+      "createdAt": "2026-10-06T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_08",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-13",
+      "scheduledStart": "2026-10-13T12:00:00.000Z",
+      "scheduledEnd": "2026-10-13T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "early_departure",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-13T12:06:57.000Z",
+        "eventId": "5231cab7-f2e6-4d3a-b93d-8de92c0ca102",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-13T12:34:02.000Z",
+        "eventId": "328d20e2-99ac-4fcd-8216-eddd94222450",
+        "source": "rule"
+      },
+      "raisedExceptionKinds": [
+        "early_departure"
+      ],
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_dba8fb72d59a",
+        "clockIn": "2026-10-13T12:04:00.000Z",
+        "clockOut": "2026-10-13T12:31:00.000Z",
+        "deltaArrivalMin": -2.95,
+        "deltaDepartureMin": -3.03
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 8:06 AM ET, 6 minutes after the scheduled time (8:00 AM ET). They left at 8:34 AM ET, 86 minutes before the scheduled time (10:00 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-13T20:00:00.000Z#v_okoro_09",
+    "item": {
+      "createdAt": "2026-10-06T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_09",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-13",
+      "scheduledStart": "2026-10-13T20:00:00.000Z",
+      "scheduledEnd": "2026-10-13T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-13T20:01:17.000Z",
+        "eventId": "6dcc77d3-32b1-474d-8d43-d8d6bfb5f3be",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-13T22:04:33.000Z",
+        "eventId": "fdae6e3b-95b3-458a-b2e9-a55734d121d2",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_77632e0650e4",
+        "clockIn": "2026-10-13T19:57:00.000Z",
+        "clockOut": "2026-10-13T22:00:00.000Z",
+        "deltaArrivalMin": -4.28,
+        "deltaDepartureMin": -4.55
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:01 PM ET, 1 minute after the scheduled time (4:00 PM ET). They left at 6:04 PM ET, 4 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-14T12:00:00.000Z#v_okoro_10",
+    "item": {
+      "createdAt": "2026-10-07T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_10",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-14",
+      "scheduledStart": "2026-10-14T12:00:00.000Z",
+      "scheduledEnd": "2026-10-14T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-14T12:00:53.000Z",
+        "eventId": "bb20cbdd-04fc-4e11-9156-e561c4d2555c",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-14T13:56:13.000Z",
+        "eventId": "3af97e5b-a021-4e94-84cb-eadc30a573bf",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_5328ad91afae",
+        "clockIn": "2026-10-14T12:04:00.000Z",
+        "clockOut": "2026-10-14T13:53:00.000Z",
+        "deltaArrivalMin": 3.12,
+        "deltaDepartureMin": -3.22
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 8:00 AM ET, on time (8:00 AM ET). They left at 9:56 AM ET, 4 minutes before the scheduled time (10:00 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-14T20:00:00.000Z#v_okoro_11",
+    "item": {
+      "createdAt": "2026-10-07T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_11",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-14",
+      "scheduledStart": "2026-10-14T20:00:00.000Z",
+      "scheduledEnd": "2026-10-14T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-14T20:20:41.000Z",
+        "eventId": "064fc011-f49a-4e74-a133-31b956ab3aaf",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-14T22:18:06.000Z",
+        "eventId": "357cf3a0-990e-4a35-80db-4628f1d8288a",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_c497c1547ca2",
+        "clockIn": "2026-10-14T20:21:00.000Z",
+        "clockOut": "2026-10-14T22:16:00.000Z",
+        "deltaArrivalMin": 0.32,
+        "deltaDepartureMin": -2.1
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:20 PM ET, 20 minutes after the scheduled time (4:00 PM ET). They left at 6:18 PM ET, 18 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-15T12:00:00.000Z#v_okoro_12",
+    "item": {
+      "createdAt": "2026-10-08T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_12",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-15",
+      "scheduledStart": "2026-10-15T12:00:00.000Z",
+      "scheduledEnd": "2026-10-15T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-15T11:59:24.000Z",
+        "eventId": "12e41f75-2ddb-46a2-bbd6-a33ad6caf648",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-15T13:59:32.000Z",
+        "eventId": "e8950656-bb86-4c35-aeee-662b4ae8e344",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_37b73adc43c4",
+        "clockIn": "2026-10-15T11:59:00.000Z",
+        "clockOut": "2026-10-15T14:01:00.000Z",
+        "deltaArrivalMin": -0.4,
+        "deltaDepartureMin": 1.47
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 7:59 AM ET, 1 minute before the scheduled time (8:00 AM ET). They left at 9:59 AM ET, 1 minute before the scheduled time (10:00 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-15T20:00:00.000Z#v_okoro_13",
+    "item": {
+      "createdAt": "2026-10-08T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_13",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-15",
+      "scheduledStart": "2026-10-15T20:00:00.000Z",
+      "scheduledEnd": "2026-10-15T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-15T19:59:38.000Z",
+        "eventId": "06995d0a-65f1-4386-9a75-129c85036152",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-15T22:06:44.000Z",
+        "eventId": "40290820-d918-4c75-b08a-5b02fa05f103",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_31c5b3eba0ed",
+        "clockIn": "2026-10-15T20:03:00.000Z",
+        "clockOut": "2026-10-15T22:10:00.000Z",
+        "deltaArrivalMin": 3.37,
+        "deltaDepartureMin": 3.27
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 3:59 PM ET, 1 minute before the scheduled time (4:00 PM ET). They left at 6:06 PM ET, 6 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-16T12:00:00.000Z#v_okoro_14",
+    "item": {
+      "createdAt": "2026-10-09T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_14",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-16",
+      "scheduledStart": "2026-10-16T12:00:00.000Z",
+      "scheduledEnd": "2026-10-16T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-16T12:08:38.000Z",
+        "eventId": "150fec08-25b9-463f-8b42-e9f19a837265",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-16T14:04:09.000Z",
+        "eventId": "0406b7bb-cad7-48b5-8d85-10dec585f91c",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "missing_clock_in"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 8:08 AM ET, 8 minutes after the scheduled time (8:00 AM ET). They left at 10:04 AM ET, 4 minutes after the scheduled time (10:00 AM ET). No caregiver clock-in has been matched to this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-16T20:00:00.000Z#v_okoro_15",
+    "item": {
+      "createdAt": "2026-10-09T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_15",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-16",
+      "scheduledStart": "2026-10-16T20:00:00.000Z",
+      "scheduledEnd": "2026-10-16T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-16T20:00:01.000Z",
+        "eventId": "0a9c55ac-bee9-4d1c-a62d-bf3e60af09af",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-16T21:56:06.000Z",
+        "eventId": "4c35cb2d-c832-41fc-b92b-ed89c0eb7f74",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_d0174589b230",
+        "clockIn": "2026-10-16T19:56:00.000Z",
+        "clockOut": "2026-10-16T21:56:00.000Z",
+        "deltaArrivalMin": -4.02,
+        "deltaDepartureMin": -0.1
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:00 PM ET, on time (4:00 PM ET). They left at 5:56 PM ET, 4 minutes before the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-17T12:00:00.000Z#v_okoro_16",
+    "item": {
+      "createdAt": "2026-10-10T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_16",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-17",
+      "scheduledStart": "2026-10-17T12:00:00.000Z",
+      "scheduledEnd": "2026-10-17T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "no_show",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_no_arrival",
+        "no_show"
+      ],
+      "reconciliation": {
+        "outcome": "missing_both"
+      },
+      "narrative": {
+        "text": "No caregiver arrival was observed by the end of the escalation window. Neither a door record nor a clock-in exists for this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-17T20:00:00.000Z#v_okoro_17",
+    "item": {
+      "createdAt": "2026-10-10T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_17",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-17",
+      "scheduledStart": "2026-10-17T20:00:00.000Z",
+      "scheduledEnd": "2026-10-17T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-17T20:04:13.000Z",
+        "eventId": "f27ee577-ba2d-47ac-8d67-022be9615b97",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-17T22:07:03.000Z",
+        "eventId": "ceca6444-fb2c-4af9-b7ed-a89b9d1d3db3",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_1bac4629f68c",
+        "clockIn": "2026-10-17T20:02:00.000Z",
+        "clockOut": "2026-10-17T22:09:00.000Z",
+        "deltaArrivalMin": -2.22,
+        "deltaDepartureMin": 1.95
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:04 PM ET, 4 minutes after the scheduled time (4:00 PM ET). They left at 6:07 PM ET, 7 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-18T12:00:00.000Z#v_okoro_18",
+    "item": {
+      "createdAt": "2026-10-11T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_18",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-18",
+      "scheduledStart": "2026-10-18T12:00:00.000Z",
+      "scheduledEnd": "2026-10-18T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-18T11:58:13.000Z",
+        "eventId": "b6a2f289-30c0-483d-bbd7-7b0b02d0b267",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-18T13:56:45.000Z",
+        "eventId": "d4f29063-bfdf-46f5-a053-b81dda0e71e2",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "contradicted",
+        "evvRecordId": "evv_324b06a0c08e",
+        "clockIn": "2026-10-18T11:14:00.000Z",
+        "clockOut": "2026-10-18T13:57:00.000Z",
+        "deltaArrivalMin": -44.22,
+        "deltaDepartureMin": 0.25
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 7:58 AM ET, 2 minutes before the scheduled time (8:00 AM ET). They left at 9:56 AM ET, 4 minutes before the scheduled time (10:00 AM ET). The door record does not match the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-18T20:00:00.000Z#v_okoro_19",
+    "item": {
+      "createdAt": "2026-10-11T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_19",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-18",
+      "scheduledStart": "2026-10-18T20:00:00.000Z",
+      "scheduledEnd": "2026-10-18T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-18T19:59:49.000Z",
+        "eventId": "be3ee431-d47f-43ef-a702-a3e3f95a19a6",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-18T22:04:36.000Z",
+        "eventId": "36f3872e-a845-4507-9d76-65f6f9e4c6b7",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_5b1656886744",
+        "clockIn": "2026-10-18T19:57:00.000Z",
+        "clockOut": "2026-10-18T22:03:00.000Z",
+        "deltaArrivalMin": -2.82,
+        "deltaDepartureMin": -1.6
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 3:59 PM ET, 1 minute before the scheduled time (4:00 PM ET). They left at 6:04 PM ET, 4 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-19T12:00:00.000Z#v_okoro_20",
+    "item": {
+      "createdAt": "2026-10-12T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_20",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-19",
+      "scheduledStart": "2026-10-19T12:00:00.000Z",
+      "scheduledEnd": "2026-10-19T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-19T12:25:47.000Z",
+        "eventId": "078bdee1-3356-4e70-b2e0-fd4ff5c19e85",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-19T14:23:29.000Z",
+        "eventId": "8f945f60-184d-431b-87a4-03eea93f5f26",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_103569280742",
+        "clockIn": "2026-10-19T12:23:00.000Z",
+        "clockOut": "2026-10-19T14:20:00.000Z",
+        "deltaArrivalMin": -2.78,
+        "deltaDepartureMin": -3.48
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 8:25 AM ET, 25 minutes after the scheduled time (8:00 AM ET). They left at 10:23 AM ET, 23 minutes after the scheduled time (10:00 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-19T20:00:00.000Z#v_okoro_21",
+    "item": {
+      "createdAt": "2026-10-12T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_21",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-19",
+      "scheduledStart": "2026-10-19T20:00:00.000Z",
+      "scheduledEnd": "2026-10-19T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-19T20:06:47.000Z",
+        "eventId": "5f173d5b-8763-47ca-8544-e28c0ed4a302",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-19T22:02:04.000Z",
+        "eventId": "46a2f589-45a9-40a9-807a-db021f1909da",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_8359b958c81d",
+        "clockIn": "2026-10-19T20:07:00.000Z",
+        "clockOut": "2026-10-19T21:59:00.000Z",
+        "deltaArrivalMin": 0.22,
+        "deltaDepartureMin": -3.07
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:06 PM ET, 6 minutes after the scheduled time (4:00 PM ET). They left at 6:02 PM ET, 2 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-20T12:00:00.000Z#v_okoro_22",
+    "item": {
+      "createdAt": "2026-10-13T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_22",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-20",
+      "scheduledStart": "2026-10-20T12:00:00.000Z",
+      "scheduledEnd": "2026-10-20T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-20T12:01:49.000Z",
+        "eventId": "ff76a95e-c143-450b-b1a9-3fec4db562c9",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-20T13:58:17.000Z",
+        "eventId": "35f47036-0592-4291-8a13-9193d2658deb",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_c2f541d9db21",
+        "clockIn": "2026-10-20T11:58:00.000Z",
+        "clockOut": "2026-10-20T14:01:00.000Z",
+        "deltaArrivalMin": -3.82,
+        "deltaDepartureMin": 2.72
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 8:01 AM ET, 1 minute after the scheduled time (8:00 AM ET). They left at 9:58 AM ET, 2 minutes before the scheduled time (10:00 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-20T20:00:00.000Z#v_okoro_23",
+    "item": {
+      "createdAt": "2026-10-13T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_23",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-20",
+      "scheduledStart": "2026-10-20T20:00:00.000Z",
+      "scheduledEnd": "2026-10-20T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-20T19:55:13.000Z",
+        "eventId": "3882d6ae-125d-4c2f-9e62-07f4aaa762ff",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-20T22:08:00.000Z",
+        "eventId": "ad91560d-cd82-4eee-8e8c-64068d21e114",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "missing_clock_in"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 3:55 PM ET, 5 minutes before the scheduled time (4:00 PM ET). They left at 6:08 PM ET, 8 minutes after the scheduled time (6:00 PM ET). No caregiver clock-in has been matched to this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-21T12:00:00.000Z#v_okoro_24",
+    "item": {
+      "createdAt": "2026-10-14T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_24",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-21",
+      "scheduledStart": "2026-10-21T12:00:00.000Z",
+      "scheduledEnd": "2026-10-21T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-21T11:57:30.000Z",
+        "eventId": "b66a188b-5276-4e75-94ec-126b72b6cd15",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-21T13:56:23.000Z",
+        "eventId": "25261a75-5796-4045-83c0-9a43c4792038",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_e680d1093ec5",
+        "clockIn": "2026-10-21T12:00:00.000Z",
+        "clockOut": "2026-10-21T13:52:00.000Z",
+        "deltaArrivalMin": 2.5,
+        "deltaDepartureMin": -4.38
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 7:57 AM ET, 3 minutes before the scheduled time (8:00 AM ET). They left at 9:56 AM ET, 4 minutes before the scheduled time (10:00 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-21T20:00:00.000Z#v_okoro_25",
+    "item": {
+      "createdAt": "2026-10-14T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_25",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-21",
+      "scheduledStart": "2026-10-21T20:00:00.000Z",
+      "scheduledEnd": "2026-10-21T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-21T19:58:00.000Z",
+        "eventId": "52e94b1a-1aa8-477c-884f-44d291da7edb",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-21T22:04:53.000Z",
+        "eventId": "ac0cfb75-306e-41cf-a712-be6280baa56b",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_7c2f91d4b7fa",
+        "clockIn": "2026-10-21T20:01:00.000Z",
+        "clockOut": "2026-10-21T22:02:00.000Z",
+        "deltaArrivalMin": 3,
+        "deltaDepartureMin": -2.88
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 3:58 PM ET, 2 minutes before the scheduled time (4:00 PM ET). They left at 6:04 PM ET, 4 minutes after the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-22T12:00:00.000Z#v_okoro_26",
+    "item": {
+      "createdAt": "2026-10-15T12:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_26",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_amara",
+      "serviceCode": "T1019",
+      "date": "2026-10-22",
+      "scheduledStart": "2026-10-22T12:00:00.000Z",
+      "scheduledEnd": "2026-10-22T14:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "unobservable",
+      "observability": {
+        "state": "unobservable",
+        "reasons": [
+          "device_offline"
+        ]
+      },
+      "arrival": {
+        "at": "2026-10-22T12:08:28.000Z",
+        "eventId": "271898d7-e62e-45ea-a80b-d0b61e3c5956",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "raisedExceptionKinds": [
+        "unobservable"
+      ],
+      "reconciliation": {
+        "outcome": "unobservable"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 8:08 AM ET, 8 minutes after the scheduled time (8:00 AM ET). The door could not be observed, so the clock-in cannot be checked.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿VISIT#2026-10-22T20:00:00.000Z#v_okoro_27",
+    "item": {
+      "createdAt": "2026-10-15T20:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_okoro_27",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverId": "cg_daniel",
+      "serviceCode": "T1019",
+      "date": "2026-10-22",
+      "scheduledStart": "2026-10-22T20:00:00.000Z",
+      "scheduledEnd": "2026-10-22T22:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "early_departure",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-22T20:00:34.000Z",
+        "eventId": "c7c543c0-e21a-4837-a98c-93e43c431b58",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-22T20:41:23.000Z",
+        "eventId": "a68d4539-3d8f-44e7-b5a4-8601c27202d8",
+        "source": "rule"
+      },
+      "raisedExceptionKinds": [
+        "early_departure"
+      ],
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_c30dd9911caf",
+        "clockIn": "2026-10-22T19:58:00.000Z",
+        "clockOut": "2026-10-22T20:41:00.000Z",
+        "deltaArrivalMin": -2.57,
+        "deltaDepartureMin": -0.38
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 4:00 PM ET, on time (4:00 PM ET). They left at 4:41 PM ET, 79 minutes before the scheduled time (6:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-09T16:00:00.000Z#v_nakamura_00",
+    "item": {
+      "createdAt": "2026-10-02T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_00",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-09",
+      "scheduledStart": "2026-10-09T16:00:00.000Z",
+      "scheduledEnd": "2026-10-09T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-09T16:03:21.000Z",
+        "eventId": "b678ed10-e231-4fb4-bc26-6d105d796ea1",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-09T18:05:04.000Z",
+        "eventId": "88407854-a51a-408b-b199-cacd9fda837f",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_8350f1d3e86e",
+        "clockIn": "2026-10-09T16:02:00.000Z",
+        "clockOut": "2026-10-09T18:01:00.000Z",
+        "deltaArrivalMin": -1.35,
+        "deltaDepartureMin": -4.07
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 12:03 PM ET, 3 minutes after the scheduled time (12:00 PM ET). They left at 2:05 PM ET, 5 minutes after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-09T22:00:00.000Z#v_nakamura_01",
+    "item": {
+      "createdAt": "2026-10-02T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_01",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-09",
+      "scheduledStart": "2026-10-09T22:00:00.000Z",
+      "scheduledEnd": "2026-10-10T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-09T21:54:57.000Z",
+        "eventId": "6a72364f-53cd-4c73-9a3b-2dec5232c6de",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-10T00:03:28.000Z",
+        "eventId": "ad58fff0-5776-4e92-90fb-37fa7244ec19",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_997b32c1d09c",
+        "clockIn": "2026-10-09T21:54:00.000Z",
+        "clockOut": "2026-10-10T00:07:00.000Z",
+        "deltaArrivalMin": -0.95,
+        "deltaDepartureMin": 3.53
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 5:54 PM ET, 6 minutes before the scheduled time (6:00 PM ET). They left at 8:03 PM ET, 3 minutes after the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-10T16:00:00.000Z#v_nakamura_02",
+    "item": {
+      "createdAt": "2026-10-03T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_02",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-10",
+      "scheduledStart": "2026-10-10T16:00:00.000Z",
+      "scheduledEnd": "2026-10-10T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-10T16:20:19.000Z",
+        "eventId": "f5164313-d07e-45d8-8c95-42aa02d064c1",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-10T18:19:38.000Z",
+        "eventId": "9989f3d4-50c5-4ff0-bc88-8e95b507c539",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_4a8eecaf2fc7",
+        "clockIn": "2026-10-10T16:17:00.000Z",
+        "clockOut": "2026-10-10T18:22:00.000Z",
+        "deltaArrivalMin": -3.32,
+        "deltaDepartureMin": 2.37
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 12:20 PM ET, 20 minutes after the scheduled time (12:00 PM ET). They left at 2:19 PM ET, 19 minutes after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-10T22:00:00.000Z#v_nakamura_03",
+    "item": {
+      "createdAt": "2026-10-03T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_03",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-10",
+      "scheduledStart": "2026-10-10T22:00:00.000Z",
+      "scheduledEnd": "2026-10-11T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-10T22:04:55.000Z",
+        "eventId": "935df1c3-fab8-4261-95cb-8b7894132baa",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-10T23:56:38.000Z",
+        "eventId": "41df5084-4cf4-4aa2-8db0-eab7b23af53b",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "contradicted",
+        "evvRecordId": "evv_5f56e21cf895",
+        "clockIn": "2026-10-10T21:22:00.000Z",
+        "clockOut": "2026-10-10T23:56:00.000Z",
+        "deltaArrivalMin": -42.92,
+        "deltaDepartureMin": -0.63
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 6:04 PM ET, 4 minutes after the scheduled time (6:00 PM ET). They left at 7:56 PM ET, 4 minutes before the scheduled time (8:00 PM ET). The door record does not match the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-11T16:00:00.000Z#v_nakamura_04",
+    "item": {
+      "createdAt": "2026-10-04T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_04",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-11",
+      "scheduledStart": "2026-10-11T16:00:00.000Z",
+      "scheduledEnd": "2026-10-11T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-11T15:56:26.000Z",
+        "eventId": "0801b838-3672-48ee-812a-620f63a4424b",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-11T17:59:59.000Z",
+        "eventId": "f4bab689-eae2-4e2a-89d7-391c4b9e6278",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_11c1ebde808d",
+        "clockIn": "2026-10-11T15:59:00.000Z",
+        "clockOut": "2026-10-11T17:58:00.000Z",
+        "deltaArrivalMin": 2.57,
+        "deltaDepartureMin": -1.98
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 11:56 AM ET, 4 minutes before the scheduled time (12:00 PM ET). They left at 1:59 PM ET, 1 minute before the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-11T22:00:00.000Z#v_nakamura_05",
+    "item": {
+      "createdAt": "2026-10-04T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_05",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-11",
+      "scheduledStart": "2026-10-11T22:00:00.000Z",
+      "scheduledEnd": "2026-10-12T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-11T22:03:59.000Z",
+        "eventId": "a4ac99ec-b1fa-4a71-86fe-aa6f609d5ffc",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-12T00:02:53.000Z",
+        "eventId": "1de43c57-c40b-4489-b66d-c2dc5f7849a2",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_d4a6b81d7260",
+        "clockIn": "2026-10-11T22:00:00.000Z",
+        "clockOut": "2026-10-12T00:02:00.000Z",
+        "deltaArrivalMin": -3.98,
+        "deltaDepartureMin": -0.88
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 6:03 PM ET, 3 minutes after the scheduled time (6:00 PM ET). They left at 8:02 PM ET, 2 minutes after the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-12T16:00:00.000Z#v_nakamura_06",
+    "item": {
+      "createdAt": "2026-10-05T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_06",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-12",
+      "scheduledStart": "2026-10-12T16:00:00.000Z",
+      "scheduledEnd": "2026-10-12T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-12T15:59:41.000Z",
+        "eventId": "4babebec-64fd-4b4c-a6f1-d5c35da80544",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-12T18:01:02.000Z",
+        "eventId": "75bf683a-008f-406c-8b87-0ea26d382476",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_175fe676e292",
+        "clockIn": "2026-10-12T15:56:00.000Z",
+        "clockOut": "2026-10-12T17:58:00.000Z",
+        "deltaArrivalMin": -3.68,
+        "deltaDepartureMin": -3.03
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 11:59 AM ET, 1 minute before the scheduled time (12:00 PM ET). They left at 2:01 PM ET, 1 minute after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-12T22:00:00.000Z#v_nakamura_07",
+    "item": {
+      "createdAt": "2026-10-05T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_07",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-12",
+      "scheduledStart": "2026-10-12T22:00:00.000Z",
+      "scheduledEnd": "2026-10-13T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "early_departure",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-12T22:02:49.000Z",
+        "eventId": "2835e627-3e37-4980-a46a-ea5b39b57fe2",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-12T22:31:00.000Z",
+        "eventId": "d1e9ba8a-04aa-4c12-b395-63aee43f7ec9",
+        "source": "rule"
+      },
+      "raisedExceptionKinds": [
+        "early_departure"
+      ],
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_fa3054b835a9",
+        "clockIn": "2026-10-12T22:02:00.000Z",
+        "clockOut": "2026-10-12T22:32:00.000Z",
+        "deltaArrivalMin": -0.82,
+        "deltaDepartureMin": 1
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 6:02 PM ET, 2 minutes after the scheduled time (6:00 PM ET). They left at 6:31 PM ET, 89 minutes before the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-13T16:00:00.000Z#v_nakamura_08",
+    "item": {
+      "createdAt": "2026-10-06T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_08",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-13",
+      "scheduledStart": "2026-10-13T16:00:00.000Z",
+      "scheduledEnd": "2026-10-13T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-13T15:58:19.000Z",
+        "eventId": "13197c5a-6bd1-4ac4-b46f-5add11385284",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-13T18:07:08.000Z",
+        "eventId": "f3e221d9-89e4-460b-a958-312637fa6646",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "missing_clock_in"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 11:58 AM ET, 2 minutes before the scheduled time (12:00 PM ET). They left at 2:07 PM ET, 7 minutes after the scheduled time (2:00 PM ET). No caregiver clock-in has been matched to this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-13T22:00:00.000Z#v_nakamura_09",
+    "item": {
+      "createdAt": "2026-10-06T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_09",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-13",
+      "scheduledStart": "2026-10-13T22:00:00.000Z",
+      "scheduledEnd": "2026-10-14T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-13T21:54:13.000Z",
+        "eventId": "9d9a2f0f-c0ea-41e8-9d33-2468df9a581f",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-13T23:56:07.000Z",
+        "eventId": "49530d60-58e3-471d-bf73-023fa08dfb42",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_4b6fe625077e",
+        "clockIn": "2026-10-13T21:52:00.000Z",
+        "clockOut": "2026-10-13T23:52:00.000Z",
+        "deltaArrivalMin": -2.22,
+        "deltaDepartureMin": -4.12
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 5:54 PM ET, 6 minutes before the scheduled time (6:00 PM ET). They left at 7:56 PM ET, 4 minutes before the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-14T16:00:00.000Z#v_nakamura_10",
+    "item": {
+      "createdAt": "2026-10-07T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_10",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-14",
+      "scheduledStart": "2026-10-14T16:00:00.000Z",
+      "scheduledEnd": "2026-10-14T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-14T16:19:16.000Z",
+        "eventId": "a1995dd4-390e-4fb6-9bbc-06365cf248e3",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-14T18:22:17.000Z",
+        "eventId": "e51f2840-d107-4ec3-834e-2ad46cdce482",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_a6b67a74ed68",
+        "clockIn": "2026-10-14T16:17:00.000Z",
+        "clockOut": "2026-10-14T18:22:00.000Z",
+        "deltaArrivalMin": -2.27,
+        "deltaDepartureMin": -0.28
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 12:19 PM ET, 19 minutes after the scheduled time (12:00 PM ET). They left at 2:22 PM ET, 22 minutes after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-14T22:00:00.000Z#v_nakamura_11",
+    "item": {
+      "createdAt": "2026-10-07T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_11",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-14",
+      "scheduledStart": "2026-10-14T22:00:00.000Z",
+      "scheduledEnd": "2026-10-15T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-14T22:04:19.000Z",
+        "eventId": "9a96e18e-62ae-4008-899c-db98d742648b",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-15T00:07:09.000Z",
+        "eventId": "4bc36c3c-641b-4e60-84f7-051b702b0fa9",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_3a5be24d4b33",
+        "clockIn": "2026-10-14T22:02:00.000Z",
+        "clockOut": "2026-10-15T00:09:00.000Z",
+        "deltaArrivalMin": -2.32,
+        "deltaDepartureMin": 1.85
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 6:04 PM ET, 4 minutes after the scheduled time (6:00 PM ET). They left at 8:07 PM ET, 7 minutes after the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-15T16:00:00.000Z#v_nakamura_12",
+    "item": {
+      "createdAt": "2026-10-08T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_12",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-15",
+      "scheduledStart": "2026-10-15T16:00:00.000Z",
+      "scheduledEnd": "2026-10-15T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-15T16:07:36.000Z",
+        "eventId": "5a2acbe5-5062-4c49-a77e-e43ab85b8a5c",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-15T18:07:31.000Z",
+        "eventId": "732bea76-a651-446c-8ca7-c59ffe41f31b",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_03797fe7a4e0",
+        "clockIn": "2026-10-15T16:08:00.000Z",
+        "clockOut": "2026-10-15T18:05:00.000Z",
+        "deltaArrivalMin": 0.4,
+        "deltaDepartureMin": -2.52
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 12:07 PM ET, 7 minutes after the scheduled time (12:00 PM ET). They left at 2:07 PM ET, 7 minutes after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-15T22:00:00.000Z#v_nakamura_13",
+    "item": {
+      "createdAt": "2026-10-08T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_13",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-15",
+      "scheduledStart": "2026-10-15T22:00:00.000Z",
+      "scheduledEnd": "2026-10-16T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "no_show",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_no_arrival",
+        "no_show"
+      ],
+      "reconciliation": {
+        "outcome": "missing_both"
+      },
+      "narrative": {
+        "text": "No caregiver arrival was observed by the end of the escalation window. Neither a door record nor a clock-in exists for this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-16T16:00:00.000Z#v_nakamura_14",
+    "item": {
+      "createdAt": "2026-10-09T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_14",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-16",
+      "scheduledStart": "2026-10-16T16:00:00.000Z",
+      "scheduledEnd": "2026-10-16T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-16T16:01:14.000Z",
+        "eventId": "85507411-df5e-44fd-b871-d97cb97db704",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-16T17:59:06.000Z",
+        "eventId": "4b86e36e-d093-49c6-adcc-432ece3750a7",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_1e66c1a4b02c",
+        "clockIn": "2026-10-16T16:02:00.000Z",
+        "clockOut": "2026-10-16T17:58:00.000Z",
+        "deltaArrivalMin": 0.77,
+        "deltaDepartureMin": -1.1
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 12:01 PM ET, 1 minute after the scheduled time (12:00 PM ET). They left at 1:59 PM ET, 1 minute before the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-16T22:00:00.000Z#v_nakamura_15",
+    "item": {
+      "createdAt": "2026-10-09T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_15",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-16",
+      "scheduledStart": "2026-10-16T22:00:00.000Z",
+      "scheduledEnd": "2026-10-17T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-16T22:04:13.000Z",
+        "eventId": "828a7e00-6283-4ad8-bb8e-6f2127ce2d0e",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-17T00:01:34.000Z",
+        "eventId": "a47a2aa7-875e-4048-b873-d1a489979c32",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_620a75d5f961",
+        "clockIn": "2026-10-16T22:03:00.000Z",
+        "clockOut": "2026-10-17T00:01:00.000Z",
+        "deltaArrivalMin": -1.22,
+        "deltaDepartureMin": -0.57
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 6:04 PM ET, 4 minutes after the scheduled time (6:00 PM ET). They left at 8:01 PM ET, 1 minute after the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-17T16:00:00.000Z#v_nakamura_16",
+    "item": {
+      "createdAt": "2026-10-10T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_16",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-17",
+      "scheduledStart": "2026-10-17T16:00:00.000Z",
+      "scheduledEnd": "2026-10-17T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-17T15:54:51.000Z",
+        "eventId": "b67de363-14d7-42c1-b075-4ad553841308",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-17T18:07:20.000Z",
+        "eventId": "c485f098-6c06-48d4-aec2-8befb908d842",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "missing_clock_in"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 11:54 AM ET, 6 minutes before the scheduled time (12:00 PM ET). They left at 2:07 PM ET, 7 minutes after the scheduled time (2:00 PM ET). No caregiver clock-in has been matched to this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-17T22:00:00.000Z#v_nakamura_17",
+    "item": {
+      "createdAt": "2026-10-10T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_17",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-17",
+      "scheduledStart": "2026-10-17T22:00:00.000Z",
+      "scheduledEnd": "2026-10-18T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-17T21:55:42.000Z",
+        "eventId": "35be7eb9-b441-4534-9157-a047e50938dd",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-18T00:03:43.000Z",
+        "eventId": "7dfc8301-52c0-43d3-b0ae-fdc6a74273d8",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "contradicted",
+        "evvRecordId": "evv_2a6411a0b372",
+        "clockIn": "2026-10-17T21:11:00.000Z",
+        "clockOut": "2026-10-18T00:01:00.000Z",
+        "deltaArrivalMin": -44.7,
+        "deltaDepartureMin": -2.72
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 5:55 PM ET, 5 minutes before the scheduled time (6:00 PM ET). They left at 8:03 PM ET, 3 minutes after the scheduled time (8:00 PM ET). The door record does not match the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-18T16:00:00.000Z#v_nakamura_18",
+    "item": {
+      "createdAt": "2026-10-11T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_18",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-18",
+      "scheduledStart": "2026-10-18T16:00:00.000Z",
+      "scheduledEnd": "2026-10-18T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "unobservable",
+      "observability": {
+        "state": "unobservable",
+        "reasons": [
+          "encrypted_device"
+        ]
+      },
+      "raisedExceptionKinds": [
+        "unobservable"
+      ],
+      "reconciliation": {
+        "outcome": "unobservable"
+      },
+      "narrative": {
+        "text": "The door could not be observed for this visit. The door could not be observed, so the clock-in cannot be checked.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-18T22:00:00.000Z#v_nakamura_19",
+    "item": {
+      "createdAt": "2026-10-11T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_19",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-18",
+      "scheduledStart": "2026-10-18T22:00:00.000Z",
+      "scheduledEnd": "2026-10-19T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-18T22:06:00.000Z",
+        "eventId": "683cab17-a596-4a37-a035-eddabadfaa8a",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-19T00:06:20.000Z",
+        "eventId": "b10bed43-32fa-418d-9aa5-65a38ce389e0",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_563050e6f30f",
+        "clockIn": "2026-10-18T22:03:00.000Z",
+        "clockOut": "2026-10-19T00:03:00.000Z",
+        "deltaArrivalMin": -3,
+        "deltaDepartureMin": -3.33
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 6:06 PM ET, 6 minutes after the scheduled time (6:00 PM ET). They left at 8:06 PM ET, 6 minutes after the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-19T16:00:00.000Z#v_nakamura_20",
+    "item": {
+      "createdAt": "2026-10-12T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_20",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-19",
+      "scheduledStart": "2026-10-19T16:00:00.000Z",
+      "scheduledEnd": "2026-10-19T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-19T15:56:12.000Z",
+        "eventId": "142989e0-40a6-449d-b2cf-342617e6db9a",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-19T18:05:36.000Z",
+        "eventId": "52dc5486-14be-4c29-a386-cc5794fb1506",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_e73f3fbd3ed6",
+        "clockIn": "2026-10-19T15:52:00.000Z",
+        "clockOut": "2026-10-19T18:05:00.000Z",
+        "deltaArrivalMin": -4.2,
+        "deltaDepartureMin": -0.6
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 11:56 AM ET, 4 minutes before the scheduled time (12:00 PM ET). They left at 2:05 PM ET, 5 minutes after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-19T22:00:00.000Z#v_nakamura_21",
+    "item": {
+      "createdAt": "2026-10-12T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_21",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-19",
+      "scheduledStart": "2026-10-19T22:00:00.000Z",
+      "scheduledEnd": "2026-10-20T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-19T22:31:27.000Z",
+        "eventId": "dbdcf855-1841-4da0-a4d9-0fc64f488a20",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-20T00:34:21.000Z",
+        "eventId": "6bb88837-4c63-47f7-b3f8-8fc224770839",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_5896751a2faa",
+        "clockIn": "2026-10-19T22:33:00.000Z",
+        "clockOut": "2026-10-20T00:32:00.000Z",
+        "deltaArrivalMin": 1.55,
+        "deltaDepartureMin": -2.35
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 6:31 PM ET, 31 minutes after the scheduled time (6:00 PM ET). They left at 8:34 PM ET, 34 minutes after the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-20T16:00:00.000Z#v_nakamura_22",
+    "item": {
+      "createdAt": "2026-10-13T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_22",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-20",
+      "scheduledStart": "2026-10-20T16:00:00.000Z",
+      "scheduledEnd": "2026-10-20T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-20T15:57:21.000Z",
+        "eventId": "d8b1f5a0-50ee-4b16-84de-ce7f9d31c2d4",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-20T18:02:39.000Z",
+        "eventId": "82e9e545-86b0-4c00-958e-3a010184e122",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_51be6f96762f",
+        "clockIn": "2026-10-20T16:00:00.000Z",
+        "clockOut": "2026-10-20T18:03:00.000Z",
+        "deltaArrivalMin": 2.65,
+        "deltaDepartureMin": 0.35
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 11:57 AM ET, 3 minutes before the scheduled time (12:00 PM ET). They left at 2:02 PM ET, 2 minutes after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-20T22:00:00.000Z#v_nakamura_23",
+    "item": {
+      "createdAt": "2026-10-13T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_23",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-20",
+      "scheduledStart": "2026-10-20T22:00:00.000Z",
+      "scheduledEnd": "2026-10-21T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-20T21:56:18.000Z",
+        "eventId": "777c37d4-2784-4c10-bfa4-803221d70a01",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-21T00:04:43.000Z",
+        "eventId": "b16035c0-a5be-4541-8175-b3a04dac4bcb",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "missing_clock_in"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 5:56 PM ET, 4 minutes before the scheduled time (6:00 PM ET). They left at 8:04 PM ET, 4 minutes after the scheduled time (8:00 PM ET). No caregiver clock-in has been matched to this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-21T16:00:00.000Z#v_nakamura_24",
+    "item": {
+      "createdAt": "2026-10-14T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_24",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-21",
+      "scheduledStart": "2026-10-21T16:00:00.000Z",
+      "scheduledEnd": "2026-10-21T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-21T15:58:13.000Z",
+        "eventId": "5a635496-e0db-420b-8583-a7759981f5a5",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-21T18:07:54.000Z",
+        "eventId": "badcec3c-2b01-4004-a599-8f5398682e3e",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_707dea655603",
+        "clockIn": "2026-10-21T16:00:00.000Z",
+        "clockOut": "2026-10-21T18:05:00.000Z",
+        "deltaArrivalMin": 1.78,
+        "deltaDepartureMin": -2.9
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 11:58 AM ET, 2 minutes before the scheduled time (12:00 PM ET). They left at 2:07 PM ET, 7 minutes after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-21T22:00:00.000Z#v_nakamura_25",
+    "item": {
+      "createdAt": "2026-10-14T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_25",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-21",
+      "scheduledStart": "2026-10-21T22:00:00.000Z",
+      "scheduledEnd": "2026-10-22T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-21T22:21:22.000Z",
+        "eventId": "2a33f9ae-9a0c-4de9-895e-100eabc71b41",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-22T00:22:20.000Z",
+        "eventId": "d033656d-5177-48f0-8b00-52702b1914f6",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_296e5713f718",
+        "clockIn": "2026-10-21T22:18:00.000Z",
+        "clockOut": "2026-10-22T00:20:00.000Z",
+        "deltaArrivalMin": -3.37,
+        "deltaDepartureMin": -2.33
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 6:21 PM ET, 21 minutes after the scheduled time (6:00 PM ET). They left at 8:22 PM ET, 22 minutes after the scheduled time (8:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-22T16:00:00.000Z#v_nakamura_26",
+    "item": {
+      "createdAt": "2026-10-15T16:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_26",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_yuki",
+      "serviceCode": "T1019",
+      "date": "2026-10-22",
+      "scheduledStart": "2026-10-22T16:00:00.000Z",
+      "scheduledEnd": "2026-10-22T18:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-22T15:55:23.000Z",
+        "eventId": "7605d029-851c-4161-8b72-fdb01a28e6e8",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-22T18:04:54.000Z",
+        "eventId": "1b21d724-6df0-44de-8024-ef862f59fc4f",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_d3f97bdd2108",
+        "clockIn": "2026-10-22T15:52:00.000Z",
+        "clockOut": "2026-10-22T18:05:00.000Z",
+        "deltaArrivalMin": -3.38,
+        "deltaDepartureMin": 0.1
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 11:55 AM ET, 5 minutes before the scheduled time (12:00 PM ET). They left at 2:04 PM ET, 4 minutes after the scheduled time (2:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿VISIT#2026-10-22T22:00:00.000Z#v_nakamura_27",
+    "item": {
+      "createdAt": "2026-10-15T22:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_nakamura_27",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverId": "cg_priya",
+      "serviceCode": "T1019",
+      "date": "2026-10-22",
+      "scheduledStart": "2026-10-22T22:00:00.000Z",
+      "scheduledEnd": "2026-10-23T00:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "no_show",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_no_arrival",
+        "no_show"
+      ],
+      "reconciliation": {
+        "outcome": "missing_both"
+      },
+      "narrative": {
+        "text": "No caregiver arrival was observed by the end of the escalation window. Neither a door record nor a clock-in exists for this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-09T13:30:00.000Z#v_alvarez_00",
+    "item": {
+      "createdAt": "2026-10-02T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_00",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-09",
+      "scheduledStart": "2026-10-09T13:30:00.000Z",
+      "scheduledEnd": "2026-10-09T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-09T13:27:01.000Z",
+        "eventId": "07cc367d-d4b9-40f2-9d13-94ef621b37ab",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-09T15:35:53.000Z",
+        "eventId": "849c0216-0ff2-43ec-ad1c-6fa465150c2f",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_208c3e6c90a0",
+        "clockIn": "2026-10-09T13:28:00.000Z",
+        "clockOut": "2026-10-09T15:39:00.000Z",
+        "deltaArrivalMin": 0.98,
+        "deltaDepartureMin": 3.12
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:27 AM ET, 3 minutes before the scheduled time (9:30 AM ET). They left at 11:35 AM ET, 5 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-09T18:00:00.000Z#v_alvarez_01",
+    "item": {
+      "createdAt": "2026-10-02T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_01",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-09",
+      "scheduledStart": "2026-10-09T18:00:00.000Z",
+      "scheduledEnd": "2026-10-09T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-09T18:06:09.000Z",
+        "eventId": "e713f6cf-f0f8-47ee-a74f-df018ff52549",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-09T19:59:17.000Z",
+        "eventId": "4f492d31-7fe0-4ef1-9b73-05c5824a9dbb",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_b48b1de1e6e2",
+        "clockIn": "2026-10-09T18:05:00.000Z",
+        "clockOut": "2026-10-09T20:01:00.000Z",
+        "deltaArrivalMin": -1.15,
+        "deltaDepartureMin": 1.72
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:06 PM ET, 6 minutes after the scheduled time (2:00 PM ET). They left at 3:59 PM ET, 1 minute before the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-10T13:30:00.000Z#v_alvarez_02",
+    "item": {
+      "createdAt": "2026-10-03T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_02",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-10",
+      "scheduledStart": "2026-10-10T13:30:00.000Z",
+      "scheduledEnd": "2026-10-10T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-10T13:31:06.000Z",
+        "eventId": "b56a03d8-d4cf-4076-aa66-2c43c893f5f7",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-10T15:35:40.000Z",
+        "eventId": "955c5dc2-d04c-44e5-912a-8abbe2d739e0",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_eafcde327d1f",
+        "clockIn": "2026-10-10T13:30:00.000Z",
+        "clockOut": "2026-10-10T15:37:00.000Z",
+        "deltaArrivalMin": -1.1,
+        "deltaDepartureMin": 1.33
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:31 AM ET, 1 minute after the scheduled time (9:30 AM ET). They left at 11:35 AM ET, 5 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-10T18:00:00.000Z#v_alvarez_03",
+    "item": {
+      "createdAt": "2026-10-03T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_03",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-10",
+      "scheduledStart": "2026-10-10T18:00:00.000Z",
+      "scheduledEnd": "2026-10-10T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-10T18:06:26.000Z",
+        "eventId": "38dbe04f-1fd5-4afc-acf8-433dcf7e080c",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-10T19:57:50.000Z",
+        "eventId": "024a8ae5-835f-449a-a1bd-9651697178b8",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_4314018fe043",
+        "clockIn": "2026-10-10T18:06:00.000Z",
+        "clockOut": "2026-10-10T19:59:00.000Z",
+        "deltaArrivalMin": -0.43,
+        "deltaDepartureMin": 1.17
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:06 PM ET, 6 minutes after the scheduled time (2:00 PM ET). They left at 3:57 PM ET, 3 minutes before the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-11T13:30:00.000Z#v_alvarez_04",
+    "item": {
+      "createdAt": "2026-10-04T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_04",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-11",
+      "scheduledStart": "2026-10-11T13:30:00.000Z",
+      "scheduledEnd": "2026-10-11T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-11T13:37:52.000Z",
+        "eventId": "c3343074-0a5f-4c70-95c9-58fc41704246",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-11T15:34:46.000Z",
+        "eventId": "00dd8b70-b7f9-4ce0-9d3d-c8e5886396fd",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_b6c52e3215f3",
+        "clockIn": "2026-10-11T13:40:00.000Z",
+        "clockOut": "2026-10-11T15:31:00.000Z",
+        "deltaArrivalMin": 2.13,
+        "deltaDepartureMin": -3.77
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:37 AM ET, 7 minutes after the scheduled time (9:30 AM ET). They left at 11:34 AM ET, 4 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-11T18:00:00.000Z#v_alvarez_05",
+    "item": {
+      "createdAt": "2026-10-04T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_05",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-11",
+      "scheduledStart": "2026-10-11T18:00:00.000Z",
+      "scheduledEnd": "2026-10-11T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-11T17:58:01.000Z",
+        "eventId": "b6277c6f-5e26-4ae5-8f1f-97ba20a2fa09",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-11T20:04:07.000Z",
+        "eventId": "f380d174-9b7a-44d5-b1ee-d18b7eabaf5e",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "contradicted",
+        "evvRecordId": "evv_acff1608d4bd",
+        "clockIn": "2026-10-11T17:12:00.000Z",
+        "clockOut": "2026-10-11T20:02:00.000Z",
+        "deltaArrivalMin": -46.02,
+        "deltaDepartureMin": -2.12
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 1:58 PM ET, 2 minutes before the scheduled time (2:00 PM ET). They left at 4:04 PM ET, 4 minutes after the scheduled time (4:00 PM ET). The door record does not match the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-12T13:30:00.000Z#v_alvarez_06",
+    "item": {
+      "createdAt": "2026-10-05T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_06",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-12",
+      "scheduledStart": "2026-10-12T13:30:00.000Z",
+      "scheduledEnd": "2026-10-12T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-12T13:56:04.000Z",
+        "eventId": "28304a05-b138-46fe-b224-051db7dcdecd",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-12T15:58:54.000Z",
+        "eventId": "6f946cae-ad1d-4e1e-981e-1da144405028",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_0a819573cf15",
+        "clockIn": "2026-10-12T13:57:00.000Z",
+        "clockOut": "2026-10-12T15:59:00.000Z",
+        "deltaArrivalMin": 0.93,
+        "deltaDepartureMin": 0.1
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:56 AM ET, 26 minutes after the scheduled time (9:30 AM ET). They left at 11:58 AM ET, 28 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-12T18:00:00.000Z#v_alvarez_07",
+    "item": {
+      "createdAt": "2026-10-05T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_07",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-12",
+      "scheduledStart": "2026-10-12T18:00:00.000Z",
+      "scheduledEnd": "2026-10-12T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-12T18:06:25.000Z",
+        "eventId": "00658b2d-90e7-4575-9134-84743d5a0eb0",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-12T19:58:19.000Z",
+        "eventId": "08f2ca0f-94a5-4fec-a6c6-975c0c3c062a",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_84e14fad5c4e",
+        "clockIn": "2026-10-12T18:07:00.000Z",
+        "clockOut": "2026-10-12T19:54:00.000Z",
+        "deltaArrivalMin": 0.58,
+        "deltaDepartureMin": -4.32
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:06 PM ET, 6 minutes after the scheduled time (2:00 PM ET). They left at 3:58 PM ET, 2 minutes before the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-13T13:30:00.000Z#v_alvarez_08",
+    "item": {
+      "createdAt": "2026-10-06T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_08",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-13",
+      "scheduledStart": "2026-10-13T13:30:00.000Z",
+      "scheduledEnd": "2026-10-13T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-13T13:29:41.000Z",
+        "eventId": "5b1dac6e-a4bb-4cd8-812a-5fde9b1b6897",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-13T15:28:55.000Z",
+        "eventId": "6d05fa75-5f16-46de-8828-6749da1ccddd",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_0df8c4d81046",
+        "clockIn": "2026-10-13T13:29:00.000Z",
+        "clockOut": "2026-10-13T15:30:00.000Z",
+        "deltaArrivalMin": -0.68,
+        "deltaDepartureMin": 1.08
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:29 AM ET, 1 minute before the scheduled time (9:30 AM ET). They left at 11:28 AM ET, 2 minutes before the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-13T18:00:00.000Z#v_alvarez_09",
+    "item": {
+      "createdAt": "2026-10-06T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_09",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-13",
+      "scheduledStart": "2026-10-13T18:00:00.000Z",
+      "scheduledEnd": "2026-10-13T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-13T18:01:06.000Z",
+        "eventId": "775b5220-68eb-4097-9802-36d5d9325864",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-13T19:56:33.000Z",
+        "eventId": "48e9250e-8822-4d63-8d25-d994da3c3b75",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "missing_clock_in"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:01 PM ET, 1 minute after the scheduled time (2:00 PM ET). They left at 3:56 PM ET, 4 minutes before the scheduled time (4:00 PM ET). No caregiver clock-in has been matched to this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-14T13:30:00.000Z#v_alvarez_10",
+    "item": {
+      "createdAt": "2026-10-07T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_10",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-14",
+      "scheduledStart": "2026-10-14T13:30:00.000Z",
+      "scheduledEnd": "2026-10-14T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-14T13:29:39.000Z",
+        "eventId": "a3bedeb4-e30f-40a6-8361-5db06b18396e",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-14T15:37:23.000Z",
+        "eventId": "0bad30f7-89d3-4a22-97a3-5a2ab4458ebf",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_9c077c6fc250",
+        "clockIn": "2026-10-14T13:32:00.000Z",
+        "clockOut": "2026-10-14T15:39:00.000Z",
+        "deltaArrivalMin": 2.35,
+        "deltaDepartureMin": 1.62
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:29 AM ET, 1 minute before the scheduled time (9:30 AM ET). They left at 11:37 AM ET, 7 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-14T18:00:00.000Z#v_alvarez_11",
+    "item": {
+      "createdAt": "2026-10-07T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_11",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-14",
+      "scheduledStart": "2026-10-14T18:00:00.000Z",
+      "scheduledEnd": "2026-10-14T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-14T18:00:04.000Z",
+        "eventId": "d26f93e8-f21a-4541-a1a6-fedcf4f894cf",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-14T19:57:02.000Z",
+        "eventId": "7d671a27-2e92-42a5-a52a-98b62ed84936",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_b075be7ed1f0",
+        "clockIn": "2026-10-14T18:02:00.000Z",
+        "clockOut": "2026-10-14T19:54:00.000Z",
+        "deltaArrivalMin": 1.93,
+        "deltaDepartureMin": -3.03
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:00 PM ET, on time (2:00 PM ET). They left at 3:57 PM ET, 3 minutes before the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-15T13:30:00.000Z#v_alvarez_12",
+    "item": {
+      "createdAt": "2026-10-08T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_12",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-15",
+      "scheduledStart": "2026-10-15T13:30:00.000Z",
+      "scheduledEnd": "2026-10-15T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "no_show",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_no_arrival",
+        "no_show"
+      ],
+      "reconciliation": {
+        "outcome": "missing_both"
+      },
+      "narrative": {
+        "text": "No caregiver arrival was observed by the end of the escalation window. Neither a door record nor a clock-in exists for this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-15T18:00:00.000Z#v_alvarez_13",
+    "item": {
+      "createdAt": "2026-10-08T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_13",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-15",
+      "scheduledStart": "2026-10-15T18:00:00.000Z",
+      "scheduledEnd": "2026-10-15T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-15T18:02:22.000Z",
+        "eventId": "f6083a55-7078-483c-ac4e-de17df242c80",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-15T20:03:10.000Z",
+        "eventId": "5c366245-94fa-4062-9018-ac5ccc07c11e",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_359f00f81d39",
+        "clockIn": "2026-10-15T18:00:00.000Z",
+        "clockOut": "2026-10-15T20:04:00.000Z",
+        "deltaArrivalMin": -2.37,
+        "deltaDepartureMin": 0.83
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:02 PM ET, 2 minutes after the scheduled time (2:00 PM ET). They left at 4:03 PM ET, 3 minutes after the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-16T13:30:00.000Z#v_alvarez_14",
+    "item": {
+      "createdAt": "2026-10-09T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_14",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-16",
+      "scheduledStart": "2026-10-16T13:30:00.000Z",
+      "scheduledEnd": "2026-10-16T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-16T13:32:52.000Z",
+        "eventId": "3deb301a-11c5-4552-8e9a-8740a148b885",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-16T15:35:52.000Z",
+        "eventId": "9852a6c6-d2d3-4444-a70b-4a6980108ec0",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_936d9268a031",
+        "clockIn": "2026-10-16T13:29:00.000Z",
+        "clockOut": "2026-10-16T15:33:00.000Z",
+        "deltaArrivalMin": -3.87,
+        "deltaDepartureMin": -2.87
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:32 AM ET, 2 minutes after the scheduled time (9:30 AM ET). They left at 11:35 AM ET, 5 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-16T18:00:00.000Z#v_alvarez_15",
+    "item": {
+      "createdAt": "2026-10-09T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_15",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-16",
+      "scheduledStart": "2026-10-16T18:00:00.000Z",
+      "scheduledEnd": "2026-10-16T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "early_departure",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-16T17:55:56.000Z",
+        "eventId": "f3abd635-cb27-4aed-ba36-480b966b03ba",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-16T18:28:16.000Z",
+        "eventId": "d1d78140-8fcf-4110-980d-c2e843b298ce",
+        "source": "rule"
+      },
+      "raisedExceptionKinds": [
+        "early_departure"
+      ],
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_63f343568b08",
+        "clockIn": "2026-10-16T17:54:00.000Z",
+        "clockOut": "2026-10-16T18:25:00.000Z",
+        "deltaArrivalMin": -1.93,
+        "deltaDepartureMin": -3.27
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 1:55 PM ET, 5 minutes before the scheduled time (2:00 PM ET). They left at 2:28 PM ET, 92 minutes before the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-17T13:30:00.000Z#v_alvarez_16",
+    "item": {
+      "createdAt": "2026-10-10T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_16",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-17",
+      "scheduledStart": "2026-10-17T13:30:00.000Z",
+      "scheduledEnd": "2026-10-17T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-17T13:24:16.000Z",
+        "eventId": "111aeb5a-120d-456a-b418-2c0f29d0da82",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-17T15:29:45.000Z",
+        "eventId": "792d121a-d67d-4d82-afeb-c4ade5e836a7",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_fc44a1fa697e",
+        "clockIn": "2026-10-17T13:20:00.000Z",
+        "clockOut": "2026-10-17T15:28:00.000Z",
+        "deltaArrivalMin": -4.27,
+        "deltaDepartureMin": -1.75
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:24 AM ET, 6 minutes before the scheduled time (9:30 AM ET). They left at 11:29 AM ET, 1 minute before the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-17T18:00:00.000Z#v_alvarez_17",
+    "item": {
+      "createdAt": "2026-10-10T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_17",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-17",
+      "scheduledStart": "2026-10-17T18:00:00.000Z",
+      "scheduledEnd": "2026-10-17T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-17T17:58:23.000Z",
+        "eventId": "258ce0b1-e6af-4294-8093-054e7b28634b",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-17T19:59:41.000Z",
+        "eventId": "03d6d889-5e6b-4650-ae45-ad38c8de7f13",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_f06c011340df",
+        "clockIn": "2026-10-17T17:54:00.000Z",
+        "clockOut": "2026-10-17T19:58:00.000Z",
+        "deltaArrivalMin": -4.38,
+        "deltaDepartureMin": -1.68
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 1:58 PM ET, 2 minutes before the scheduled time (2:00 PM ET). They left at 3:59 PM ET, 1 minute before the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-18T13:30:00.000Z#v_alvarez_18",
+    "item": {
+      "createdAt": "2026-10-11T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_18",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-18",
+      "scheduledStart": "2026-10-18T13:30:00.000Z",
+      "scheduledEnd": "2026-10-18T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-18T13:27:55.000Z",
+        "eventId": "ba768ae9-14e5-41c3-9252-3af6c90df234",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-18T15:33:50.000Z",
+        "eventId": "951430df-c2a2-4c73-9d09-e7273cc62b12",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_c99cf4a81a18",
+        "clockIn": "2026-10-18T13:24:00.000Z",
+        "clockOut": "2026-10-18T15:32:00.000Z",
+        "deltaArrivalMin": -3.92,
+        "deltaDepartureMin": -1.83
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:27 AM ET, 3 minutes before the scheduled time (9:30 AM ET). They left at 11:33 AM ET, 3 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-18T18:00:00.000Z#v_alvarez_19",
+    "item": {
+      "createdAt": "2026-10-11T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_19",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-18",
+      "scheduledStart": "2026-10-18T18:00:00.000Z",
+      "scheduledEnd": "2026-10-18T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-18T18:01:52.000Z",
+        "eventId": "45058cda-42a5-4e0f-b0fe-3d7c11f77dd5",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-18T20:02:06.000Z",
+        "eventId": "0bee9e9c-61a4-424b-ab3c-f889dbb7413d",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "contradicted",
+        "evvRecordId": "evv_ace6198fe983",
+        "clockIn": "2026-10-18T17:12:00.000Z",
+        "clockOut": "2026-10-18T20:01:00.000Z",
+        "deltaArrivalMin": -49.87,
+        "deltaDepartureMin": -1.1
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:01 PM ET, 1 minute after the scheduled time (2:00 PM ET). They left at 4:02 PM ET, 2 minutes after the scheduled time (4:00 PM ET). The door record does not match the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-19T13:30:00.000Z#v_alvarez_20",
+    "item": {
+      "createdAt": "2026-10-12T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_20",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-19",
+      "scheduledStart": "2026-10-19T13:30:00.000Z",
+      "scheduledEnd": "2026-10-19T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "unobservable",
+      "observability": {
+        "state": "unobservable",
+        "reasons": [
+          "integration_removed"
+        ]
+      },
+      "arrival": {
+        "at": "2026-10-19T13:37:04.000Z",
+        "eventId": "e6b77f04-50f1-4592-adb9-5b2fe087897c",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "raisedExceptionKinds": [
+        "unobservable"
+      ],
+      "reconciliation": {
+        "outcome": "unobservable"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:37 AM ET, 7 minutes after the scheduled time (9:30 AM ET). The door could not be observed, so the clock-in cannot be checked.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-19T18:00:00.000Z#v_alvarez_21",
+    "item": {
+      "createdAt": "2026-10-12T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_21",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-19",
+      "scheduledStart": "2026-10-19T18:00:00.000Z",
+      "scheduledEnd": "2026-10-19T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-19T18:03:05.000Z",
+        "eventId": "288ec719-2760-4902-a7dc-9dd6739df1d1",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-19T20:02:35.000Z",
+        "eventId": "3c00d693-93c1-4e90-b9fa-893881f7c18d",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "missing_clock_in"
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:03 PM ET, 3 minutes after the scheduled time (2:00 PM ET). They left at 4:02 PM ET, 2 minutes after the scheduled time (4:00 PM ET). No caregiver clock-in has been matched to this visit.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-20T13:30:00.000Z#v_alvarez_22",
+    "item": {
+      "createdAt": "2026-10-13T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_22",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-20",
+      "scheduledStart": "2026-10-20T13:30:00.000Z",
+      "scheduledEnd": "2026-10-20T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-20T13:35:18.000Z",
+        "eventId": "3183d16a-c2c0-4e8a-bf20-ec98a9511e64",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-20T15:27:13.000Z",
+        "eventId": "74576feb-e8ae-44f1-bdb2-8338f253f576",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_9b70a7598026",
+        "clockIn": "2026-10-20T13:35:00.000Z",
+        "clockOut": "2026-10-20T15:29:00.000Z",
+        "deltaArrivalMin": -0.3,
+        "deltaDepartureMin": 1.78
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:35 AM ET, 5 minutes after the scheduled time (9:30 AM ET). They left at 11:27 AM ET, 3 minutes before the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-20T18:00:00.000Z#v_alvarez_23",
+    "item": {
+      "createdAt": "2026-10-13T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_23",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-20",
+      "scheduledStart": "2026-10-20T18:00:00.000Z",
+      "scheduledEnd": "2026-10-20T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "raisedExceptionKinds": [
+        "late_arrival",
+        "late_no_arrival"
+      ],
+      "arrival": {
+        "at": "2026-10-20T18:21:32.000Z",
+        "eventId": "e988c242-aac1-42bc-873a-a5bd9b58e207",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-20T20:18:07.000Z",
+        "eventId": "233bba2a-0dc5-4257-9bde-a994d4c9e287",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_f42faa5fcb3b",
+        "clockIn": "2026-10-20T18:20:00.000Z",
+        "clockOut": "2026-10-20T20:15:00.000Z",
+        "deltaArrivalMin": -1.53,
+        "deltaDepartureMin": -3.12
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:21 PM ET, 21 minutes after the scheduled time (2:00 PM ET). They left at 4:18 PM ET, 18 minutes after the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-21T13:30:00.000Z#v_alvarez_24",
+    "item": {
+      "createdAt": "2026-10-14T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_24",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-21",
+      "scheduledStart": "2026-10-21T13:30:00.000Z",
+      "scheduledEnd": "2026-10-21T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-21T13:31:02.000Z",
+        "eventId": "8c184784-0785-4fbb-a29b-989be315a825",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-21T15:32:42.000Z",
+        "eventId": "7b45ef30-3b2c-43fb-9ca4-f5cca6528acf",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_b8476b2c99c5",
+        "clockIn": "2026-10-21T13:29:00.000Z",
+        "clockOut": "2026-10-21T15:36:00.000Z",
+        "deltaArrivalMin": -2.03,
+        "deltaDepartureMin": 3.3
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:31 AM ET, 1 minute after the scheduled time (9:30 AM ET). They left at 11:32 AM ET, 2 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-21T18:00:00.000Z#v_alvarez_25",
+    "item": {
+      "createdAt": "2026-10-14T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_25",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-21",
+      "scheduledStart": "2026-10-21T18:00:00.000Z",
+      "scheduledEnd": "2026-10-21T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-21T18:02:28.000Z",
+        "eventId": "e6e0a3d2-e253-49d8-a4f0-4efcefd77e40",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-21T19:57:18.000Z",
+        "eventId": "b71b2e5b-f686-4fa8-8893-3ca495967fc6",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_6998014e2867",
+        "clockIn": "2026-10-21T18:03:00.000Z",
+        "clockOut": "2026-10-21T19:56:00.000Z",
+        "deltaArrivalMin": 0.53,
+        "deltaDepartureMin": -1.3
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 2:02 PM ET, 2 minutes after the scheduled time (2:00 PM ET). They left at 3:57 PM ET, 3 minutes before the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-22T13:30:00.000Z#v_alvarez_26",
+    "item": {
+      "createdAt": "2026-10-15T13:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_26",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_marisol",
+      "serviceCode": "G0299",
+      "date": "2026-10-22",
+      "scheduledStart": "2026-10-22T13:30:00.000Z",
+      "scheduledEnd": "2026-10-22T15:30:00.000Z",
+      "authorizedUnits": 8,
+      "status": "completed",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-22T13:38:33.000Z",
+        "eventId": "a1fb70bc-5f44-43be-87db-0404680132e5",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-22T15:33:07.000Z",
+        "eventId": "3b20aedf-8191-4493-9694-1f43b208fbb5",
+        "source": "rule"
+      },
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_0398b8baee8a",
+        "clockIn": "2026-10-22T13:37:00.000Z",
+        "clockOut": "2026-10-22T15:29:00.000Z",
+        "deltaArrivalMin": -1.55,
+        "deltaDepartureMin": -4.12
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 9:38 AM ET, 8 minutes after the scheduled time (9:30 AM ET). They left at 11:33 AM ET, 3 minutes after the scheduled time (11:30 AM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿VISIT#2026-10-22T18:00:00.000Z#v_alvarez_27",
+    "item": {
+      "createdAt": "2026-10-15T18:00:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 3,
+      "id": "v_alvarez_27",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverId": "cg_ana",
+      "serviceCode": "G0299",
+      "date": "2026-10-22",
+      "scheduledStart": "2026-10-22T18:00:00.000Z",
+      "scheduledEnd": "2026-10-22T20:00:00.000Z",
+      "authorizedUnits": 8,
+      "status": "early_departure",
+      "observability": {
+        "state": "observable",
+        "reasons": []
+      },
+      "arrival": {
+        "at": "2026-10-22T17:56:17.000Z",
+        "eventId": "34e48af1-066a-470e-aa68-1824dd076c4c",
+        "source": "rule",
+        "confidence": 0.9
+      },
+      "departure": {
+        "at": "2026-10-22T18:33:27.000Z",
+        "eventId": "f6b9e3bd-ab3e-434f-b92f-e44226586d92",
+        "source": "rule"
+      },
+      "raisedExceptionKinds": [
+        "early_departure"
+      ],
+      "reconciliation": {
+        "outcome": "corroborated",
+        "evvRecordId": "evv_83254257a577",
+        "clockIn": "2026-10-22T17:53:00.000Z",
+        "clockOut": "2026-10-22T18:33:00.000Z",
+        "deltaArrivalMin": -3.28,
+        "deltaDepartureMin": -0.45
+      },
+      "narrative": {
+        "text": "A caregiver arrived at 1:56 PM ET, 4 minutes before the scheduled time (2:00 PM ET). They left at 2:33 PM ET, 87 minutes before the scheduled time (4:00 PM ET). The door record matches the caregiver's clock-in.",
+        "provenance": "template",
+        "generatedAt": "2026-10-23T01:30:00.000Z"
+      }
+    }
+  }
+]

@@ -1,0 +1,1439 @@
+[
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-09T11:53:00.000Z#evv_a6371612bb63",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_a6371612bb63",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-09T11:53:00.000Z",
+      "clockOut": "2026-10-09T13:58:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.9613,
+      "lng": -82.99898,
+      "source": "csv",
+      "visitId": "v_okoro_00"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-09T20:03:00.000Z#evv_6a778b7b1f97",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_6a778b7b1f97",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-09T20:03:00.000Z",
+      "clockOut": "2026-10-09T22:05:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96152,
+      "lng": -82.99935,
+      "source": "csv",
+      "visitId": "v_okoro_01"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-10T11:55:00.000Z#evv_fa2f4fe452ac",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_fa2f4fe452ac",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-10T11:55:00.000Z",
+      "clockOut": "2026-10-10T14:05:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96092,
+      "lng": -82.99877,
+      "source": "csv",
+      "visitId": "v_okoro_02"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-10T20:23:00.000Z#evv_e0c20981cba1",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_e0c20981cba1",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-10T20:23:00.000Z",
+      "clockOut": "2026-10-10T22:25:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96128,
+      "lng": -82.99927,
+      "source": "csv",
+      "visitId": "v_okoro_03"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-11T11:22:00.000Z#evv_fa7f9664d6b3",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_fa7f9664d6b3",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-11T11:22:00.000Z",
+      "clockOut": "2026-10-11T14:06:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.9357,
+      "lng": -82.98441,
+      "source": "csv",
+      "visitId": "v_okoro_04"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-11T20:00:00.000Z#evv_b486c1da7b49",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_b486c1da7b49",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-11T20:00:00.000Z",
+      "clockOut": "2026-10-11T22:08:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.9611,
+      "lng": -82.99871,
+      "source": "csv",
+      "visitId": "v_okoro_05"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-12T20:06:00.000Z#evv_a350397bacc6",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_a350397bacc6",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-12T20:06:00.000Z",
+      "clockOut": "2026-10-12T21:55:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96125,
+      "lng": -82.999,
+      "source": "csv",
+      "visitId": "v_okoro_07"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-13T12:04:00.000Z#evv_dba8fb72d59a",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_dba8fb72d59a",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-13T12:04:00.000Z",
+      "clockOut": "2026-10-13T12:31:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96102,
+      "lng": -82.99923,
+      "source": "csv",
+      "visitId": "v_okoro_08"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-13T19:57:00.000Z#evv_77632e0650e4",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_77632e0650e4",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-13T19:57:00.000Z",
+      "clockOut": "2026-10-13T22:00:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96111,
+      "lng": -82.99837,
+      "source": "csv",
+      "visitId": "v_okoro_09"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-14T12:04:00.000Z#evv_5328ad91afae",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_5328ad91afae",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-14T12:04:00.000Z",
+      "clockOut": "2026-10-14T13:53:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96139,
+      "lng": -82.99939,
+      "source": "csv",
+      "visitId": "v_okoro_10"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-14T20:21:00.000Z#evv_c497c1547ca2",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_c497c1547ca2",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-14T20:21:00.000Z",
+      "clockOut": "2026-10-14T22:16:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96097,
+      "lng": -82.99902,
+      "source": "csv",
+      "visitId": "v_okoro_11"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-15T11:59:00.000Z#evv_37b73adc43c4",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_37b73adc43c4",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-15T11:59:00.000Z",
+      "clockOut": "2026-10-15T14:01:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96108,
+      "lng": -82.99874,
+      "source": "csv",
+      "visitId": "v_okoro_12"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-15T20:03:00.000Z#evv_31c5b3eba0ed",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_31c5b3eba0ed",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-15T20:03:00.000Z",
+      "clockOut": "2026-10-15T22:10:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96111,
+      "lng": -82.99824,
+      "source": "csv",
+      "visitId": "v_okoro_13"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-16T19:56:00.000Z#evv_d0174589b230",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_d0174589b230",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-16T19:56:00.000Z",
+      "clockOut": "2026-10-16T21:56:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96114,
+      "lng": -82.99931,
+      "source": "csv",
+      "visitId": "v_okoro_15"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-17T20:02:00.000Z#evv_1bac4629f68c",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_1bac4629f68c",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-17T20:02:00.000Z",
+      "clockOut": "2026-10-17T22:09:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96106,
+      "lng": -82.99913,
+      "source": "csv",
+      "visitId": "v_okoro_17"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-18T11:14:00.000Z#evv_324b06a0c08e",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_324b06a0c08e",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-18T11:14:00.000Z",
+      "clockOut": "2026-10-18T13:57:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.95199,
+      "lng": -83.02731,
+      "source": "csv",
+      "visitId": "v_okoro_18"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-18T19:57:00.000Z#evv_5b1656886744",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_5b1656886744",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-18T19:57:00.000Z",
+      "clockOut": "2026-10-18T22:03:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96095,
+      "lng": -82.99941,
+      "source": "csv",
+      "visitId": "v_okoro_19"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-19T12:23:00.000Z#evv_103569280742",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_103569280742",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-19T12:23:00.000Z",
+      "clockOut": "2026-10-19T14:20:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96112,
+      "lng": -82.99878,
+      "source": "csv",
+      "visitId": "v_okoro_20"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-19T20:07:00.000Z#evv_8359b958c81d",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_8359b958c81d",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-19T20:07:00.000Z",
+      "clockOut": "2026-10-19T21:59:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96133,
+      "lng": -82.99862,
+      "source": "csv",
+      "visitId": "v_okoro_21"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-20T11:58:00.000Z#evv_c2f541d9db21",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_c2f541d9db21",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-20T11:58:00.000Z",
+      "clockOut": "2026-10-20T14:01:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96155,
+      "lng": -82.99889,
+      "source": "csv",
+      "visitId": "v_okoro_22"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-21T12:00:00.000Z#evv_e680d1093ec5",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_e680d1093ec5",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-21T12:00:00.000Z",
+      "clockOut": "2026-10-21T13:52:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96141,
+      "lng": -82.99856,
+      "source": "csv",
+      "visitId": "v_okoro_24"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-21T20:01:00.000Z#evv_7c2f91d4b7fa",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_7c2f91d4b7fa",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-21T20:01:00.000Z",
+      "clockOut": "2026-10-21T22:02:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96112,
+      "lng": -82.99895,
+      "source": "csv",
+      "visitId": "v_okoro_25"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-22T12:08:00.000Z#evv_4c72ccbe57b4",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 1,
+      "id": "evv_4c72ccbe57b4",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1001",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-22T12:08:00.000Z",
+      "clockOut": "2026-10-22T14:02:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96081,
+      "lng": -82.99859,
+      "source": "csv"
+    }
+  },
+  {
+    "key": "CLIENT#cli_okoro￿EVV#2026-10-22T19:58:00.000Z#evv_c30dd9911caf",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_c30dd9911caf",
+      "clientId": "cli_okoro",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1002",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-22T19:58:00.000Z",
+      "clockOut": "2026-10-22T20:41:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.96128,
+      "lng": -82.99877,
+      "source": "csv",
+      "visitId": "v_okoro_27"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-09T16:02:00.000Z#evv_8350f1d3e86e",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_8350f1d3e86e",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-09T16:02:00.000Z",
+      "clockOut": "2026-10-09T18:01:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05813,
+      "lng": -83.02067,
+      "source": "csv",
+      "visitId": "v_nakamura_00"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-09T21:54:00.000Z#evv_997b32c1d09c",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_997b32c1d09c",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-09T21:54:00.000Z",
+      "clockOut": "2026-10-10T00:07:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05797,
+      "lng": -83.02064,
+      "source": "csv",
+      "visitId": "v_nakamura_01"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-10T16:17:00.000Z#evv_4a8eecaf2fc7",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_4a8eecaf2fc7",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-10T16:17:00.000Z",
+      "clockOut": "2026-10-10T18:22:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05815,
+      "lng": -83.02068,
+      "source": "csv",
+      "visitId": "v_nakamura_02"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-10T21:22:00.000Z#evv_5f56e21cf895",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_5f56e21cf895",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-10T21:22:00.000Z",
+      "clockOut": "2026-10-10T23:56:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.06204,
+      "lng": -83.04524,
+      "source": "csv",
+      "visitId": "v_nakamura_03"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-11T15:59:00.000Z#evv_11c1ebde808d",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_11c1ebde808d",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-11T15:59:00.000Z",
+      "clockOut": "2026-10-11T17:58:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.0584,
+      "lng": -83.02055,
+      "source": "csv",
+      "visitId": "v_nakamura_04"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-11T22:00:00.000Z#evv_d4a6b81d7260",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_d4a6b81d7260",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-11T22:00:00.000Z",
+      "clockOut": "2026-10-12T00:02:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05815,
+      "lng": -83.02036,
+      "source": "csv",
+      "visitId": "v_nakamura_05"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-12T15:56:00.000Z#evv_175fe676e292",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_175fe676e292",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-12T15:56:00.000Z",
+      "clockOut": "2026-10-12T17:58:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05842,
+      "lng": -83.02052,
+      "source": "csv",
+      "visitId": "v_nakamura_06"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-12T22:02:00.000Z#evv_fa3054b835a9",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_fa3054b835a9",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-12T22:02:00.000Z",
+      "clockOut": "2026-10-12T22:32:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05781,
+      "lng": -83.02066,
+      "source": "csv",
+      "visitId": "v_nakamura_07"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-13T21:52:00.000Z#evv_4b6fe625077e",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_4b6fe625077e",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-13T21:52:00.000Z",
+      "clockOut": "2026-10-13T23:52:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.0582,
+      "lng": -83.02119,
+      "source": "csv",
+      "visitId": "v_nakamura_09"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-14T16:17:00.000Z#evv_a6b67a74ed68",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_a6b67a74ed68",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-14T16:17:00.000Z",
+      "clockOut": "2026-10-14T18:22:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05819,
+      "lng": -83.021,
+      "source": "csv",
+      "visitId": "v_nakamura_10"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-14T22:02:00.000Z#evv_3a5be24d4b33",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_3a5be24d4b33",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-14T22:02:00.000Z",
+      "clockOut": "2026-10-15T00:09:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05811,
+      "lng": -83.02034,
+      "source": "csv",
+      "visitId": "v_nakamura_11"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-15T16:08:00.000Z#evv_03797fe7a4e0",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_03797fe7a4e0",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-15T16:08:00.000Z",
+      "clockOut": "2026-10-15T18:05:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05817,
+      "lng": -83.0207,
+      "source": "csv",
+      "visitId": "v_nakamura_12"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-16T16:02:00.000Z#evv_1e66c1a4b02c",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_1e66c1a4b02c",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-16T16:02:00.000Z",
+      "clockOut": "2026-10-16T17:58:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05823,
+      "lng": -83.02075,
+      "source": "csv",
+      "visitId": "v_nakamura_14"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-16T22:03:00.000Z#evv_620a75d5f961",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_620a75d5f961",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-16T22:03:00.000Z",
+      "clockOut": "2026-10-17T00:01:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05792,
+      "lng": -83.021,
+      "source": "csv",
+      "visitId": "v_nakamura_15"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-17T21:11:00.000Z#evv_2a6411a0b372",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_2a6411a0b372",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-17T21:11:00.000Z",
+      "clockOut": "2026-10-18T00:01:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.03944,
+      "lng": -83.01949,
+      "source": "csv",
+      "visitId": "v_nakamura_17"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-18T16:01:00.000Z#evv_af92d5e9dc32",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 1,
+      "id": "evv_af92d5e9dc32",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-18T16:01:00.000Z",
+      "clockOut": "2026-10-18T18:04:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05838,
+      "lng": -83.02078,
+      "source": "csv"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-18T22:03:00.000Z#evv_563050e6f30f",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_563050e6f30f",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-18T22:03:00.000Z",
+      "clockOut": "2026-10-19T00:03:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05844,
+      "lng": -83.02094,
+      "source": "csv",
+      "visitId": "v_nakamura_19"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-19T15:52:00.000Z#evv_e73f3fbd3ed6",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_e73f3fbd3ed6",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-19T15:52:00.000Z",
+      "clockOut": "2026-10-19T18:05:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.0582,
+      "lng": -83.02107,
+      "source": "csv",
+      "visitId": "v_nakamura_20"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-19T22:33:00.000Z#evv_5896751a2faa",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_5896751a2faa",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-19T22:33:00.000Z",
+      "clockOut": "2026-10-20T00:32:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05787,
+      "lng": -83.02068,
+      "source": "csv",
+      "visitId": "v_nakamura_21"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-20T16:00:00.000Z#evv_51be6f96762f",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_51be6f96762f",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-20T16:00:00.000Z",
+      "clockOut": "2026-10-20T18:03:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05821,
+      "lng": -83.02093,
+      "source": "csv",
+      "visitId": "v_nakamura_22"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-21T16:00:00.000Z#evv_707dea655603",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_707dea655603",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-21T16:00:00.000Z",
+      "clockOut": "2026-10-21T18:05:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05793,
+      "lng": -83.02044,
+      "source": "csv",
+      "visitId": "v_nakamura_24"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-21T22:18:00.000Z#evv_296e5713f718",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_296e5713f718",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1004",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-21T22:18:00.000Z",
+      "clockOut": "2026-10-22T00:20:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05798,
+      "lng": -83.02025,
+      "source": "csv",
+      "visitId": "v_nakamura_25"
+    }
+  },
+  {
+    "key": "CLIENT#cli_nakamura￿EVV#2026-10-22T15:52:00.000Z#evv_d3f97bdd2108",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_d3f97bdd2108",
+      "clientId": "cli_nakamura",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1003",
+      "serviceCode": "T1019",
+      "clockIn": "2026-10-22T15:52:00.000Z",
+      "clockOut": "2026-10-22T18:05:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 40.05832,
+      "lng": -83.02006,
+      "source": "csv",
+      "visitId": "v_nakamura_26"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-09T13:28:00.000Z#evv_208c3e6c90a0",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_208c3e6c90a0",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-09T13:28:00.000Z",
+      "clockOut": "2026-10-09T15:39:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91024,
+      "lng": -82.9143,
+      "source": "csv",
+      "visitId": "v_alvarez_00"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-09T18:05:00.000Z#evv_b48b1de1e6e2",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_b48b1de1e6e2",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-09T18:05:00.000Z",
+      "clockOut": "2026-10-09T20:01:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91031,
+      "lng": -82.91434,
+      "source": "csv",
+      "visitId": "v_alvarez_01"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-10T13:30:00.000Z#evv_eafcde327d1f",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_eafcde327d1f",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-10T13:30:00.000Z",
+      "clockOut": "2026-10-10T15:37:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.9101,
+      "lng": -82.91439,
+      "source": "csv",
+      "visitId": "v_alvarez_02"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-10T18:06:00.000Z#evv_4314018fe043",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_4314018fe043",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-10T18:06:00.000Z",
+      "clockOut": "2026-10-10T19:59:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91037,
+      "lng": -82.9149,
+      "source": "csv",
+      "visitId": "v_alvarez_03"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-11T13:40:00.000Z#evv_b6c52e3215f3",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_b6c52e3215f3",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-11T13:40:00.000Z",
+      "clockOut": "2026-10-11T15:31:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91047,
+      "lng": -82.91463,
+      "source": "csv",
+      "visitId": "v_alvarez_04"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-11T17:12:00.000Z#evv_acff1608d4bd",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_acff1608d4bd",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-11T17:12:00.000Z",
+      "clockOut": "2026-10-11T20:02:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.89317,
+      "lng": -82.90276,
+      "source": "csv",
+      "visitId": "v_alvarez_05"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-12T13:57:00.000Z#evv_0a819573cf15",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_0a819573cf15",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-12T13:57:00.000Z",
+      "clockOut": "2026-10-12T15:59:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.90991,
+      "lng": -82.91489,
+      "source": "csv",
+      "visitId": "v_alvarez_06"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-12T18:07:00.000Z#evv_84e14fad5c4e",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_84e14fad5c4e",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-12T18:07:00.000Z",
+      "clockOut": "2026-10-12T19:54:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.90992,
+      "lng": -82.9144,
+      "source": "csv",
+      "visitId": "v_alvarez_07"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-13T13:29:00.000Z#evv_0df8c4d81046",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_0df8c4d81046",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-13T13:29:00.000Z",
+      "clockOut": "2026-10-13T15:30:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.9099,
+      "lng": -82.91402,
+      "source": "csv",
+      "visitId": "v_alvarez_08"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-14T13:32:00.000Z#evv_9c077c6fc250",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_9c077c6fc250",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-14T13:32:00.000Z",
+      "clockOut": "2026-10-14T15:39:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91022,
+      "lng": -82.91407,
+      "source": "csv",
+      "visitId": "v_alvarez_10"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-14T18:02:00.000Z#evv_b075be7ed1f0",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_b075be7ed1f0",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-14T18:02:00.000Z",
+      "clockOut": "2026-10-14T19:54:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.90996,
+      "lng": -82.91402,
+      "source": "csv",
+      "visitId": "v_alvarez_11"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-15T18:00:00.000Z#evv_359f00f81d39",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_359f00f81d39",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-15T18:00:00.000Z",
+      "clockOut": "2026-10-15T20:04:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91026,
+      "lng": -82.91463,
+      "source": "csv",
+      "visitId": "v_alvarez_13"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-16T13:29:00.000Z#evv_936d9268a031",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_936d9268a031",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-16T13:29:00.000Z",
+      "clockOut": "2026-10-16T15:33:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91006,
+      "lng": -82.9142,
+      "source": "csv",
+      "visitId": "v_alvarez_14"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-16T17:54:00.000Z#evv_63f343568b08",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_63f343568b08",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-16T17:54:00.000Z",
+      "clockOut": "2026-10-16T18:25:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91002,
+      "lng": -82.91362,
+      "source": "csv",
+      "visitId": "v_alvarez_15"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-17T13:20:00.000Z#evv_fc44a1fa697e",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_fc44a1fa697e",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-17T13:20:00.000Z",
+      "clockOut": "2026-10-17T15:28:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91001,
+      "lng": -82.91465,
+      "source": "csv",
+      "visitId": "v_alvarez_16"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-17T17:54:00.000Z#evv_f06c011340df",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_f06c011340df",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-17T17:54:00.000Z",
+      "clockOut": "2026-10-17T19:58:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91001,
+      "lng": -82.91442,
+      "source": "csv",
+      "visitId": "v_alvarez_17"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-18T13:24:00.000Z#evv_c99cf4a81a18",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_c99cf4a81a18",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-18T13:24:00.000Z",
+      "clockOut": "2026-10-18T15:32:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91007,
+      "lng": -82.91416,
+      "source": "csv",
+      "visitId": "v_alvarez_18"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-18T17:12:00.000Z#evv_ace6198fe983",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_ace6198fe983",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-18T17:12:00.000Z",
+      "clockOut": "2026-10-18T20:01:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.90582,
+      "lng": -82.94843,
+      "source": "csv",
+      "visitId": "v_alvarez_19"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-19T13:37:00.000Z#evv_0485b62907ca",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 1,
+      "id": "evv_0485b62907ca",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-19T13:37:00.000Z",
+      "clockOut": "2026-10-19T15:26:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.90987,
+      "lng": -82.91386,
+      "source": "csv"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-20T13:35:00.000Z#evv_9b70a7598026",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_9b70a7598026",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-20T13:35:00.000Z",
+      "clockOut": "2026-10-20T15:29:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91041,
+      "lng": -82.91472,
+      "source": "csv",
+      "visitId": "v_alvarez_22"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-20T18:20:00.000Z#evv_f42faa5fcb3b",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_f42faa5fcb3b",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-20T18:20:00.000Z",
+      "clockOut": "2026-10-20T20:15:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91048,
+      "lng": -82.91435,
+      "source": "csv",
+      "visitId": "v_alvarez_23"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-21T13:29:00.000Z#evv_b8476b2c99c5",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_b8476b2c99c5",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-21T13:29:00.000Z",
+      "clockOut": "2026-10-21T15:36:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.90994,
+      "lng": -82.91471,
+      "source": "csv",
+      "visitId": "v_alvarez_24"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-21T18:03:00.000Z#evv_6998014e2867",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_6998014e2867",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-21T18:03:00.000Z",
+      "clockOut": "2026-10-21T19:56:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.90993,
+      "lng": -82.91443,
+      "source": "csv",
+      "visitId": "v_alvarez_25"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-22T13:37:00.000Z#evv_0398b8baee8a",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_0398b8baee8a",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1005",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-22T13:37:00.000Z",
+      "clockOut": "2026-10-22T15:29:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.91036,
+      "lng": -82.91456,
+      "source": "csv",
+      "visitId": "v_alvarez_26"
+    }
+  },
+  {
+    "key": "CLIENT#cli_alvarez￿EVV#2026-10-22T17:53:00.000Z#evv_83254257a577",
+    "item": {
+      "createdAt": "2026-10-23T01:30:00.000Z",
+      "updatedAt": "2026-10-23T01:30:00.000Z",
+      "version": 2,
+      "id": "evv_83254257a577",
+      "clientId": "cli_alvarez",
+      "agencyId": "a1",
+      "caregiverEvvId": "EVV-1006",
+      "serviceCode": "G0299",
+      "clockIn": "2026-10-22T17:53:00.000Z",
+      "clockOut": "2026-10-22T18:33:00.000Z",
+      "verificationMethod": "mobile GPS",
+      "lat": 39.90987,
+      "lng": -82.9143,
+      "source": "csv",
+      "visitId": "v_alvarez_27"
+    }
+  }
+]

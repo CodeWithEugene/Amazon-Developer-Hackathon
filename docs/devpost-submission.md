@@ -26,7 +26,10 @@ Thumbnail image: `docs/assets/thumbnail.png` (a JPEG copy is at `docs/assets/thu
 
 ## Try It Out Links
 
+- Live demo: https://visitproof.codewitheugene.top (sample data from the `pnpm demo` pipeline, moved onto the current week; sign in with one click as any role)
 - Source code: https://github.com/CodeWithEugene/Amazon-Developer-Hackathon (Apache-2.0)
+
+The live demo runs the console only, on demo data. Ask VisitProof needs the MCP server, so on the hosted site `/ask` says so and points to `pnpm demo`. Live Ring mode is off there (no token is configured); live Ring needs a Ring Developer Playground token on a local run.
 
 ---
 
