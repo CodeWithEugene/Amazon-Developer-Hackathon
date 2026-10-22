@@ -1,0 +1,7 @@
+# Recorder output and scratch frames (videos, PDFs, PNGs) are never committed.
+out/
+tmp/
+# Voiceover takes are personal recordings; keep them out of git too.
+*.m4a
+*.wav
+*.aiff
